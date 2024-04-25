@@ -12,18 +12,18 @@ namespace TakeshiLibrary
     public class GridField
     {
         //======変数===========================================================================================================================
-        private Vector3 position;
-        private int gridWidth;
-        private int gridDepth;
-        private float cellWidth;
-        private float cellDepth;
+        private Vector3 _position;
+        private int _gridWidth;
+        private int _gridDepth;
+        private float _cellWidth;
+        private float _cellDepth;
 
 
-        public Vector3 Position => position;
-        public int GridWidth => gridWidth;
-        public int GridDepth => gridDepth;
-        public float CellWidth => cellWidth;
-        public float CellDepth => cellDepth;
+        public Vector3 Position => _position;
+        public int GridWidth => _gridWidth;
+        public int GridDepth => _gridDepth;
+        public float CellWidth => _cellWidth;
+        public float CellDepth => _cellDepth;
 
         public Vector3 this[int x, int z]
         {
@@ -32,8 +32,8 @@ namespace TakeshiLibrary
                 if (!CheckOnGridCoord(new Coord(x, z)))
                     throw new IndexOutOfRangeException();
 
-                return position + new Vector3(x * cellWidth, 0, z * cellDepth)
-                    - new Vector3((float)(gridWidth - 1) / 2 * cellWidth, 0, (float)(gridDepth - 1) / 2 * cellDepth);    // xとzに10をかけた値を代入
+                return _position + new Vector3(x * _cellWidth, 0, z * _cellDepth)
+                    - new Vector3((float)(_gridWidth - 1) / 2 * _cellWidth, 0, (float)(_gridDepth - 1) / 2 * _cellDepth);    // xとzに10をかけた値を代入
             }
         }
 
@@ -41,11 +41,11 @@ namespace TakeshiLibrary
 
         public GridField(Vector3 position,int gridWidth,int gridDepth,float cellWidth,float cellDepth)
         {
-            this.position = position;
-            this.gridWidth = gridWidth;
-            this.gridDepth = gridDepth;
-            this.cellWidth = cellWidth;
-            this.cellDepth = cellDepth;
+            this._position  = position;
+            this._gridWidth = gridWidth;
+            this._gridDepth = gridDepth;
+            this._cellWidth = cellWidth;
+            this._cellDepth = cellDepth;
         }
 
 
@@ -108,6 +108,29 @@ namespace TakeshiLibrary
         }
 
 
+        /// <summary>
+        /// フィールドの幅と奥行の最も長い方を返します。
+        /// </summary>
+        public float FieldMaxLength
+        {
+            get
+            {
+                return GridMaxLength * CellMaxLength;
+            }
+        }
+
+
+        /// <summary>
+        /// フィールドの幅と奥行の最も短い方を返します。
+        /// </summary>
+        public float FieldMinLength
+        {
+            get
+            {
+                return GridMinLength * CellMinLength;
+            }
+        }
+
 
         /*==========グリッドフィールドの角のセルのVector3座標==========*/
         /// <summary>
@@ -164,7 +187,7 @@ namespace TakeshiLibrary
         {
             get
             {
-                return this[0, 0] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2 * -1);
+                return this[0, 0] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2 * -1);
             }
         }
 
@@ -175,7 +198,7 @@ namespace TakeshiLibrary
         {
             get
             {
-                return this[GridWidth - 1, 0] + new Vector3(CellWidth / 2, position.y, CellDepth / 2 * -1);
+                return this[GridWidth - 1, 0] + new Vector3(CellWidth / 2, _position.y, CellDepth / 2 * -1);
             }
         }
 
@@ -186,7 +209,7 @@ namespace TakeshiLibrary
         {
             get
             {
-                return this[0, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2);
+                return this[0, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2);
             }
         }
 
@@ -197,7 +220,7 @@ namespace TakeshiLibrary
         {
             get
             {
-                return this[GridWidth - 1, GridDepth - 1] + new Vector3(CellWidth / 2, position.y, CellDepth / 2);
+                return this[GridWidth - 1, GridDepth - 1] + new Vector3(CellWidth / 2, _position.y, CellDepth / 2);
             }
         }
 
@@ -291,8 +314,8 @@ namespace TakeshiLibrary
             // 中の行
             for (int z = 1; z < GridDepth; z++)
             {
-                Vector3 gridLineStart = this[0, z] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2 * -1);
-                Vector3 gridLineEnd = this[GridWidth - 1, z] + new Vector3(CellWidth / 2, position.y, CellDepth / 2 * -1);
+                Vector3 gridLineStart = this[0, z] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2 * -1);
+                Vector3 gridLineEnd = this[GridWidth - 1, z] + new Vector3(CellWidth / 2, _position.y, CellDepth / 2 * -1);
 
                 Debug.DrawLine(gridLineStart, gridLineEnd, Color.red);
             }
@@ -300,8 +323,8 @@ namespace TakeshiLibrary
             // 中の列
             for (int x = 1; x < GridWidth; x++)
             {
-                Vector3 gridRowStart = this[x, 0] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2 * -1);
-                Vector3 gridRowEnd = this[x, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2);
+                Vector3 gridRowStart = this[x, 0] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2 * -1);
+                Vector3 gridRowEnd = this[x, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2);
 
                 Debug.DrawLine(gridRowStart, gridRowEnd, Color.red);
             }
@@ -471,8 +494,8 @@ namespace TakeshiLibrary
             // 中の行
             for (int z = 1; z < GridDepth; z++)
             {
-                Vector3 gridLineStart = this[0, z] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2 * -1);
-                Vector3 gridLineEnd = this[GridWidth - 1, z] + new Vector3(CellWidth / 2, position.y, CellDepth / 2 * -1);
+                Vector3 gridLineStart = this[0, z] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2 * -1);
+                Vector3 gridLineEnd = this[GridWidth - 1, z] + new Vector3(CellWidth / 2, _position.y, CellDepth / 2 * -1);
 
                 Gizmos.DrawLine(gridLineStart, gridLineEnd);
             }
@@ -480,8 +503,8 @@ namespace TakeshiLibrary
             // 中の列
             for (int x = 1; x < GridWidth; x++)
             {
-                Vector3 gridRowStart = this[x, 0] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2 * -1);
-                Vector3 gridRowEnd = this[x, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, position.y, CellDepth / 2);
+                Vector3 gridRowStart = this[x, 0] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2 * -1);
+                Vector3 gridRowEnd = this[x, GridDepth - 1] + new Vector3(CellWidth / 2 * -1, _position.y, CellDepth / 2);
 
                 Gizmos.DrawLine(gridRowStart, gridRowEnd);
             }

@@ -13,10 +13,16 @@ namespace TakeshiLibrary
         private GridFieldMapSettings _map;
         private Vector3 _latePos;
         private bool _cursorLock;
+        private Rigidbody _rb;
+        private GameObject _player;
+        private GameObject _camera;
 
-        public FPS(GridFieldMapSettings map)
+        public FPS(GridFieldMapSettings map,Rigidbody rb,GameObject player,GameObject camera)
         {
             _map = map;
+            _rb = rb;
+            _player = player;
+            _camera = camera;
         }
 
         public enum eFourDirection
@@ -36,7 +42,7 @@ namespace TakeshiLibrary
         /// <param name="minX">下の角度制限</param>
         /// <param name="maxX">上の角度制限</param>
         /// <returns>角度</returns>
-        public static Quaternion ClampRotation(Quaternion q, float minX, float maxX)
+        private Quaternion ClampRotation(Quaternion q, float minX, float maxX)
         {
             q.x /= q.w;
             q.y /= q.w;
@@ -54,44 +60,59 @@ namespace TakeshiLibrary
 
 
         ///<summary>カメラの視点移動関数(上下の視点移動)</summary>>
-        ///<param name="camera"<pragma>カメラの初期向き設定</pragma>
         ///<param name="Xsensityvity"<pragma>視点移動スピード</pragma>
         ///<param name="minX"<pragma>下の角度制限</pragma>
         ///<param name="maxX"<pragma>上の角度制限</pragma>
-        public static void CameraViewport(GameObject camera, float Xsensityvity = 3f, float minX = -90f, float maxX = 90f)
+        public void CameraViewport(float Xsensityvity = 3f, float minX = -90f, float maxX = 90f)
         {
             float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;       // マウスの座標代入
-            camera.transform.localRotation *= Quaternion.Euler(-yRot, 0, 0);     // 角度代入
+            _camera.transform.localRotation *= Quaternion.Euler(-yRot, 0, 0);     // 角度代入
 
-            camera.transform.localRotation = ClampRotation(camera.transform.localRotation, minX, maxX);           // 角度制限
+            _camera.transform.localRotation = ClampRotation(_camera.transform.localRotation, minX, maxX);           // 角度制限
         }
 
 
         /// <summary>
         /// プレイヤーの視点移動関数(左右視点移動)
         /// </summary>
-        /// <param name="player">プレイヤーオブジェクト</param>
-        public static void PlayerViewport(GameObject player, float Ysensityvity = 3f)
+        public void PlayerViewport(float Ysensityvity = 3f)
         {
             float xRot = Input.GetAxis("Mouse X") * Ysensityvity;               // マウスの座標代入
-            player.transform.localRotation *= Quaternion.Euler(0, xRot, 0);     // 角度代入
+            _player.transform.localRotation *= Quaternion.Euler(0, xRot, 0);     // 角度代入
         }
 
 
         /// <summary>
         /// プレイヤーをキー入力によって移動させます
         /// </summary>
-        /// <param name="player">動かすプレイヤー</param>
         /// <param name="speed">移動スピード</param>
-        public static void Locomotion(Transform player, float speed = 10f,float dashSpeed = 15,KeyCode dashuKey = KeyCode.LeftShift)
+        public void Locomotion(float speed = 10f,float dashSpeed = 15,KeyCode dashuKey = KeyCode.LeftShift)
         {
             if (Input.GetKey(dashuKey)) speed = dashSpeed;
 
             float x = Input.GetAxisRaw("Horizontal") * speed;     // 移動入力
             float z = Input.GetAxisRaw("Vertical") * speed;       // 移動入力
 
-            player.position += player.forward * z * Time.deltaTime + player.right * x * Time.deltaTime;  // 移動
+            _player.transform.position += _player.transform.forward * z * Time.deltaTime + _player.transform.right * x * Time.deltaTime;  // 移動
 
+        }
+
+        /// <summary>
+        /// プレイヤーをキー入力によって移動させます
+        /// </summary>
+        /// <param name="player">動かすプレイヤー</param>
+        /// <param name="speed">移動スピード</param>
+        public void AddForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashuKey = KeyCode.LeftShift)
+        {
+            if (Input.GetKey(dashuKey)) speed = dashSpeed;
+
+            float x = Input.GetAxisRaw("Horizontal");     // 移動入力
+            float z = Input.GetAxisRaw("Vertical");       // 移動入力
+
+            if(x != 0 &&  z != 0)
+                speed *= 0.707f;
+
+            _rb.velocity = _player.transform.right * x * speed + _player.transform.forward * z * speed;
         }
 
 
@@ -124,15 +145,15 @@ namespace TakeshiLibrary
         /// 与えたトランスフォームが壁ブロックに入らないようにします
         /// </summary>
         /// <param name="trafo">プレイヤートランスフォーム</param>
-        public void ClampMoveRange(Transform trafo)
+        public void ClampMoveRange()
         {
-            Coord coord = _map.gridField.GridCoordinate(trafo.position);
+            Coord coord = _map.gridField.GridCoordinate(_player.transform.position);
 
             if (_map.blocks[coord.x,coord.z].isSpace == false)
             {
-                trafo.position = _latePos;
+                _player.transform.position = _latePos;
             }
-            _latePos = trafo.position;
+            _latePos = _player.transform.position;
         }
 
 
