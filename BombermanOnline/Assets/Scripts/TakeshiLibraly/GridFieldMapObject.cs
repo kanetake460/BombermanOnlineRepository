@@ -29,7 +29,7 @@ public class GridFieldMapObject
         plane.name = new string(coord.x + "," + coord.z + "_Plane");
         plane.transform.position = _mapSet.gridField[coord.x, coord.z];
         plane.transform.localScale = new Vector3(_mapSet.gridField.CellWidth / 10, 1, _mapSet.gridField.CellDepth / 10);
-        
+        plane.transform.parent = _mapSet.transform;
 
         // �Ǎ쐬
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -38,7 +38,7 @@ public class GridFieldMapObject
         cube.name = new string(coord.x + "," + coord.z + "_Wall");
         cube.transform.position = _mapSet.gridField[coord.x, coord.z] + new Vector3(0, scaleY / 2, 0);
         cube.transform.localScale = new Vector3(_mapSet.gridField.CellWidth, scaleY, _mapSet.gridField.CellDepth);
-
+        cube.transform.parent = _mapSet.transform;
     }
 
 

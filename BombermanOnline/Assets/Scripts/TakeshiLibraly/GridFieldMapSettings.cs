@@ -31,6 +31,8 @@ namespace TakeshiLibrary
             public bool leftWall { get; set; } = false;
 
             // オブジェクト設定
+            public GameObject wallObjParent { get; set; }
+            public GameObject planeObjParent { get; set; }
             public GameObject wallObj { get; set; }         // 壁オブジェクト
             public GameObject planeObj { get; set; }        // 床オブジェクト
             public Renderer wallRenderer { get; set; }      // 壁レンダラ

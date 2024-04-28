@@ -13,7 +13,7 @@ public class GameMap : MonoBehaviour
     private GridField _gridField;
     private GridFieldMapObject _mapObj;
 
-    private List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();
+    public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();
 
     [HideInInspector] public Coord[] _startCoords;
     private List<Coord> _emptyCoords = new List<Coord>();
@@ -83,6 +83,24 @@ public class GameMap : MonoBehaviour
         m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
     }
 
+    public bool BreakStone(Coord coord)
+    {
+        var b = stoneBlockList.Find(b => b.coord == coord);
+        if (b != null)
+        {
+            b.isSpace = true;
+            _emptyCoords.Add(b.coord);
+            _mapObj.ActiveMapWallObjects();
+            return true;
+        }
+        if(_emptyCoords.Contains(coord)) 
+        {
+            return true;
+        }
+        Debug.Log(coord.x + "," + coord.z);
+        return false;
+
+    }
     void Update()
     {
 
