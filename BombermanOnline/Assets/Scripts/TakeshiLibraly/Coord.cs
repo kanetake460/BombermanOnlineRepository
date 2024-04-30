@@ -122,6 +122,7 @@ public struct Coord
 
     public static bool Equal(Coord lhs, Coord rhs) => lhs == rhs;
 
+
 #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(Coord))]
     public class CoordDrawer : PropertyDrawer

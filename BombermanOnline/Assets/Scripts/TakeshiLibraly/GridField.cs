@@ -489,6 +489,19 @@ namespace TakeshiLibrary
         public bool CheckOnGridCoord(Coord coord) => IterateOverGrid(c => Coord.Equal(c, coord));
 
 
+        /// <summary>
+        /// グリッド座標版Instantiate
+        /// </summary>
+        /// <param name="original">インスタンスするもの</param>
+        /// <param name="coord">座標</param>
+        /// <param name="rotation">向き</param>
+        /// <returns>インスタンスしたもの</returns>
+        public UnityEngine.Object Instantiate(UnityEngine.Object original,Coord coord,Quaternion rotation)
+        {
+            Vector3 position = this[coord.x,coord.z];
+            return UnityEngine.Object.Instantiate(original, position, rotation);
+        }
+
         private void OnDrawGizmos()
         {
             // 中の行

@@ -9,10 +9,9 @@ public class PlayerMovement : Base
 {
     // ===イベント==================================================================================
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        fps ??= new FPS(_map.mapSet,_rb,gameObject,mainCamera);
+        fps ??= new FPS(map.mapSet,rb,gameObject,mainCamera);
 
         InitPlayer();
     }
@@ -21,7 +20,6 @@ public class PlayerMovement : Base
     private void Update()
     {
         PlayerSettings();
-
         PutBomb();
     }
 
@@ -30,8 +28,8 @@ public class PlayerMovement : Base
     [Header("パラメーター")]
     [SerializeField] private float speed;
     [SerializeField] private float dashSpeed;
-    [SerializeField] private int bombMaxValue;
     private List<Bomb> bombList = new();
+    [SerializeField] private int m_bombMaxValue;
     private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0);
 
     [Header("オブジェクト参照")]
@@ -62,24 +60,31 @@ public class PlayerMovement : Base
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
 
-        GetItem();
-
-        GetItem();
-        GetItem();
-        GetItem();
+        AddBombList();
     }
 
 
+    /// <summary>
+    /// ゲームスタート
+    /// </summary>
     public void GameStart()
     {
-        Coord = _map._startCoords[0];
+        Coord = map._startCoords[0];
     }
 
+
+    /// <summary>
+    /// ゲームオーバー
+    /// </summary>
     public void GameOver()
     {
         gameObj.SetActive(false);
     }
 
+
+    /// <summary>
+    /// キー入力によって爆弾を置きます
+    /// </summary>
     private void PutBomb()
     {
         if(Input.GetKeyDown(KeyCode.Space)) 
@@ -95,12 +100,19 @@ public class PlayerMovement : Base
         }
     }
 
-    private void GetItem()
-    {
-        Bomb b = Instantiate(bomb,CoordPos,Quaternion.identity);
-        b.Init(_map);
-        bombList.Add(b);
-        
-    }
 
+    /// <summary>
+    /// 手持ち爆弾の最大値を増やします
+    /// </summary>
+    private void AddBombList()
+    {
+        if (bombList.Count < m_bombMaxValue)
+        {
+            Bomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
+            b.Initialize(map);
+            bombList.Add(b);
+        }
+        else
+            Debug.Log("それ以上は持てない！");
+    }
 }

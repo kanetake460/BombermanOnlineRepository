@@ -109,6 +109,14 @@ public class AudioManager : MonoBehaviour
     {
         _SEAudioSource.volume = volume;
     }
+    /// <summary>
+    /// SEの音量を設定します
+    /// </summary>
+    /// <param name="volume">音量（0～1）</param>
+    public static void SetVolumeSE(AudioSource audio,float volume)
+    {
+        audio.volume = volume;
+    }
 
     /// <summary>
     /// BGMの音量を設定します
@@ -117,6 +125,13 @@ public class AudioManager : MonoBehaviour
     public static void SetVolumeBGM(float volume)
     {
         _BGMAudioSource.volume = volume;
+    }    /// <summary>
+         /// BGMの音量を設定します
+         /// </summary>
+         /// <param name="volume">音量（0～1）</param>
+    public static void SetVolumeBGM(AudioSource audio,float volume)
+    {
+        audio.volume = volume;
     }
 
     /// <summary>
@@ -147,7 +162,7 @@ public class AudioManager : MonoBehaviour
     }
     public static void PlayOneShot(string clipKey,AudioSource audioSource, float volume = 0.5f)
     {
-        SetVolumeSE(volume);
+        SetVolumeSE(audioSource,volume);
         audioSource.PlayOneShot(_DicSE[clipKey]);
     }
 

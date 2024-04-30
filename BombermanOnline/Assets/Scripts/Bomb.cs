@@ -7,9 +7,8 @@ using UnityEngine;
 public class Bomb : Base
 {
     // ===イベント関数================================================
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
     }
 
     private void Update()
@@ -20,58 +19,88 @@ public class Bomb : Base
         }
         if(counter.Point(explosionTime))
         {
-            gameObj.SetActive(false);
             counter.Reset();
-            isHeld = true;
-            Explosion();
-            Debug.Log("ばーん");
+
+            Fire();
         }
     }
 
     // ===変数========================================
+    [SerializeField] Vector3 putPos;
+
     public bool isHeld = true; // 持たれているかどうか
     public int explosionTime;
     public int explosionLevel;
     private Timer counter = new Timer();
-    private const int exploDirNum = 4;
+    private List<Explosion> exploList = new List<Explosion>();
+    [SerializeField] private Explosion m_explosion;
+    private AudioSource _audioSource;
 
     // ===関数====================================================
+    public override void Initialize(GameMap map)
+    {
+        base.Initialize(map);
+        _audioSource ??= GetComponent<AudioSource>();
+        gameObj.SetActive(false);
+    }
 
     public void Put(Coord coord)
     {
         isHeld = false;
         gameObj.SetActive(true);
         Coord = coord;
-        Pos += new Vector3(0,2.5f,0);
+        Pos += putPos;
     }
 
-    public void Explosion()
+
+    /// <summary>
+    /// 四方向のストーンブロックを爆破します
+    /// </summary>
+    public void Fire()
     {
         Coord exploCoord;
         for (int x = 1; x <= explosionLevel; x++)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
-            if (_map.BreakStone(exploCoord) == false)
+            if (map.BreakStone(exploCoord) == false)
                 break;
+            PlayExplosionEffect(exploCoord);
         }
         for (int x = -1; x >= -explosionLevel; x--)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
-            if (_map.BreakStone(exploCoord) == false)
+            if (map.BreakStone(exploCoord) == false)
                 break;
+            PlayExplosionEffect(exploCoord);
         }
         for (int z = 1; z <= explosionLevel; z++)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
-            if (_map.BreakStone(exploCoord) == false)
+            if (map.BreakStone(exploCoord) == false)
                 break;
+            PlayExplosionEffect(exploCoord);
         }
         for (int z = -1; z >= -explosionLevel; z--)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
-            if (_map.BreakStone(exploCoord) == false)
+            if (map.BreakStone(exploCoord) == false)
                 break;
+            PlayExplosionEffect(exploCoord);
         }
+        AudioManager.PlayOneShot("爆発");
+        gameObj.SetActive(false);
+        isHeld = true;
+    }
+
+    private void PlayExplosionEffect(Coord exploCoord)
+    {
+        Explosion explo = exploList.Find(e => e.IsExplosion == false);
+        if (explo == null)
+        {
+            explo = map.mapSet.gridField.Instantiate(m_explosion, exploCoord, Quaternion.identity) as Explosion;
+            exploList.Add(explo);
+        }
+        explo.Initialize(map,exploCoord);
     }
 
 

@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TakeshiLibrary;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] protected GameMap _map;
-    
-    protected Rigidbody _rb;
+    [SerializeField] protected GameMap map;
+    protected GridField gridField;
+    protected Rigidbody rb;
 
-    [HideInInspector] protected GameObject gameObj;
-    [HideInInspector] public Transform trafo;
+    [HideInInspector] public GameObject gameObj { get; set; }
+    [HideInInspector] public Transform Trafo { get; set; }
 
-    protected virtual void Start()
+    private void Awake()
     {
-        trafo = gameObject.transform;
+        Trafo = gameObject.transform;
         gameObj = gameObject;
-        _rb ??= GetComponent<Rigidbody>();
+        rb ??= GetComponent<Rigidbody>();
     }
 
     // ===プロパティ=================================================
@@ -27,11 +28,11 @@ public class Base : MonoBehaviour
     {
         set
         {
-            trafo.position = _map.mapSet.gridField[value.x, value.z];
+            Trafo.position = map.mapSet.gridField[value.x, value.z];
         }
         get
         {
-            return _map.mapSet.gridField.GridCoordinate(trafo.position);
+            return map.mapSet.gridField.GridCoordinate(Trafo.position);
         }
     }
 
@@ -43,11 +44,11 @@ public class Base : MonoBehaviour
     {
         set
         {
-            trafo.position = value;
+            Trafo.position = value;
         }
         get
         {
-            return trafo.position;
+            return Trafo.position;
         }
     }
 
@@ -59,12 +60,12 @@ public class Base : MonoBehaviour
     {
         get
         {
-            return _map.mapSet.gridField[Coord.x,Coord.z];
+            return map.mapSet.gridField[Coord.x,Coord.z];
         }
     }
     // ===関数====================================================
-    public void Init(GameMap map)
+    public virtual void Initialize(GameMap map)
     {
-        _map = map;
+        this.map = map;
     }
 }

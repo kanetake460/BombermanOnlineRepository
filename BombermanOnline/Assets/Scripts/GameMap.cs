@@ -9,6 +9,21 @@ using UnityEngine.UIElements;
 
 public class GameMap : MonoBehaviour
 {
+    // ===イベント関数================================================
+    private void Awake()
+    {
+        mapSet ??= GetComponent<GridFieldMapSettings>();
+
+    }
+    void Start()
+    {
+        _mapObj = new GridFieldMapObject(mapSet);
+        _gridField = mapSet.gridField;
+        InitializeMap();
+
+    }
+
+    // ===変数====================================================
     public GridFieldMapSettings mapSet;
     private GridField _gridField;
     private GridFieldMapObject _mapObj;
@@ -23,20 +38,8 @@ public class GameMap : MonoBehaviour
     [SerializeField] Texture m_stoneTexture;
     [SerializeField] Camera m_mapCamera;
 
-    private void Awake()
-    {
-        mapSet ??= GetComponent<GridFieldMapSettings>();
 
-    }
-    void Start()
-    {
-        _mapObj = new GridFieldMapObject(mapSet);
-        _gridField = mapSet.gridField;
-        InitializeMap();
-
-    }
-    
-
+    // ===関数====================================================
     /// <summary>
     /// マップを初期化します。
     /// </summary>
@@ -69,12 +72,9 @@ public class GameMap : MonoBehaviour
         }
 
         // 何もないマス設定
-        // 何もないマスはストーンリストから削除
-        stoneBlockList.RemoveAll(b => _emptyCoords.Contains(b.coord));
-        // 壁にする
-        stoneBlockList.ForEach(b => b.isSpace = false);
-        // テクスチャ変更
-        stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);
+        stoneBlockList.RemoveAll(b => _emptyCoords.Contains(b.coord));                      // 何もないマスはストーンリストから削除
+        stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
+        stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
         // アクティブ管理
         _mapObj.ActiveMapWallObjects();
@@ -83,12 +83,19 @@ public class GameMap : MonoBehaviour
         m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
     }
 
+
+    /// <summary>
+    /// 指定した座標の石ストーンマスをなくします。
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <returns>壊せないブロックかどうか（壊せないブロック：false）</returns>
     public bool BreakStone(Coord coord)
     {
         var b = stoneBlockList.Find(b => b.coord == coord);
         if (b != null)
         {
             b.isSpace = true;
+            stoneBlockList.Remove(b);
             _emptyCoords.Add(b.coord);
             _mapObj.ActiveMapWallObjects();
             return true;
@@ -97,13 +104,6 @@ public class GameMap : MonoBehaviour
         {
             return true;
         }
-        Debug.Log(coord.x + "," + coord.z);
         return false;
-
-    }
-    void Update()
-    {
-
-
     }
 }
