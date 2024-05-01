@@ -192,6 +192,7 @@ public class AudioManager : MonoBehaviour
         if(_BGMAudioSource.isPlaying == false)
         {
             _BGMAudioSource.clip = _DicBGM[clipKey];
+            SetVolumeBGM(volume);
             _BGMAudioSource.Play();
         }
     }

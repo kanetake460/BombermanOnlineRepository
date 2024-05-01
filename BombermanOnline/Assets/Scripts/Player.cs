@@ -1,21 +1,22 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerMovement : Base
+public class Player : Base
 {
     // ===イベント==================================================================================
 
     protected void Start()
     {
-        fps ??= new FPS(map.mapSet,rb,gameObject,mainCamera);
-
+        fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
         InitPlayer();
     }
-    
+
 
     private void Update()
     {
@@ -26,40 +27,55 @@ public class PlayerMovement : Base
     // ===変数======================================================================================
 
     [Header("パラメーター")]
-    [SerializeField] private float speed;
-    [SerializeField] private float dashSpeed;
-    private List<Bomb> bombList = new();
-    [SerializeField] private int m_bombMaxValue;
-    private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0);
+    [SerializeField] private float m_speed;         // 移動スピード
+    [SerializeField] private float m_dashSpeed;     // ダッシュスピード
+    [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
+    [SerializeField] private int m_firepower;       // 爆弾の火力
+
+    private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
+
+    private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0); // マップカメラのポジション
+
 
     [Header("オブジェクト参照")]
-    [SerializeField] GameObject mainCamera;
-    [SerializeField] GameObject mapCamera;
-    [SerializeField] GameObject bombPrefab;
-    [SerializeField] Bomb bomb;
+    [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
+    [SerializeField] GameObject mapCamera;          // マップUIのカメラ
+    [SerializeField] Bomb bomb;                     // 生成する爆弾
 
 
     [Header("コンポーネント")]
+    [SerializeField] UI ui;
     FPS fps;
-    
+
     // ===プロパティ================================================================================
+    public int Firepower => m_firepower;                        // 火力ゲッター
+    public int BombMaxCount => bombList.Count;                  // 手持ちの爆弾最大値
+    public int BombCount => bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
+
 
     // ===関数================================================================================
+    /// <summary>
+    /// プレイヤーの設定をします
+    /// この関数はUpdate関数で呼び出します
+    /// </summary>
     private void PlayerSettings()
     {
+        // カメラ、移動の設定
         fps.CameraViewport();
         fps.PlayerViewport();
-        fps.AddForceLocomotion(speed, dashSpeed);
+        fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();
-
-    }
-
-
-    private void InitPlayer()
-    {
+        // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
+    }
 
+    /// <summary>
+    /// プレイヤーの初期化をします
+    /// この関数はStart関数で呼び出します
+    /// </summary>
+    private void InitPlayer()
+    {
         AddBombList();
     }
 
@@ -87,16 +103,18 @@ public class PlayerMovement : Base
     /// </summary>
     private void PutBomb()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
-            if(b == null)
+            if (b == null)
             {
-                Debug.Log("手持ちのボムがない");
+                ui.ShowGameText("No bomb !!",1);
+                AudioManager.PlayOneShot("爆弾がない");
                 return;
             }
-            b.Put(Coord);
-            
+            AudioManager.PlayOneShot("爆弾を置く");
+            b.Put(Coord,Firepower);
+
         }
     }
 
@@ -113,6 +131,12 @@ public class PlayerMovement : Base
             bombList.Add(b);
         }
         else
-            Debug.Log("それ以上は持てない！");
+        {
+            AudioManager.PlayOneShot("爆弾がない");
+            ui.ShowGameText("Full stack !!", 1);
+        }
     }
 }
+
+
+

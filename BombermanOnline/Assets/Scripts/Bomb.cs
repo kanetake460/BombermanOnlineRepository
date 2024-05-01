@@ -30,7 +30,7 @@ public class Bomb : Base
 
     public bool isHeld = true; // éùÇΩÇÍÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©
     public int explosionTime;
-    public int explosionLevel;
+    public int firepower;
     private Timer counter = new Timer();
     private List<Explosion> exploList = new List<Explosion>();
     [SerializeField] private Explosion m_explosion;
@@ -44,9 +44,10 @@ public class Bomb : Base
         gameObj.SetActive(false);
     }
 
-    public void Put(Coord coord)
+    public void Put(Coord coord,int exploLevel)
     {
         isHeld = false;
+        firepower = exploLevel;
         gameObj.SetActive(true);
         Coord = coord;
         Pos += putPos;
@@ -58,29 +59,31 @@ public class Bomb : Base
     /// </summary>
     public void Fire()
     {
+        PlayExplosionEffect(Coord);
+
         Coord exploCoord;
-        for (int x = 1; x <= explosionLevel; x++)
+        for (int x = 1; x <= firepower; x++)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
             if (map.BreakStone(exploCoord) == false)
                 break;
             PlayExplosionEffect(exploCoord);
         }
-        for (int x = -1; x >= -explosionLevel; x--)
+        for (int x = -1; x >= -firepower; x--)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
             if (map.BreakStone(exploCoord) == false)
                 break;
             PlayExplosionEffect(exploCoord);
         }
-        for (int z = 1; z <= explosionLevel; z++)
+        for (int z = 1; z <= firepower; z++)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
             if (map.BreakStone(exploCoord) == false)
                 break;
             PlayExplosionEffect(exploCoord);
         }
-        for (int z = -1; z >= -explosionLevel; z--)
+        for (int z = -1; z >= -firepower; z--)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
             if (map.BreakStone(exploCoord) == false)
