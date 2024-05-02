@@ -501,6 +501,20 @@ namespace TakeshiLibrary
             Vector3 position = this[coord.x,coord.z];
             return UnityEngine.Object.Instantiate(original, position, rotation);
         }
+        /// <summary>
+        /// グリッド座標版Instantiate
+        /// </summary>
+        /// <param name="original">インスタンスするもの</param>
+        /// <param name="coord">座標</param>
+        /// <param name="y">高さ</param>
+        /// <param name="rotation">向き</param>
+        /// <returns>インスタンスしたもの</returns>
+        public UnityEngine.Object Instantiate(UnityEngine.Object original, Coord coord,float y, Quaternion rotation)
+        {
+            Vector3 position = this[coord.x, coord.z];
+            position.y = y;
+            return UnityEngine.Object.Instantiate(original, position, rotation);
+        }
 
         private void OnDrawGizmos()
         {

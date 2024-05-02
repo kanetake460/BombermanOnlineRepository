@@ -14,6 +14,7 @@ public class Player : Base
     protected void Start()
     {
         fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
+        gameManager = GameManager.Instance;
         InitPlayer();
     }
 
@@ -24,13 +25,47 @@ public class Player : Base
         PutBomb();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // アイテムのレイヤーなら
+        if (gameManager.itemManager.itemLayer == (gameManager.itemManager.itemLayer | (1 << other.gameObject.layer)))
+        {
+            switch (other.tag)
+            {
+                case "Item_Bomb":
+                    AddBombList();
+                    break;
+
+                case "Item_Fire":
+                    FierPowerUp();
+                    break;
+
+                case "Item_Speed":
+                    SpeedUp();
+                    break;
+
+                case "Item_Life":
+                    LifeUp();
+                    break;
+            }
+            Debug.Log("アイテムゲット！！");
+            AudioManager.PlayOneShot("アイテムゲット");
+            other.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("アイテムじゃない");
+        }
+    }
     // ===変数======================================================================================
 
     [Header("パラメーター")]
     [SerializeField] private float m_speed;         // 移動スピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
+    [SerializeField] private float m_upSpeed;
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
+    [SerializeField] private int m_life;            // 体力
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
@@ -41,6 +76,7 @@ public class Player : Base
     [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] GameObject mapCamera;          // マップUIのカメラ
     [SerializeField] Bomb bomb;                     // 生成する爆弾
+    GameManager gameManager;
 
 
     [Header("コンポーネント")]
@@ -135,6 +171,26 @@ public class Player : Base
             AudioManager.PlayOneShot("爆弾がない");
             ui.ShowGameText("Full stack !!", 1);
         }
+    }
+
+    /// <summary>
+    /// スピードアップします
+    /// </summary>
+    /// <param name="up"></param>
+    private void SpeedUp()
+    {
+        m_speed += m_upSpeed;
+        m_dashSpeed += m_upSpeed;
+    }
+
+    private void FierPowerUp()
+    {
+        m_firepower++;
+    }
+
+    private void LifeUp()
+    {
+        m_life++;
     }
 }
 

@@ -19,7 +19,6 @@ public class UI : MonoBehaviour
         {
             gameText.text = null;
         }
-        Debug.Log(uiCount);
     }
 
     static private float uiCount;

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,16 +11,53 @@ using UnityEngine.UIElements;
 
 public class GameMap : MonoBehaviour
 {
+
+    private static GameMap _instance;
+
+    public static GameMap Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                // シーン内で GameManager のインスタンスを探す
+                _instance = FindObjectOfType<GameMap>();
+
+                // シーン内で見つからない場合は新しい GameObject を作成して GameManager のインスタンスをアタッチする
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameManager");
+                    _instance = singletonObject.AddComponent<GameMap>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+
     // ===イベント関数================================================
+
     private void Awake()
     {
-        mapSet ??= GetComponent<GridFieldMapSettings>();
+        // インスタンスが重複している場合は破棄する
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject); // シーンを切り替えてもインスタンスが破棄されないようにする
+        }
 
+        mapSet ??= GetComponent<GridFieldMapSettings>();
     }
+
     void Start()
     {
         _mapObj = new GridFieldMapObject(mapSet);
         _gridField = mapSet.gridField;
+        gameManager = GameManager.Instance;
         InitializeMap();
 
     }
@@ -33,11 +72,12 @@ public class GameMap : MonoBehaviour
     [HideInInspector] public Coord[] _startCoords;
     private List<Coord> _emptyCoords = new List<Coord>();
 
+    [Header("コンポーネント")]
     [SerializeField] GameObject m_player;
     [SerializeField] Texture m_wallTexture;
     [SerializeField] Texture m_stoneTexture;
     [SerializeField] Camera m_mapCamera;
-
+    GameManager gameManager;
 
     // ===関数====================================================
     /// <summary>
@@ -75,6 +115,8 @@ public class GameMap : MonoBehaviour
         stoneBlockList.RemoveAll(b => _emptyCoords.Contains(b.coord));                      // 何もないマスはストーンリストから削除
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
+
+        gameManager.itemManager.InstanceItems();
 
         // アクティブ管理
         _mapObj.ActiveMapWallObjects();

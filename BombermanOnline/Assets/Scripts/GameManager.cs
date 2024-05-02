@@ -1,3 +1,5 @@
+using System;
+using TakeshiLibrary;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -38,10 +40,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ExampleMethod()
-    {
-        Debug.Log("Singleton method called");
-    }
+    public ItemManager itemManager;
+
 
     private void Start()
     {
@@ -52,4 +52,73 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.PlayBGM("ゲームBGM",0.0f);
     }
+}
+
+[Serializable]
+public class ItemManager
+{
+    public Item[] items;
+
+    [SerializeField] float itemY;
+
+    public LayerMask itemLayer;
+
+
+    /// <summary>
+    /// アイテムをランダムなブロックの座標に生成します
+    /// </summary>
+    public void InstanceItems()
+    {
+        GameMap gameMap = GameMap.Instance;
+
+        int allItemCount = 0;       // すべてのアイテムの数
+
+        // カウントする
+        foreach (var item in items)
+        {
+            allItemCount += item.itemNum;
+        }
+
+        // もし、アイテムの数が、ストーンブロックの数より多い場合は生成する場所が足りないのでエラー
+        if (gameMap.stoneBlockList.Count < allItemCount)
+        {
+            Debug.Log(allItemCount);
+            Debug.Assert(gameMap.stoneBlockList.Count < allItemCount, "アイテムの数が多いため生成できません");
+            return;
+        }
+
+        Coord[] randomCoords = new Coord[gameMap.stoneBlockList.Count];     // ランダムなストーンブロックの座標の配列
+
+        // いったん順番に入れる
+        for (int i = 0; i < gameMap.stoneBlockList.Count; i++)
+        {
+            randomCoords[i] = gameMap.stoneBlockList[i].coord;
+        }
+        // シャッフル
+        Algorithm.Shuffle(randomCoords);
+
+        // 生成していく
+        int count = 0;
+        for (int i = 0; i < items.Length; i++)
+        {
+            for (int j = 0; j < items[i].itemNum; j++)
+            {
+                gameMap.mapSet.gridField.Instantiate(items[i].itemObject, randomCoords[count], itemY, Quaternion.identity);
+                count++;
+            }
+        }
+    }
+
+
+    public void GetItem(string tag, Action action)
+    {
+        foreach (var item in items)
+        {
+            if (item.Tag == tag)
+            {
+                action();
+            }
+        }
+    }
+
 }
