@@ -90,7 +90,7 @@ public class Bomb : Base
                 break;
             PlayExplosionEffect(exploCoord);
         }
-        AudioManager.PlayOneShot("”š”­");
+        AudioManager.PlayOneShot("”š”­",0.3f);
         gameObj.SetActive(false);
         isHeld = true;
     }

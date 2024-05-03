@@ -147,6 +147,7 @@ namespace TakeshiLibrary
         /// <param name="trafo">プレイヤートランスフォーム</param>
         public void ClampMoveRange()
         {
+            if(_latePos == Vector3.zero) return;
             Coord coord = _map.gridField.GridCoordinate(_player.transform.position);
 
             if (_map.blocks[coord.x,coord.z].isSpace == false)

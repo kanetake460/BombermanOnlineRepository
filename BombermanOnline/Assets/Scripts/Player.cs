@@ -22,29 +22,38 @@ public class Player : Base
     private void Update()
     {
         PlayerSettings();
+        PlayerSystem();
         PutBomb();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
+        if(other.tag == ExplosionTag)
+        {
+            LifeCount--;
+            AudioManager.PlayOneShot("被ダメージ",1f);
+            ui.ShowDamageEffectUI();
+        }
+
         // アイテムのレイヤーなら
         if (gameManager.itemManager.itemLayer == (gameManager.itemManager.itemLayer | (1 << other.gameObject.layer)))
         {
             switch (other.tag)
             {
-                case "Item_Bomb":
+                case ItemBombTag:
                     AddBombList();
                     break;
 
-                case "Item_Fire":
+                case ItemFireTag:
                     FierPowerUp();
                     break;
 
-                case "Item_Speed":
+                case ItemSpeedTag:
                     SpeedUp();
                     break;
 
-                case "Item_Life":
+                case ItemLifeTag:
                     LifeUp();
                     break;
             }
@@ -66,10 +75,18 @@ public class Player : Base
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
     [SerializeField] private int m_life;            // 体力
+    [SerializeField] private int m_lifeMaxValue;    // 体力の最大値
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0); // マップカメラのポジション
+
+
+    private const string ItemBombTag  = "Item_Bomb";
+    private const string ItemFireTag  = "Item_Fire";
+    private const string ItemSpeedTag = "Item_Speed";
+    private const string ItemLifeTag  = "Item_Life";
+    private const string ExplosionTag = "Explosion";
 
 
     [Header("オブジェクト参照")]
@@ -80,13 +97,30 @@ public class Player : Base
 
 
     [Header("コンポーネント")]
-    [SerializeField] UI ui;
+    [SerializeField] UIManager ui;
     FPS fps;
 
     // ===プロパティ================================================================================
     public int Firepower => m_firepower;                        // 火力ゲッター
     public int BombMaxCount => bombList.Count;                  // 手持ちの爆弾最大値
     public int BombCount => bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
+    public int LifeCount
+    {
+        get
+        {
+            return m_life;
+        }
+        private set 
+        { 
+            if(value > m_lifeMaxValue)
+            {
+                ui.ShowGameText("Full Life !!", 1);
+                AudioManager.PlayOneShot("爆弾がない");
+                return;
+            }
+            m_life = value;
+        }
+    }
 
 
     // ===関数================================================================================
@@ -101,10 +135,21 @@ public class Player : Base
         fps.PlayerViewport();
         fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();
+        fps.CursorLock();
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
     }
+
+
+    private void PlayerSystem()
+    {
+        if(m_life <= 0)
+        {
+            GameOver();
+        }
+    }
+
 
     /// <summary>
     /// プレイヤーの初期化をします
@@ -122,6 +167,7 @@ public class Player : Base
     public void GameStart()
     {
         Coord = map._startCoords[0];
+        enabled = true;
     }
 
 
@@ -150,7 +196,6 @@ public class Player : Base
             }
             AudioManager.PlayOneShot("爆弾を置く");
             b.Put(Coord,Firepower);
-
         }
     }
 
@@ -169,14 +214,13 @@ public class Player : Base
         else
         {
             AudioManager.PlayOneShot("爆弾がない");
-            ui.ShowGameText("Full stack !!", 1);
+            ui.ShowGameText("Full Stack !!", 1);
         }
     }
 
     /// <summary>
     /// スピードアップします
     /// </summary>
-    /// <param name="up"></param>
     private void SpeedUp()
     {
         m_speed += m_upSpeed;
@@ -190,7 +234,7 @@ public class Player : Base
 
     private void LifeUp()
     {
-        m_life++;
+        LifeCount++;
     }
 }
 

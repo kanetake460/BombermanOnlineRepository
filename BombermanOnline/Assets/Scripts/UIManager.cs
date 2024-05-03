@@ -4,12 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     private void Update()
     {
         ShowBombUI(player.BombCount);
+        ShowLifeUI(player.LifeCount);
         ShowUIText(firepowerText, "FirePower : " + player.Firepower);
         if (uiCount > 0)
         {
@@ -19,24 +21,44 @@ public class UI : MonoBehaviour
         {
             gameText.text = null;
         }
+
+
+        if (Mathf.Approximately(damageEffect.color.a, 0) == false)
+        {
+            Color color = damageEffect.color;
+            color.a = Mathf.Lerp(color.a, 0, Time.deltaTime * damageEffectSpeed);
+            damageEffect.color = color;
+        }
     }
 
-    static private float uiCount;
 
+    [Header("オブジェクト参照")]
     [SerializeField] GameObject[] bombUIs;
+    [SerializeField] GameObject[] lifeUIs;
+    [SerializeField] Image damageEffect;
     [SerializeField] TextMeshProUGUI firepowerText;
     [SerializeField] TextMeshProUGUI gameText;
     [SerializeField] Player player;
 
-    public void ShowBombUI(int count)
+    [Header("パラメーター")]
+    [SerializeField] float damageEffectSpeed;
+    private float uiCount;
+
+
+    private readonly Color damageColor = new Color(1,0,0,0.8f);
+
+    public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);
+    public void ShowLifeUI(int count) => ShowParamGuage(lifeUIs, count);
+
+
+    public void ShowParamGuage(GameObject[] uis,int count)
     {
-        Array.ForEach(bombUIs, b => b.SetActive(false));
+        Array.ForEach(uis, b => b.SetActive(false));
         for (int i = 0; i < count; i++)
         {
-            bombUIs[i].SetActive(true);
+            uis[i].SetActive(true);
         }
     }
-
 
     public void ShowUIText(TextMeshProUGUI tmp, string text)
     {
@@ -52,5 +74,11 @@ public class UI : MonoBehaviour
     public void ShowGameText(string text,float count)
     {
         ShowUIText(gameText,text,count);
+    }
+
+
+    public void ShowDamageEffectUI()
+    {
+        damageEffect.color = damageColor;
     }
 }
