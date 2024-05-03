@@ -8,6 +8,7 @@ TagManager:
   - Item_Fire
   - Item_Life
   - Item_Speed
+  - Explosion
   layers:
   - Default
   - TransparentFX
