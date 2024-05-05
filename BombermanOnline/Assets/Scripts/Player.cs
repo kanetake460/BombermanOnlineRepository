@@ -1,11 +1,9 @@
+using SoftGear.Strix.Unity.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : Base
 {
@@ -21,6 +19,10 @@ public class Player : Base
 
     private void Update()
     {
+        if(!isLocal)
+        {
+            return;
+        }
         PlayerSettings();
         PlayerSystem();
         PutBomb();
@@ -135,7 +137,7 @@ public class Player : Base
         fps.PlayerViewport();
         fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();
-        fps.CursorLock();
+        //fps.CursorLock();
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;

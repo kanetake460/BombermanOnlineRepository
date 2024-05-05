@@ -9,6 +9,7 @@ TagManager:
   - Item_Life
   - Item_Speed
   - Explosion
+  - SomeoneCamera
   layers:
   - Default
   - TransparentFX

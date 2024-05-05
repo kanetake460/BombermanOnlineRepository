@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TakeshiLibrary;
+using SoftGear.Strix.Unity.Runtime;
 
-public class Base : MonoBehaviour
+public class Base : StrixBehaviour
 {
     [SerializeField] protected GameMap map;
     protected GridField gridField;
@@ -61,6 +60,19 @@ public class Base : MonoBehaviour
         get
         {
             return map.mapSet.gridField[Coord.x,Coord.z];
+        }
+    }
+
+
+    public Quaternion Rot
+    {
+        set
+        {
+            transform.rotation = value;
+        }
+        get
+        {
+            return transform.rotation;
         }
     }
     // ===ä÷êî====================================================

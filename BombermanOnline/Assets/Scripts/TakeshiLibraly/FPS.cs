@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace TakeshiLibrary
     /*=====FPSの移動関連のスクリプトです=====*/
     // 参考サイト
     //https://www.popii33.com/unity-first-person-camera/
-    // 
+    [Serializable]
     public class FPS
     {
         private GridFieldMapSettings _map;
@@ -94,6 +95,7 @@ namespace TakeshiLibrary
             float z = Input.GetAxisRaw("Vertical") * speed;       // 移動入力
 
             _player.transform.position += _player.transform.forward * z * Time.deltaTime + _player.transform.right * x * Time.deltaTime;  // 移動
+            _camera.transform.position = _player.transform.position;
 
         }
 
@@ -236,7 +238,7 @@ namespace TakeshiLibrary
 
         public static Coord GetRandomVector3FourDirection()
         {
-            int rand = Random.Range(0, 4);
+            int rand = UnityEngine.Random.Range(0, 4);
 
             if (rand == 0)
                 return Coord.left;
@@ -311,7 +313,7 @@ namespace TakeshiLibrary
         public static eFourDirection RandomFourDirection()
         {
             Vector3 rand = Vector3.zero;
-               rand.y = Random.Range(0.0f,360f);
+               rand.y = UnityEngine.Random.Range(0.0f,360f);
 
             return GetFourDirection(rand);
         }

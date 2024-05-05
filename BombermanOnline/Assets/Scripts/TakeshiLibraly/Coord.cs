@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Unity.VisualScripting;
 
 #if UNITY_EDITOR
 using UnityEditor;

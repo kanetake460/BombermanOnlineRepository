@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TakeshiLibrary;
 using UnityEngine;
 
 public class Bomb : Base
