@@ -133,7 +133,6 @@ public class Player : Base
     private void PlayerSettings()
     {
         // ƒJƒƒ‰AˆÚ“®‚Ìİ’è
-        fps.CameraViewport();
         fps.PlayerViewport();
         fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();

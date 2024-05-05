@@ -51,6 +51,21 @@ public class Base : StrixBehaviour
         }
     }
 
+    /// <summary>
+    /// Vector3ローカル座標
+    /// </summary>
+    public Vector3 LocPos
+    {
+        set
+        {
+            Trafo.localPosition = value;
+        }
+        get
+        {
+            return Trafo.localPosition; 
+        }
+    }
+
 
     /// <summary>
     /// グリッド座標のVector3座標
@@ -64,6 +79,9 @@ public class Base : StrixBehaviour
     }
 
 
+    /// <summary>
+    /// クォータニオンローテイション
+    /// </summary>
     public Quaternion Rot
     {
         set
@@ -73,6 +91,22 @@ public class Base : StrixBehaviour
         get
         {
             return transform.rotation;
+        }
+    }
+
+
+    /// <summary>
+    /// クォータニオンローカルローテイション
+    /// </summary>
+    public Quaternion LocRot
+    {
+        set
+        {
+            transform.localRotation = value;
+        }
+        get
+        {
+            return transform.localRotation;
         }
     }
     // ===関数====================================================

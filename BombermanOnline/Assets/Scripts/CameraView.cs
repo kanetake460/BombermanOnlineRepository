@@ -53,8 +53,8 @@ public class CameraView : Base
     public void CameraViewport(float Xsensityvity = 3f, float minX = -90f, float maxX = 90f)
     {
         float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;       // マウスの座標代入
-        Rot *= Quaternion.Euler(-yRot, 0, 0);     // 角度代入
+        transform.localRotation *= Quaternion.Euler(-yRot, 0, 0);     // 角度代入
 
-        ClampRotation(Rot, minX, maxX);           // 角度制限
+        transform.localRotation = ClampRotation(transform.localRotation, minX, maxX);           // 角度制限
     }
 }

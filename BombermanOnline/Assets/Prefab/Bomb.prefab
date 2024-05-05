@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 6001974515815307178}
   - component: {fileID: -4227422920176734895}
   - component: {fileID: 105799587945549751}
+  - component: {fileID: 4876368351567000322}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -345,12 +346,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 6001974515815307178}
+  - {fileID: 4876368351567000322}
   objectType: 2
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1
   ConnectionClosedBehaviour: 1
+--- !u!114 &4876368351567000322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416152949586608248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1088213620, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncPosition: 1
+  syncRotation: 1
+  syncVelocity: 1
+  syncAngularVelocity: 1
 --- !u!1 &2525843039840558260
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using TakeshiLibrary;
 using UnityEngine;
 
@@ -116,4 +117,17 @@ public class GridFieldMapObject
     public void ActiveMapWallObjects() => _mapSet.gridField.IterateOverGrid(c => ActiveMapWallObject(c));
 
 
+    public void AddComponentWallObject<T>(Coord coord) where T : Component
+    {
+        if (_mapSet.blocks[coord.x, coord.z].wallObj != null)
+        {
+            _mapSet.blocks[coord.x, coord.z].wallObj.AddComponent<T>();
+        }
+        else
+        {
+            Debug.LogError("指定された壁オブジェクトがありません");
+        }
+    }
+
+    public void AddComponentAllWallObjects<T>() where T : Component => _mapSet.gridField.IterateOverGrid(c => AddComponentWallObject<T>(c));
 }

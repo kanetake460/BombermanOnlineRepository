@@ -15,3 +15,5 @@ MonoBehaviour:
   replicators:
   - {fileID: 105799587945549751, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
   - {fileID: 4584071630267515134, guid: 187544613e2b53141a9956160c0764ef, type: 3}
+  - {fileID: -1898743265024079889, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
+  - {fileID: -8656837125456601451, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}

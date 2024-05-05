@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 739954427788385108}
   - component: {fileID: 2785405235267584744}
   - component: {fileID: 4584071630267515134}
+  - component: {fileID: -3440616770046577060}
+  - component: {fileID: -8356144319842605858}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Explosion
@@ -5037,9 +5039,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: -7081392715024944984}
+  - {fileID: -3440616770046577060}
+  - {fileID: -8356144319842605858}
   objectType: 1
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1
   ConnectionClosedBehaviour: 1
+--- !u!114 &-3440616770046577060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831956353777784858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1088213620, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncPosition: 1
+  syncRotation: 1
+  syncVelocity: 1
+  syncAngularVelocity: 1
+--- !u!114 &-8356144319842605858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831956353777784858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -357823647, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  SynchronizeStates: 1
+  ParameterSynchronizationFlags: 

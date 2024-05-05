@@ -27,6 +27,12 @@ public class TestPlayer : StrixBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            Instantiate(test,transform.position, Quaternion.identity);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            bool active = !test2.activeSelf;
+            test2.SetActive(active);
         }
         fps.AddForceLocomotion();
         fps.PlayerViewport();
@@ -36,4 +42,6 @@ public class TestPlayer : StrixBehaviour
     Rigidbody rb;
     [SerializeField] GameObject mainCamera;
     [SerializeField] Vector3 cameraPos;
+    [SerializeField] GameObject test;
+    [SerializeField] GameObject test2;
 }

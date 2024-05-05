@@ -1,3 +1,4 @@
+using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using TakeshiLibrary;
 using UnityEngine;
@@ -118,6 +119,7 @@ public class GameMap : MonoBehaviour
 
         // 右上のマップのサイズを調節
         m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
+
     }
 
 
