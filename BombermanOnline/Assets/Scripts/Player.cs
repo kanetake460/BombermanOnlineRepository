@@ -19,14 +19,30 @@ public class Player : Base
 
     private void Update()
     {
-        if(!isLocal)
+        if (!isLocal)
         {
             return;
         }
         PlayerSettings();
         PlayerSystem();
         PutBomb();
+        InputTest();
     }
+
+    private void InputTest()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            RpcToAll(nameof(CallSetActiveTest));
+        }
+    }
+
+    [StrixRpc]
+    private void CallSetActiveTest()
+    {
+        map.SetActiveObjectTest();
+    }
+
 
 
     private void OnTriggerEnter(Collider other)

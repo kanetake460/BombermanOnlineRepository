@@ -8,44 +8,11 @@ using UnityEngine;
 public class GameMap : MonoBehaviour
 {
 
-    private static GameMap _instance;
-
-    public static GameMap Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                // シーン内で GameManager のインスタンスを探す
-                _instance = FindObjectOfType<GameMap>();
-
-                // シーン内で見つからない場合は新しい GameObject を作成して GameManager のインスタンスをアタッチする
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject("GameManager");
-                    _instance = singletonObject.AddComponent<GameMap>();
-                }
-            }
-            return _instance;
-        }
-    }
-
 
     // ===イベント関数================================================
 
     private void Awake()
     {
-        // インスタンスが重複している場合は破棄する
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject); // シーンを切り替えてもインスタンスが破棄されないようにする
-        }
-
         mapSet ??= GetComponent<GridFieldMapSettings>();
     }
 
@@ -67,6 +34,8 @@ public class GameMap : MonoBehaviour
 
     [HideInInspector] public Coord[] _startCoords;
     private List<Coord> _emptyCoords = new List<Coord>();
+
+    public GameObject test;
 
     [Header("コンポーネント")]
     [SerializeField] GameObject m_player;
@@ -128,6 +97,7 @@ public class GameMap : MonoBehaviour
     /// </summary>
     /// <param name="coord">座標</param>
     /// <returns>壊せないブロックかどうか（壊せないブロック：false）</returns>
+    [StrixRpc]
     public bool BreakStone(Coord coord)
     {
         var b = stoneBlockList.Find(b => b.coord == coord);
@@ -144,5 +114,20 @@ public class GameMap : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    [StrixRpc]
+    public void SetActiveObjectTest()
+    {
+
+            Debug.Log("Test1");
+            //if (mapSet.blocks[1, 3].wallObj.GetComponent<StrixTransformSynchronizer>() == null)
+            //{
+            //    mapSet.blocks[1, 3].wallObj.AddComponent<StrixTransformSynchronizer>();
+            //}
+            bool active = mapSet.blocks[1, 3].wallObj.activeSelf;
+            mapSet.blocks[1, 3].wallObj.SetActive(!active);
+
+            test.SetActive(active);
     }
 }

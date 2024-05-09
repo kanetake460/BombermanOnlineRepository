@@ -63,14 +63,12 @@ public class ItemManager
 
     public LayerMask itemLayer;
 
-
+    [SerializeField] GameMap m_gameMap;
     /// <summary>
     /// アイテムをランダムなブロックの座標に生成します
     /// </summary>
     public void InstanceItems()
     {
-        GameMap gameMap = GameMap.Instance;
-
         int allItemCount = 0;       // すべてのアイテムの数
 
         // カウントする
@@ -80,19 +78,19 @@ public class ItemManager
         }
 
         // もし、アイテムの数が、ストーンブロックの数より多い場合は生成する場所が足りないのでエラー
-        if (gameMap.stoneBlockList.Count < allItemCount)
+        if (m_gameMap.stoneBlockList.Count < allItemCount)
         {
             Debug.Log(allItemCount);
-            Debug.Assert(gameMap.stoneBlockList.Count < allItemCount, "アイテムの数が多いため生成できません");
+            Debug.Assert(m_gameMap.stoneBlockList.Count < allItemCount, "アイテムの数が多いため生成できません");
             return;
         }
 
-        Coord[] randomCoords = new Coord[gameMap.stoneBlockList.Count];     // ランダムなストーンブロックの座標の配列
+        Coord[] randomCoords = new Coord[m_gameMap.stoneBlockList.Count];     // ランダムなストーンブロックの座標の配列
 
         // いったん順番に入れる
-        for (int i = 0; i < gameMap.stoneBlockList.Count; i++)
+        for (int i = 0; i < m_gameMap.stoneBlockList.Count; i++)
         {
-            randomCoords[i] = gameMap.stoneBlockList[i].coord;
+            randomCoords[i] = m_gameMap.stoneBlockList[i].coord;
         }
         // シャッフル
         Algorithm.Shuffle(randomCoords);
@@ -103,7 +101,7 @@ public class ItemManager
         {
             for (int j = 0; j < items[i].itemNum; j++)
             {
-                gameMap.mapSet.gridField.Instantiate(items[i].itemObject, randomCoords[count], itemY, Quaternion.identity);
+                m_gameMap.mapSet.gridField.Instantiate(items[i].itemObject, randomCoords[count], itemY, Quaternion.identity);
                 count++;
             }
         }

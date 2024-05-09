@@ -1,3 +1,4 @@
+using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,16 +11,30 @@ public class Bomb : Base
 
     private void Update()
     {
+        if (isLocal == false) { return; }
+        RpcToAll(nameof(BombTimer));
+    }
+
+    [StrixRpc]
+    private void BombTimer()
+    {
         if (isHeld == false)
         {
             counter.Count();
         }
-        if(counter.Point(explosionTime))
+        if (counter.Point(explosionTime))
         {
             counter.Reset();
 
-            Fire();
+            RpcToAll(nameof(Fire));
+            RpcToAll(nameof(CallSetActiveTest));
         }
+    }
+
+    [StrixRpc]
+    private void CallSetActiveTest()
+    {
+        map.SetActiveObjectTest();
     }
 
     // ===変数========================================
@@ -54,6 +69,7 @@ public class Bomb : Base
     /// <summary>
     /// 四方向のストーンブロックを爆破します
     /// </summary>
+    [StrixRpc]
     public void Fire()
     {
         PlayExplosionEffect(Coord);

@@ -4908,6 +4908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   collisionDuration: 120
+  _sphereCollider: {fileID: 2785405235267584744}
 --- !u!82 &739954427788385108
 AudioSource:
   m_ObjectHideFlags: 0
