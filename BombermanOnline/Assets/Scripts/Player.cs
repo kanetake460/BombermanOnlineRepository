@@ -26,23 +26,7 @@ public class Player : Base
         PlayerSettings();
         PlayerSystem();
         PutBomb();
-        InputTest();
     }
-
-    private void InputTest()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RpcToAll(nameof(CallSetActiveTest));
-        }
-    }
-
-    [StrixRpc]
-    private void CallSetActiveTest()
-    {
-        map.SetActiveObjectTest();
-    }
-
 
 
     private void OnTriggerEnter(Collider other)
@@ -204,16 +188,26 @@ public class Player : Base
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
-            if (b == null)
-            {
-                ui.ShowGameText("No bomb !!",1);
-                AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
-                return;
-            }
-            AudioManager.PlayOneShot("”š’e‚ğ’u‚­");
-            b.Put(Coord,Firepower);
+            RpcToAll(nameof(GenerateBomb));
         }
+    }
+
+
+    /// <summary>
+    /// ”š’e‚ğ¶¬‚µA’u‚«‚Ü‚·B
+    /// </summary>
+    [StrixRpc]
+    void GenerateBomb()
+    {
+        Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
+        if (b == null)
+        {
+            ui.ShowGameText("No bomb !!", 1);
+            AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
+            return;
+        }
+        AudioManager.PlayOneShot("”š’e‚ğ’u‚­");
+        b.Put(Coord, Firepower);
     }
 
 

@@ -81,7 +81,7 @@ public class GameMap : MonoBehaviour
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
-        gameManager.itemManager.InstanceItems();
+
 
         // アクティブ管理
         _mapObj.ActiveMapWallObjects();
@@ -116,18 +116,10 @@ public class GameMap : MonoBehaviour
         return false;
     }
 
+
     [StrixRpc]
-    public void SetActiveObjectTest()
+    public void CallItemInstance()
     {
 
-            Debug.Log("Test1");
-            //if (mapSet.blocks[1, 3].wallObj.GetComponent<StrixTransformSynchronizer>() == null)
-            //{
-            //    mapSet.blocks[1, 3].wallObj.AddComponent<StrixTransformSynchronizer>();
-            //}
-            bool active = mapSet.blocks[1, 3].wallObj.activeSelf;
-            mapSet.blocks[1, 3].wallObj.SetActive(!active);
-
-            test.SetActive(active);
     }
 }

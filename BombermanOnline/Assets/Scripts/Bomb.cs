@@ -27,15 +27,9 @@ public class Bomb : Base
             counter.Reset();
 
             RpcToAll(nameof(Fire));
-            RpcToAll(nameof(CallSetActiveTest));
         }
     }
 
-    [StrixRpc]
-    private void CallSetActiveTest()
-    {
-        map.SetActiveObjectTest();
-    }
 
     // ===変数========================================
     [SerializeField] Vector3 putPos;
@@ -56,6 +50,12 @@ public class Bomb : Base
         gameObj.SetActive(false);
     }
 
+
+    /// <summary>
+    /// 爆弾を置いた時の処理
+    /// </summary>
+    /// <param name="coord">置かれる座標</param>
+    /// <param name="exploLevel">爆発レベル</param>
     public void Put(Coord coord,int exploLevel)
     {
         isHeld = false;
