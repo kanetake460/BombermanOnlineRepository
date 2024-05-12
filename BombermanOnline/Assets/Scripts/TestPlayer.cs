@@ -5,6 +5,7 @@ using TakeshiLibrary;
 using SoftGear.Strix.Unity.Runtime;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TestPlayer : StrixBehaviour
 {
@@ -29,18 +30,22 @@ public class TestPlayer : StrixBehaviour
         fps.AddForceLocomotion();
         fps.PlayerViewport();
 
+        // オブジェクト配置
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(test, transform.position, Quaternion.identity);
         }
-        // Wキー
-        if (Input.GetKeyDown(KeyCode.W))
+        // テストオブジェクトのセットアクティブ
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             RpcToAll("Active");
         }
-        // Qキー
-        RpcToAll("InputActive");
 
+        // ゲームシーンロード
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            RpcToAll(nameof(CallLoadScene));
+        }
 
 
 
@@ -48,26 +53,30 @@ public class TestPlayer : StrixBehaviour
         RpcToAll(nameof(DecSyncValue));
         RpcToAll(nameof(PrivateMethod));
 
+        RpcToAll(nameof(ShowValueText));
         //RpcToAll("DecIntValue");
         //RpcToAll("DecSyncValue");
         //RpcToAll("PrivateMethod");
 
-        Debug.Log("シンクロ数値" + syncInt);
-        Debug.Log("数値" + intValue);
-        Debug.Log("privateシンクロ数値" + _syncInt);
-        Debug.Log("private数値" + _intValue);
-        tmp.text = "syncInt:" + syncInt + "\n" + "intValue:" + intValue + "\n" + "private syncInt:" + _syncInt + "\n" +"intValue:"+_intValue;
+        //Debug.Log("シンクロ数値" + syncInt);
+        //Debug.Log("数値" + intValue);
+        //Debug.Log("privateシンクロ数値" + _syncInt);
+        //Debug.Log("private数値" + _intValue);
     }
 
     [StrixRpc]
-    private void InputActive()
+    private void ShowValueText()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            bool active = !test2.activeSelf;
-            test2.SetActive(active);
-        }
+        tmp.text = "syncInt:" + syncInt + "\n" + "intValue:" + intValue + "\n" + "private syncInt:" + _syncInt + "\n" + "intValue:" + _intValue;
     }
+
+    [StrixRpc]
+    private void CallLoadScene()
+    {
+        Debug.Log("GameScene");
+        SceneManager.LoadScene("GameScene");
+    }
+
 
     [StrixRpc]
     private void Active()

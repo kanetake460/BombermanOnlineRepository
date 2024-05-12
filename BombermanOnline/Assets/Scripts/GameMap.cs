@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public class GameMap : MonoBehaviour
+public class GameMap : StrixBehaviour
 {
 
 
@@ -13,17 +13,25 @@ public class GameMap : MonoBehaviour
 
     private void Awake()
     {
-        mapSet ??= GetComponent<GridFieldMapSettings>();
+        //RpcToAll(nameof(InitializeMap));
     }
 
-    void Start()
+    private void Start()
     {
-        _mapObj = new GridFieldMapObject(mapSet);
-        _gridField = mapSet.gridField;
-        gameManager = GameManager.Instance;
-        InitializeMap();
 
     }
+    
+    // ===インプットアクション関数=======================================
+    public void CreateMap1()
+    {
+        RpcToAll(nameof(InitializeMap));
+        gameManager.playerList.ForEach(player => player.enabled = true);
+        for (int i = 0; i < gameManager.playerList.Count; i++)
+        {
+            gameManager.playerList[i].Coord = _startCoords[i];
+        }
+    }
+
 
     // ===変数====================================================
     public GridFieldMapSettings mapSet;
@@ -48,8 +56,17 @@ public class GameMap : MonoBehaviour
     /// <summary>
     /// マップを初期化します。
     /// </summary>
-    private void InitializeMap()
+    [StrixRpc]
+    public void InitializeMap()
     {
+        mapSet ??= GetComponent<GridFieldMapSettings>();
+
+
+        _mapObj = new GridFieldMapObject(mapSet);
+        _gridField = mapSet.gridField;
+        gameManager = GameManager.Instance;
+
+
         // オブジェクト生成
         _mapObj.InstanceMapObjects();
         // テクスチャ変更
@@ -81,7 +98,7 @@ public class GameMap : MonoBehaviour
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
-
+        CallItemInstance();
 
         // アクティブ管理
         _mapObj.ActiveMapWallObjects();
@@ -120,6 +137,6 @@ public class GameMap : MonoBehaviour
     [StrixRpc]
     public void CallItemInstance()
     {
-
+        gameManager.itemManager.InstanceItems();
     }
 }

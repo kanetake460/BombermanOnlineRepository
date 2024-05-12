@@ -1,5 +1,4 @@
 using SoftGear.Strix.Unity.Runtime;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
@@ -19,10 +18,8 @@ public class Player : Base
 
     private void Update()
     {
-        if (!isLocal)
-        {
-            return;
-        }
+        if (isLocal == false) return;
+
         PlayerSettings();
         PlayerSystem();
         PutBomb();
@@ -82,7 +79,6 @@ public class Player : Base
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0); // マップカメラのポジション
-
 
     private const string ItemBombTag  = "Item_Bomb";
     private const string ItemFireTag  = "Item_Fire";
@@ -159,15 +155,21 @@ public class Player : Base
     private void InitPlayer()
     {
         AddBombList();
+        Coord = map._startCoords[0];
     }
 
+
+    public void GameStart() 
+    {
+        RpcToAll(nameof(CallGameStart)); 
+    }
 
     /// <summary>
     /// ゲームスタート
     /// </summary>
-    public void GameStart()
+    [StrixRpc]
+    public void CallGameStart()
     {
-        Coord = map._startCoords[0];
         enabled = true;
     }
 

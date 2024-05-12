@@ -1,58 +1,45 @@
 using System;
 using TakeshiLibrary;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager _instance;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                // シーン内で GameManager のインスタンスを探す
-                _instance = FindObjectOfType<GameManager>();
-
-                // シーン内で見つからない場合は新しい GameObject を作成して GameManager のインスタンスをアタッチする
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject("GameManager");
-                    _instance = singletonObject.AddComponent<GameManager>();
-                }
-            }
-            return _instance;
-        }
-    }
-
-    private void Awake()
-    {
-        // インスタンスが重複している場合は破棄する
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject); // シーンを切り替えてもインスタンスが破棄されないようにする
-        }
-    }
-
-    public ItemManager itemManager;
-
+    // ===イベント関数================================================
 
     private void Start()
     {
-        
+        InitializePlayerList();
     }
+
 
     private void Update()
     {
         AudioManager.PlayBGM("ゲームBGM",0.0f);
     }
+
+    // ===変数====================================================
+    public ItemManager itemManager;
+
+    public List<Player> playerList = new List<Player>();
+
+
+    // ===関数====================================================
+
+    /// <summary>
+    /// プレイヤーのリストを作成します
+    /// </summary>
+    private void InitializePlayerList()
+    {
+        var playerObjs = GameObject.FindGameObjectsWithTag("player");
+        foreach (var playerObj in playerObjs)
+        {
+            Player player = playerObj.GetComponent<Player>();
+            playerList.Add(player);
+        }
+    }
 }
+
 
 [Serializable]
 public class ItemManager
@@ -107,7 +94,11 @@ public class ItemManager
         }
     }
 
-
+    /// <summary>
+    /// アイテムを取得したときのアクションを行います。
+    /// </summary>
+    /// <param name="tag">アイテムのタグ</param>
+    /// <param name="action">アクション</param>
     public void GetItem(string tag, Action action)
     {
         foreach (var item in items)
@@ -118,5 +109,4 @@ public class ItemManager
             }
         }
     }
-
 }
