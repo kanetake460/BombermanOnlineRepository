@@ -155,7 +155,6 @@ public class Player : Base
     private void InitPlayer()
     {
         AddBombList();
-        Coord = map._startCoords[0];
     }
 
 
@@ -170,7 +169,11 @@ public class Player : Base
     [StrixRpc]
     public void CallGameStart()
     {
-        enabled = true;
+        gameManager.playerList.ForEach(player => player.enabled = true);
+        for (int i = 0; i < gameManager.playerList.Count; i++)
+        {
+            gameManager.playerList[i].Coord = map.startCoords[i];
+        }
     }
 
 

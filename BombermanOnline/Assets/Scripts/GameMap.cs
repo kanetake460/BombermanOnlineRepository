@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using TakeshiLibrary;
 using UnityEngine;
 
-
-
-public class GameMap : StrixBehaviour
+public class GameMap : SingletonStrixBehaviour<GameMap>
 {
 
 
@@ -13,23 +11,19 @@ public class GameMap : StrixBehaviour
 
     private void Awake()
     {
-        //RpcToAll(nameof(InitializeMap));
+        base.Awake();
     }
 
     private void Start()
     {
 
     }
-    
+
     // ===インプットアクション関数=======================================
     public void CreateMap1()
     {
         RpcToAll(nameof(InitializeMap));
-        gameManager.playerList.ForEach(player => player.enabled = true);
-        for (int i = 0; i < gameManager.playerList.Count; i++)
-        {
-            gameManager.playerList[i].Coord = _startCoords[i];
-        }
+
     }
 
 
@@ -40,7 +34,7 @@ public class GameMap : StrixBehaviour
 
     public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();
 
-    [HideInInspector] public Coord[] _startCoords;
+    [HideInInspector] public Coord[] startCoords;
     private List<Coord> _emptyCoords = new List<Coord>();
 
     public GameObject test;
@@ -57,7 +51,7 @@ public class GameMap : StrixBehaviour
     /// マップを初期化します。
     /// </summary>
     [StrixRpc]
-    public void InitializeMap()
+    private void InitializeMap()
     {
         mapSet ??= GetComponent<GridFieldMapSettings>();
 
@@ -75,7 +69,7 @@ public class GameMap : StrixBehaviour
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
 
         // 4つのスタート地点
-        _startCoords = new Coord[]
+        startCoords = new Coord[]
         {
             new Coord(1,1),
             new Coord(1,mapSet.gridDepth - 2),
@@ -84,13 +78,13 @@ public class GameMap : StrixBehaviour
         };
 
         // スタート地点の周りは何もないブロック
-        for (int i = 0; i < _startCoords.Length; i++)
+        for (int i = 0; i < startCoords.Length; i++)
         {
-            _emptyCoords.Add(_startCoords[i]);
-            _emptyCoords.Add(_startCoords[i] + Coord.forward);
-            _emptyCoords.Add(_startCoords[i] + Coord.back);
-            _emptyCoords.Add(_startCoords[i] + Coord.left);
-            _emptyCoords.Add(_startCoords[i] + Coord.right);
+            _emptyCoords.Add(startCoords[i]);
+            _emptyCoords.Add(startCoords[i] + Coord.forward);
+            _emptyCoords.Add(startCoords[i] + Coord.back);
+            _emptyCoords.Add(startCoords[i] + Coord.left);
+            _emptyCoords.Add(startCoords[i] + Coord.right);
         }
 
         // 何もないマス設定
@@ -105,6 +99,13 @@ public class GameMap : StrixBehaviour
 
         // 右上のマップのサイズを調節
         m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
+
+        // プレイヤーをすべて動かせるようにし、スタート地点に設定します。
+        gameManager.playerList.ForEach(player => player.enabled = true);
+        for (int i = 0; i < gameManager.playerList.Count; i++)
+        {
+            gameManager.playerList[i].Coord = startCoords[i];
+        }
 
     }
 
@@ -137,6 +138,7 @@ public class GameMap : StrixBehaviour
     [StrixRpc]
     public void CallItemInstance()
     {
+        Debug.Log("マップ生成");
         gameManager.itemManager.InstanceItems();
     }
 }

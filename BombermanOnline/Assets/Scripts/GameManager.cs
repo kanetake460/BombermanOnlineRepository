@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public class GameManager : Singleton<GameManager>
 {
     // ===イベント関数================================================
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Start()
     {
@@ -31,7 +35,7 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     private void InitializePlayerList()
     {
-        var playerObjs = GameObject.FindGameObjectsWithTag("player");
+        var playerObjs = GameObject.FindGameObjectsWithTag("Player");
         foreach (var playerObj in playerObjs)
         {
             Player player = playerObj.GetComponent<Player>();
@@ -68,7 +72,7 @@ public class ItemManager
         if (m_gameMap.stoneBlockList.Count < allItemCount)
         {
             Debug.Log(allItemCount);
-            Debug.Assert(m_gameMap.stoneBlockList.Count < allItemCount, "アイテムの数が多いため生成できません");
+            Debug.LogError("アイテムの数が多いため生成できません");
             return;
         }
 

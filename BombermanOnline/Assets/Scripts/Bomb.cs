@@ -51,6 +51,13 @@ public class Bomb : Base
     }
 
 
+    [StrixRpc]
+    private void CallInitialize()
+    {
+
+    }
+
+
     /// <summary>
     /// ”š’e‚ğ’u‚¢‚½‚Ìˆ—
     /// </summary>

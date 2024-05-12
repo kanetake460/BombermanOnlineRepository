@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoftGear.Strix.Unity.Runtime;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviour
 {
     private static T _instance;
 

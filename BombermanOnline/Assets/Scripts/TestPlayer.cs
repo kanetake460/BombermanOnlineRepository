@@ -73,7 +73,6 @@ public class TestPlayer : StrixBehaviour
     [StrixRpc]
     private void CallLoadScene()
     {
-        Debug.Log("GameScene");
         SceneManager.LoadScene("GameScene");
     }
 
