@@ -2216,7 +2216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29635d42707d3204b99a8dc61e969ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 1898085064}
+  map: {fileID: 0}
   m_speed: 10
   m_dashSpeed: 20
   m_upSpeed: 5

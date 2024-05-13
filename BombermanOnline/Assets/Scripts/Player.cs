@@ -10,8 +10,9 @@ public class Player : Base
 
     protected void Start()
     {
-        fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
+        map = GameMap.Instance;
         gameManager = GameManager.Instance;
+        fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
         InitPlayer();
     }
 

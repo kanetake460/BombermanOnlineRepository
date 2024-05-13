@@ -16,6 +16,7 @@ public class Base : StrixBehaviour
         Trafo = gameObject.transform;
         gameObj = gameObject;
         rb ??= GetComponent<Rigidbody>();
+        //map = GameMap.Instance;
     }
 
     // ===プロパティ=================================================

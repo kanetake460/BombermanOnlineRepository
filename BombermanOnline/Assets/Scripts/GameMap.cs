@@ -9,9 +9,12 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
     // ===ÉCÉxÉìÉgä÷êî================================================
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
+        mapSet ??= GetComponent<GridFieldMapSettings>();
+        _gridField = mapSet.gridField;
+        _mapObj = new GridFieldMapObject(mapSet);
     }
 
     private void Start()
@@ -23,7 +26,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     public void CreateMap1()
     {
         RpcToAll(nameof(InitializeMap));
-
     }
 
 
@@ -53,11 +55,9 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [StrixRpc]
     private void InitializeMap()
     {
-        mapSet ??= GetComponent<GridFieldMapSettings>();
 
 
-        _mapObj = new GridFieldMapObject(mapSet);
-        _gridField = mapSet.gridField;
+
         gameManager = GameManager.Instance;
 
 

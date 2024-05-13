@@ -26,7 +26,7 @@ public class Bomb : Base
         {
             counter.Reset();
 
-            RpcToAll(nameof(Fire));
+            Fire();
         }
     }
 
