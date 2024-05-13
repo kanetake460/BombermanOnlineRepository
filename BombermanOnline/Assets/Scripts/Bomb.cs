@@ -12,10 +12,10 @@ public class Bomb : Base
     private void Update()
     {
         if (isLocal == false) return;
-        RpcToAll(nameof(BombTimer));
+        BombTimer();
     }
 
-    [StrixRpc]
+
     private void BombTimer()
     {
         if (isHeld == false)
@@ -47,15 +47,17 @@ public class Bomb : Base
     {
         base.Initialize(map);
         _audioSource ??= GetComponent<AudioSource>();
+        CallInActive();
+    }
+
+
+    private void CallInActive() { RpcToAll(nameof(InActive)); }
+    [StrixRpc]
+    private void InActive()
+    {
         gameObj.SetActive(false);
     }
 
-
-    [StrixRpc]
-    private void CallInitialize()
-    {
-
-    }
 
 
     /// <summary>
@@ -76,7 +78,6 @@ public class Bomb : Base
     /// <summary>
     /// 四方向のストーンブロックを爆破します
     /// </summary>
-    [StrixRpc]
     public void Fire()
     {
         PlayExplosionEffect(Coord);
@@ -111,9 +112,12 @@ public class Bomb : Base
             PlayExplosionEffect(exploCoord);
         }
         AudioManager.PlayOneShot("爆発",0.3f);
-        gameObj.SetActive(false);
+        CallInActive();
         isHeld = true;
     }
+
+
+
 
     private void PlayExplosionEffect(Coord exploCoord)
     {

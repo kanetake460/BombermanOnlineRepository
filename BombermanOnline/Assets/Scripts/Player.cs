@@ -229,6 +229,7 @@ public class Player : Base
         if (bombList.Count < m_bombMaxValue)
         {
             Bomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
+            b.gameObj.SetActive(false) ;
             b.Initialize(map);
             bombList.Add(b);
         }
