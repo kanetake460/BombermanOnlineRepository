@@ -11,7 +11,7 @@ public class Bomb : Base
 
     private void Update()
     {
-        if (isLocal == false) { return; }
+        if (isLocal == false) return;
         RpcToAll(nameof(BombTimer));
     }
 

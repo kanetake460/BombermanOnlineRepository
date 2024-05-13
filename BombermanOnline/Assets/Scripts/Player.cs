@@ -29,8 +29,12 @@ public class Player : Base
 
     private void OnTriggerEnter(Collider other)
     {
+        
+
         if(other.tag == ExplosionTag)
         {
+            if(isLocal == false) return;
+
             LifeCount--;
             AudioManager.PlayOneShot("îÌÉ_ÉÅÅ[ÉW",1f);
             ui.ShowDamageEffectUI();
