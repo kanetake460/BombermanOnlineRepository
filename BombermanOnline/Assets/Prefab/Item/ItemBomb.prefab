@@ -206,6 +206,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2893627844302390426}
     m_Modifications:
+    - target: {fileID: -1898743265024079889, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
+      propertyPath: objectType
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1898743265024079889, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
+      propertyPath: strixBehaviours.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7420734803486470809, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -254,7 +262,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7894113042275498695, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
+    - {fileID: -1898743265024079889, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

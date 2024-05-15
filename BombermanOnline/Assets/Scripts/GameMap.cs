@@ -95,7 +95,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
-        CallItemInstance();
 
         // アクティブ管理
         _mapObj.ActiveMapWallObjects();
@@ -120,8 +119,10 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         {
             gameManager.PlayerList[i].Coord = startCoords[gameManager.PlayerList[i].PlayerIndex];
         }
-        Debug.Log(gameManager.PlayerList.Count);
-        Debug.Log(gameManager.RoomMenbers.Count);
+        if (StrixNetwork.instance.isRoomOwner)
+        {
+            ItemInstance();
+        }
     }
 
 
@@ -150,8 +151,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     }
 
 
-    [StrixRpc]
-    public void CallItemInstance()
+    public void ItemInstance()
     {
         Debug.Log("マップ生成");
         gameManager.itemManager.InstanceItems();
