@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        InitializePlayerList();
+
     }
 
 
@@ -38,26 +38,20 @@ public class GameManager : Singleton<GameManager>
     // ===変数====================================================
     public ItemManager itemManager;
 
-    public List<Player> playerList = new List<Player>();
 
     // ===プロパティ=================================================
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
 
-
-    // ===関数====================================================
-
-    /// <summary>
-    /// プレイヤーのリストを作成します
-    /// </summary>
-    private void InitializePlayerList()
+    public List<Player> PlayerList
     {
-        var playerObjs = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var playerObj in playerObjs)
+        get
         {
-            Player player = playerObj.GetComponent<Player>();
-            playerList.Add(player);
+            var playerObjs = GameObject.FindGameObjectsWithTag("Player");
+            return playerObjs.Select(obj => obj.GetComponent<Player>()).ToList();
         }
     }
+
+    // ===関数====================================================
 }
 
 

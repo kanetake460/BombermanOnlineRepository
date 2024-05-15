@@ -27,6 +27,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     {
         startButton.SetActive(false);
         RpcToAll(nameof(InitializeMap));
+        InitializePosition();
     }
 
 
@@ -52,7 +53,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     GameManager gameManager;
 
     // ===関数====================================================
-    /// <summary>
+    private void CallInitializeMap() { RpcToAll(nameof(InitializeMap)); }
+        /// <summary>
     /// マップを初期化します。
     /// </summary>
     [StrixRpc]
@@ -101,13 +103,25 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         // 右上のマップのサイズを調節
         m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
 
+
+
+
+    }
+
+
+    /// <summary>
+    /// プレイヤー、アイテムのポジションを設定します。
+    /// </summary>
+    private void InitializePosition()
+    {
         // プレイヤーをすべて動かせるようにし、スタート地点に設定します。
-        gameManager.playerList.ForEach(player => player.enabled = true);
+        gameManager.PlayerList.ForEach(player => player.enabled = true);
         for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
-            gameManager.playerList[i].Coord = startCoords[gameManager.playerList[i].PlayerIndex];
+            gameManager.PlayerList[i].Coord = startCoords[gameManager.PlayerList[i].PlayerIndex];
         }
-
+        Debug.Log(gameManager.PlayerList.Count);
+        Debug.Log(gameManager.RoomMenbers.Count);
     }
 
 

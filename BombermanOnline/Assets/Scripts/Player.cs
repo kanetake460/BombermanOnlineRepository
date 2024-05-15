@@ -16,6 +16,21 @@ public class Player : Base
         gameManager = GameManager.Instance;
         fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
         InitPlayer();
+        if (isLocal)
+        {
+            if (GetComponent<AudioListener>() == null)
+            {
+                gameObj.AddComponent<AudioListener>();
+            }
+        }
+        else
+        {
+            AudioListener listener = GetComponent<AudioListener>();
+            if(listener != null) 
+            {
+                Destroy(listener);
+            }
+        }
     }
 
 
