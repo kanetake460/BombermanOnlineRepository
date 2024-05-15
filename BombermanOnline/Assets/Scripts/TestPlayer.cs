@@ -6,6 +6,10 @@ using SoftGear.Strix.Unity.Runtime;
 using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using SoftGear.Strix.Client.Core;
+using System;
+using SoftGear.Strix.Client.Match.Room.Model;
 
 public class TestPlayer : StrixBehaviour
 {
@@ -17,7 +21,7 @@ public class TestPlayer : StrixBehaviour
 
     private void Start()
     {
-
+        if (isLocal == false) return;
     }
 
 
@@ -33,18 +37,23 @@ public class TestPlayer : StrixBehaviour
         // オブジェクト配置
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(test, transform.position, Quaternion.identity);
+            //Instantiate(test, transform.position, Quaternion.identity);
         }
         // テストオブジェクトのセットアクティブ
         if (Input.GetKeyDown(KeyCode.Q))
         {
             RpcToAll("Active");
+
+
         }
 
         // ゲームシーンロード
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            RpcToAll(nameof(CallLoadScene));
+            if (StrixNetwork.instance.isRoomOwner)
+            {
+                RpcToAll(nameof(CallLoadScene));
+            }
         }
 
 
@@ -54,20 +63,52 @@ public class TestPlayer : StrixBehaviour
         RpcToAll(nameof(PrivateMethod));
 
         RpcToAll(nameof(ShowValueText));
-        //RpcToAll("DecIntValue");
-        //RpcToAll("DecSyncValue");
-        //RpcToAll("PrivateMethod");
-
-        //Debug.Log("シンクロ数値" + syncInt);
-        //Debug.Log("数値" + intValue);
-        //Debug.Log("privateシンクロ数値" + _syncInt);
-        //Debug.Log("private数値" + _intValue);
     }
 
+    // ===変数====================================================
+    FPS fps;
+    Rigidbody rb;
+
+    [Header("オブジェクト参照")]
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject test;
+    [SerializeField] GameObject test2;
+    [SerializeField] TextMeshProUGUI tmp;
+
+    [Header("パラメーター")]
+    [SerializeField] Vector3 cameraPos;
+    [StrixSyncField]
+    public int syncInt = 0;
+    public int intValue = 0;
+
+    [StrixSyncField]
+    private int _syncInt = 0;
+    private int _intValue = 0;
+
+    // ===プロパティ=================================================
+    UID UID => strixReplicator.ownerUid;
+
+    IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
+
+    int PlayerIndex
+    {
+        get
+        {
+            for (int i = 0; i < RoomMenbers.Count; i++)
+            {
+                if (UID.ToString() == RoomMenbers[i].GetUid().ToString())
+                    return i;
+            }
+            throw new Exception("UID not found in the list");
+        }
+    }
+
+    // ===関数====================================================
     [StrixRpc]
     private void ShowValueText()
     {
-        tmp.text = "syncInt:" + syncInt + "\n" + "intValue:" + intValue + "\n" + "private syncInt:" + _syncInt + "\n" + "intValue:" + _intValue;
+        //tmp.text = "syncInt:" + syncInt + "\n" + "intValue:" + intValue + "\n" + "private syncInt:" + _syncInt + "\n" + "intValue:" + _intValue;
+        tmp.text = "PlayerIndex" + PlayerIndex +"\n" + "UID" + UID;
     }
 
     [StrixRpc]
@@ -82,6 +123,22 @@ public class TestPlayer : StrixBehaviour
     {
         bool active = !test2.activeSelf;
         test2.SetActive(active);
+        if (PlayerIndex == 0)
+        {
+            SetPlayerColor(Color.black);
+        }
+        if (PlayerIndex == 1)
+        {
+            SetPlayerColor(Color.yellow);
+        }
+        if (PlayerIndex == 2)
+        {
+            SetPlayerColor(Color.blue);
+        }
+        if (PlayerIndex == 3)
+        {
+            SetPlayerColor(Color.red);
+        }
     }
 
     [StrixRpc]
@@ -118,23 +175,14 @@ public class TestPlayer : StrixBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーの色を変更します。
+    /// </summary>
+    /// <param name="color">色</param>
+    private void SetPlayerColor(Color color) { gameObject.GetComponent<Renderer>().material.color = color; }
 
 
-    FPS fps;
-    Rigidbody rb;
-    [SerializeField] GameObject mainCamera;
-    [SerializeField] Vector3 cameraPos;
-    [SerializeField] GameObject test;
-    [SerializeField] GameObject test2;
 
-    [SerializeField] TextMeshProUGUI tmp;
-    [StrixSyncField]
-    public int syncInt = 0;
-    public int intValue = 0;
-
-    [StrixSyncField]
-    private int _syncInt = 0;
-    private int _intValue = 0;
 
 
     // ストリクスクラウドメモ

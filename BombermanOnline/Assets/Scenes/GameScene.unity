@@ -2227,6 +2227,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194225}
   mapCamera: {fileID: 1269192926}
   bomb: {fileID: 6001974515815307178, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
+  startButton: {fileID: 370247695}
   ui: {fileID: 1036371554}
 --- !u!54 &1383805136
 Rigidbody:
@@ -2971,6 +2972,7 @@ MonoBehaviour:
   mapSet: {fileID: 1898085062}
   startCoords: []
   test: {fileID: 0}
+  startButton: {fileID: 370247695}
   m_player: {fileID: 1383805130}
   m_wallTexture: {fileID: 2800000, guid: 280c50d6e26aeeb40b69ab7465cdd958, type: 3}
   m_stoneTexture: {fileID: 2800000, guid: 68d54400679c40548a5fa2f197442a02, type: 3}

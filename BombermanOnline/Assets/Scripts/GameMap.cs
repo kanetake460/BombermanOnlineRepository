@@ -25,6 +25,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     // ===インプットアクション関数=======================================
     public void CreateMap1()
     {
+        startButton.SetActive(false);
         RpcToAll(nameof(InitializeMap));
     }
 
@@ -40,6 +41,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     private List<Coord> _emptyCoords = new List<Coord>();
 
     public GameObject test;
+    [SerializeField] GameObject startButton;
+
 
     [Header("コンポーネント")]
     [SerializeField] GameObject m_player;
@@ -55,8 +58,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [StrixRpc]
     private void InitializeMap()
     {
-
-
 
         gameManager = GameManager.Instance;
 
@@ -102,9 +103,9 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
         // プレイヤーをすべて動かせるようにし、スタート地点に設定します。
         gameManager.playerList.ForEach(player => player.enabled = true);
-        for (int i = 0; i < gameManager.playerList.Count; i++)
+        for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
-            gameManager.playerList[i].Coord = startCoords[i];
+            gameManager.playerList[i].Coord = startCoords[gameManager.playerList[i].PlayerIndex];
         }
 
     }

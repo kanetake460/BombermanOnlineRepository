@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Base
 {
@@ -96,7 +97,6 @@ public class Player : Base
     [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] GameObject mapCamera;          // マップUIのカメラ
     [SerializeField] Bomb bomb;                     // 生成する爆弾
-    GameManager gameManager;
 
 
     [Header("コンポーネント")]
@@ -174,10 +174,11 @@ public class Player : Base
     [StrixRpc]
     public void CallGameStart()
     {
-        gameManager.playerList.ForEach(player => player.enabled = true);
-        for (int i = 0; i < gameManager.playerList.Count; i++)
+        //gameManager.playerList.ForEach(player => player.enabled = true);
+        for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
-            gameManager.playerList[i].Coord = map.startCoords[i];
+            Debug.Log(i);
+            gameManager.playerList[i].Coord = map.startCoords[PlayerIndex];
         }
     }
 

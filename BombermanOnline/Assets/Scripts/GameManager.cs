@@ -1,7 +1,11 @@
 using System;
 using TakeshiLibrary;
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
+using SoftGear.Strix.Client.Core;
+using SoftGear.Strix.Unity.Runtime;
+using SoftGear.Strix.Client.Match.Room.Model;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -26,6 +30,9 @@ public class GameManager : Singleton<GameManager>
     public ItemManager itemManager;
 
     public List<Player> playerList = new List<Player>();
+
+    // ===プロパティ=================================================
+    public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
 
 
     // ===関数====================================================
