@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using SoftGear.Strix.Client.Core;
 using SoftGear.Strix.Unity.Runtime;
 using SoftGear.Strix.Client.Match.Room.Model;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -24,6 +25,14 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         AudioManager.PlayBGM("ゲームBGM",0.0f);
+        // ゲームシーンロード
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (StrixNetwork.instance.isRoomOwner)
+            {
+                SceneManager.LoadScene("Lobby");
+            }
+        }
     }
 
     // ===変数====================================================

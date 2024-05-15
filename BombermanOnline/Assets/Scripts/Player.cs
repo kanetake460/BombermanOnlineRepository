@@ -2,6 +2,7 @@ using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,19 +26,18 @@ public class Player : Base
         PlayerSettings();
         PlayerSystem();
         PutBomb();
+
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        
-
-        if(other.tag == ExplosionTag)
+        if (other.tag == ExplosionTag)
         {
-            if(isLocal == false) return;
+            if (isLocal == false) return;
 
             LifeCount--;
-            AudioManager.PlayOneShot("被ダメージ",1f);
+            AudioManager.PlayOneShot("被ダメージ", 1f);
             ui.ShowDamageEffectUI();
         }
 
@@ -84,12 +84,12 @@ public class Player : Base
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
-    private readonly Vector3 mapCameraPos = new Vector3(0, 100, 0); // マップカメラのポジション
+    private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0); // マップカメラのポジション
 
-    private const string ItemBombTag  = "Item_Bomb";
-    private const string ItemFireTag  = "Item_Fire";
+    private const string ItemBombTag = "Item_Bomb";
+    private const string ItemFireTag = "Item_Fire";
     private const string ItemSpeedTag = "Item_Speed";
-    private const string ItemLifeTag  = "Item_Life";
+    private const string ItemLifeTag = "Item_Life";
     private const string ExplosionTag = "Explosion";
 
 
@@ -97,6 +97,7 @@ public class Player : Base
     [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] GameObject mapCamera;          // マップUIのカメラ
     [SerializeField] Bomb bomb;                     // 生成する爆弾
+    [SerializeField] TextMeshProUGUI playerInfoText;
 
 
     [Header("コンポーネント")]
@@ -113,9 +114,9 @@ public class Player : Base
         {
             return m_life;
         }
-        private set 
-        { 
-            if(value > m_lifeMaxValue)
+        private set
+        {
+            if (value > m_lifeMaxValue)
             {
                 ui.ShowGameText("Full Life !!", 1);
                 AudioManager.PlayOneShot("爆弾がない");
@@ -146,7 +147,7 @@ public class Player : Base
 
     private void PlayerSystem()
     {
-        if(m_life <= 0)
+        if (m_life <= 0)
         {
             GameOver();
         }
@@ -160,26 +161,8 @@ public class Player : Base
     private void InitPlayer()
     {
         AddBombList();
-    }
-
-
-    public void GameStart() 
-    {
-        RpcToAll(nameof(CallGameStart)); 
-    }
-
-    /// <summary>
-    /// ゲームスタート
-    /// </summary>
-    [StrixRpc]
-    public void CallGameStart()
-    {
-        //gameManager.playerList.ForEach(player => player.enabled = true);
-        for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
-        {
-            Debug.Log(i);
-            gameManager.playerList[i].Coord = map.startCoords[PlayerIndex];
-        }
+        CallSetMembersColor();
+        CallShowPlayerName();
     }
 
 
@@ -188,6 +171,8 @@ public class Player : Base
     /// </summary>
     public void GameOver()
     {
+        Pos = mapCameraPos;
+        Rot = Quaternion.identity;
         gameObj.SetActive(false);
     }
 
@@ -230,7 +215,7 @@ public class Player : Base
         if (bombList.Count < m_bombMaxValue)
         {
             Bomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
-            b.gameObj.SetActive(false) ;
+            b.gameObj.SetActive(false);
             b.Initialize(map);
             bombList.Add(b);
         }
@@ -258,6 +243,42 @@ public class Player : Base
     private void LifeUp()
     {
         LifeCount++;
+    }
+
+    private void CallSetMembersColor() => RpcToAll(nameof(SetMembersColor));
+    [StrixRpc]
+    private void SetMembersColor()
+    {
+        if (PlayerIndex == 0)
+        {
+            SetPlayerColor(Color.black);
+        }
+        if (PlayerIndex == 1)
+        {
+            SetPlayerColor(Color.yellow);
+        }
+        if (PlayerIndex == 2)
+        {
+            SetPlayerColor(Color.blue);
+        }
+        if (PlayerIndex == 3)
+        {
+            SetPlayerColor(Color.red);
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーの色を変更します。
+    /// </summary>
+    /// <param name="color">色</param>
+    private void SetPlayerColor(Color color) { gameObject.GetComponent<Renderer>().material.color = color; }
+
+
+    private void CallShowPlayerName() =>RpcToAll(nameof(ShowPlayerName));
+    [StrixRpc]
+    private void ShowPlayerName()
+    {
+        playerInfoText.text = "PlayerName\n" + StrixNetwork.instance.playerName + "\nPlayerIndex\n" + PlayerIndex;
     }
 }
 

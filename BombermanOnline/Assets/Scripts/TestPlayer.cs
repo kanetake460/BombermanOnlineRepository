@@ -22,6 +22,7 @@ public class TestPlayer : StrixBehaviour
     private void Start()
     {
         if (isLocal == false) return;
+        CallSetMembersColor();
     }
 
 
@@ -43,8 +44,6 @@ public class TestPlayer : StrixBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             RpcToAll("Active");
-
-
         }
 
         // ゲームシーンロード
@@ -123,6 +122,12 @@ public class TestPlayer : StrixBehaviour
     {
         bool active = !test2.activeSelf;
         test2.SetActive(active);
+    }
+
+    private void CallSetMembersColor() => RpcToAll(nameof(SetMembersColor));
+    [StrixRpc]
+    private void SetMembersColor()
+    {
         if (PlayerIndex == 0)
         {
             SetPlayerColor(Color.black);
@@ -140,6 +145,7 @@ public class TestPlayer : StrixBehaviour
             SetPlayerColor(Color.red);
         }
     }
+
 
     [StrixRpc]
     public void DecIntValue()
