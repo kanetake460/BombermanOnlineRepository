@@ -3,12 +3,12 @@ using TakeshiLibrary;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-using SoftGear.Strix.Client.Core;
 using SoftGear.Strix.Unity.Runtime;
 using SoftGear.Strix.Client.Match.Room.Model;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : SingletonStrixBehaviour<GameManager>
 {
     // ===イベント関数================================================
     protected override void Awake()
@@ -22,26 +22,24 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void Update()
+    protected override void Update()
     {
-        AudioManager.PlayBGM("ゲームBGM",0.0f);
-        // ゲームシーンロード
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            if (StrixNetwork.instance.isRoomOwner)
-            {
-                SceneManager.LoadScene("Lobby");
-            }
-        }
+        base.Update();
+        
+        AudioManager.PlayBGM("ゲームBGM", 0.0f);
+
     }
+
+
 
     // ===変数====================================================
     public ItemManager itemManager;
 
-
     // ===プロパティ=================================================
+    /// <summary>ルームメンバーリスト</summary>
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
 
+   /// <summary>プレイヤーのリスト</summary>
     public List<Player> PlayerList
     {
         get

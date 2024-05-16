@@ -4,6 +4,7 @@ using System.Linq;
 using TakeshiLibrary;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : Base
@@ -41,6 +42,7 @@ public class Player : Base
         PlayerSettings();
         PlayerSystem();
         PutBomb();
+
 
     }
 
@@ -166,6 +168,14 @@ public class Player : Base
         {
             GameOver();
         }
+        // ゲームシーンロード
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (StrixNetwork.instance.isRoomOwner)
+            {
+                CallFinishGame();
+            }
+        }
     }
 
 
@@ -191,6 +201,16 @@ public class Player : Base
         gameObj.SetActive(false);
     }
 
+
+    /// <summary>
+    /// ゲームを終了させ、ロビーに戻ります
+    /// </summary>
+    private void CallFinishGame() { RpcToAll(nameof(FinishGame)); }
+    [StrixRpc]
+    private void FinishGame()
+    {
+        SceneManager.LoadScene("Lobby");
+    }
 
     /// <summary>
     /// キー入力によって爆弾を置きます

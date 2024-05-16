@@ -22,7 +22,7 @@ public class AudioClipDictionary
     public AudioClip value;
 }
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
     public static AudioManager instance;
 
@@ -58,8 +58,9 @@ public class AudioManager : MonoBehaviour
 
     
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if(instance == null)
         {
             instance = this;

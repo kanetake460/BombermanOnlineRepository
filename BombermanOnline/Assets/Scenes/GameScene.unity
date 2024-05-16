@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 963194229}
-  objectType: 524289
+  objectType: 524290
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 1383805135}
   - {fileID: 1383805137}
-  objectType: 524290
+  objectType: 524291
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -2402,6 +2402,7 @@ GameObject:
   - component: {fileID: 1414995912}
   - component: {fileID: 1414995911}
   - component: {fileID: 1414995913}
+  - component: {fileID: 1414995914}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2421,6 +2422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e5a40477946d748880e46c172e70c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singletonSettings:
+    m_singletonObjName: GameManager
+    m_loadingScene: GameScene
   itemManager:
     items:
     - itemObject: {fileID: 7750926043821849839, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}
@@ -2436,7 +2440,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 64
     m_gameMap: {fileID: 1898085064}
-  playerList: []
 --- !u!4 &1414995912
 Transform:
   m_ObjectHideFlags: 0
@@ -2479,6 +2482,26 @@ MonoBehaviour:
   gameText: {fileID: 944302538}
   player: {fileID: 1383805135}
   damageEffectSpeed: 3
+--- !u!114 &1414995914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414995910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 1414995911}
+  objectType: 524289
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
 --- !u!1 &1457523811
 GameObject:
   m_ObjectHideFlags: 0
@@ -3218,6 +3241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9275764e2378bad48bf54dbd31e2e22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singletonSettings:
+    m_singletonObjName: GameMap
+    m_loadingScene: GameScene
   mapSet: {fileID: 1898085062}
   startCoords: []
   test: {fileID: 0}
@@ -3240,7 +3266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 1898085064}
-  objectType: 524291
+  objectType: 524293
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
