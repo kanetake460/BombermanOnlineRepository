@@ -583,6 +583,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
+--- !u!1 &462831233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1216987314598044, guid: 4743cdac02f4447409af6b84bc8ffcfe, type: 3}
+  m_PrefabInstance: {fileID: 378312418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &533272419
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +927,8 @@ GameObject:
   - component: {fileID: 945578712}
   - component: {fileID: 945578711}
   - component: {fileID: 945578710}
+  - component: {fileID: 945578715}
+  - component: {fileID: 945578714}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -1013,6 +1020,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &945578714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945578709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1088213620, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncPosition: 1
+  syncRotation: 1
+  syncVelocity: 1
+  syncAngularVelocity: 1
+--- !u!114 &945578715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945578709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 945578714}
+  objectType: 262147
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
 --- !u!1 &992082373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,10 +1360,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1375318125}
-  cameraPos: {x: 0, y: 30, z: -16}
   test: {fileID: 7750926043821849839, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}
   test2: {fileID: 559414666}
   tmp: {fileID: 533272421}
+  conectUI: {fileID: 462831233}
+  cameraPos: {x: 0, y: 30, z: -16}
   syncInt: 0
   intValue: 0
 --- !u!114 &1371443070

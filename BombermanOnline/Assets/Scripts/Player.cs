@@ -37,13 +37,12 @@ public class Player : Base
 
     private void Update()
     {
+
         if (isLocal == false) return;
 
         PlayerSettings();
         PlayerSystem();
         PutBomb();
-
-
     }
 
 
@@ -115,6 +114,7 @@ public class Player : Base
     [SerializeField] GameObject mapCamera;          // マップUIのカメラ
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
+    [SerializeField] GameObject titleCanvas;
 
 
     [Header("コンポーネント")]
@@ -166,15 +166,7 @@ public class Player : Base
     {
         if (m_life <= 0)
         {
-            GameOver();
-        }
-        // ゲームシーンロード
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            if (StrixNetwork.instance.isRoomOwner)
-            {
-                CallFinishGame();
-            }
+            CallGameOver();
         }
     }
 
@@ -194,23 +186,15 @@ public class Player : Base
     /// <summary>
     /// ゲームオーバー
     /// </summary>
-    public void GameOver()
+    private void CallGameOver() { RpcToAll(nameof(GameOver)); }
+    [StrixRpc]
+    private void GameOver()
     {
         Pos = mapCameraPos;
         Rot = Quaternion.identity;
         gameObj.SetActive(false);
     }
 
-
-    /// <summary>
-    /// ゲームを終了させ、ロビーに戻ります
-    /// </summary>
-    private void CallFinishGame() { RpcToAll(nameof(FinishGame)); }
-    [StrixRpc]
-    private void FinishGame()
-    {
-        SceneManager.LoadScene("Lobby");
-    }
 
     /// <summary>
     /// キー入力によって爆弾を置きます
@@ -286,19 +270,19 @@ public class Player : Base
     {
         if (PlayerIndex == 0)
         {
-            SetPlayerColor(Color.black);
+            SetPlayerColor(Color.red);
         }
         if (PlayerIndex == 1)
         {
-            SetPlayerColor(Color.yellow);
+            SetPlayerColor(Color.blue);
         }
         if (PlayerIndex == 2)
         {
-            SetPlayerColor(Color.blue);
+            SetPlayerColor(Color.yellow);
         }
         if (PlayerIndex == 3)
         {
-            SetPlayerColor(Color.red);
+            SetPlayerColor(Color.green);
         }
     }
 

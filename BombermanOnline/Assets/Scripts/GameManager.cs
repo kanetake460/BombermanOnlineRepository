@@ -25,7 +25,7 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     protected override void Update()
     {
         base.Update();
-        
+
         AudioManager.PlayBGM("ゲームBGM", 0.0f);
 
     }
@@ -39,7 +39,7 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     /// <summary>ルームメンバーリスト</summary>
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
 
-   /// <summary>プレイヤーのリスト</summary>
+    /// <summary>プレイヤーのリスト</summary>
     public List<Player> PlayerList
     {
         get
@@ -49,7 +49,10 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
         }
     }
 
+    public bool IsGameFinish => PlayerList.Count <= 1;
+
     // ===関数====================================================
+
 }
 
 

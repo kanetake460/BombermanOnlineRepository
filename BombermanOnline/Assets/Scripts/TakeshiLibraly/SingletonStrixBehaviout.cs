@@ -56,7 +56,6 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
     protected virtual void Update()
     {
         _loadingScene = singletonSettings.m_loadingScene;
-
         if (_loadingScene == null)
         {
             Destroy(gameObject);

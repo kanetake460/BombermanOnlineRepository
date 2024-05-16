@@ -23,11 +23,13 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     }
 
     // ===インプットアクション関数=======================================
+    public void CallCreateMap1() { if(isLocal)RpcToAll(nameof(CreateMap1)); }
+    [StrixRpc]
     public void CreateMap1()
     {
-        startButton.SetActive(false);
-        RpcToAll(nameof(InitializeMap));
-        InitializePosition();
+            TitleCanvas.SetActive(false);
+            CallInitializeMap();
+            InitializePosition();
     }
 
 
@@ -42,7 +44,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     private List<Coord> _emptyCoords = new List<Coord>();
 
     public GameObject test;
-    [SerializeField] GameObject startButton;
+    [SerializeField] GameObject TitleCanvas;
 
 
     [Header("コンポーネント")]
@@ -121,7 +123,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         }
         if (StrixNetwork.instance.isRoomOwner)
         {
-            ItemInstance();
+            gameManager.itemManager.InstanceItems();
         }
     }
 
@@ -148,12 +150,5 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             return true;
         }
         return false;
-    }
-
-
-    public void ItemInstance()
-    {
-        Debug.Log("マップ生成");
-        gameManager.itemManager.InstanceItems();
     }
 }

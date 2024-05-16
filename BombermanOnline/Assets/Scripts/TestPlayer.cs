@@ -43,7 +43,7 @@ public class TestPlayer : StrixBehaviour
         // テストオブジェクトのセットアクティブ
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            RpcToAll("Active");
+            RpcToAll(nameof(Active));
         }
 
         // ゲームシーンロード
@@ -55,7 +55,7 @@ public class TestPlayer : StrixBehaviour
             }
         }
 
-
+        conectUI.SetActive(!IsConected);
 
         RpcToAll(nameof(DecIntValue));
         RpcToAll(nameof(DecSyncValue));
@@ -73,6 +73,7 @@ public class TestPlayer : StrixBehaviour
     [SerializeField] GameObject test;
     [SerializeField] GameObject test2;
     [SerializeField] TextMeshProUGUI tmp;
+    [SerializeField] GameObject conectUI;
 
     [Header("パラメーター")]
     [SerializeField] Vector3 cameraPos;
@@ -101,6 +102,9 @@ public class TestPlayer : StrixBehaviour
             throw new Exception("UID not found in the list");
         }
     }
+
+    /// <summary>サーバーに接続されているかどうか(true:つながっている)</summary>
+    bool IsConected => StrixNetwork.instance.playerName != null;
 
     // ===関数====================================================
     [StrixRpc]
