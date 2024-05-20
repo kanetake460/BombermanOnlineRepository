@@ -15,7 +15,7 @@ public class Player : Base
     {
         map = GameMap.Instance;
         gameManager = GameManager.Instance;
-        fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
+        fps ??= new FPS(map.m_mapSet, rb, gameObject, mainCamera);
         InitPlayer();
         if (isLocal)
         {

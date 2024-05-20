@@ -1,6 +1,8 @@
 using System;
 using TakeshiLibrary;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridFieldMapObject
 {
@@ -17,8 +19,12 @@ public class GridFieldMapObject
     /// </summary>
     /// <param name="coord"></param>
     /// <param name="scaleY">壁の高さ</param>
-    public void InstanceMapObject(Coord coord, float scaleY)
+    public void GenerateMapObject(Coord coord, float scaleY)
     {
+        if (_mapSet.blocks[coord.x, coord.z].wallObj != null)
+        {
+            throw new Exception("オブジェクトが生成されています");
+        }
         // 床作成
         GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         _mapSet.blocks[coord.x, coord.z].planeObj = plane;
@@ -28,6 +34,11 @@ public class GridFieldMapObject
         plane.transform.localScale = new Vector3(_mapSet.gridField.CellWidth / 10, 1, _mapSet.gridField.CellDepth / 10);
         plane.transform.parent = _mapSet.transform;
 
+        if (_mapSet.blocks[coord.x, coord.z].wallObj != null)
+        {
+            Debug.Log("すでに生成されています");
+            return;
+        }
         // 壁作成
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         _mapSet.blocks[coord.x, coord.z].wallObj = cube;
@@ -39,11 +50,43 @@ public class GridFieldMapObject
     }
 
 
+
     /// <summary>
     /// すべてのマップのオブジェクトを生成します
     /// </summary>
     /// <param>壁の高さ</param>
-    public void InstanceMapObjects(float scaleY = 10) => _mapSet.gridField.IterateOverGrid(c => InstanceMapObject(c, scaleY));
+    public void GenerateMapObjects(float scaleY = 10) => _mapSet.gridField.IterateOverGrid(c => GenerateMapObject(c, scaleY));
+
+
+    /// <summary>
+    /// オブジェクトを削除します
+    /// </summary>
+    /// <param name="coord">座標</param>
+    public void DestroyMapObject(Coord coord)
+    {
+        if (_mapSet.blocks[coord.x, coord.z].wallObj == null && _mapSet.blocks[coord.x, coord.z].planeObj == null)
+        {
+            throw new Exception("オブジェクトが生成されていません");
+        }
+        GameObject.DestroyImmediate(_mapSet.blocks[coord.x, coord.z].wallObj);
+        GameObject.DestroyImmediate(_mapSet.blocks[coord.x, coord.z].planeObj);
+    }
+
+
+    /// <summary>
+    /// すべてのオブジェクトを削除します
+    /// </summary>
+    public void DestroyAllMapObjects()
+    {
+        if(_mapSet.transform.childCount <= 0)
+        {
+            throw new Exception("オブジェクトはないです");
+        }
+        for(int i = _mapSet.transform.childCount - 1; i >= 0; i--) 
+        {
+            GameObject.DestroyImmediate(_mapSet.transform.GetChild(i).gameObject);
+        }
+    }
 
 
     /// <summary>
@@ -130,4 +173,5 @@ public class GridFieldMapObject
     }
 
     public void AddComponentAllWallObjects<T>() where T : Component => _mapSet.gridField.IterateOverGrid(c => AddComponentWallObject<T>(c));
+
 }

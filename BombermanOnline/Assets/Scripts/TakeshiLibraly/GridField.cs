@@ -352,9 +352,9 @@ namespace TakeshiLibrary
         public void IterateOverGrid(UnityAction<Coord> action)
         {
             Coord coord = new Coord();
-            for (int x = 0; x < GridWidth; x++)
+            for (int z = 0; z < GridDepth; z++)
             {
-                for (int z = 0; z < GridDepth; z++)
+                for (int x = 0; x < GridWidth; x++)
                 {
                     coord.x = x;
                     coord.z = z;
@@ -367,7 +367,7 @@ namespace TakeshiLibrary
         /// すべてのグリッド座標に対してメソッドを実行するイテレータです
         /// </summary>
         /// <param name="action">メソッド</param>
-        public bool IterateOverGrid(Func<Coord,bool> action)
+        public bool IterateOverGrid(Func<Coord, bool> action)
         {
             Coord coord = new Coord();
             for (int x = 0; x < GridWidth; x++)

@@ -34,11 +34,11 @@ public class Base : StrixBehaviour
     {
         set
         {
-            Trafo.position = map.mapSet.gridField[value.x, value.z];
+            Trafo.position = map.m_mapSet.gridField[value.x, value.z];
         }
         get
         {
-            return map.mapSet.gridField.GridCoordinate(Trafo.position);
+            return map.m_mapSet.gridField.GridCoordinate(Trafo.position);
         }
     }
 
@@ -81,7 +81,7 @@ public class Base : StrixBehaviour
     {
         get
         {
-            return map.mapSet.gridField[Coord.x,Coord.z];
+            return map.m_mapSet.gridField[Coord.x,Coord.z];
         }
     }
 

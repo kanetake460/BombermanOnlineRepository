@@ -1,15 +1,20 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using System;
+using UnityEngine.UIElements;
 
 namespace TakeshiLibrary
 {
     [CustomEditor(typeof(GridFieldMapSettings))]
     public class GridFieldMapEditor : Editor
     {
+        // ===イベント関数================================================
         private void OnEnable()
         {
             m_settings = (GridFieldMapSettings)target;
+            m_object = new GridFieldMapObject(m_settings);
+            m_settings.gridField = new GridField(m_settings.position, m_settings.gridWidth, m_settings.gridDepth, m_settings.cellWidth, m_settings.cellDepth);
 
             InitGUIStyles();     // トグルのスタイル初期化
         }
@@ -22,14 +27,35 @@ namespace TakeshiLibrary
             base.OnInspectorGUI();
             GUILayout.Space(Figures.TwoPowerdByFive);
             // ===ここに処理=============================================================================
-            
+            if (GUILayout.Button("Generate"))
+            {
+                if (m_settings.gameObject.transform.childCount > 0)
+                {
+                    m_object.DestroyAllMapObjects();
+                }
+                int count = 0;
+                m_settings.gridField.IterateOverGrid(coord =>
+                {
+                    m_settings.blocks[coord.x, coord.z] = new GridFieldMapSettings.Block(coord.x, coord.z, m_settings.isSpaceProp[count]);
+                    count++;
+                });
+                m_object.GenerateMapObjects();
+                m_object.ActiveMapWallObjects();
+            }
+
+            if (GUILayout.Button("Clear"))
+            {
+                m_object.DestroyAllMapObjects();
+            }
+
             ShowMapEditor();            // マップエディタ表示
+                                        // エディター内でオブジェクトを生成するボタン
 
             // ===================================================================================
-            if (Application.isPlaying == false)serializedObject.ApplyModifiedProperties();// 再生されてなければSerializePropatyをApplyする
+            if (Application.isPlaying == false) serializedObject.ApplyModifiedProperties();// 再生されてなければSerializePropatyをApplyする
         }
-        
-        
+
+
         private void OnDisable()
         {
             _spaceTexture = null;
@@ -42,10 +68,11 @@ namespace TakeshiLibrary
             _diagonalHeaderStyle = null;
         }
 
+        // ===変数====================================================
         // 数値
         private float _cellToggleSize = Figures.TwoPowerdByFive; // マップエディタのトグルのサイズ
         private Vector2 _scrollPosition;                          // エディタのスクロールのポジション
-        
+
         // マップエディタのトグルとテキストのスタイル
         GUIStyle _cellToggleStyle = new GUIStyle();             // マップのトグルのスタイル
         GUIStyle _coordTextStyle = new GUIStyle();              // 座標のテキストのスタイル
@@ -58,14 +85,16 @@ namespace TakeshiLibrary
 
         // セッティングス参照
         GridFieldMapSettings m_settings;
+        GridFieldMapObject m_object;
 
+        // ===プロパティ=================================================
         int TotalCell => m_settings.gridWidth * m_settings.gridDepth;
 
         int GridWidth => m_settings.gridWidth;
 
         int GridDepth => m_settings.gridDepth;
 
-
+        // ===関数====================================================
         /// <summary>
         /// スタイルを初期化します
         /// </summary>
@@ -75,7 +104,7 @@ namespace TakeshiLibrary
             _spaceTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/FrameCell.png") as Texture2D;
             _wallTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/BlackCell.png") as Texture2D;
             _pushTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/OrangeCell.png") as Texture2D;
-            
+
             // セルトグル初期化
             GUIUtilityT.SetGUIStyle(_cellToggleStyle, _spaceTexture, _wallTexture, _pushTexture);
             _cellToggleStyle.normal.textColor = Color.white;
@@ -100,7 +129,7 @@ namespace TakeshiLibrary
         {
             // セルトグル管理
             _cellToggleStyle.fontSize = (int)_cellToggleSize / 3;
-            
+
             // 座標テキスト管理
             _coordTextStyle.fontSize = (int)_cellToggleSize / 2;
 
@@ -151,7 +180,7 @@ namespace TakeshiLibrary
             if (GUILayout.Button("Even Grid"))
                 for (int i = 0; i < m_settings.isSpaceProp.Length; i++)
                 {
-                    if (i % (GridWidth * 2) < GridWidth && i % 2  == 0)
+                    if (i % (GridWidth * 2) < GridWidth && i % 2 == 0)
                         m_settings.isSpaceProp[i] = false;
                     else
                         m_settings.isSpaceProp[i] = true;
@@ -223,7 +252,7 @@ namespace TakeshiLibrary
         {
             // トグルは左上から右下に下るように表示されるので、表示の仕方を変えます
             // グリッドを表示左下が原点なので、左下から数え上げるようにfor文を回す
-            
+
             _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
             for (int z = GridDepth - 1; z >= -1; z--)
             {
@@ -233,13 +262,13 @@ namespace TakeshiLibrary
                     // 左下隅は座標もトグルも表示しない
                     if (x + z == -2)
                     {
-                        GUILayout.Label("z／x",_diagonalHeaderStyle, GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
+                        GUILayout.Label("z／x", _diagonalHeaderStyle, GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
                         continue;
                     }
                     // 一番下の行はxの座標表示
                     if (z == -1)
                     {
-                        GUILayout.Label(x.ToString(),_coordTextStyle , GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
+                        GUILayout.Label(x.ToString(), _coordTextStyle, GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
                         continue;
                     }
                     // 一番左の列はzの座標表示
@@ -253,7 +282,7 @@ namespace TakeshiLibrary
                     {
                         int index = x + z + z * (m_settings.gridWidth - 1); // インデックス
                         string coord = x + "," + z;                         // 座標
-                        m_settings.isSpaceProp[index] = GUILayout.Toggle(m_settings.isSpaceProp[index], index.ToString(), _cellToggleStyle, GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
+                        m_settings.isSpaceProp[index] = GUILayout.Toggle(m_settings.isSpaceProp[index], coord, _cellToggleStyle, GUILayout.Width(_cellToggleSize), GUILayout.Height(_cellToggleSize), GUILayout.ExpandWidth(false));
                     }
                 }
                 EditorGUILayout.EndHorizontal();
@@ -352,8 +381,8 @@ namespace TakeshiLibrary
     //        serializedObject.ApplyModifiedProperties();
     //    }
     //}
-    
-    
-    
-    
+
+
+
+
 }

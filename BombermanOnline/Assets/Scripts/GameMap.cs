@@ -12,29 +12,26 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     protected override void Awake()
     {
         base.Awake();
-        mapSet ??= GetComponent<GridFieldMapSettings>();
-        _gridField = mapSet.gridField;
-        _mapObj = new GridFieldMapObject(mapSet);
-    }
-
-    private void Start()
-    {
+        m_mapSet ??= GetComponent<GridFieldMapSettings>();
 
     }
+
 
     // ===インプットアクション関数=======================================
-    public void CallCreateMap1() { if(isLocal)RpcToAll(nameof(CreateMap1)); }
+    public void CallCreateMap1(int index) { if (isLocal) RpcToAll(nameof(CreateMap1),index); }
     [StrixRpc]
-    public void CreateMap1()
+    public void CreateMap1(int index)
     {
-            TitleCanvas.SetActive(false);
-            CallInitializeMap();
-            InitializePosition();
+        m_mapSet = m_mapSets[index];
+        InitializeMap(m_mapSet);
+        InitializePosition();
     }
 
 
     // ===変数====================================================
-    public GridFieldMapSettings mapSet;
+    public GridFieldMapSettings m_mapSet;
+    [SerializeField] GridFieldMapSettings[] m_mapSets;
+
     private GridField _gridField;
     private GridFieldMapObject _mapObj;
 
@@ -42,9 +39,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
     [HideInInspector] public Coord[] startCoords;
     private List<Coord> _emptyCoords = new List<Coord>();
-
-    public GameObject test;
-    [SerializeField] GameObject TitleCanvas;
 
 
     [Header("コンポーネント")]
@@ -55,19 +49,18 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     GameManager gameManager;
 
     // ===関数====================================================
-    private void CallInitializeMap() { RpcToAll(nameof(InitializeMap)); }
-        /// <summary>
+    /// <summary>
     /// マップを初期化します。
     /// </summary>
     [StrixRpc]
-    private void InitializeMap()
+    private void InitializeMap(GridFieldMapSettings mapSet)
     {
-
         gameManager = GameManager.Instance;
-
+        _gridField = mapSet.gridField;
+        _mapObj = new GridFieldMapObject(mapSet);
 
         // オブジェクト生成
-        _mapObj.InstanceMapObjects();
+        _mapObj.GenerateMapObjects();
         // テクスチャ変更
         _mapObj.ChangeAllWallTexture(m_wallTexture);
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる

@@ -89,7 +89,7 @@ namespace TakeshiLibrary
             /// <param name="texture">テクスチャ</param>
             /// <param name="color">色</param>
             public void SetWallMaterial(Texture texture, Color color) { wallRenderer.material.mainTexture = texture; wallRenderer.material.color = color; }
-            
+
 
             /// <summary>
             /// 床のテクスチャを変更します。
@@ -126,11 +126,8 @@ namespace TakeshiLibrary
         // グリッドフィールド
         public GridField gridField;
 
-        private Block[,] _blocks = new Block[100,100];
+        public Block[,] blocks = new Block[100, 100];
 
-        // ブロックの二次元配列ゲッター
-        public Block[,] blocks => _blocks;
-            
         // ブロックの一次元配列ゲッター
         public Block[] Blocks
         {
@@ -139,12 +136,12 @@ namespace TakeshiLibrary
                 Block[] ret = new Block[gridField.TotalCell];
                 int count = 0;
 
-                for (int x = 0; x < gridWidth; x++) 
+                for (int x = 0; x < gridWidth; x++)
                 {
-                    for(int z = 0; z < gridDepth; z++)
+                    for (int z = 0; z < gridDepth; z++)
                     {
                         count++;
-                        ret[count] = blocks[x,z];
+                        ret[count] = blocks[x, z];
                     }
                 }
 
@@ -159,13 +156,13 @@ namespace TakeshiLibrary
             gridField = new GridField(position, gridWidth, gridDepth, cellWidth, cellDepth);
 
             int count = 0;
-            gridField.IterateOverGrid(coord =>
+            gridField.IterateOverGrid((UnityEngine.Events.UnityAction<Coord>)(coord =>
             {
-                _blocks[coord.x, coord.z] = new Block(coord.x, coord.z, isSpaceProp[count]);
+                this.blocks[coord.x, coord.z] = new Block(coord.x, coord.z, isSpaceProp[count]);
                 count++;
-            });
+            }));
         }
-// ===================================================================================================
+        // ===================================================================================================
 
 
 
@@ -180,7 +177,7 @@ namespace TakeshiLibrary
         {
             blocks[x, z].isSpace = false;
         }
-        
+
         /// <summary>
         /// 指定したブロックを壁ブロックに設定します
         /// </summary>
@@ -229,7 +226,7 @@ namespace TakeshiLibrary
         /// <param name="right">右壁</param>
         /// <param name="back">後壁</param>
         /// <param name="left">左壁</param>
-        public void SetWallsDirection(int x, int z, bool foward = true, bool right = true, bool back = true, bool left = true,bool isSpace = false)
+        public void SetWallsDirection(int x, int z, bool foward = true, bool right = true, bool back = true, bool left = true, bool isSpace = false)
         {
             blocks[x, z].fowardWall = foward;
             blocks[x, z].rightWall = right;
@@ -309,16 +306,16 @@ namespace TakeshiLibrary
         /// </summary>
         /// <param name="func">条件</param>
         /// <returns>当てはまるブロックのリスト</returns>
-        public List<Block> WhereBlocks(Func<Coord, bool> func) 
+        public List<Block> WhereBlocks(Func<Coord, bool> func)
         {
             List<Block> ret = new List<Block>();
-            gridField.IterateOverGrid(coord =>
+            gridField.IterateOverGrid((UnityEngine.Events.UnityAction<Coord>)(coord =>
             {
-                if(func(coord))
+                if (func(coord))
                 {
-                    ret.Add(blocks[coord.x,coord.z]);
+                    ret.Add((Block)this.blocks[coord.x, coord.z]);
                 }
-            });
+            }));
             return ret;
         }
 
@@ -326,7 +323,7 @@ namespace TakeshiLibrary
         /// <summary>
         /// マップのすべてのブロックを壁に設定します
         /// </summary>
-        public void CreateWallsAll() => CreateWalls(a => true );
+        public void CreateWallsAll() => CreateWalls(a => true);
 
 
         /// <summary>
@@ -392,7 +389,7 @@ namespace TakeshiLibrary
         /// <param name="exceptionCoordList">除外する座標のリスト</param>
         /// <param name="areaX"></param>
         /// <param name="areaZ"></param>
-        public List<Block> CustomAreaBlockList(Coord coord,List<Coord> exceptionCoordList, int areaX, int areaZ)
+        public List<Block> CustomAreaBlockList(Coord coord, List<Coord> exceptionCoordList, int areaX, int areaZ)
         {
             // 選択範囲のブロックのリスト
             List<Block> lAreaBlock = AreaBlockList(coord, areaX, areaZ);
@@ -411,15 +408,15 @@ namespace TakeshiLibrary
         /// <param name="areaX">Xの長さ</param>
         /// <param name="areaZ">Zの長さ</param>
         /// <returns></returns>
-        public List<Block> FrameAreaBlockList(Coord coord,int frameSize, int areaX, int areaZ)
+        public List<Block> FrameAreaBlockList(Coord coord, int frameSize, int areaX, int areaZ)
         {
             // 選択範囲のブロックのリスト
-            List<Block> lAreaBlock = AreaBlockList(coord,areaX,areaZ);
+            List<Block> lAreaBlock = AreaBlockList(coord, areaX, areaZ);
 
             // エリアから、frameSizeの値分内側のエリアのブロックを削除
             for (int x = -areaX + frameSize; x < areaX - frameSize; x++)
             {
-                for(int z = -areaZ + frameSize; z < areaZ - frameSize; z++)
+                for (int z = -areaZ + frameSize; z < areaZ - frameSize; z++)
                 {
                     if (!CheckMap(new Coord(coord.x + x, coord.z + z))) continue;
                     Block removeBlock = blocks[coord.x + x, coord.z + z];
@@ -442,7 +439,7 @@ namespace TakeshiLibrary
         public List<Block> CustomFrameAreaBlockList(Coord coord, int frameSize, List<Coord> exceptionCoordList, int areaX, int areaZ)
         {
             // 選択範囲のブロックのリスト
-            List<Block> lAreaBlock = FrameAreaBlockList(coord,frameSize, areaX, areaZ);
+            List<Block> lAreaBlock = FrameAreaBlockList(coord, frameSize, areaX, areaZ);
 
             lAreaBlock.RemoveAll(b => exceptionCoordList.Contains(b.coord));
 
@@ -465,7 +462,7 @@ namespace TakeshiLibrary
 
             aStar.AStarPath(this, gridField.GridCoordinate(start), gridField.GridCoordinate(goal));
 
-            foreach(Coord p in aStar.pathStack)
+            foreach (Coord p in aStar.pathStack)
             {
                 Debug.DrawLine(gridField[p.x, p.z], gridField[p.x, p.z] + Vector3.up, UnityEngine.Color.red, 10f);
 

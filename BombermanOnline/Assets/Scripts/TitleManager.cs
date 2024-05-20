@@ -1,6 +1,4 @@
 using SoftGear.Strix.Unity.Runtime;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,13 +60,15 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// タイトルキャンバスをInActiveにし、マップを生成します
     /// </summary>
-    public void CallGameStart() { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(GameStart)); }
+    /// <summary>ステージ１</summary>
+    public void CallGameStart1(int index) { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(GameStart),index); }
     [StrixRpc]
-    private void GameStart()
+    private void GameStart(int index)
     {
         titleCanvas.SetActive(false);
-        GameMap.Instance.CallCreateMap1();
+        GameMap.Instance.CallCreateMap1(index);
     }
+
 
     /// <summary>
     /// アイテムを増やします

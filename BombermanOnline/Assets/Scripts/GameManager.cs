@@ -103,7 +103,7 @@ public class ItemManager
         {
             for (int j = 0; j < items[i].itemNum; j++)
             {
-                m_gameMap.mapSet.gridField.Instantiate(items[i].itemObject, randomCoords[count], itemY, Quaternion.identity);
+                m_gameMap.m_mapSet.gridField.Instantiate(items[i].itemObject, randomCoords[count], itemY, Quaternion.identity);
                 count++;
             }
         }

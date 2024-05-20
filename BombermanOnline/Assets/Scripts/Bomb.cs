@@ -124,7 +124,7 @@ public class Bomb : Base
         Explosion explo = exploList.Find(e => e.IsExplosion == false);
         if (explo == null)
         {
-            explo = map.mapSet.gridField.Instantiate(m_explosion, exploCoord, Quaternion.identity) as Explosion;
+            explo = map.m_mapSet.gridField.Instantiate(m_explosion, exploCoord, Quaternion.identity) as Explosion;
             exploList.Add(explo);
         }
         explo.Initialize(map,exploCoord);
