@@ -8,16 +8,18 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
 {
     private static T _instance;
 
-    private static string _singletonObjName;
+    private static string _objectName;
     private static string _loadingScene;
 
     [Serializable]
     private struct SingletonSettings
     {
-        [SerializeField] public string m_singletonObjName;
+        [SerializeField] public string m_objectName;
         [SerializeField] public string m_loadingScene;
     }
-    [SerializeField] private SingletonSettings singletonSettings;
+
+    [SerializeField] private SingletonSettings m_singletonSettings;
+
     public static T Instance
     {
         get
@@ -29,7 +31,7 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
                 // シーン内で見つからない場合は新しい GameObject を作成して T のインスタンスをアタッチする
                 if (_instance == null)
                 {
-                    GameObject singletonObj = new GameObject(_singletonObjName);
+                    GameObject singletonObj = new GameObject(_objectName);
                     _instance = singletonObj.AddComponent<T>();
                     DontDestroyOnLoad(singletonObj);
                 }
@@ -40,7 +42,7 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
 
     protected virtual void Awake()
     {
-        gameObject.name = _singletonObjName = singletonSettings.m_singletonObjName;
+        gameObject.name = _objectName = m_singletonSettings.m_objectName;
 
         if (_instance == null)
         {
@@ -55,7 +57,7 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
 
     protected virtual void Update()
     {
-        _loadingScene = singletonSettings.m_loadingScene;
+        _loadingScene = m_singletonSettings.m_loadingScene;
         if (_loadingScene == null)
         {
             Destroy(gameObject);

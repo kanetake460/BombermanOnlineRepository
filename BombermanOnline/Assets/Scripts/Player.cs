@@ -190,9 +190,10 @@ public class Player : Base
     [StrixRpc]
     private void GameOver()
     {
-        Pos = mapCameraPos;
-        Rot = Quaternion.identity;
+        mainCamera.transform.position = Pos = mapCameraPos;
+        mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
         gameObj.SetActive(false);
+        mainCamera.GetComponent<CameraView>().enabled = false;
     }
 
 

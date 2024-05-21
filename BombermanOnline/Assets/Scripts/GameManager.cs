@@ -16,11 +16,6 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
         base.Awake();
     }
 
-    private void Start()
-    {
-
-    }
-
 
     protected override void Update()
     {
