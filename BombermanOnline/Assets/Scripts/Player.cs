@@ -37,11 +37,8 @@ public class Player : Base
 
     private void Update()
     {
-
         if (isLocal == false) return;
-
         PlayerSettings();
-        PlayerSystem();
         PutBomb();
     }
 
@@ -122,9 +119,17 @@ public class Player : Base
     FPS fps;
 
     // ===プロパティ================================================================================
-    public int Firepower => m_firepower;                        // 火力ゲッター
+    
+    /// <summary>火力</summary>
+    public int Firepower => m_firepower;
+    
+    /// <summary>爆弾所持最大数</summary>
     public int BombMaxCount => bombList.Count;                  // 手持ちの爆弾最大値
+    
+    /// <summary>爆弾所持数</summary>
     public int BombCount => bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
+
+    /// <summary>ライフ数</summary>
     public int LifeCount
     {
         get
@@ -159,11 +164,6 @@ public class Player : Base
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
-    }
-
-
-    private void PlayerSystem()
-    {
         if (m_life <= 0)
         {
             CallGameOver();
@@ -254,16 +254,25 @@ public class Player : Base
         m_dashSpeed += m_upSpeed;
     }
 
+    /// <summary>
+    /// 火力をアップさせます
+    /// </summary>
     private void FierPowerUp()
     {
         m_firepower++;
     }
 
+    /// <summary>
+    /// ライフを増やします
+    /// </summary>
     private void LifeUp()
     {
         LifeCount++;
     }
 
+    /// <summary>
+    /// [RPC]プレイヤーの色を設定します。
+    /// </summary>
     private void CallSetMembersColor() => RpcToAll(nameof(SetMembersColor));
     [StrixRpc]
     private void SetMembersColor()
@@ -293,11 +302,14 @@ public class Player : Base
     private void SetPlayerColor(Color color) { gameObject.GetComponent<Renderer>().material.color = color; }
 
 
+    /// <summary>
+    /// プレイヤーの情報を更新します
+    /// </summary>
     private void CallShowPlayerName() =>RpcToAll(nameof(ShowPlayerName));
     [StrixRpc]
     private void ShowPlayerName()
     {
-        playerInfoText.text = "PlayerName\n" + StrixNetwork.instance.playerName + "\nPlayerIndex\n" + PlayerIndex;
+        playerInfoText.text = "PlayerName\n" + gameManager.RoomMenbers[PlayerIndex].GetName() + "\nPlayerIndex\n" + PlayerIndex;
     }
 }
 
