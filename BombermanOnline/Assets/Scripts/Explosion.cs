@@ -17,7 +17,10 @@ public class Explosion : Base
             collisionDurationCount--;
         }
         else
+        {
             _sphereCollider.enabled = false;
+            gameObj.SetActive(false);
+        }
     }
 
     [Header("パラメーター")]
@@ -33,6 +36,7 @@ public class Explosion : Base
     public void Initialize(GameMap map,Coord exploCoord)
     {
         base.Initialize(map);
+        gameObj.SetActive(true);
         _particleSystem ??= GetComponent<ParticleSystem>();
         _audioSource ??= GetComponent<AudioSource>();
         AudioManager.PlayOneShot("炎",_audioSource,0.1f);
