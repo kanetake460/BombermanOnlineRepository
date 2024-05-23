@@ -10,6 +10,8 @@ public class TitleResultManager : StrixBehaviour
     {
         gameManager = GameManager.Instance;
         itemManager = gameManager.itemManager;
+
+        CallSetOwnPointer();
         for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
             playerName[i].text = gameManager.RoomMenbers[i].GetName();
@@ -43,7 +45,11 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI[] playerName;
 
     [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject finishButton;
+    [SerializeField] GameObject finishButton; 
+    [SerializeField] GameObject ownPinter;
+
+    [SerializeField] Player player;
+
 
 
     // ===関数====================================================
@@ -60,21 +66,58 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// タイトルキャンバスをInActiveにし、マップを生成します
     /// </summary>
-    /// <summary>ステージ１</summary>
-    public void CallGameStart1(int index) { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(GameStart),index); }
+    public void CallSelectStage(int index) { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(SelectStage), index); }
     [StrixRpc]
-    private void GameStart(int index)
+    private void SelectStage(int index)
+    {
+        GameMap.Instance.CallCreateMap(index);
+    }
+
+    /// <summary>
+    /// タイトルキャンバスをInActiveにし、マップを生成します
+    /// </summary>
+    public void CallGameStart() { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(GameStart)); }
+    [StrixRpc]
+    private void GameStart()
     {
         titleCanvas.SetActive(false);
-        GameMap.Instance.CallCreateMap1(index);
+        GameMap.Instance.CallInitializePosition();
+    }
+
+    /// <summary>
+    /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
+    /// </summary>
+    public void CallSetOwnPointer() { RpcToAll(nameof(SetOwnPointer)); }
+    [StrixRpc]
+    private void SetOwnPointer()
+    {
+        switch (player.PlayerIndex)
+        {
+            case 0:
+                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
+                break;
+
+            case 1:
+                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
+                break;
+
+            case 2:
+                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
+                break;
+
+            case 3:
+                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
+                break;
+        }
     }
 
 
-    /// <summary>
-    /// アイテムを増やします
-    /// </summary>
-    /// <param name="itemIndex">アイテムインデックス</param>
-    public void CallIncItem(int index) { RpcToAll(nameof(IncItem),index); }
+
+/// <summary>
+/// アイテムを増やします
+/// </summary>
+/// <param name="itemIndex">アイテムインデックス</param>
+public void CallIncItem(int index) { RpcToAll(nameof(IncItem),index); }
     [StrixRpc]
     public void IncItem(int itemIndex)
     {

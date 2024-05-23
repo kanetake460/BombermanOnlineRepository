@@ -18,9 +18,9 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
 
     // ===インプットアクション関数=======================================
-    public void CallCreateMap1(int index) { if (isLocal) RpcToAll(nameof(CreateMap1),index); }
+    public void CallCreateMap(int index) { if (isLocal) RpcToAll(nameof(CreateMap),index); }
     [StrixRpc]
-    public void CreateMap1(int index)
+    public void CreateMap(int index)
     {
         m_mapSet = m_mapSets[index];
         InitializeMap(m_mapSet);
@@ -103,6 +103,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     /// <summary>
     /// プレイヤー、アイテムのポジションを設定します。
     /// </summary>
+    public void CallInitializePosition() { if (isLocal) RpcToAll(nameof(InitializePosition)); }
+    [StrixRpc]
     private void InitializePosition()
     {
         // プレイヤーをすべて動かせるようにし、スタート地点に設定します。
