@@ -95,7 +95,7 @@ namespace TakeshiLibrary
             /// 床のテクスチャを変更します。
             /// </summary>
             /// <param name="texture">テクスチャ</param>
-            public void SetPlanematerial(Texture texture) { planeRenderer.material.mainTexture = texture; }
+            public void SetPlaneMaterial(Texture texture) { planeRenderer.material.mainTexture = texture; }
             /// <summary>
             /// 床の色を変更します。
             /// </summary>

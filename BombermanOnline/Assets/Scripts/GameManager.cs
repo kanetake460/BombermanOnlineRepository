@@ -30,6 +30,8 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     // ===変数====================================================
     public ItemManager itemManager;
 
+    public List<Explosion> exploList = new List<Explosion>();
+
     // ===プロパティ=================================================
     /// <summary>ルームメンバーリスト</summary>
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
@@ -54,13 +56,14 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
 [Serializable]
 public class ItemManager
 {
-    public Item[] items;
+    // ===変数====================================================
+    public Item[] items;                // アイテム配列（種類）
+    [SerializeField] float itemY;       // 生成するアイテムの高さ
+    public LayerMask itemLayer;         // アイテムのレイヤー
+    [SerializeField] GameMap m_gameMap; // ゲームマップ
 
-    [SerializeField] float itemY;
 
-    public LayerMask itemLayer;
-
-    [SerializeField] GameMap m_gameMap;
+    // ===関数====================================================
     /// <summary>
     /// アイテムをランダムなブロックの座標に生成します
     /// </summary>

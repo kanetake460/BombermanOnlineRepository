@@ -29,24 +29,23 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
 
     // ===変数====================================================
-    public GridFieldMapSettings m_mapSet;
-    [SerializeField] GridFieldMapSettings[] m_mapSets;
+    public GridFieldMapSettings m_mapSet;               // 生成するマップ
+    [SerializeField] GridFieldMapSettings[] m_mapSets;  // 各ステージ配列
 
-    private GridField _gridField;
-    private GridFieldMapObject _mapObj;
+    private GridField _gridField;                       // グリッドフィールド
+    private GridFieldMapObject _mapObj;                 // マップオブジェクト管理クラス
 
-    public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();
-
-    [HideInInspector] public Coord[] startCoords;
-    private List<Coord> _emptyCoords = new List<Coord>();
+    public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
+    [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
+    private List<Coord> _emptyCoords = new List<Coord>();   // 何もない座標
 
 
     [Header("コンポーネント")]
-    [SerializeField] GameObject m_player;
-    [SerializeField] Texture m_wallTexture;
-    [SerializeField] Texture m_stoneTexture;
-    [SerializeField] Camera m_mapCamera;
-    GameManager gameManager;
+    [SerializeField] Texture m_wallTexture;     // 壁オブジェクトのテクスチャ
+    [SerializeField] Texture m_stoneTexture;    // 石オブジェクトのテクスチャ
+    [SerializeField] Texture m_planeTexture;    // 石オブジェクトのテクスチャ
+    [SerializeField] Camera m_mapCamera;        // マップカメラ
+    GameManager gameManager;                    // ゲームマネージャー
 
     // ===関数====================================================
     /// <summary>
@@ -55,6 +54,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [StrixRpc]
     private void InitializeMap(GridFieldMapSettings mapSet)
     {
+        // インスタンスを代入
         gameManager = GameManager.Instance;
         _gridField = mapSet.gridField;
         _mapObj = new GridFieldMapObject(mapSet);
@@ -63,6 +63,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         _mapObj.GenerateMapObjects();
         // テクスチャ変更
         _mapObj.ChangeAllWallTexture(m_wallTexture);
+        _mapObj.ChangeAllPlaneTexture(m_planeTexture);
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
 
@@ -95,11 +96,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         _mapObj.ActiveMapWallObjects();
 
         // 右上のマップのサイズを調節
-        m_mapCamera.orthographicSize = _gridField.FieldMaxLength / 2;
-
-
-
-
+        m_mapCamera.orthographicSize = mapSet.gridField.FieldMaxLength / 2;
     }
 
 
@@ -114,6 +111,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         {
             gameManager.PlayerList[i].Coord = startCoords[gameManager.PlayerList[i].PlayerIndex];
         }
+        // アイテムのインスタンスは一度だけでいいので、ルームオーナーのスクリプトだけ生成
         if (StrixNetwork.instance.isRoomOwner)
         {
             gameManager.itemManager.InstanceItems();

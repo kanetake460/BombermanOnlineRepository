@@ -125,6 +125,20 @@ public class GridFieldMapObject
     /// <param name="color">色</param>
     public void ChangeAllWallColor(Color color) => _mapSet.gridField.IterateOverGrid(coord => ChangeWallColor(coord, color));
 
+    /// <summary>
+    /// 床オブジェクトのテクスチャを変更します
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <param name="texture">テクスチャ</param>
+    public void ChangePlaneTexture(Coord coord, Texture texture) => _mapSet.blocks[coord.x, coord.z].SetPlaneMaterial(texture);
+
+
+    /// <summary>
+    /// すべての壁オブジェクトのテクスチャを変更します
+    /// </summary>
+    /// <param name="texture">テクスチャ</param>
+    public void ChangeAllPlaneTexture(Texture texture) => _mapSet.gridField.IterateOverGrid(c => ChangePlaneTexture(c, texture));
+
 
     /// <summary>
     /// 壁オブジェクトのテクスチャを変更します

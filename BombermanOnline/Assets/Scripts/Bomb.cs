@@ -38,7 +38,7 @@ public class Bomb : Base
     public int explosionTime;
     public int firepower;
     private Timer counter = new Timer();
-    private List<Explosion> exploList = new List<Explosion>();
+    private List<Explosion> exploPool = new List<Explosion>();
     [SerializeField] private Explosion m_explosion;
     private AudioSource _audioSource;
 
@@ -51,13 +51,15 @@ public class Bomb : Base
     }
 
 
+    /// <summary>
+    /// 爆弾非アクティブ（RPC）
+    /// </summary>
     private void CallInActive() { RpcToAll(nameof(InActive)); }
     [StrixRpc]
     private void InActive()
     {
         gameObj.SetActive(false);
     }
-
 
 
     /// <summary>
@@ -80,6 +82,7 @@ public class Bomb : Base
     /// </summary>
     public void Fire()
     {
+        // 爆弾の位置
         PlayExplosionEffect(Coord);
 
         Coord exploCoord;
@@ -112,26 +115,26 @@ public class Bomb : Base
             PlayExplosionEffect(exploCoord);
         }
         AudioManager.PlayOneShot("爆発",0.3f);
-        CallInActive();
+        CallInActive();     // 非アクティブ
         isHeld = true;
     }
 
 
-
-
+    /// <summary>
+    /// 爆発のプレハブを生成し、エフェクトを再生します
+    /// </summary>
+    /// <param name="exploCoord">生成する場所</param>
     private void PlayExplosionEffect(Coord exploCoord)
     {
-        Explosion explo = exploList.Find(e => e.IsExplosion == false);
+        // プールから爆発中じゃないモノを探し出す
+        Explosion explo = exploPool.Find(e => e.IsExplosion == false);
         if (explo == null)
         {
+            // ないなら、生成し、プールに追加
             explo = map.m_mapSet.gridField.Instantiate(m_explosion, exploCoord, Quaternion.identity) as Explosion;
-            exploList.Add(explo);
+            exploPool.Add(explo);
         }
+        // 爆発を初期化
         explo.Initialize(map,exploCoord);
     }
-
-
-
-
-    // ===プロパティ=================================================
 }
