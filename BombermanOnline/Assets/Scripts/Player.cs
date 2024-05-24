@@ -112,6 +112,7 @@ public class Player : Base
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
     [SerializeField] GameObject titleCanvas;
+    [SerializeField] GameObject[] ownPointers;
 
 
     [Header("コンポーネント")]
@@ -306,11 +307,21 @@ public class Player : Base
     /// <summary>
     /// プレイヤーの情報を更新します
     /// </summary>
-    private void CallShowPlayerName() =>RpcToAll(nameof(ShowPlayerName));
+    private void CallShowPlayerName() => RpcToAll(nameof(ShowPlayerName));
     [StrixRpc]
     private void ShowPlayerName()
     {
         playerInfoText.text = "PlayerName\n" + gameManager.RoomMenbers[PlayerIndex].GetName() + "\nPlayerIndex\n" + PlayerIndex;
+    }
+
+    /// <summary>
+    /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
+    /// </summary>
+    private void CallSetOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
+    [StrixRpc]
+    private void ActiveOwnPointer()
+    {
+        ownPointers[PlayerIndex].SetActive(true);
     }
 }
 

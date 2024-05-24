@@ -131,8 +131,8 @@ public struct Coord
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var xProperty = property.FindPropertyRelative("m_X");
-            var zProperty = property.FindPropertyRelative("m_Z");
+            var xProperty = property.FindPropertyRelative(nameof(m_X));
+            var zProperty = property.FindPropertyRelative(nameof(m_Z));
 
             // –¼‘O
             label = EditorGUI.BeginProperty(position, label, property);

@@ -1,4 +1,5 @@
 using SoftGear.Strix.Unity.Runtime;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,6 @@ public class TitleResultManager : StrixBehaviour
     {
         gameManager = GameManager.Instance;
         itemManager = gameManager.itemManager;
-
         CallSetOwnPointer();
         for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
@@ -46,7 +46,7 @@ public class TitleResultManager : StrixBehaviour
 
     [SerializeField] GameObject titleCanvas;
     [SerializeField] GameObject finishButton; 
-    [SerializeField] GameObject ownPinter;
+    [SerializeField] GameObject[] ownPointers;
 
     [SerializeField] Player player;
 
@@ -71,46 +71,20 @@ public class TitleResultManager : StrixBehaviour
     private void SelectStage(int index)
     {
         GameMap.Instance.CallCreateMap(index);
-    }
-
-    /// <summary>
-    /// タイトルキャンバスをInActiveにし、マップを生成します
-    /// </summary>
-    public void CallGameStart() { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(GameStart)); }
-    [StrixRpc]
-    private void GameStart()
-    {
-        titleCanvas.SetActive(false);
         GameMap.Instance.CallInitializePosition();
+        titleCanvas.SetActive(false);
     }
+    
 
     /// <summary>
     /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
     /// </summary>
-    public void CallSetOwnPointer() { RpcToAll(nameof(SetOwnPointer)); }
+    private void CallSetOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
     [StrixRpc]
-    private void SetOwnPointer()
+    private void ActiveOwnPointer()
     {
-        switch (player.PlayerIndex)
-        {
-            case 0:
-                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
-                break;
-
-            case 1:
-                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
-                break;
-
-            case 2:
-                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
-                break;
-
-            case 3:
-                ownPinter.transform.position = ownPinter.transform.position + new Vector3(240f * player.PlayerIndex, 0, 0);
-                break;
-        }
+        ownPointers[player.PlayerIndex].SetActive(true);
     }
-
 
 
 /// <summary>

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GameMap : SingletonStrixBehaviour<GameMap>
 {
-
-
     // ===ƒCƒxƒ“ƒgŠÖ”================================================
 
     protected override void Awake()

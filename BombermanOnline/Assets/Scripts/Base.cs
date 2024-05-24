@@ -2,12 +2,9 @@ using UnityEngine;
 using TakeshiLibrary;
 using SoftGear.Strix.Unity.Runtime;
 using SoftGear.Strix.Client.Core;
-using System.Collections.Generic;
-using System.Linq;
 using System;
-using SoftGear.Strix.Client.Match.Room.Model;
 
-public class Base : StrixBehaviour
+public abstract class Base : StrixBehaviour
 {
     [SerializeField] protected GameMap map;
     protected GridField gridField;

@@ -62,6 +62,8 @@ public class TestPlayer : StrixBehaviour
         RpcToAll(nameof(PrivateMethod));
 
         RpcToAll(nameof(ShowValueText));
+
+        AudioManager.PlayBGM("ƒ^ƒCƒgƒ‹BGM");
     }
 
     // ===•Ï”====================================================

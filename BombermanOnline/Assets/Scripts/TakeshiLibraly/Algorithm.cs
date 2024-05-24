@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,12 @@ namespace TakeshiLibrary
 {
     public class Algorithm : MonoBehaviour
     {
-        public static void Shuffle<T>(T[] arry)
+        public static void Shuffle<T>(IList<T> arry)
         {
             int rand;
-            for (int i = 0; i < arry.Length; i++)
+            for (int i = 0; i < arry.Count; i++)
             {
-                rand = Random.Range(0, arry.Length);
+                rand = UnityEngine.Random.Range(0, arry.Count);
                 T swap = arry[i];
                 arry[i] = arry[rand];
                 arry[rand] = swap;
@@ -24,7 +24,7 @@ namespace TakeshiLibrary
             {
                 for (int j = 0; j < arry.GetLength(1); j++)
                 {
-                    rand = Random.Range(0, arry.Length);
+                    rand = UnityEngine.Random.Range(0, arry.Length);
                     //Swap(arry[i], arry[rand]);
                     T swap = arry[i,j];
                     arry[i,j] = arry[i,rand];
