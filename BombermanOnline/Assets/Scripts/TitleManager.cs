@@ -46,7 +46,6 @@ public class TitleResultManager : StrixBehaviour
 
     [SerializeField] GameObject titleCanvas;
     [SerializeField] GameObject finishButton; 
-    [SerializeField] GameObject[] ownPointers;
 
     [SerializeField] Player player;
 
@@ -73,17 +72,7 @@ public class TitleResultManager : StrixBehaviour
         GameMap.Instance.CallCreateMap(index);
         GameMap.Instance.CallInitializePosition();
         titleCanvas.SetActive(false);
-    }
-    
-
-    /// <summary>
-    /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
-    /// </summary>
-    private void CallActiceOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
-    [StrixRpc]
-    private void ActiveOwnPointer()
-    {
-        ownPointers[player.PlayerIndex].SetActive(true);
+        player.transform.position += player.posY;
     }
 
 

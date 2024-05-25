@@ -1,10 +1,11 @@
+using SoftGear.Strix.Unity.Runtime;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : StrixBehaviour
 {
     private void Update()
     {
@@ -15,11 +16,10 @@ public class UIManager : MonoBehaviour
         {
             uiCount -= Time.deltaTime;
         }
-        else
+        else if(uiCount <= 0&& gameText.text != null)
         {
             gameText.text = null;
         }
-
 
         if (Mathf.Approximately(damageEffect.color.a, 0) == false)
         {
@@ -69,6 +69,8 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void CallShowGameText(string text, float count) { RpcToAll(nameof(ShowGameText), text, count); }
+    [StrixRpc]
     public void ShowGameText(string text,float count)
     {
         ShowUIText(gameText,text,count);

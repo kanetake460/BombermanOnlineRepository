@@ -48,7 +48,7 @@ public class Player : Base
         if (other.tag == ExplosionTag)
         {
             if (isLocal == false) return;
-
+            if (isInvincible) return;
             LifeCount--;
             AudioManager.PlayOneShot("被ダメージ", 1f);
             ui.ShowDamageEffectUI();
@@ -87,6 +87,8 @@ public class Player : Base
     // ===変数======================================================================================
 
     [Header("パラメーター")]
+    public Vector3 posY;
+
     [SerializeField] private float m_speed;         // 移動スピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_upSpeed;
@@ -94,8 +96,13 @@ public class Player : Base
     [SerializeField] private int m_firepower;       // 爆弾の火力
     [SerializeField] private int m_life;            // 体力
     [SerializeField] private int m_lifeMaxValue;    // 体力の最大値
+    [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
+
+    private bool isInvincible = false;
+    public float invncebleCount = 0;
+
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0); // マップカメラのポジション
 
@@ -112,7 +119,6 @@ public class Player : Base
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
     [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject ownPointer;
 
 
     [Header("コンポーネント")]
@@ -161,6 +167,7 @@ public class Player : Base
         fps.PlayerViewport();
         fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();
+        Invincible();
         //fps.CursorLock();
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
@@ -181,7 +188,6 @@ public class Player : Base
         AddBombList();
         CallSetMembersColor();
         CallShowPlayerName();
-        ActiveOwnPointer();
     }
 
 
@@ -196,6 +202,7 @@ public class Player : Base
         mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
         gameObj.SetActive(false);
         mainCamera.GetComponent<CameraView>().enabled = false;
+        ui.CallShowGameText(strixReplicator.roomMember.GetName() + "が倒された！", 3);
     }
 
 
@@ -248,6 +255,29 @@ public class Player : Base
         }
     }
 
+
+    /// <summary>
+    /// 無敵時の処理
+    /// </summary>
+    private void Invincible()
+    {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            isInvincible = true;
+        }
+        if (isInvincible)
+        {
+            invncebleCount += Time.deltaTime;
+
+            if (invncebleCount > invncebleTime)
+            {
+                isInvincible = false;
+                invncebleCount = 0;
+            }
+        }
+    }
+
+
     /// <summary>
     /// スピードアップします
     /// </summary>
@@ -272,6 +302,7 @@ public class Player : Base
     {
         LifeCount++;
     }
+
 
     /// <summary>
     /// [RPC]プレイヤーの色を設定します。
@@ -315,15 +346,6 @@ public class Player : Base
         playerInfoText.text = "PlayerName\n" + gameManager.RoomMenbers[PlayerIndex].GetName() + "\nPlayerIndex\n" + PlayerIndex;
     }
 
-    /// <summary>
-    /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
-    /// </summary>
-    private void CallActiveOwnPointer() { RpcToAll(nameof(ActiveOwnPointer));  }
-    [StrixRpc]
-    private void ActiveOwnPointer()
-    {
-        ownPointer.transform.position += new Vector3(PlayerIndex * 240f,0,0);
-    }
 }
 
 
