@@ -112,7 +112,7 @@ public class Player : Base
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
     [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject[] ownPointers;
+    [SerializeField] GameObject ownPointer;
 
 
     [Header("コンポーネント")]
@@ -181,6 +181,7 @@ public class Player : Base
         AddBombList();
         CallSetMembersColor();
         CallShowPlayerName();
+        ActiveOwnPointer();
     }
 
 
@@ -317,11 +318,11 @@ public class Player : Base
     /// <summary>
     /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
     /// </summary>
-    private void CallSetOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
+    private void CallActiveOwnPointer() { RpcToAll(nameof(ActiveOwnPointer));  }
     [StrixRpc]
     private void ActiveOwnPointer()
     {
-        ownPointers[PlayerIndex].SetActive(true);
+        ownPointer.transform.position += new Vector3(PlayerIndex * 240f,0,0);
     }
 }
 

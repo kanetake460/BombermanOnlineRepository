@@ -11,7 +11,7 @@ public class TitleResultManager : StrixBehaviour
     {
         gameManager = GameManager.Instance;
         itemManager = gameManager.itemManager;
-        CallSetOwnPointer();
+        //ActiveOwnPointer();
         for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
             playerName[i].text = gameManager.RoomMenbers[i].GetName();
@@ -79,7 +79,7 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// 「↑You」のテキストの位置をプレイヤーインデックスによって変更します。
     /// </summary>
-    private void CallSetOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
+    private void CallActiceOwnPointer() { RpcToAll(nameof(ActiveOwnPointer)); }
     [StrixRpc]
     private void ActiveOwnPointer()
     {

@@ -14,7 +14,7 @@ public abstract class Base : StrixBehaviour
     [HideInInspector] public GameObject gameObj { get; set; }
     [HideInInspector] public Transform Trafo { get; set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Trafo = gameObject.transform;
         gameObj = gameObject;
@@ -114,7 +114,6 @@ public abstract class Base : StrixBehaviour
     }
 
 
-
     /// <summary>
     /// ÉvÉåÉCÉÑÅ[ÇÃUID
     /// </summary>
@@ -127,6 +126,12 @@ public abstract class Base : StrixBehaviour
     {
         get
         {
+            
+            if (strixReplicator.ownerUid == null)
+            {
+                return 0;
+            }
+
             for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
             {
                 if (UID.ToString() == gameManager.RoomMenbers[i].GetUid().ToString())

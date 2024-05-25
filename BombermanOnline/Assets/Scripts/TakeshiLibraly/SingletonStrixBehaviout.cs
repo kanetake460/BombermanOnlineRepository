@@ -51,6 +51,7 @@ public class SingletonStrixBehaviour<T> : StrixBehaviour where T : StrixBehaviou
         }
         else
         {
+            Debug.Log("Destroy");
             Destroy(gameObject);
         }
     }

@@ -11,7 +11,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     {
         base.Awake();
         m_mapSet ??= GetComponent<GridFieldMapSettings>();
-
     }
 
 
