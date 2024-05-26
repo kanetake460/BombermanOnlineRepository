@@ -69,6 +69,7 @@ public class ItemManager
     /// </summary>
     public void InstanceItems()
     {
+        Debug.Log("アイテム生成");
         int allItemCount = 0;       // すべてのアイテムの数
 
         // カウントする

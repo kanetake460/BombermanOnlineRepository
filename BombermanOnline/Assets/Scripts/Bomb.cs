@@ -82,6 +82,11 @@ public class Bomb : Base
     /// </summary>
     public void Fire()
     {
+        Debug.Log(map.emptyCoords.Count);
+        if (map.emptyCoords.Contains(Coord))
+        {
+            Debug.Log("そこはEmpty");
+        }
         // 爆弾の位置
         PlayExplosionEffect(Coord);
 
@@ -89,30 +94,101 @@ public class Bomb : Base
         for (int x = 1; x <= firepower; x++)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
-            if (map.BreakStone(exploCoord) == false)
-                break;
-            PlayExplosionEffect(exploCoord);
+
+            // 爆発マスが、Emptyなら
+            if (map.emptyCoords.Contains(exploCoord))
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合は、break
+                if (map.ContinueBreakStone(exploCoord) == false)
+                    break;
+
+                // 破壊したのでエフェクト再生
+                PlayExplosionEffect(exploCoord);
+            }
+            // ストーンブロックまたは、壁ブロックなら
+            else
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合、ストーンブロックの場合は、break
+                if (map.BreakStone(exploCoord) == false)
+                {
+                    // 破壊したのでエフェクト再生し、破壊ループ終了
+                    PlayExplosionEffect(exploCoord);
+                    break;
+                }
+            }
         }
         for (int x = -1; x >= -firepower; x--)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
-            if (map.BreakStone(exploCoord) == false)
-                break;
-            PlayExplosionEffect(exploCoord);
+
+            // 爆発マスが、Emptyなら
+            if (map.emptyCoords.Contains(exploCoord))
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合は、break
+                if (map.ContinueBreakStone(exploCoord) == false)
+                    break;
+
+                // 破壊したのでエフェクト再生
+                PlayExplosionEffect(exploCoord);
+            }
+            // ストーンブロックまたは、壁ブロックなら
+            else
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合、ストーンブロックの場合は、break
+                if (map.BreakStone(exploCoord) == false)
+                {
+                    // 破壊したのでエフェクト再生し、破壊ループ終了
+                    PlayExplosionEffect(exploCoord);
+                    break;
+                }
+            }
         }
         for (int z = 1; z <= firepower; z++)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
-            if (map.BreakStone(exploCoord) == false)
-                break;
-            PlayExplosionEffect(exploCoord);
+
+            // 爆発マスが、Emptyなら
+            if (map.emptyCoords.Contains(exploCoord))
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合は、break
+                if (map.ContinueBreakStone(exploCoord) == false)
+                    break;
+
+                // 破壊したのでエフェクト再生
+                PlayExplosionEffect(exploCoord);
+            }
+            // ストーンブロックまたは、壁ブロックなら
+            else
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合、ストーンブロックの場合は、break
+                if (map.BreakStone(exploCoord) == false)
+                {
+                    // 破壊したのでエフェクト再生し、破壊ループ終了
+                    PlayExplosionEffect(exploCoord);
+                    break;
+                }
+            }
         }
         for (int z = -1; z >= -firepower; z--)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
-            if (map.BreakStone(exploCoord) == false)
-                break;
-            PlayExplosionEffect(exploCoord);
+
+            if (map.emptyCoords.Contains(exploCoord) == false)
+            {
+                // 破壊するマスが、ストーンブロックか調べて破壊する
+                // 壁ブロックの場合は、break
+                if (map.ContinueBreakStone(exploCoord) == false)
+                    break;
+
+                // 破壊したのでエフェクト再生
+                PlayExplosionEffect(exploCoord);
+            }
         }
         AudioManager.PlayOneShot("爆発",0.3f);
         CallInActive();     // 非アクティブ

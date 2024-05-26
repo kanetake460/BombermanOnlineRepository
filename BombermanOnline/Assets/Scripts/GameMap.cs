@@ -34,7 +34,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
     public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
-    private List<Coord> _emptyCoords = new List<Coord>();   // 何もない座標
+    public List<Coord> emptyCoords = new List<Coord>();   // 何もない座標
 
 
     [Header("コンポーネント")]
@@ -76,15 +76,15 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         // スタート地点の周りは何もないブロック
         for (int i = 0; i < startCoords.Length; i++)
         {
-            _emptyCoords.Add(startCoords[i]);
-            _emptyCoords.Add(startCoords[i] + Coord.forward);
-            _emptyCoords.Add(startCoords[i] + Coord.back);
-            _emptyCoords.Add(startCoords[i] + Coord.left);
-            _emptyCoords.Add(startCoords[i] + Coord.right);
+            emptyCoords.Add(startCoords[i]);
+            emptyCoords.Add(startCoords[i] + Coord.forward);
+            emptyCoords.Add(startCoords[i] + Coord.back);
+            emptyCoords.Add(startCoords[i] + Coord.left);
+            emptyCoords.Add(startCoords[i] + Coord.right);
         }
 
         // 何もないマス設定
-        stoneBlockList.RemoveAll(b => _emptyCoords.Contains(b.coord));                      // 何もないマスはストーンリストから削除
+        stoneBlockList.RemoveAll(b => emptyCoords.Contains(b.coord));                      // 何もないマスはストーンリストから削除
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
@@ -124,6 +124,30 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     /// <param name="coord">座標</param>
     /// <returns>壊せないブロックかどうか（壊せないブロック：false）</returns>
     [StrixRpc]
+    public bool ContinueBreakStone(Coord coord)
+    {
+        var b = stoneBlockList.Find(b => b.coord == coord);
+        if (b != null)
+        {
+            b.isSpace = true;
+            stoneBlockList.Remove(b);
+            emptyCoords.Add(b.coord);
+            _mapObj.ActiveMapWallObjects();
+            return true;
+        }
+        if(emptyCoords.Contains(coord)) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 指定した座標の石ストーンマスをなくします。
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <returns>壊せないブロックかどうか（壊せないブロック：false）</returns>
+    [StrixRpc]
     public bool BreakStone(Coord coord)
     {
         var b = stoneBlockList.Find(b => b.coord == coord);
@@ -131,11 +155,11 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         {
             b.isSpace = true;
             stoneBlockList.Remove(b);
-            _emptyCoords.Add(b.coord);
+            emptyCoords.Add(b.coord);
             _mapObj.ActiveMapWallObjects();
-            return true;
+            return false;
         }
-        if(_emptyCoords.Contains(coord)) 
+        if (emptyCoords.Contains(coord))
         {
             return true;
         }
