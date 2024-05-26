@@ -2,7 +2,6 @@ using SoftGear.Strix.Unity.Runtime;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : StrixBehaviour
@@ -69,10 +68,11 @@ public class UIManager : StrixBehaviour
     }
 
 
-    public void CallShowGameText(string text, float count) { RpcToAll(nameof(ShowGameText), text, count); }
+    public void CallShowGameText(string text, float count) { Rpc(nameof(ShowGameText), text, count); }
     [StrixRpc]
     public void ShowGameText(string text,float count)
     {
+        if(isLocal)
         ShowUIText(gameText,text,count);
     }
 

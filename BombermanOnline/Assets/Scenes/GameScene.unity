@@ -3593,7 +3593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 275}
+  m_AnchoredPosition: {x: 0, y: 270}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &558329490
@@ -7640,7 +7640,6 @@ GameObject:
   - component: {fileID: 1036371552}
   - component: {fileID: 1036371551}
   - component: {fileID: 1036371550}
-  - component: {fileID: 1036371555}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -7698,8 +7697,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_Camera: {fileID: 963194227}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -7725,8 +7724,8 @@ RectTransform:
   m_Children:
   - {fileID: 1335199911}
   - {fileID: 1791274108}
-  - {fileID: 1520198734}
   - {fileID: 944302540}
+  - {fileID: 1520198734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7734,25 +7733,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1036371555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036371549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strixBehaviours: []
-  objectType: 524289
-  sendRate: 5
-  syncDestroy: 1
-  networkInstanceId: -1
-  InstantiableBy: 1
-  ConnectionClosedBehaviour: 1
 --- !u!1 &1060438065
 GameObject:
   m_ObjectHideFlags: 0
@@ -10238,7 +10218,7 @@ MonoBehaviour:
   bomb: {fileID: 6001974515815307178, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
   playerInfoText: {fileID: 1481765626}
   titleCanvas: {fileID: 291420355}
-  ui: {fileID: 1414995913}
+  ui: {fileID: 1414995915}
 --- !u!54 &1383805136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10583,8 +10563,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1414995912}
   - component: {fileID: 1414995911}
-  - component: {fileID: 1414995913}
   - component: {fileID: 1414995914}
+  - component: {fileID: 1414995915}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10642,7 +10622,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1414995913
+--- !u!114 &1414995914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414995910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 1414995911}
+  - {fileID: 1414995915}
+  objectType: 524292
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
+--- !u!114 &1414995915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10669,27 +10670,6 @@ MonoBehaviour:
   gameText: {fileID: 944302538}
   player: {fileID: 1383805135}
   damageEffectSpeed: 3
---- !u!114 &1414995914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414995910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strixBehaviours:
-  - {fileID: 1414995911}
-  - {fileID: 1414995913}
-  objectType: 524292
-  sendRate: 5
-  syncDestroy: 1
-  networkInstanceId: -1
-  InstantiableBy: 1
-  ConnectionClosedBehaviour: 1
 --- !u!1 &1425881220
 GameObject:
   m_ObjectHideFlags: 0
@@ -11411,7 +11391,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -532.3}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1481765625
 MonoBehaviour:
@@ -11486,7 +11466,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -16791,8 +16771,8 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 1563796844}
   - {fileID: 2011975274}
-  - {fileID: 291420359}
   - {fileID: 1036371553}
+  - {fileID: 291420359}
   - {fileID: 1222872810}
   - {fileID: 1303901300}
   - {fileID: 1009865285}

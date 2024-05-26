@@ -4,8 +4,6 @@ using System.Linq;
 using TakeshiLibrary;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Player : Base
 {
@@ -17,22 +15,9 @@ public class Player : Base
         gameManager = GameManager.Instance;
         fps ??= new FPS(map.m_mapSet, rb, gameObject, mainCamera);
         InitPlayer();
-        if (isLocal)
-        {
-            if (GetComponent<AudioListener>() == null)
-            {
-                gameObj.AddComponent<AudioListener>();
-            }
-        }
-        else
-        {
-            AudioListener listener = GetComponent<AudioListener>();
-            if(listener != null) 
-            {
-                Destroy(listener);
-            }
-        }
+        InitLocalPlayer();
     }
+
 
 
     private void Update()
@@ -75,7 +60,7 @@ public class Player : Base
                     LifeUp();
                     break;
             }
-            Debug.Log("アイテムゲット！！");
+
             AudioManager.PlayOneShot("アイテムゲット");
             other.gameObject.SetActive(false);
         }
@@ -126,7 +111,8 @@ public class Player : Base
     FPS fps;
 
     // ===プロパティ================================================================================
-    
+    public string PlayerName => StrixNetwork.instance.roomMembers[strixReplicator.ownerUid].GetName();
+
     /// <summary>火力</summary>
     public int Firepower => m_firepower;
     
@@ -147,7 +133,8 @@ public class Player : Base
         {
             if (value > m_lifeMaxValue)
             {
-                ui.ShowGameText("Full Life !!", 1);
+                if (isLocal)
+                    ui.ShowGameText("Full Life !!", 1);
                 AudioManager.PlayOneShot("爆弾がない");
                 return;
             }
@@ -192,6 +179,30 @@ public class Player : Base
 
 
     /// <summary>
+    /// Localのプレイヤーの初期化をします
+    /// この関数はStart関数で呼び出します
+    /// </summary>
+    private void InitLocalPlayer()
+    {
+        if (isLocal)
+        {
+            if (GetComponent<AudioListener>() == null)
+            {
+                gameObj.AddComponent<AudioListener>();
+            }
+        }
+        else
+        {
+            AudioListener listener = GetComponent<AudioListener>();
+            if (listener != null)
+            {
+                Destroy(listener);
+            }
+        }
+    }
+
+
+    /// <summary>
     /// ゲームオーバー
     /// </summary>
     private void CallGameOver() { RpcToAll(nameof(GameOver)); }
@@ -202,7 +213,7 @@ public class Player : Base
         mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
         gameObj.SetActive(false);
         mainCamera.GetComponent<CameraView>().enabled = false;
-        ui.CallShowGameText(strixReplicator.roomMember.GetName() + "が倒された！", 3);
+        ui.ShowGameText("P" + (PlayerIndex + 1) + ":" + PlayerName + " is Down", 2);
     }
 
 
@@ -213,6 +224,7 @@ public class Player : Base
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // RPCで呼び出さないと、他の人のマップには爆発が反映しない（見た目では置かれるが、爆弾のスクリプトの処理が行われない）
             RpcToAll(nameof(GenerateBomb));
         }
     }
@@ -225,10 +237,15 @@ public class Player : Base
     void GenerateBomb()
     {
         Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
+        // リストに爆弾がない場合は
         if (b == null)
         {
-            ui.ShowGameText("No bomb !!", 1);
-            AudioManager.PlayOneShot("爆弾がない");
+            // 自分だけに処理を行う
+            if (isLocal)
+            {
+                ui.ShowGameText("No bomb !!", 1);
+                AudioManager.PlayOneShot("爆弾がない");
+            }
             return;
         }
         AudioManager.PlayOneShot("爆弾を置く");
@@ -248,10 +265,15 @@ public class Player : Base
             b.Initialize(map);
             bombList.Add(b);
         }
+        // 手持ちの爆弾が最大所持数なら
         else
         {
-            AudioManager.PlayOneShot("爆弾がない");
-            ui.ShowGameText("Full Stack !!", 1);
+            // 自分にだけ処理
+            if (isLocal)
+            {
+                ui.ShowGameText("Full Stack !!", 1);
+                AudioManager.PlayOneShot("爆弾がない");
+            }
         }
     }
 
@@ -261,12 +283,9 @@ public class Player : Base
     /// </summary>
     private void Invincible()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            isInvincible = true;
-        }
         if (isInvincible)
         {
+            // 無敵時間のカウント
             invncebleCount += Time.deltaTime;
 
             if (invncebleCount > invncebleTime)
@@ -286,6 +305,7 @@ public class Player : Base
         m_speed += m_upSpeed;
         m_dashSpeed += m_upSpeed;
     }
+
 
     /// <summary>
     /// 火力をアップさせます
@@ -343,7 +363,7 @@ public class Player : Base
     [StrixRpc]
     private void ShowPlayerName()
     {
-        playerInfoText.text = "PlayerName\n" + gameManager.RoomMenbers[PlayerIndex].GetName() + "\nPlayerIndex\n" + PlayerIndex;
+        playerInfoText.text = "P" + (PlayerIndex + 1) + ":" + PlayerName;
     }
 
 }
