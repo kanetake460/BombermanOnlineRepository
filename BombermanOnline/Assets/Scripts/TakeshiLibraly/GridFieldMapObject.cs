@@ -171,7 +171,7 @@ public class GridFieldMapObject
     /// <summary>
     /// すべての壁オブジェクトのアクティブ管理
     /// </summary>
-    public void ActiveMapWallObjects() => _mapSet.gridField.IterateOverGrid(c => ActiveMapWallObject(c));
+    public void SetActiveMapWallObjects() => _mapSet.gridField.IterateOverGrid(c => ActiveMapWallObject(c));
 
 
     public void AddComponentWallObject<T>(Coord coord) where T : Component

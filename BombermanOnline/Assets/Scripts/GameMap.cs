@@ -33,6 +33,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     private GridFieldMapObject _mapObj;                 // マップオブジェクト管理クラス
 
     public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
+    public List<GridFieldMapSettings.Block> wallBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
     public List<Coord> emptyCoords = new List<Coord>();   // 何もない座標
 
@@ -63,6 +64,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         _mapObj.ChangeAllPlaneTexture(m_planeTexture);
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
+        wallBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == false);
 
         // 4つのスタート地点
         startCoords = new Coord[]
@@ -82,15 +84,15 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             emptyCoords.Add(startCoords[i] + Coord.left);
             emptyCoords.Add(startCoords[i] + Coord.right);
         }
+        emptyCoords.RemoveAll(c => c.x == 0 || c.z == 0 || c.x == mapSet.gridWidth - 1 || c.z == mapSet.gridDepth - 1);
 
         // 何もないマス設定
         stoneBlockList.RemoveAll(b => emptyCoords.Contains(b.coord));                      // 何もないマスはストーンリストから削除
         stoneBlockList.ForEach(b => b.isSpace = false);                                     // 壁にする
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
-
         // アクティブ管理
-        _mapObj.ActiveMapWallObjects();
+        _mapObj.SetActiveMapWallObjects();
 
         // 右上のマップのサイズを調節
         m_mapCamera.orthographicSize = mapSet.gridField.FieldMaxLength / 2;
@@ -119,6 +121,30 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
 
     /// <summary>
+    /// ストーンマスかどうか調べます
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <returns>true:ストーンマス</returns>
+    public bool IsStone(Coord coord) { return stoneBlockList.Find(b => b.coord == coord) != null; }
+
+
+    /// <summary>
+    /// なにもないマスかどうか調べます
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <returns>true:何もないマス</returns>
+    public bool IsEmpty(Coord coord) { return emptyCoords.Contains(coord); }
+
+
+    /// <summary>
+    /// 壁ますかどうか調べます
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <returns>true:壁マス</returns>
+    public bool IsWall(Coord coord) { return wallBlockList.Find(b => b.coord == coord) != null; }
+
+
+    /// <summary>
     /// 指定した座標の石ストーンマスをなくします。
     /// </summary>
     /// <param name="coord">座標</param>
@@ -126,15 +152,18 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [StrixRpc]
     public bool ContinueBreakStone(Coord coord)
     {
+        // 引数の座標にストーンがあるか調べる
         var b = stoneBlockList.Find(b => b.coord == coord);
+        // ストーンなら
         if (b != null)
         {
             b.isSpace = true;
             stoneBlockList.Remove(b);
             emptyCoords.Add(b.coord);
-            _mapObj.ActiveMapWallObjects();
+            _mapObj.SetActiveMapWallObjects();
             return true;
         }
+        // なにもないなら
         if(emptyCoords.Contains(coord)) 
         {
             return true;
@@ -146,7 +175,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     /// 指定した座標の石ストーンマスをなくします。
     /// </summary>
     /// <param name="coord">座標</param>
-    /// <returns>壊せないブロックかどうか（壊せないブロック：false）</returns>
+    /// <returns>false:ストーンマスではない</returns>
     [StrixRpc]
     public bool BreakStone(Coord coord)
     {
@@ -156,13 +185,10 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             b.isSpace = true;
             stoneBlockList.Remove(b);
             emptyCoords.Add(b.coord);
-            _mapObj.ActiveMapWallObjects();
-            return false;
-        }
-        if (emptyCoords.Contains(coord))
-        {
+            _mapObj.SetActiveMapWallObjects();
             return true;
         }
+        Debug.Log("そこはストーンマスじゃない！");
         return false;
     }
 }

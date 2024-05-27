@@ -40,7 +40,7 @@ namespace TakeshiLibrary
                     count++;
                 });
                 m_object.GenerateMapObjects();
-                m_object.ActiveMapWallObjects();
+                m_object.SetActiveMapWallObjects();
             }
 
             if (GUILayout.Button("Clear"))

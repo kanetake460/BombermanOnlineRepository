@@ -95,99 +95,94 @@ public class Bomb : Base
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            // 爆発マスが、Emptyなら
-            if (map.emptyCoords.Contains(exploCoord))
+            // 何もないマス
+            if (map.IsEmpty(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合は、break
-                if (map.ContinueBreakStone(exploCoord) == false)
-                    break;
-
-                // 破壊したのでエフェクト再生
                 PlayExplosionEffect(exploCoord);
+                continue;
             }
-            // ストーンブロックまたは、壁ブロックなら
-            else
+
+            // 壁マス
+            if (map.IsWall(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合、ストーンブロックの場合は、break
-                if (map.BreakStone(exploCoord) == false)
-                {
-                    // 破壊したのでエフェクト再生し、破壊ループ終了
-                    PlayExplosionEffect(exploCoord);
-                    break;
-                }
+                break;
+            }
+
+            // 石マス
+            if (map.IsStone(exploCoord))
+            {
+                map.BreakStone(exploCoord);
+                PlayExplosionEffect(exploCoord);
+                break;
             }
         }
         for (int x = -1; x >= -firepower; x--)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            // 爆発マスが、Emptyなら
-            if (map.emptyCoords.Contains(exploCoord))
+            if(map.IsEmpty(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合は、break
-                if (map.ContinueBreakStone(exploCoord) == false)
-                    break;
-
-                // 破壊したのでエフェクト再生
-                PlayExplosionEffect(exploCoord);
+                PlayExplosionEffect (exploCoord);
+                continue;
             }
-            // ストーンブロックまたは、壁ブロックなら
-            else
+
+            if(map.IsWall(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合、ストーンブロックの場合は、break
-                if (map.BreakStone(exploCoord) == false)
-                {
-                    // 破壊したのでエフェクト再生し、破壊ループ終了
-                    PlayExplosionEffect(exploCoord);
-                    break;
-                }
+                break;
+            }
+
+
+            if(map.IsStone(exploCoord))
+            {
+                map.BreakStone (exploCoord);
+                PlayExplosionEffect(exploCoord);
+                break;
             }
         }
         for (int z = 1; z <= firepower; z++)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
 
-            // 爆発マスが、Emptyなら
-            if (map.emptyCoords.Contains(exploCoord))
+            if (map.IsEmpty(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合は、break
-                if (map.ContinueBreakStone(exploCoord) == false)
-                    break;
-
-                // 破壊したのでエフェクト再生
                 PlayExplosionEffect(exploCoord);
+                continue;
             }
-            // ストーンブロックまたは、壁ブロックなら
-            else
+
+            if (map.IsWall(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合、ストーンブロックの場合は、break
-                if (map.BreakStone(exploCoord) == false)
-                {
-                    // 破壊したのでエフェクト再生し、破壊ループ終了
-                    PlayExplosionEffect(exploCoord);
-                    break;
-                }
+                break;
+            }
+
+
+            if (map.IsStone(exploCoord))
+            {
+                map.BreakStone(exploCoord);
+                PlayExplosionEffect(exploCoord);
+                break;
             }
         }
         for (int z = -1; z >= -firepower; z--)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
 
-            if (map.emptyCoords.Contains(exploCoord) == false)
+            if (map.IsEmpty(exploCoord))
             {
-                // 破壊するマスが、ストーンブロックか調べて破壊する
-                // 壁ブロックの場合は、break
-                if (map.ContinueBreakStone(exploCoord) == false)
-                    break;
-
-                // 破壊したのでエフェクト再生
                 PlayExplosionEffect(exploCoord);
+                continue;
+            }
+
+            if (map.IsWall(exploCoord))
+            {
+                break;
+            }
+
+
+            if (map.IsStone(exploCoord))
+            {
+                map.BreakStone(exploCoord);
+                PlayExplosionEffect(exploCoord);
+                break;
             }
         }
         AudioManager.PlayOneShot("爆発",0.3f);
