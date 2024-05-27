@@ -1,6 +1,7 @@
 using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using TakeshiLibrary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMap : SingletonStrixBehaviour<GameMap>
@@ -38,7 +39,10 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     public List<GridFieldMapSettings.Block> wallBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
     public List<Coord> emptyCoords = new List<Coord>();   // 何もない座標
+    private List<PredictObj> predictObjects = new List<PredictObj>();
 
+    [Header("オブジェクト参照")]
+    [SerializeField] GameObject predictPrefab;
 
     [Header("コンポーネント")]
     [SerializeField] Texture m_wallTexture;     // 壁オブジェクトのテクスチャ
@@ -66,7 +70,17 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         _mapObj.ChangeAllPlaneTexture(m_planeTexture);
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
+        // 壁オブジェクトの場所を壁リストに入れる
         wallBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == false);
+
+        // 爆破予測オブジェクトを生成し、座標を割り当てる、親を設定する
+        _gridField.IterateOverGrid(c => {
+            var predict = _gridField.Instantiate(predictPrefab, c, predictPrefab.transform.rotation).GetComponent<PredictObj>();
+            predict.coord = c;
+            predict.transform.parent = mapSet.transform;
+            predictObjects.Add(predict);
+            });
+
 
         // 4つのスタート地点
         startCoords = new Coord[]
@@ -194,6 +208,17 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         return false;
     }
 
-    public void UndoDefaultColor(Coord coord) { _mapObj.ChangePlaneColor(coord, planeColor); }
+    public void UndoDefaultPlaneColor() { _mapObj.ChangeAllPlaneColor(planeColor); }
     public void ChangePlaneColor(Coord coord,Color color) { _mapObj.ChangePlaneColor(coord, color); }
+
+    public void ActivePredictObject(Coord coord,bool active) 
+    {
+        foreach(var predict in predictObjects)
+        {
+            if(predict.coord == coord)
+            {
+                predict.gameObject.SetActive(active);
+            }
+        }
+    }
 }

@@ -74,18 +74,28 @@ public class Player : Base
 
     [Header("パラメーター")]
     public Vector3 posY;
-
+    
+    // スピード
     [SerializeField] private float m_speed;         // 移動スピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_upSpeed;
+
+    // 体力
     [SerializeField] private float m_life;            // 体力
+    public float m_lifeMaxValue;    // 体力の最大値
+
+    // 爆弾
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
+
+    // 無敵
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
     private bool isInvincible = false;
     private float invncebleCount = 0;
 
-    public float m_lifeMaxValue;    // 体力の最大値
+    // 予測
+    private bool isPredictable = false;
+
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
@@ -156,11 +166,17 @@ public class Player : Base
         fps.PlayerViewport();
         fps.AddForceLocomotion(m_speed, m_dashSpeed);
         fps.ClampMoveRange();
-        Invincible();
+
         //fps.CursorLock();
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
+        
+        // アイテム効果
+        Invincible();
+        Predictive();
+
+        // ゲームオーバー処理
         if (m_life <= 0)
         {
             CallGameOver();
@@ -285,6 +301,10 @@ public class Player : Base
     /// </summary>
     private void Invincible()
     {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            isInvincible = true;
+        }
         if (isInvincible)
         {
             // 無敵時間のカウント
@@ -295,6 +315,16 @@ public class Player : Base
                 isInvincible = false;
                 invncebleCount = 0;
             }
+        }
+    }
+
+
+    private void Predictive()
+    {
+        if (isInvincible)
+        {
+            Debug.Log("予測眼！！");
+            map.UndoDefaultPlaneColor();
         }
     }
 

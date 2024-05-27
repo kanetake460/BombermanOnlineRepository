@@ -109,6 +109,13 @@ public class GridFieldMapObject
     /// <param name="coord">プレーンの座標</param>
     /// <param name="color">色</param>
     public void ChangePlaneColor(Coord coord, Color color) => _mapSet.blocks[coord.x, coord.z].planeRenderer.material.color = color;
+    
+
+    /// <summary>
+    /// すべての壁オブジェクトの色を変えます
+    /// </summary>
+    /// <param name="color">色</param>
+    public void ChangeAllPlaneColor(Color color) => _mapSet.gridField.IterateOverGrid(coord => ChangePlaneColor(coord, color));
 
 
     /// <summary>

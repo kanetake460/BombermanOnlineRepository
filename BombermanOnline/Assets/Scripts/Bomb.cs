@@ -52,7 +52,7 @@ public class Bomb : Base
         if (isHeld == false)
         {
             counter.Count();
-
+            
             PredictionFire();
         }
         if (counter.Point(explosionTime))
@@ -100,7 +100,7 @@ public class Bomb : Base
             Debug.Log("そこはEmpty");
         }
         // 爆弾の位置
-        map.UndoDefaultColor(Coord);
+        map.ActivePredictObject(Coord, false);
         PlayExplosionEffect(Coord);
 
         Coord exploCoord;
@@ -111,7 +111,7 @@ public class Bomb : Base
             // 何もないマス
             if (map.IsEmpty(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -125,7 +125,7 @@ public class Bomb : Base
             // 石マス
             if (map.IsStone(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -137,8 +137,8 @@ public class Bomb : Base
 
             if(map.IsEmpty(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
-                PlayExplosionEffect (exploCoord);
+                map.ActivePredictObject(exploCoord, false);
+                PlayExplosionEffect(exploCoord);
                 continue;
             }
 
@@ -150,7 +150,7 @@ public class Bomb : Base
 
             if(map.IsStone(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 map.BreakStone (exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -162,7 +162,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -175,7 +175,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -187,7 +187,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -200,7 +200,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
-                map.UndoDefaultColor(exploCoord);
+                map.ActivePredictObject(exploCoord, false);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -218,7 +218,7 @@ public class Bomb : Base
     public void PredictionFire()
     {
         // 爆弾の位置
-        map.ChangePlaneColor(Coord,predictionColor);
+        map.ActivePredictObject(Coord,true);
 
         Coord exploCoord;
         for (int x = 1; x <= firepower; x++)
@@ -228,7 +228,7 @@ public class Bomb : Base
             // 何もないマス
             if (map.IsEmpty(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 continue;
             }
 
@@ -241,7 +241,7 @@ public class Bomb : Base
             // 石マス
             if (map.IsStone(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 break;
             }
         }
@@ -251,7 +251,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 continue;
             }
 
@@ -263,7 +263,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 break;
             }
         }
@@ -273,7 +273,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 continue;
             }
 
@@ -285,7 +285,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 break;
             }
         }
@@ -295,7 +295,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 continue;
             }
 
@@ -307,7 +307,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
-                map.ChangePlaneColor(exploCoord, predictionColor);
+                map.ActivePredictObject(exploCoord, true);
                 break;
             }
         }
