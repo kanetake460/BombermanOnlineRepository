@@ -13,7 +13,7 @@ public class Player : Base
     {
         map = GameMap.Instance;
         gameManager = GameManager.Instance;
-        fps ??= new FPS(map.m_mapSet, rb, gameObject, mainCamera);
+        fps ??= new FPS(map.m_mapSet, rb, gameObject, mainCamera.gameObject);
         InitPlayer();
         InitLocalPlayer();
     }
@@ -24,7 +24,6 @@ public class Player : Base
     {
         if (isLocal == false) return;
         PlayerSettings();
-        PutBomb();
     }
 
 
@@ -74,11 +73,14 @@ public class Player : Base
 
     [Header("パラメーター")]
     public Vector3 posY;
-    
+
     // スピード
-    [SerializeField] private float m_speed;         // 移動スピード
+    private float _currSpeed;                       // 現在のスピード
+    private float _currDashSpeed;                   // 現在のダッシュスピード
+    [SerializeField] private float m_speed;         // 普通のスピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
-    [SerializeField] private float m_upSpeed;
+    [SerializeField] private float m_slowSpeed;     // 遅いスピード
+    [SerializeField] private float m_upSpeed;       // 上がるスピード
 
     // 体力
     [SerializeField] private float m_life;            // 体力
@@ -94,6 +96,7 @@ public class Player : Base
     private float invncebleCount = 0;
 
     // 予測
+    [SerializeField] LayerMask predictLandmarkMask;
     private bool isPredictable = false;
 
 
@@ -111,8 +114,8 @@ public class Player : Base
 
 
     [Header("オブジェクト参照")]
-    [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
-    [SerializeField] GameObject mapCamera;          // マップUIのカメラ
+    [SerializeField] Camera mainCamera;         // プレイヤーに追従するカメラ
+    [SerializeField] Camera mapCamera;          // マップUIのカメラ
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
     [SerializeField] GameObject titleCanvas;
@@ -156,6 +159,9 @@ public class Player : Base
 
 
     // ===関数================================================================================
+
+    // ーーーーープレイヤーのシステムーーーーーー
+
     /// <summary>
     /// プレイヤーの設定をします
     /// この関数はUpdate関数で呼び出します
@@ -164,17 +170,21 @@ public class Player : Base
     {
         // カメラ、移動の設定
         fps.PlayerViewport();
-        fps.AddForceLocomotion(m_speed, m_dashSpeed);
+        fps.AddForceLocomotion(_currSpeed, m_dashSpeed);
         fps.ClampMoveRange();
-
         //fps.CursorLock();
+
+        // キー入力によるプレイヤーのアクション
+        PutBomb();
+        PutArtificialStone();
+
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         mapCamera.transform.position = mapCamPos;
         
         // アイテム効果
         Invincible();
-        Predictive();
+        PredictiveEye();
 
         // ゲームオーバー処理
         if (m_life <= 0)
@@ -202,6 +212,8 @@ public class Player : Base
     /// </summary>
     private void InitLocalPlayer()
     {
+        _currSpeed = m_speed;
+        _currDashSpeed = m_dashSpeed;
         if (isLocal)
         {
             if (GetComponent<AudioListener>() == null)
@@ -234,6 +246,7 @@ public class Player : Base
         ui.ShowGameText("P" + (PlayerIndex + 1) + ":" + PlayerName + " is Down", 2);
     }
 
+    // ーーーーープレイヤーアクションーーーーー
 
     /// <summary>
     /// キー入力によって爆弾を置きます
@@ -242,17 +255,18 @@ public class Player : Base
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // RPCで呼び出さないと、他の人のマップには爆発が反映しない（見た目では置かれるが、爆弾のスクリプトの処理が行われない）
-            RpcToAll(nameof(GenerateBomb));
+            CallGenerateBomb();
         }
     }
 
 
     /// <summary>
     /// 爆弾を生成し、置きます。
+    /// RPCで呼び出さないと、他の人のマップには爆発が反映しない（見た目では置かれるが、爆弾のスクリプトの処理が行われない）
     /// </summary>
+    private void CallGenerateBomb() { RpcToAll(nameof(GenerateBomb)); }
     [StrixRpc]
-    void GenerateBomb()
+    private void GenerateBomb()
     {
         Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
         // リストに爆弾がない場合は
@@ -270,6 +284,19 @@ public class Player : Base
         b.Put(Coord, Firepower);
     }
 
+
+    /// <summary>
+    /// キー入力によって人工石ブロックを生成します
+    /// </summary>
+    private void PutArtificialStone()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CallGenerateArtificialStone();
+        }
+    }
+
+    // ーーーーーアイテムの処理ーーーーーー
 
     /// <summary>
     /// 手持ち爆弾の最大値を増やします
@@ -292,39 +319,6 @@ public class Player : Base
                 ui.ShowGameText("Full Stack !!", 1);
                 AudioManager.PlayOneShot("爆弾がない");
             }
-        }
-    }
-
-
-    /// <summary>
-    /// 無敵時の処理
-    /// </summary>
-    private void Invincible()
-    {
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            isInvincible = true;
-        }
-        if (isInvincible)
-        {
-            // 無敵時間のカウント
-            invncebleCount += Time.deltaTime;
-
-            if (invncebleCount > invncebleTime)
-            {
-                isInvincible = false;
-                invncebleCount = 0;
-            }
-        }
-    }
-
-
-    private void Predictive()
-    {
-        if (isInvincible)
-        {
-            Debug.Log("予測眼！！");
-            map.UndoDefaultPlaneColor();
         }
     }
 
@@ -355,6 +349,71 @@ public class Player : Base
         Life += 10;
     }
 
+
+    /// <summary>
+    /// 無敵時の処理
+    /// </summary>
+    private void Invincible()
+    {
+        if (isInvincible)
+        {
+            // 無敵時間のカウント
+            invncebleCount += Time.deltaTime;
+
+            if (invncebleCount > invncebleTime)
+            {
+                isInvincible = false;
+                invncebleCount = 0;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 予測眼の処理
+    /// </summary>
+    private void PredictiveEye()
+    {
+        // 左コントロールキー
+        isPredictable = Input.GetKey(KeyCode.LeftControl);
+
+        if (isPredictable)
+        {
+            _currSpeed = _currDashSpeed = m_slowSpeed;
+            mainCamera.cullingMask |= predictLandmarkMask;
+        }
+        else
+        {
+            _currSpeed = m_speed;
+            _currDashSpeed = m_dashSpeed;
+            mainCamera.cullingMask &= ~predictLandmarkMask;
+        }
+    }
+
+
+    /// <summary>
+    /// プレイヤーの前に石を生成します
+    /// </summary>
+    private void CallGenerateArtificialStone() { RpcToAll(nameof(GenerateArtificialStone)); }
+    [StrixRpc]
+    private void GenerateArtificialStone()
+    {
+        // プレイヤーのひとつ前のマスの座標
+        Coord generateCoord = Coord + FPS.GetVector3FourDirection(Rot.eulerAngles);
+
+        // 何もないマスなら
+        if (map.IsEmpty(generateCoord))
+        {
+            map.GenerateStone(generateCoord);
+            map.SetArtificialStoneTexture(generateCoord);
+        }
+        else
+        {
+            Debug.Log("そこはすでに石がある！！");
+        }
+    }
+
+    // ーーーーーそれぞれのプレイヤーの見たなどーーーーー
 
     /// <summary>
     /// [RPC]プレイヤーの色を設定します。

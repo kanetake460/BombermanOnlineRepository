@@ -1561,7 +1561,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1600,7 +1600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624e60bb385724f4c86551ad3e4f0778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
   playerTransform: {fileID: 1371443068}
 --- !u!114 &1375318130
 MonoBehaviour:
@@ -1614,8 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strixBehaviours:
-  - {fileID: 1375318129}
+  strixBehaviours: []
   objectType: 262149
   sendRate: 5
   syncDestroy: 1

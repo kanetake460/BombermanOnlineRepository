@@ -31,25 +31,26 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
     public GridFieldMapSettings m_mapSet;               // 生成するマップ
     [SerializeField] GridFieldMapSettings[] m_mapSets;  // 各ステージ配列
+    public GridFieldMapObject mapObj;                 // マップオブジェクト管理クラス
+    public GridField gridField;                       // グリッドフィールド
 
-    private GridField _gridField;                       // グリッドフィールド
-    private GridFieldMapObject _mapObj;                 // マップオブジェクト管理クラス
 
     public List<GridFieldMapSettings.Block> stoneBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     public List<GridFieldMapSettings.Block> wallBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
     public List<Coord> emptyCoords = new List<Coord>();   // 何もない座標
-    private List<PredictObj> predictObjects = new List<PredictObj>();
+    private List<PredictLandmark> predictLandmarks = new List<PredictLandmark>();
 
     [Header("オブジェクト参照")]
     [SerializeField] GameObject predictPrefab;
 
     [Header("コンポーネント")]
-    [SerializeField] Texture m_wallTexture;     // 壁オブジェクトのテクスチャ
-    [SerializeField] Texture m_stoneTexture;    // 石オブジェクトのテクスチャ
-    [SerializeField] Texture m_planeTexture;    // 石オブジェクトのテクスチャ
-    [SerializeField] Camera m_mapCamera;        // マップカメラ
-    GameManager gameManager;                    // ゲームマネージャー
+    [SerializeField] Texture m_wallTexture;         // 壁オブジェクトのテクスチャ
+    [SerializeField] Texture m_stoneTexture;        // 石オブジェクトのテクスチャ
+    [SerializeField] Texture m_planeTexture;        // 石オブジェクトのテクスチャ
+    [SerializeField] Texture m_artificialTexture;   // 石オブジェクトのテクスチャ
+    [SerializeField] Camera m_mapCamera;            // マップカメラ
+    GameManager gameManager;                        // ゲームマネージャー
 
     // ===関数====================================================
     /// <summary>
@@ -60,25 +61,25 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     {
         // インスタンスを代入
         gameManager = GameManager.Instance;
-        _gridField = mapSet.gridField;
-        _mapObj = new GridFieldMapObject(mapSet);
+        gridField = mapSet.gridField;
+        mapObj = new GridFieldMapObject(mapSet);
 
         // オブジェクト生成
-        _mapObj.GenerateMapObjects();
+        mapObj.GenerateMapObjects();
         // テクスチャ変更
-        _mapObj.ChangeAllWallTexture(m_wallTexture);
-        _mapObj.ChangeAllPlaneTexture(m_planeTexture);
+        mapObj.ChangeAllWallTexture(m_wallTexture);
+        mapObj.ChangeAllPlaneTexture(m_planeTexture);
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
         // 壁オブジェクトの場所を壁リストに入れる
         wallBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == false);
 
         // 爆破予測オブジェクトを生成し、座標を割り当てる、親を設定する
-        _gridField.IterateOverGrid(c => {
-            var predict = _gridField.Instantiate(predictPrefab, c, predictPrefab.transform.rotation).GetComponent<PredictObj>();
+        gridField.IterateOverGrid(c => {
+            var predict = gridField.Instantiate(predictPrefab, c, predictPrefab.transform.rotation).GetComponent<PredictLandmark>();
             predict.coord = c;
             predict.transform.parent = mapSet.transform;
-            predictObjects.Add(predict);
+            predictLandmarks.Add(predict);
             });
 
 
@@ -108,7 +109,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         stoneBlockList.ForEach(b => b.wallRenderer.material.mainTexture = m_stoneTexture);  // テクスチャ変更
 
         // アクティブ管理
-        _mapObj.SetActiveMapWallObjects();
+        mapObj.SetActiveMapWallObjects();
 
         // 右上のマップのサイズを調節
         m_mapCamera.orthographicSize = mapSet.gridField.FieldMaxLength / 2;
@@ -176,7 +177,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             b.isSpace = true;
             stoneBlockList.Remove(b);
             emptyCoords.Add(b.coord);
-            _mapObj.SetActiveMapWallObjects();
+            mapObj.SetActiveMapWallObjects();
             return true;
         }
         // なにもないなら
@@ -201,23 +202,48 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             b.isSpace = true;
             stoneBlockList.Remove(b);
             emptyCoords.Add(b.coord);
-            _mapObj.SetActiveMapWallObjects();
+            mapObj.SetActiveMapWallObjects();
             return true;
         }
         Debug.Log("そこはストーンマスじゃない！");
         return false;
     }
 
-    public void UndoDefaultPlaneColor() { _mapObj.ChangeAllPlaneColor(planeColor); }
-    public void ChangePlaneColor(Coord coord,Color color) { _mapObj.ChangePlaneColor(coord, color); }
 
-    public void ActivePredictObject(Coord coord,bool active) 
+    /// <summary>
+    /// 石ブロックを生成します
+    /// </summary>
+    /// <param name="coord">生成する座標</param>
+    /// <returns>生成できるかどうか</returns>
+    public void GenerateStone(Coord coord)
     {
-        foreach(var predict in predictObjects)
+        GridFieldMapSettings.Block b = m_mapSet.blocks[coord.x, coord.z];
+        b.isSpace = false;
+        stoneBlockList.Add(b);
+        emptyCoords.Remove(coord);
+        mapObj.SetActiveMapWallObjects();
+    }
+
+
+    /// <summary>
+    /// 人工石のテクスチャに変更します
+    /// </summary>
+    /// <param name="coord">変更するブロックの座標</param>
+    public void SetArtificialStoneTexture(Coord coord)
+    {
+        mapObj.ChangeWallTexture(coord,m_artificialTexture);
+    }
+
+    public void UndoDefaultPlaneColor() { mapObj.ChangeAllPlaneColor(planeColor); }
+    public void ChangePlaneColor(Coord coord,Color color) { mapObj.ChangePlaneColor(coord, color); }
+
+    public void ActivePredictLandmark(Coord coord,bool active) 
+    {
+        foreach(var landmark in predictLandmarks)
         {
-            if(predict.coord == coord)
+            if(landmark.coord == coord)
             {
-                predict.gameObject.SetActive(active);
+                landmark.gameObject.SetActive(active);
             }
         }
     }

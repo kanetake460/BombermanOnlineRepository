@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CameraView : Base
+public class CameraView : MonoBehaviour
 {
     void Start()
     {
         parent = new GameObject("MainCameraPrent");
-        Trafo.parent = parent.transform;
+        transform.parent = parent.transform;
     }
 
     void Update()

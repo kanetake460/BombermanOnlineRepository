@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8553360566290746116}
   - component: {fileID: 5934219534600391535}
   - component: {fileID: 4067478636389694053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4842,7 @@ GameObject:
   - component: {fileID: 8941994276725595267}
   - component: {fileID: 7589842843919494489}
   - component: {fileID: 3042582458347050848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4929,7 +4929,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4947,7 +4947,7 @@ GameObject:
   - component: {fileID: 1692621583495636668}
   - component: {fileID: 2262806030937216651}
   - component: {fileID: 6425523836654524733}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5034,7 +5034,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5050,7 +5050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3707378825425617089}
   - component: {fileID: 3987689650106625424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PredictObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5084,7 +5084,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6352062979304188795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e34793d44877961459727478860cb953, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e6e016b0204b14599447da3df3c884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coord:

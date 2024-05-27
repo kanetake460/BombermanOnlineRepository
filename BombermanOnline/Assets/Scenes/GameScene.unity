@@ -6598,7 +6598,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194230}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
@@ -6646,7 +6645,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6685,28 +6684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624e60bb385724f4c86551ad3e4f0778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
   playerTransform: {fileID: 1383805134}
---- !u!114 &963194230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strixBehaviours:
-  - {fileID: 963194229}
-  objectType: 524290
-  sendRate: 5
-  syncDestroy: 1
-  networkInstanceId: -1
-  InstantiableBy: 1
-  ConnectionClosedBehaviour: 1
 --- !u!1 &967145975
 GameObject:
   m_ObjectHideFlags: 0
@@ -9530,11 +9508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264132174}
   m_CullTransparentMesh: 1
---- !u!1 &1269192926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7038578782652837051, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
-  m_PrefabInstance: {fileID: 2011975274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1269192928 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 958827932528607114, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
@@ -10090,14 +10063,18 @@ MonoBehaviour:
   posY: {x: 0, y: 2, z: 0}
   m_speed: 10
   m_dashSpeed: 20
+  m_slowSpeed: 5
   m_upSpeed: 5
   m_life: 100
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
   m_firepower: 10
   invncebleTime: 5
-  mainCamera: {fileID: 963194225}
-  mapCamera: {fileID: 1269192926}
+  predictLandmarkMask:
+    serializedVersion: 2
+    m_Bits: 128
+  mainCamera: {fileID: 963194227}
+  mapCamera: {fileID: 1269192928}
   bomb: {fileID: 6001974515815307178, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
   playerInfoText: {fileID: 1481765626}
   titleCanvas: {fileID: 291420355}
@@ -15947,6 +15924,10 @@ PrefabInstance:
     - target: {fileID: 958827932528607114, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
       propertyPath: m_RenderingPath
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 958827932528607114, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 2701608393848408847, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
       propertyPath: m_AnchorMax.x
