@@ -34,7 +34,8 @@ public class Player : Base
         {
             if (isLocal == false) return;
             if (isInvincible) return;
-            LifeCount--;
+            Life -= 10f;
+            isInvincible = true;
             AudioManager.PlayOneShot("被ダメージ", 1f);
             ui.ShowDamageEffectUI();
         }
@@ -77,16 +78,17 @@ public class Player : Base
     [SerializeField] private float m_speed;         // 移動スピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_upSpeed;
+    [SerializeField] private float m_life;            // 体力
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
-    [SerializeField] private int m_life;            // 体力
-    [SerializeField] private int m_lifeMaxValue;    // 体力の最大値
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
+    private bool isInvincible = false;
+    private float invncebleCount = 0;
+
+    public float m_lifeMaxValue;    // 体力の最大値
 
     private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
 
-    private bool isInvincible = false;
-    public float invncebleCount = 0;
 
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0); // マップカメラのポジション
@@ -123,7 +125,7 @@ public class Player : Base
     public int BombCount => bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
 
     /// <summary>ライフ数</summary>
-    public int LifeCount
+    public float Life
     {
         get
         {
@@ -320,7 +322,7 @@ public class Player : Base
     /// </summary>
     private void LifeUp()
     {
-        LifeCount++;
+        Life += 10;
     }
 
 
