@@ -15357,6 +15357,7 @@ MonoBehaviour:
   m_singletonSettings:
     m_objectName: GameMap
     m_loadingScene: GameScene
+  planeColor: {r: 1, g: 1, b: 1, a: 0}
   m_mapSet: {fileID: 440364993}
   m_mapSets:
   - {fileID: 440364993}

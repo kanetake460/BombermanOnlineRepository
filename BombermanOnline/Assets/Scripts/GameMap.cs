@@ -26,6 +26,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
 
 
     // ===変数====================================================
+    [SerializeField] Color planeColor;
+
     public GridFieldMapSettings m_mapSet;               // 生成するマップ
     [SerializeField] GridFieldMapSettings[] m_mapSets;  // 各ステージ配列
 
@@ -191,4 +193,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         Debug.Log("そこはストーンマスじゃない！");
         return false;
     }
+
+    public void UndoDefaultColor(Coord coord) { _mapObj.ChangePlaneColor(coord, planeColor); }
+    public void ChangePlaneColor(Coord coord,Color color) { _mapObj.ChangePlaneColor(coord, color); }
 }

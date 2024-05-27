@@ -16,23 +16,12 @@ public class Bomb : Base
     }
 
 
-    private void BombTimer()
-    {
-        if (isHeld == false)
-        {
-            counter.Count();
-        }
-        if (counter.Point(explosionTime))
-        {
-            counter.Reset();
 
-            Fire();
-        }
-    }
 
 
     // ===変数========================================
     [SerializeField] Vector3 putPos;
+    [SerializeField] Color predictionColor;
 
     public bool isHeld = true; // 持たれているかどうか
     public int explosionTime;
@@ -43,11 +32,35 @@ public class Bomb : Base
     private AudioSource _audioSource;
 
     // ===関数====================================================
+    /// <summary>
+    /// 爆弾初期化
+    /// </summary>
+    /// <param name="map"></param>
     public override void Initialize(GameMap map)
     {
         base.Initialize(map);
         _audioSource ??= GetComponent<AudioSource>();
         CallInActive();
+    }
+
+
+    /// <summary>
+    /// 爆発までのタイマー
+    /// </summary>
+    private void BombTimer()
+    {
+        if (isHeld == false)
+        {
+            counter.Count();
+
+            PredictionFire();
+        }
+        if (counter.Point(explosionTime))
+        {
+            counter.Reset();
+
+            Fire();
+        }
     }
 
 
@@ -82,12 +95,12 @@ public class Bomb : Base
     /// </summary>
     public void Fire()
     {
-        Debug.Log(map.emptyCoords.Count);
         if (map.emptyCoords.Contains(Coord))
         {
             Debug.Log("そこはEmpty");
         }
         // 爆弾の位置
+        map.UndoDefaultColor(Coord);
         PlayExplosionEffect(Coord);
 
         Coord exploCoord;
@@ -98,6 +111,7 @@ public class Bomb : Base
             // 何もないマス
             if (map.IsEmpty(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -111,6 +125,7 @@ public class Bomb : Base
             // 石マス
             if (map.IsStone(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -122,6 +137,7 @@ public class Bomb : Base
 
             if(map.IsEmpty(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 PlayExplosionEffect (exploCoord);
                 continue;
             }
@@ -134,6 +150,7 @@ public class Bomb : Base
 
             if(map.IsStone(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 map.BreakStone (exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -145,6 +162,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -157,6 +175,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -168,6 +187,7 @@ public class Bomb : Base
 
             if (map.IsEmpty(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
@@ -180,6 +200,7 @@ public class Bomb : Base
 
             if (map.IsStone(exploCoord))
             {
+                map.UndoDefaultColor(exploCoord);
                 map.BreakStone(exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
@@ -188,6 +209,108 @@ public class Bomb : Base
         AudioManager.PlayOneShot("爆発",0.3f);
         CallInActive();     // 非アクティブ
         isHeld = true;
+    }
+
+
+    /// <summary>
+    /// 爆発が予測されるマスの地面を赤くします
+    /// </summary>
+    public void PredictionFire()
+    {
+        // 爆弾の位置
+        map.ChangePlaneColor(Coord,predictionColor);
+
+        Coord exploCoord;
+        for (int x = 1; x <= firepower; x++)
+        {
+            exploCoord = new Coord(Coord.x + x, Coord.z);
+
+            // 何もないマス
+            if (map.IsEmpty(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                continue;
+            }
+
+            // 壁マス
+            if (map.IsWall(exploCoord))
+            {
+                break;
+            }
+
+            // 石マス
+            if (map.IsStone(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                break;
+            }
+        }
+        for (int x = -1; x >= -firepower; x--)
+        {
+            exploCoord = new Coord(Coord.x + x, Coord.z);
+
+            if (map.IsEmpty(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                continue;
+            }
+
+            if (map.IsWall(exploCoord))
+            {
+                break;
+            }
+
+
+            if (map.IsStone(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                break;
+            }
+        }
+        for (int z = 1; z <= firepower; z++)
+        {
+            exploCoord = new Coord(Coord.x, Coord.z + z);
+
+            if (map.IsEmpty(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                continue;
+            }
+
+            if (map.IsWall(exploCoord))
+            {
+                break;
+            }
+
+
+            if (map.IsStone(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                break;
+            }
+        }
+        for (int z = -1; z >= -firepower; z--)
+        {
+            exploCoord = new Coord(Coord.x, Coord.z + z);
+
+            if (map.IsEmpty(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                continue;
+            }
+
+            if (map.IsWall(exploCoord))
+            {
+                break;
+            }
+
+
+            if (map.IsStone(exploCoord))
+            {
+                map.ChangePlaneColor(exploCoord, predictionColor);
+                break;
+            }
+        }
     }
 
 
