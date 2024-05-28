@@ -15353,6 +15353,7 @@ MonoBehaviour:
   m_wallTexture: {fileID: 2800000, guid: 280c50d6e26aeeb40b69ab7465cdd958, type: 3}
   m_stoneTexture: {fileID: 2800000, guid: 68d54400679c40548a5fa2f197442a02, type: 3}
   m_planeTexture: {fileID: 2800000, guid: b2d9ff8a591c7514fa37843a7a0a5194, type: 3}
+  m_artificialTexture: {fileID: 2800000, guid: 854ddad95b0b31c4bbc651616d4a46d9, type: 3}
   m_mapCamera: {fileID: 1269192928}
 --- !u!114 &1898085065
 MonoBehaviour:
