@@ -74,13 +74,13 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         // 壁オブジェクトの場所を壁リストに入れる
         wallBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == false);
 
-        // 爆破予測オブジェクトを生成し、座標を割り当てる、親を設定する
-        gridField.IterateOverGrid(c => {
-            var predict = gridField.Instantiate(predictPrefab, c, predictPrefab.transform.rotation).GetComponent<PredictLandmark>();
-            predict.coord = c;
-            predict.transform.parent = mapSet.transform;
-            predictLandmarks.Add(predict);
-            });
+        //// 爆破予測オブジェクトを生成し、座標を割り当てる、親を設定する
+        //gridField.IterateOverGrid(c => {
+        //    var predict = gridField.Instantiate(predictPrefab, c, predictPrefab.transform.rotation).GetComponent<PredictLandmark>();
+        //    predict.coord = c;
+        //    predict.transform.parent = mapSet.transform;
+        //    predictLandmarks.Add(predict);
+        //    });
 
 
         // 4つのスタート地点
