@@ -10,7 +10,7 @@ Shader"Custm/NormalOutline"
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-
+        
         Pass // 1
         {
 Cull Front
@@ -86,3 +86,4 @@ fixed4 frag(v2f i) : SV_Target
         }
     }
 }
+

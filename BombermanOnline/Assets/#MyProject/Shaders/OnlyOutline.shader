@@ -31,6 +31,7 @@ Shader"Custm/OnlyOutline"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
             };
 
             half _OutlineWidth;
@@ -45,6 +46,18 @@ Shader"Custm/OnlyOutline"
 
             fixed4 frag(v2f i) : SV_Target
             {
+                // 視線の方向ベクトルを取得
+                float3 viewDir = normalize(_WorldSpaceCameraPos - i.vertex.xyz);
+
+                // 視線の方向と頂点の法線の内積を計算
+                float dotProduct = dot(i.normal, viewDir);
+
+                // 内積が0未満の場合、頂点が視点から隠れているとみなし、フラグメントを破棄する
+                if (dotProduct < 0.0)
+                {
+                    discard;
+                }
+        
                 return _OutlineColor;
             }
                 ENDCG
