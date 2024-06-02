@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b7ec33e47f8b79f4895a565b861c9a95, type: 2}
+  - {fileID: 2100000, guid: e4dcd3f30877a4e40933beb7d376c5b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: TransparentBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d418cb8fb60e0b44b9be104a17295473, type: 2}
+  - {fileID: 2100000, guid: e4dcd3f30877a4e40933beb7d376c5b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 6001974515815307178}
   - {fileID: 4876368351567000322}
-  objectType: 2
+  objectType: 1
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -432,7 +432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50832720508f5d24aab3fc3b34303164, type: 2}
+  - {fileID: 2100000, guid: e4dcd3f30877a4e40933beb7d376c5b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

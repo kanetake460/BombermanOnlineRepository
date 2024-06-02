@@ -65,6 +65,10 @@ Shader"Custm/OnlyOutline"
 
         Pass // 2
         {
+            ZWrite On
+
+            ZTest Always
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
