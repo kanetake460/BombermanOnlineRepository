@@ -1,0 +1,36 @@
+
+
+インプット構造体で使えるメンバ名はUnityのシェーダープリプロセッサが
+特定のデータを自動的にバインドするためのものです。
+struct Input
+{
+    // テクスチャ座標（UV座標）
+    float2 uv_<TextureName>;    // メインテクスチャのUV座標
+    float2 uv_<SubTextureName>; // 詳細テクスチャのUV座標
+    
+    // ワールド空間のデータ
+    float3 worldPos;            // ワールド空間での位置
+    float3 worldRefl;           // ワールド空間での反射ベクトル（主にリフレクションマッピングで使用）
+    float3 worldNormal;         // ワールド空間での法線
+    float3 worldTangent;        // ワールド空間での接線ベクトル
+    float3 worldBinormal;       // ワールド空間での従法線ベクトル
+    
+    // ビュー空間のデータ
+    float3 viewDir;             // ビュー方向ベクトル
+    
+    // スクリーン空間のデータ
+    float4 screenPos;           // スクリーン空間での位置
+    
+    // ライトデータ
+    half3  liteDir;             // ライト方向ベクトル(主にディレク所なるライトに対して)
+
+    // シャドウデータ
+    half4 shadowCoord;          // シャドウマップ用の座標
+
+    // 色データ
+    fixed4 color;               // 頂点カラー
+
+    // そのほかのデータ
+    float ddx;                  // テクスチャ座標のx方向の微分
+    float ddy;                  // テクスチャ座標のy方向の微分
+};

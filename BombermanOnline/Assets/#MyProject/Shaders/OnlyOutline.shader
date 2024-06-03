@@ -12,10 +12,11 @@ Shader"Custm/OnlyOutline"
     {
         Tags { "RenderType"="Transparent"}
         Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite [_ZWrite]
 
         Pass // 1
         {
+            Tags{ "Queue"="GeoMetry-1"}
+            Zwrite On
             Cull Front
             CGPROGRAM
             #pragma vertex vert
@@ -65,10 +66,7 @@ Shader"Custm/OnlyOutline"
 
         Pass // 2
         {
-            ZWrite On
-
-            ZTest Always
-
+            Zwrite On
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
