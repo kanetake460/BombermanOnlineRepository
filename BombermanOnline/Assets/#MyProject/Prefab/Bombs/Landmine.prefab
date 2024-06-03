@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: Landmine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2550365143326764097}
@@ -348,7 +348,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 6001974515815307178}
   - {fileID: 4876368351567000322}
-  objectType: 2
+  objectType: 15
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

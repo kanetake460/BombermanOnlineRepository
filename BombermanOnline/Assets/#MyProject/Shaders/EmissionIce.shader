@@ -18,7 +18,6 @@ LOD 200
         #pragma surface surf Standard alpha:fade
         #pragma target 3.0
 
-#include "UnityCG.cginc"
 #include "TakeshiCG.cginc"
 
 

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: XBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0068091fa12bd5b4981d12f3809bf634, type: 2}
+  - {fileID: 2100000, guid: c608208088ba60144adf7911e6c24ca7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 6001974515815307178}
   - {fileID: 4876368351567000322}
-  objectType: 2
+  objectType: 11
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EmissionIce
-  m_Shader: {fileID: 4800000, guid: 62daf8825f988bc43bd13abb38a844c5, type: 3}
+  m_Name: Custom_SpherePulse
+  m_Shader: {fileID: 4800000, guid: eb906f61c2908f741878e7fe99c02006, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,14 +22,14 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 0afb8f3bdc8855f4e9aadfd7b12ce8a0, type: 3}
+        m_Scale: {x: 1, y: 8.8}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorStrength: 1.5
-    - _LineSpeed: 30
-    - _LineWidth: 4
-    - _LoopDuration: 3
-    m_Colors:
-    - _BaseColor: {r: 0, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.7971698, g: 1, b: 0.9705927, a: 1}
+    - _Power: 0.918
+    - _Radius: 2
+    m_Colors: []
   m_BuildTextureStacks: []

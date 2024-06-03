@@ -15,18 +15,18 @@
 
 
 【強化爆弾】
-	・貫通爆弾
-	・広範囲爆弾
-	・リモート爆弾
-	・変形爆弾
-	・長時間爆弾
-	・地雷弾
-	・斜め爆弾
-	・手榴弾
-	・透明爆弾
-	・ラッシュ爆弾
-	・氷結爆弾
-	・毒爆弾
+	・手榴弾(Grenade)
+	・地雷弾(Landmine)
+	・リモート爆弾(RemoteBomb)
+	・斜め爆弾(XBomb)
+	・長時間爆弾(PersistentBomb)
+	・広範囲爆弾(WideBomb)
+	・変形爆弾(TransformBomb)
+	・貫通爆弾(PenetrationBomb)
+	・透明爆弾(TransparentBomb)
+	・氷結爆弾(IceBomb)
+	・毒爆弾(PoisonBomb)
+	・ラッシュ爆弾(Rush)
 
 
 
