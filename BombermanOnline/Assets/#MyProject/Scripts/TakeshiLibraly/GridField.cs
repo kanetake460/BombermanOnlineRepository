@@ -486,6 +486,7 @@ namespace TakeshiLibrary
         /// 与えたグリッド座標がグリッドの上にいるかどうか調べます
         /// </summary>
         /// <param name="coord">調べたいポジション</pragma>
+        /// <returns>true : グリッドの上</returns>
         public bool CheckOnGridCoord(Coord coord) => IterateOverGrid(c => Coord.Equal(c, coord));
 
 

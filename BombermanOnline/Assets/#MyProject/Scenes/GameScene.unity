@@ -10068,14 +10068,14 @@ MonoBehaviour:
   m_life: 100
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
-  m_firepower: 10
+  m_firepower: 5
   invncebleTime: 5
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
   mainCamera: {fileID: 963194227}
   mapCamera: {fileID: 1269192928}
-  bomb: {fileID: 6001974515815307178, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
+  bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
   playerInfoText: {fileID: 1481765626}
   titleCanvas: {fileID: 291420355}
   ui: {fileID: 1414995915}

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: XBomb
+  m_Name: MegatonBomb
   m_Shader: {fileID: 4800000, guid: ccf961f7555bc904aa57c72a96a9a2a1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -31,16 +31,16 @@ Material:
     m_Floats:
     - _BlockSize: 8
     - _ColorStrength: 12.03
-    - _LineSpeed: -50
-    - _LineWidth: 0.615
+    - _LineSpeed: 200
+    - _LineWidth: 0.3
     - _LoopDuration: 1
     - _MoveSpeedX: 0.1
     - _MoveSpeedY: 0.1
     - _Threshold: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
-    - _LineColor: {r: 1, g: 0.8950032, b: 0, a: 1}
+    - _LineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

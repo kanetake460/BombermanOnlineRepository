@@ -119,12 +119,12 @@ GameObject:
   - component: {fileID: 18761877736598308}
   - component: {fileID: 9169044384253688544}
   - component: {fileID: 4094428007210208929}
-  - component: {fileID: -1375502178225266207}
+  - component: {fileID: -3249076242847269991}
   - component: {fileID: -4227422920176734895}
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: PierceBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0068091fa12bd5b4981d12f3809bf634, type: 2}
+  - {fileID: 2100000, guid: c608208088ba60144adf7911e6c24ca7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,7 +218,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1375502178225266207
+--- !u!114 &-3249076242847269991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2416152949586608248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b913413aae6ab4a409950567a0e16270, type: 3}
+  m_Script: {fileID: 11500000, guid: 044882f97c36c5c48bf31893f06a1f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
-  - {fileID: -1375502178225266207}
+  - {fileID: -3249076242847269991}
   - {fileID: 4876368351567000322}
-  objectType: 2
+  objectType: 11
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

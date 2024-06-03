@@ -64,10 +64,6 @@ public class Player : Base
             AudioManager.PlayOneShot("アイテムゲット");
             other.gameObject.SetActive(false);
         }
-        else
-        {
-            Debug.Log("アイテムじゃない");
-        }
     }
     // ===変数======================================================================================
 
@@ -100,7 +96,7 @@ public class Player : Base
     private bool isPredictable = false;
 
 
-    private List<Bomb> bombList = new();            // 手持ちの爆弾リスト
+    private List<NormalBomb> bombList = new();            // 手持ちの爆弾リスト
 
 
 
@@ -116,7 +112,7 @@ public class Player : Base
     [Header("オブジェクト参照")]
     [SerializeField] Camera mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] Camera mapCamera;          // マップUIのカメラ
-    [SerializeField] Bomb bomb;                     // 生成する爆弾
+    [SerializeField] NormalBomb bomb;                     // 生成する爆弾
     [SerializeField] TextMeshProUGUI playerInfoText;
     [SerializeField] GameObject titleCanvas;
 
@@ -268,7 +264,7 @@ public class Player : Base
     [StrixRpc]
     private void GenerateBomb()
     {
-        Bomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
+        NormalBomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
         // リストに爆弾がない場合は
         if (b == null)
         {
@@ -305,7 +301,7 @@ public class Player : Base
     {
         if (bombList.Count < m_bombMaxValue)
         {
-            Bomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
+            NormalBomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
             b.gameObj.SetActive(false);
             b.Initialize(map);
             bombList.Add(b);
