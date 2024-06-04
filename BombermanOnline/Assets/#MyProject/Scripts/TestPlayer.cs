@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TakeshiLibrary;
 using SoftGear.Strix.Unity.Runtime;
-using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using SoftGear.Strix.Client.Core;
 using System;
 using SoftGear.Strix.Client.Match.Room.Model;
@@ -38,12 +35,7 @@ public class TestPlayer : StrixBehaviour
         // オブジェクト配置
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Instantiate(test, transform.position, Quaternion.identity);
-        }
-        // テストオブジェクトのセットアクティブ
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RpcToAll(nameof(Active));
+            Instantiate(test, transform.position, Quaternion.identity);
         }
 
         // ゲームシーンロード
@@ -57,12 +49,6 @@ public class TestPlayer : StrixBehaviour
 
         conectUI.SetActive(!IsConected);
 
-        RpcToAll(nameof(DecIntValue));
-        RpcToAll(nameof(DecSyncValue));
-        RpcToAll(nameof(PrivateMethod));
-
-        RpcToAll(nameof(ShowValueText));
-
         AudioManager.PlayBGM("タイトルBGM");
     }
 
@@ -73,7 +59,6 @@ public class TestPlayer : StrixBehaviour
     [Header("オブジェクト参照")]
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject test;
-    [SerializeField] GameObject test2;
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject conectUI;
 
@@ -112,7 +97,6 @@ public class TestPlayer : StrixBehaviour
     [StrixRpc]
     private void ShowValueText()
     {
-        //tmp.text = "syncInt:" + syncInt + "\n" + "intValue:" + intValue + "\n" + "private syncInt:" + _syncInt + "\n" + "intValue:" + _intValue;
         tmp.text = "PlayerIndex" + PlayerIndex +"\n" + "UID" + UID;
     }
 
@@ -122,13 +106,6 @@ public class TestPlayer : StrixBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-
-    [StrixRpc]
-    private void Active()
-    {
-        bool active = !test2.activeSelf;
-        test2.SetActive(active);
-    }
 
     private void CallSetMembersColor() => RpcToAll(nameof(SetMembersColor));
     [StrixRpc]

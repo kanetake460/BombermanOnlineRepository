@@ -13,7 +13,7 @@ public class Player : Base
     {
         map = GameMap.Instance;
         gameManager = GameManager.Instance;
-        fps ??= new FPS(map.m_mapSet, rb, gameObject, mainCamera.gameObject);
+        fps ??= new FPS(map.m_mapSet, rb, gameObject, m_mainCamera.gameObject);
         InitPlayer();
         InitLocalPlayer();
     }
@@ -94,9 +94,11 @@ public class Player : Base
     [SerializeField] LayerMask predictLandmarkMask;
     private bool isPredictable = false;
 
-    private List<NormalBomb> bombList = new();            // 手持ちの爆弾リスト
+    private List<NormalBomb> _bombList = new List<NormalBomb>();           // 手持ちの爆弾リスト
+    private List<GameObject> _specialBombList1 = new List<GameObject>();   // 特殊爆弾1
+    private List<GameObject> _specialBombList2 = new List<GameObject>();   // 特殊爆弾2
 
-    private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0); // マップカメラのポジション
+    private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0);         // マップカメラのポジション
 
     private const string ItemBombTag = "Item_Bomb";
     private const string ItemFireTag = "Item_Fire";
@@ -106,12 +108,13 @@ public class Player : Base
 
 
     [Header("オブジェクト参照")]
-    [SerializeField] Camera mainCamera;         // プレイヤーに追従するカメラ
-    [SerializeField] Camera mapCamera;          // マップUIのカメラ
-    [SerializeField] NormalBomb bomb;                     // 生成する爆弾
-    [SerializeField] TextMeshProUGUI playerInfoText;
-    [SerializeField] GameObject titleCanvas;
-
+    [SerializeField] Camera m_mainCamera;         // プレイヤーに追従するカメラ
+    [SerializeField] Camera m_mapCamera;          // マップUIのカメラ
+    [SerializeField] NormalBomb m_bomb;           // 生成する爆弾
+    [SerializeField] GameObject m_specialBomb1;   // 特殊爆弾1
+    [SerializeField] GameObject m_specialBomb2;   // 特殊爆弾2
+    [SerializeField] TextMeshProUGUI m_playerInfoText;
+    [SerializeField] GameObject m_titleCanvas;
 
     [Header("コンポーネント")]
     [SerializeField] UIManager ui;
@@ -124,10 +127,10 @@ public class Player : Base
     public int Firepower => m_firepower;
     
     /// <summary>爆弾所持最大数</summary>
-    public int BombMaxCount => bombList.Count;                  // 手持ちの爆弾最大値
+    public int BombMaxCount => _bombList.Count;                  // 手持ちの爆弾最大値
     
     /// <summary>爆弾所持数</summary>
-    public int BombCount => bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
+    public int BombCount => _bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
 
     /// <summary>ライフ数</summary>
     public float Life
@@ -172,7 +175,7 @@ public class Player : Base
 
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
-        mapCamera.transform.position = mapCamPos;
+        m_mapCamera.transform.position = mapCamPos;
         
         // アイテム効果
         Invincible();
@@ -231,15 +234,13 @@ public class Player : Base
     [StrixRpc]
     private void GameOver()
     {
-        mainCamera.transform.position = Pos = mapCameraPos;
-        mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
+        m_mainCamera.transform.position = Pos = mapCameraPos;
+        m_mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
         gameObj.SetActive(false);
-        mainCamera.GetComponent<CameraView>().enabled = false;
+        m_mainCamera.GetComponent<CameraView>().enabled = false;
         ui.ShowGameText("P" + (PlayerIndex + 1) + ":" + PlayerName + " is Down", 2);
     }
-
     // ーーーーープレイヤーアクションーーーーー
-
     /// <summary>
     /// キー入力によって爆弾を置きます
     /// </summary>
@@ -260,7 +261,7 @@ public class Player : Base
     [StrixRpc]
     private void GenerateBomb()
     {
-        NormalBomb b = bombList.Where(b => b.isHeld).FirstOrDefault();
+        NormalBomb b = _bombList.Where(b => b.isHeld).FirstOrDefault();
         // リストに爆弾がない場合は
         if (b == null)
         {
@@ -295,12 +296,12 @@ public class Player : Base
     /// </summary>
     private void AddBombList()
     {
-        if (bombList.Count < m_bombMaxValue)
+        if (_bombList.Count < m_bombMaxValue)
         {
-            NormalBomb b = Instantiate(bomb, CoordPos, Quaternion.identity);
+            NormalBomb b = Instantiate(m_bomb, CoordPos, Quaternion.identity);
             b.gameObj.SetActive(false);
             b.Initialize(map);
-            bombList.Add(b);
+            _bombList.Add(b);
         }
         // 手持ちの爆弾が最大所持数なら
         else
@@ -372,13 +373,13 @@ public class Player : Base
         if (isPredictable)
         {
             _currSpeed = _currDashSpeed = m_slowSpeed;
-            mainCamera.cullingMask |= predictLandmarkMask;
+            m_mainCamera.cullingMask |= predictLandmarkMask;
         }
         else
         {
             _currSpeed = m_speed;
             _currDashSpeed = m_dashSpeed;
-            mainCamera.cullingMask &= ~predictLandmarkMask;
+            m_mainCamera.cullingMask &= ~predictLandmarkMask;
         }
     }
 
@@ -405,8 +406,14 @@ public class Player : Base
         }
     }
 
+    // ーーーーー特殊爆弾処理ーーーーー
+    
+
+
+
     // ーーーーーそれぞれのプレイヤーの見たなどーーーーー
 
+    
     /// <summary>
     /// [RPC]プレイヤーの色を設定します。
     /// </summary>
@@ -446,7 +453,7 @@ public class Player : Base
     [StrixRpc]
     private void ShowPlayerName()
     {
-        playerInfoText.text = "P" + (PlayerIndex + 1) + ":" + PlayerName;
+        m_playerInfoText.text = "P" + (PlayerIndex + 1) + ":" + PlayerName;
     }
 
 }

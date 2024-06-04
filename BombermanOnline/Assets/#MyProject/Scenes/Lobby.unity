@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
       propertyPath: objectType
-      value: 262148
+      value: 262157
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
       propertyPath: m_Name
@@ -206,7 +206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: objectType
-      value: 262186
+      value: 262160
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: m_Name
@@ -1729,7 +1729,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1375318125}
   test: {fileID: 7750926043821849839, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}
-  test2: {fileID: 0}
   tmp: {fileID: 533272421}
   conectUI: {fileID: 462831233}
   cameraPos: {x: 0, y: 30, z: -16}
@@ -2765,7 +2764,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
       propertyPath: objectType
-      value: 262158
+      value: 262161
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
       propertyPath: m_Name
@@ -2826,7 +2825,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: objectType
-      value: 262169
+      value: 262159
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: m_Name
@@ -3104,7 +3103,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
       propertyPath: objectType
-      value: 262170
+      value: 262146
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
       propertyPath: m_Name
@@ -3166,8 +3165,8 @@ SceneRoots:
   - {fileID: 1612403358}
   - {fileID: 945578713}
   - {fileID: 805096497}
-  - {fileID: 456145312}
   - {fileID: 233062819}
+  - {fileID: 456145312}
   - {fileID: 1660059022}
   - {fileID: 113471642}
   - {fileID: 1655598738}

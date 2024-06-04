@@ -10,7 +10,7 @@ public struct Coord
 {
     [SerializeField] private int m_X;
     [SerializeField] private int m_Z;
-
+    
     public int x
     {
         get => m_X; set => m_X = value;
