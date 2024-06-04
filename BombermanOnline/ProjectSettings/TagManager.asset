@@ -10,6 +10,9 @@ TagManager:
   - Item_Speed
   - Explosion
   - SomeoneCamera
+  - Heal
+  - Poison
+  - Ice
   layers:
   - Default
   - TransparentFX

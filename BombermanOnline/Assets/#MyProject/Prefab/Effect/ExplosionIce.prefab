@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4584071630267515134}
   - component: {fileID: -3440616770046577060}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: ExplosionIce
   m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1371,19 +1371,19 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
+        key0: {r: 0, g: 1, b: 1, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
-        key2: {r: 1, g: 0.58280706, b: 0, a: 0}
-        key3: {r: 1.0485392, g: 0.6313726, b: 0.5686275, a: 0}
-        key4: {r: 1.0019674, g: 0.50980395, b: 0, a: 0}
+        key2: {r: 0, g: 0, b: 1, a: 0}
+        key3: {r: 1, g: 1, b: 1, a: 0}
+        key4: {r: 1.0485392, g: 0.6313726, b: 0.5686275, a: 0}
         key5: {r: 1.0051746, g: 0.9725491, b: 0.95294124, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 14264
         ctime2: 24287
-        ctime3: 31611
-        ctime4: 46646
+        ctime3: 63029
+        ctime4: 31611
         ctime5: 64957
         ctime6: 0
         ctime7: 0
@@ -5041,7 +5041,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: -7081392715024944984}
   - {fileID: -3440616770046577060}
-  objectType: 4
+  objectType: 29
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

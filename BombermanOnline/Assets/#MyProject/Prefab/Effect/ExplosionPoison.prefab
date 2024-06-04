@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 4584071630267515134}
   - component: {fileID: -3440616770046577060}
   m_Layer: 0
-  m_Name: Explosion
-  m_TagString: Explosion
+  m_Name: ExplosionPoison
+  m_TagString: Poison
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 16
@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 831956353777784858}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -60.45121}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,14 +46,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831956353777784858}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -174,7 +174,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -609,7 +609,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 500
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -1371,10 +1371,10 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0}
-        key2: {r: 1, g: 0.58280706, b: 0, a: 0}
-        key3: {r: 1.0485392, g: 0.6313726, b: 0.5686275, a: 0}
+        key0: {r: 0.571486, g: 0, b: 1, a: 1}
+        key1: {r: 0.4173813, g: 0, b: 1, a: 0}
+        key2: {r: 0, g: 0.5849056, b: 0.15135072, a: 0}
+        key3: {r: 0.6423867, g: 0.40784314, b: 0.7490196, a: 0}
         key4: {r: 1.0019674, g: 0.50980395, b: 0, a: 0}
         key5: {r: 1.0051746, g: 0.9725491, b: 0.95294124, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -5041,7 +5041,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: -7081392715024944984}
   - {fileID: -3440616770046577060}
-  objectType: 4
+  objectType: 13
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

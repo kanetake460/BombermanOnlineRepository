@@ -19,7 +19,6 @@ public class Player : Base
     }
 
 
-
     private void Update()
     {
         if (isLocal == false) return;
@@ -95,10 +94,7 @@ public class Player : Base
     [SerializeField] LayerMask predictLandmarkMask;
     private bool isPredictable = false;
 
-
     private List<NormalBomb> bombList = new();            // 手持ちの爆弾リスト
-
-
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0); // マップカメラのポジション
 

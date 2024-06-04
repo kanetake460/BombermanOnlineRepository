@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grenade
-  m_Shader: {fileID: 4800000, guid: b640c275a59fe15479190434f251662d, type: 3}
+  m_Name: HealBomb
+  m_Shader: {fileID: 4800000, guid: 15d535de2a1e1d849a90704cb04a445a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,12 +24,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0afb8f3bdc8855f4e9aadfd7b12ce8a0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MoveSpeedX: 10
-    - _MoveSpeedY: 0
-    m_Colors: []
+    - _BlockSize: 20
+    - _MoveSpeedX: 2
+    - _MoveSpeedY: 1
+    - _Threshold: 1
+    m_Colors:
+    - _Color1: {r: 1, g: 0.16470589, b: 1, a: 1}
+    - _Color2: {r: 0.9694079, g: 1, b: 0.6556604, a: 1}
   m_BuildTextureStacks: []

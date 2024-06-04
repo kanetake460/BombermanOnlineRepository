@@ -119,12 +119,12 @@ GameObject:
   - component: {fileID: 18761877736598308}
   - component: {fileID: 9169044384253688544}
   - component: {fileID: 4094428007210208929}
-  - component: {fileID: 6001974515815307178}
+  - component: {fileID: 7247847052120146054}
   - component: {fileID: -4227422920176734895}
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
   m_Layer: 0
-  m_Name: Grenade
+  m_Name: HealBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22d950a0effd147469db4fd01a7b50e1, type: 2}
+  - {fileID: 2100000, guid: 1198f3facbdfc5544b18c16c4f2515df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,7 +218,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6001974515815307178
+--- !u!114 &7247847052120146054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2416152949586608248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653613805ed41fa4eb145c0d60545158, type: 3}
+  m_Script: {fileID: 11500000, guid: ae37a7bad744a564785df4739371186b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   isHeld: 1
   explosionTime: 5
   firepower: 0
-  m_explosion: {fileID: -7081392715024944984, guid: 187544613e2b53141a9956160c0764ef, type: 3}
+  m_explosion: {fileID: -7081392715024944984, guid: 92f39a851778cb94e97c5b9668ce5c18, type: 3}
 --- !u!82 &-4227422920176734895
 AudioSource:
   m_ObjectHideFlags: 0
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
-  - {fileID: 6001974515815307178}
+  - {fileID: 7247847052120146054}
   - {fileID: 4876368351567000322}
-  objectType: 28
+  objectType: 16
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

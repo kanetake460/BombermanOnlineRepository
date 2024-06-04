@@ -28,13 +28,14 @@ public class BombBase : Base
     {
         base.Initialize(map);
         _audioSource ??= GetComponent<AudioSource>();
-        CallInActive();
     }
 
 
     /// <summary>
     /// 爆発までのタイマー
     /// </summary>
+    /// <param name="countAction">爆発するまでのアクション</param>
+    /// <param name="fireAction">爆発するときのアクション</param>
     protected void BombTimer(Action countAction,Action fireAction)
     {
         if (isHeld == false)
@@ -50,18 +51,6 @@ public class BombBase : Base
             
             fireAction();
         }
-    }
-
-
-    /// <summary>
-    /// 爆弾非アクティブ（RPC）
-    /// </summary>
-    public void CallInActive() { RpcToAll(nameof(InActive)); }
-    [StrixRpc]
-    private void InActive()
-    {
-        Debug.Log("インアクティブ");
-        gameObj.SetActive(false);
     }
 
 
