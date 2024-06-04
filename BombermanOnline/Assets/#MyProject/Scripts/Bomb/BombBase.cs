@@ -17,7 +17,6 @@ public class BombBase : Base
 
     private Timer counter = new Timer();
     private List<Explosion> exploPool = new List<Explosion>();
-    private AudioSource _audioSource;
     
     // ===ä÷êî====================================================
     /// <summary>
@@ -27,7 +26,6 @@ public class BombBase : Base
     public override void Initialize(GameMap map)
     {
         base.Initialize(map);
-        _audioSource ??= GetComponent<AudioSource>();
     }
 
 

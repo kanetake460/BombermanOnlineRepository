@@ -39,6 +39,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     public List<GridFieldMapSettings.Block> wallBlockList = new List<GridFieldMapSettings.Block>();    // 石マスのリスト
     [HideInInspector] public Coord[] startCoords;           // スタート地点の座標
     public List<Coord> emptyCoords = new List<Coord>();   // 何もない座標
+    public List<Coord> frozenCoords = new List<Coord>();    // 凍った床の座標
     private List<PredictLandmark> predictLandmarks = new List<PredictLandmark>();
 
     [Header("オブジェクト参照")]
@@ -47,8 +48,9 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [Header("コンポーネント")]
     [SerializeField] Texture m_wallTexture;         // 壁オブジェクトのテクスチャ
     [SerializeField] Texture m_stoneTexture;        // 石オブジェクトのテクスチャ
-    [SerializeField] Texture m_planeTexture;        // 石オブジェクトのテクスチャ
-    [SerializeField] Texture m_artificialTexture;   // 石オブジェクトのテクスチャ
+    [SerializeField] Texture m_artificialTexture;   // 人工石オブジェクトのテクスチャ
+    [SerializeField] Texture m_planeTexture;        // 床オブジェクトのテクスチャ
+    [SerializeField] Texture m_frozenTexture;       // 凍った床のテクスチャ
     [SerializeField] Camera m_mapCamera;            // マップカメラ
     GameManager gameManager;                        // ゲームマネージャー
 
@@ -233,6 +235,30 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     {
         mapObj.ChangeWallTexture(coord,m_artificialTexture);
     }
+
+
+    /// <summary>
+    /// 指定した座標の床を凍らせたり、溶かします
+    /// </summary>
+    /// <param name="coord">座標</param>
+    /// <param name="frozen">true : 凍る</param>
+    public void SetFrozenFloor(Coord coord,bool frozen)
+    {
+        if (frozen)
+        {
+            frozenCoords.Add(coord);
+            mapObj.ChangePlaneTexture(coord,m_frozenTexture);
+            m_mapSet.blocks[coord.x, coord.z].planeObj.tag = "FrozenFloor";
+        }
+        else 
+        {
+            mapObj.ChangePlaneTexture(coord, m_planeTexture);
+            frozenCoords.Remove(coord);
+            m_mapSet.blocks[coord.x, coord.z].planeObj.tag = "Untagged";
+        }
+    }
+
+
 
     public void UndoDefaultPlaneColor() { mapObj.ChangeAllPlaneColor(planeColor); }
     public void ChangePlaneColor(Coord coord,Color color) { mapObj.ChangePlaneColor(coord, color); }

@@ -3,43 +3,20 @@ using UnityEngine;
 
 // 霧爆弾
 // PoisonBomb・HealBombに使用
-public class GrenadeBomb : BombBase
+public class LandmineBomb : BombBase
 {
     // ===イベント関数================================================
+    private void Update()
+    {
+        if (isLocal == false) return;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (isLocal == false) return;
-        Fire();
-    }
+        if (collision.gameObject.CompareTag("Player"))
+            Fire();
 
-
-    // ===変数====================================================
-    [Header("パラメーター")]
-    [SerializeField] float m_throwSpeed;
-    
-    private Vector3 _throwDirection;
-
-
-    // ===関数====================================================
-    
-    /// <summary>
-    /// 爆弾を投げる処理
-    /// </summary>
-    /// <param name="coord">座標</param>
-    /// <param name="dir">向き</param>
-    private void Throw(Coord coord,Vector3 dir)
-    {
-        Put(coord,1);
-        _throwDirection = dir;
-    }
-
-
-    /// <summary>
-    /// 爆弾が飛んでいく処理
-    /// </summary>
-    private void Fly()
-    {
-        Pos += _throwDirection * m_throwSpeed;
     }
 
 

@@ -15,8 +15,8 @@
 
 
 【強化爆弾】
-	・手榴弾(Grenade)
-	・地雷弾(Landmine)
+	〇手榴弾(Grenade)
+	〇地雷弾(Landmine)
 	・リモート爆弾(RemoteBomb)
 	〇斜め爆弾(XBomb)
 	〇長時間爆弾(PersistentBomb)

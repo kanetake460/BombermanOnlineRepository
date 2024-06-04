@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 18761877736598308}
   - component: {fileID: 9169044384253688544}
   - component: {fileID: 4094428007210208929}
-  - component: {fileID: 6001974515815307178}
+  - component: {fileID: 6268799882381680082}
   - component: {fileID: -4227422920176734895}
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
@@ -218,7 +218,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6001974515815307178
+--- !u!114 &6268799882381680082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2416152949586608248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653613805ed41fa4eb145c0d60545158, type: 3}
+  m_Script: {fileID: 11500000, guid: 134bdd4a3bfc9d5489069092a17db308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
@@ -236,6 +236,7 @@ MonoBehaviour:
   explosionTime: 5
   firepower: 0
   m_explosion: {fileID: -7081392715024944984, guid: 187544613e2b53141a9956160c0764ef, type: 3}
+  m_throwSpeed: 0
 --- !u!82 &-4227422920176734895
 AudioSource:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
-  - {fileID: 6001974515815307178}
+  - {fileID: 6268799882381680082}
   - {fileID: 4876368351567000322}
   objectType: 28
   sendRate: 5
