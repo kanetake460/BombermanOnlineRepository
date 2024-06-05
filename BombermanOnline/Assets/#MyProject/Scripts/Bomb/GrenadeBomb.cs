@@ -27,7 +27,7 @@ public class GrenadeBomb : BombBase
     /// </summary>
     /// <param name="coord">À•W</param>
     /// <param name="dir">Œü‚«</param>
-    private void Throw(Coord coord,Vector3 dir)
+    public void Throw(Coord coord,Vector3 dir)
     {
         Put(coord,1);
         _throwDirection = dir;
