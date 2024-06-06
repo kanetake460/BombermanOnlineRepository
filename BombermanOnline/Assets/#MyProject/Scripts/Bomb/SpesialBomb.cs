@@ -70,7 +70,6 @@ public class SpesialBomb
 
                     bomb.gameObj.SetActive(false);
                     bomb.Initialize(map);
-                    Debug.Log(dir);
                     bomb.Throw(coord, dir);
                     break;
                 }

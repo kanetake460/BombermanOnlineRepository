@@ -23,6 +23,7 @@ public class GrenadeBomb : BombBase
     [SerializeField] float m_throwSpeed;
     
     private Vector3 _throwDirection;
+    private Coord _instanceCoord;
 
 
     // ===関数====================================================
@@ -35,6 +36,7 @@ public class GrenadeBomb : BombBase
     public void Throw(Coord coord,Vector3 dir)
     {
         Put(coord,1);
+        _instanceCoord = coord;
         _throwDirection = dir;
     }
 
@@ -44,7 +46,7 @@ public class GrenadeBomb : BombBase
     /// </summary>
     private void Fly()
     {
-        Pos += _throwDirection * m_throwSpeed * 0.01f;
+        rb.velocity = _throwDirection * m_throwSpeed;
     }
 
 
@@ -53,6 +55,8 @@ public class GrenadeBomb : BombBase
     /// </summary>
     private void Fire()
     {
+        // もし、現在の座標が、投げた座標なら、爆発しない
+        if (_instanceCoord == Coord) return;
         // 爆弾の位置
         map.ActivePredictLandmark(Coord, false);
         PlayExplosionEffect(Coord);
@@ -72,7 +76,6 @@ public class GrenadeBomb : BombBase
     [StrixRpc]
     private void InActive()
     {
-        Debug.Log("インアクティブ");
         gameObj.SetActive(false);
     }
 }

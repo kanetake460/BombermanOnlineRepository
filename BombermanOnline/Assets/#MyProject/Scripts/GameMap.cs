@@ -210,7 +210,6 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
             mapObj.SetActiveMapWallObjects();
             return true;
         }
-        Debug.Log("そこはストーンマスじゃない！");
         return false;
     }
 
