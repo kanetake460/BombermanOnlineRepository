@@ -27,15 +27,6 @@ public class TitleResultManager : StrixBehaviour
         }
 
         finishButton.SetActive(gameManager.IsGameFinish);
-        if (gameManager.IsGameFinish)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            // ゲームシーンロード
-            if (Input.GetKeyDown(KeyCode.Delete))
-            {
-                CallFinishGame();
-            }
-        }
     }
 
 

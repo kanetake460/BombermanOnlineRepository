@@ -16,7 +16,6 @@ public class BombBase : Base
     [SerializeField] private Explosion m_explosion;
 
     private Timer counter = new Timer();
-    private List<Explosion> exploPool = new List<Explosion>();
     
     // ===ä÷êî====================================================
     /// <summary>
@@ -42,7 +41,6 @@ public class BombBase : Base
             counter.Count();
 
             countAction();
-            //PredictionFire();
         }
         if (counter.Point(explosionTime))
         {
