@@ -18,15 +18,15 @@
 	◎手榴弾(Grenade)
 	◎地雷弾(Landmine)
 	・リモート爆弾(RemoteBomb)
-	〇斜め爆弾(XBomb)
+	◎斜め爆弾(XBomb)
 	〇長時間爆弾(PersistentBomb)
-	〇広範囲爆弾(MegatonBomb)
-	・変形爆弾(TransformBomb)
-	〇貫通爆弾(PierceBomb)
-	〇透明爆弾(TransparentBomb)
-	〇氷結爆弾(IceBomb)
+	◎広範囲爆弾(MegatonBomb)
+	◎貫通爆弾(PierceBomb)
+	◎透明爆弾(TransparentBomb)
+	〇〇氷結爆弾(IceBomb)
 	〇毒爆弾(PoisonBomb)
 	〇回復爆弾(HealBomb)
+	
 	・ラッシュ爆弾(Rush)
 
 ＜通常爆弾＞

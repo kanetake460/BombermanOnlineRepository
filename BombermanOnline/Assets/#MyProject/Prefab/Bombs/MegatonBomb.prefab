@@ -233,7 +233,7 @@ MonoBehaviour:
   map: {fileID: 0}
   putPos: {x: 0, y: 5, z: 0}
   isHeld: 1
-  explosionTime: 5
+  explosionTime: 10
   firepower: 0
   m_explosion: {fileID: -7081392715024944984, guid: 187544613e2b53141a9956160c0764ef, type: 3}
 --- !u!82 &-4227422920176734895
