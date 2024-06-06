@@ -2,6 +2,7 @@ using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using TakeshiLibrary;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class GameMap : SingletonStrixBehaviour<GameMap>
@@ -23,6 +24,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         m_mapSet = m_mapSets[index];
         InitializeMap(m_mapSet);
         InitializePosition();
+        Cursor.lockState = CursorLockMode.Locked;
+        gameManager.IsGaming = true;
     }
 
 

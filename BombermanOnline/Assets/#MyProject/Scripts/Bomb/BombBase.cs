@@ -25,6 +25,7 @@ public class BombBase : Base
     /// <param name="map"></param>
     public override void Initialize(GameMap map)
     {
+        gameManager = GameManager.Instance;
         base.Initialize(map);
     }
 
@@ -74,13 +75,8 @@ public class BombBase : Base
     protected void PlayExplosionEffect(Coord exploCoord)
     {
         // プールから爆発中じゃないモノを探し出す
-        Explosion explo = exploPool.Find(e => e.IsExplosion == false);
-        if (explo == null)
-        {
-            // ないなら、生成し、プールに追加
-            explo = map.m_mapSet.gridField.Instantiate(m_explosion, exploCoord, Quaternion.identity) as Explosion;
-            exploPool.Add(explo);
-        }
+        Explosion explo = gameManager.exploPool.Get(e => e.IsExplosion == false,() => Instantiate(m_explosion));
+
         // 爆発を初期化
         explo.Initialize(map, exploCoord);
     }

@@ -44,7 +44,7 @@ public class Player : Base
             switch (other.tag)
             {
                 case ItemBombTag:
-                    AddBombList();
+                    AddBombPool();
                     break;
 
                 case ItemFireTag:
@@ -94,9 +94,12 @@ public class Player : Base
     [SerializeField] LayerMask predictLandmarkMask;
     private bool isPredictable = false;
 
-    private List<NormalBomb> _bombList = new List<NormalBomb>();           // 手持ちの爆弾リスト
+    private Pool<NormalBomb> _bombPool = new Pool<NormalBomb>();
     private List<GameObject> _specialBombList1 = new List<GameObject>();   // 特殊爆弾1
     private List<GameObject> _specialBombList2 = new List<GameObject>();   // 特殊爆弾2
+
+    [SerializeField]private SpesialBomb.BombType bombType1;
+    private SpesialBomb.BombType bombType2;
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0);         // マップカメラのポジション
 
@@ -111,8 +114,8 @@ public class Player : Base
     [SerializeField] Camera m_mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] Camera m_mapCamera;          // マップUIのカメラ
     [SerializeField] NormalBomb m_bomb;           // 生成する爆弾
-    [SerializeField] GameObject m_specialBomb1;   // 特殊爆弾1
-    [SerializeField] GameObject m_specialBomb2;   // 特殊爆弾2
+    [SerializeField] SpesialBomb m_specialBomb1;   // 特殊爆弾1
+    [SerializeField] SpesialBomb m_specialBomb2;   // 特殊爆弾2
     [SerializeField] TextMeshProUGUI m_playerInfoText;
     [SerializeField] GameObject m_titleCanvas;
 
@@ -127,10 +130,10 @@ public class Player : Base
     public int Firepower => m_firepower;
     
     /// <summary>爆弾所持最大数</summary>
-    public int BombMaxCount => _bombList.Count;                  // 手持ちの爆弾最大値
+    public int BombMaxCount => _bombPool.Count;                  // 手持ちの爆弾最大値
     
     /// <summary>爆弾所持数</summary>
-    public int BombCount => _bombList.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
+    public int BombCount => _bombPool.list.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
 
     /// <summary>ライフ数</summary>
     public float Life
@@ -163,6 +166,7 @@ public class Player : Base
     /// </summary>
     private void PlayerSettings()
     {
+        if (gameManager.IsGaming == false) return;
         // カメラ、移動の設定
         fps.PlayerViewport();
         fps.AddForceLocomotion(_currSpeed, m_dashSpeed);
@@ -171,6 +175,7 @@ public class Player : Base
 
         // キー入力によるプレイヤーのアクション
         PutBomb();
+        PutSpesialBomb();
         PutArtificialStone();
 
         // マップカメラのポジション設定
@@ -195,7 +200,9 @@ public class Player : Base
     /// </summary>
     private void InitPlayer()
     {
-        AddBombList();
+        _currSpeed = m_speed;
+        _currDashSpeed = m_dashSpeed;
+        AddBombPool();
         CallSetMembersColor();
         CallShowPlayerName();
     }
@@ -207,23 +214,7 @@ public class Player : Base
     /// </summary>
     private void InitLocalPlayer()
     {
-        _currSpeed = m_speed;
-        _currDashSpeed = m_dashSpeed;
-        if (isLocal)
-        {
-            if (GetComponent<AudioListener>() == null)
-            {
-                gameObj.AddComponent<AudioListener>();
-            }
-        }
-        else
-        {
-            AudioListener listener = GetComponent<AudioListener>();
-            if (listener != null)
-            {
-                Destroy(listener);
-            }
-        }
+
     }
 
 
@@ -261,8 +252,9 @@ public class Player : Base
     [StrixRpc]
     private void GenerateBomb()
     {
-        NormalBomb b = _bombList.Where(b => b.isHeld).FirstOrDefault();
-        // リストに爆弾がない場合は
+        //// リストに爆弾がない場合は
+        var b = _bombPool.Take(b => b.isHeld);
+
         if (b == null)
         {
             // 自分だけに処理を行う
@@ -273,6 +265,7 @@ public class Player : Base
             }
             return;
         }
+
         AudioManager.PlayOneShot("爆弾を置く");
         b.Put(Coord, Firepower);
     }
@@ -289,19 +282,27 @@ public class Player : Base
         }
     }
 
+    private void PutSpesialBomb()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            m_specialBomb1.Put(bombType1,map,Trafo,m_firepower);
+        }
+    }
+
     // ーーーーーアイテムの処理ーーーーーー
 
     /// <summary>
     /// 手持ち爆弾の最大値を増やします
     /// </summary>
-    private void AddBombList()
+    private void AddBombPool()
     {
-        if (_bombList.Count < m_bombMaxValue)
+        if (_bombPool.Count < m_bombMaxValue)
         {
             NormalBomb b = Instantiate(m_bomb, CoordPos, Quaternion.identity);
             b.gameObj.SetActive(false);
             b.Initialize(map);
-            _bombList.Add(b);
+            _bombPool.Add(b);
         }
         // 手持ちの爆弾が最大所持数なら
         else
@@ -392,7 +393,7 @@ public class Player : Base
     private void GenerateArtificialStone()
     {
         // プレイヤーのひとつ前のマスの座標
-        Coord generateCoord = Coord + FPS.GetVector3FourDirection(Rot.eulerAngles);
+        Coord generateCoord = Coord + FPS.GetCoordFourDirection(Rot.eulerAngles);
 
         // 何もないマスなら
         if (map.IsEmpty(generateCoord))

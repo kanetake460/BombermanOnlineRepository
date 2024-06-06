@@ -6599,6 +6599,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6685,6 +6686,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1383805134}
+--- !u!81 &963194230
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
 --- !u!1 &967145975
 GameObject:
   m_ObjectHideFlags: 0
@@ -10073,11 +10082,44 @@ MonoBehaviour:
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
-  mainCamera: {fileID: 963194227}
-  mapCamera: {fileID: 1269192928}
-  bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
-  playerInfoText: {fileID: 1481765626}
-  titleCanvas: {fileID: 291420355}
+  bombType1: 0
+  m_mainCamera: {fileID: 963194227}
+  m_mapCamera: {fileID: 1269192928}
+  m_bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
+  m_specialBomb1:
+    m_poolParent: {fileID: 1383805134}
+    m_spesialBombMaxCount: 0
+    m_bombMaxValue: 1
+    m_MegatonExploLevel: 2
+    grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+    landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
+    RemoteBomb: {fileID: 0}
+    crossBomb: {fileID: 0}
+    persistentBomb: {fileID: -1375502178225266207, guid: 181b74ef1a111254f98b26c10df2d3f4, type: 3}
+    megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
+    pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
+    transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
+    iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
+    poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
+    healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
+  m_specialBomb2:
+    m_poolParent: {fileID: 0}
+    m_spesialBombMaxCount: 0
+    m_bombMaxValue: 0
+    m_MegatonExploLevel: 0
+    grenadeBomb: {fileID: 0}
+    landmineBomb: {fileID: 0}
+    RemoteBomb: {fileID: 0}
+    crossBomb: {fileID: 0}
+    persistentBomb: {fileID: 0}
+    megatonBomb: {fileID: 0}
+    pierceBomb: {fileID: 0}
+    transparentBomb: {fileID: 0}
+    iceBomb: {fileID: 0}
+    poisonBomb: {fileID: 0}
+    healBomb: {fileID: 0}
+  m_playerInfoText: {fileID: 1481765626}
+  m_titleCanvas: {fileID: 291420355}
   ui: {fileID: 1414995915}
 --- !u!54 &1383805136
 Rigidbody:
@@ -10466,7 +10508,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 64
     m_gameMap: {fileID: 1898085064}
-  exploList: []
 --- !u!4 &1414995912
 Transform:
   m_ObjectHideFlags: 0
@@ -15349,11 +15390,13 @@ MonoBehaviour:
   - {fileID: 2060330926}
   startCoords: []
   emptyCoords: []
+  frozenCoords: []
   predictPrefab: {fileID: 6352062979304188795, guid: 01535d059a88b1b47b3d527507a7a337, type: 3}
   m_wallTexture: {fileID: 2800000, guid: 280c50d6e26aeeb40b69ab7465cdd958, type: 3}
   m_stoneTexture: {fileID: 2800000, guid: a51a0abef9d5982438981013812071a5, type: 3}
-  m_planeTexture: {fileID: 2800000, guid: b2d9ff8a591c7514fa37843a7a0a5194, type: 3}
   m_artificialTexture: {fileID: 2800000, guid: 854ddad95b0b31c4bbc651616d4a46d9, type: 3}
+  m_planeTexture: {fileID: 2800000, guid: b2d9ff8a591c7514fa37843a7a0a5194, type: 3}
+  m_frozenTexture: {fileID: 0}
   m_mapCamera: {fileID: 1269192928}
 --- !u!114 &1898085065
 MonoBehaviour:

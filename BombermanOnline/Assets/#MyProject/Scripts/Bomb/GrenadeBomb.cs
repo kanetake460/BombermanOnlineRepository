@@ -6,12 +6,17 @@ using UnityEngine;
 public class GrenadeBomb : BombBase
 {
     // ===イベント関数================================================
-    private void OnCollisionEnter(Collision collision)
+
+    private void Update()
+    {
+        Fly();
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if (isLocal == false) return;
         Fire();
     }
-
 
     // ===変数====================================================
     [Header("パラメーター")]
@@ -39,7 +44,7 @@ public class GrenadeBomb : BombBase
     /// </summary>
     private void Fly()
     {
-        Pos += _throwDirection * m_throwSpeed;
+        Pos += _throwDirection * m_throwSpeed * 0.01f;
     }
 
 

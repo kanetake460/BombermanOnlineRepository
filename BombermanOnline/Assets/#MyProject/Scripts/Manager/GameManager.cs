@@ -5,7 +5,6 @@ using System.Linq;
 using System.Collections.Generic;
 using SoftGear.Strix.Unity.Runtime;
 using SoftGear.Strix.Client.Match.Room.Model;
-using UnityEngine.SceneManagement;
 using UnityEditor;
 
 public class GameManager : SingletonStrixBehaviour<GameManager>
@@ -25,13 +24,12 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
 
     }
 
-
-
     // ===変数====================================================
     public ItemManager itemManager;
 
-    public List<Explosion> exploList = new List<Explosion>();
-
+    public Pool<Explosion> exploPool = new Pool<Explosion>();
+    
+    
     // ===プロパティ=================================================
     /// <summary>ルームメンバーリスト</summary>
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
@@ -47,6 +45,8 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     }
 
     public bool IsGameFinish => PlayerList.Count <= 1;
+    
+    public bool IsGaming { get;set; } = false;
 
     // ===関数====================================================
 

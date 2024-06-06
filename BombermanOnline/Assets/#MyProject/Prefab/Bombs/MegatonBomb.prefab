@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 18761877736598308}
   - component: {fileID: 9169044384253688544}
   - component: {fileID: 4094428007210208929}
-  - component: {fileID: -3249076242847269991}
+  - component: {fileID: 6497990751618578599}
   - component: {fileID: -4227422920176734895}
   - component: {fileID: 105799587945549751}
   - component: {fileID: 4876368351567000322}
@@ -140,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2550365143326764097}
@@ -218,7 +218,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3249076242847269991
+--- !u!114 &6497990751618578599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,11 +227,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2416152949586608248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044882f97c36c5c48bf31893f06a1f45, type: 3}
+  m_Script: {fileID: 11500000, guid: 9040eec279f376046a377550f7ed3850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  putPos: {x: 0, y: 2.5, z: 0}
+  putPos: {x: 0, y: 5, z: 0}
   isHeld: 1
   explosionTime: 5
   firepower: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
-  - {fileID: -3249076242847269991}
+  - {fileID: 6497990751618578599}
   - {fileID: 4876368351567000322}
   objectType: 14
   sendRate: 5

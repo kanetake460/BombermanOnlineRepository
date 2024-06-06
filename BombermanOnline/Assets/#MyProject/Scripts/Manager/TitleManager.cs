@@ -1,6 +1,7 @@
 using SoftGear.Strix.Unity.Runtime;
 using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +29,7 @@ public class TitleResultManager : StrixBehaviour
         finishButton.SetActive(gameManager.IsGameFinish);
         if (gameManager.IsGameFinish)
         {
+            Cursor.lockState = CursorLockMode.None;
             // ゲームシーンロード
             if (Input.GetKeyDown(KeyCode.Delete))
             {

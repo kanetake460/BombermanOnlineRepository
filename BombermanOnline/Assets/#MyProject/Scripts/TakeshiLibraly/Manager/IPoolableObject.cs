@@ -1,5 +1,6 @@
-public interface IPoolableObject
+using System;
+
+public interface IPoolableObject<T>
 {
-    void OnObjectSpawn();
-    void OnObjectDespawn();
+    T Get(Func<T, bool> isTakeble, Func<T> generator);
 }
