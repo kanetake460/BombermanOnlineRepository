@@ -10082,7 +10082,7 @@ MonoBehaviour:
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
-  bombType1: 0
+  bombType1: 1
   m_mainCamera: {fileID: 963194227}
   m_mapCamera: {fileID: 1269192928}
   m_bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}

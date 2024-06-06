@@ -28,7 +28,7 @@ public class Player : Base
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == ExplosionTag)
+        if (other.gameObject.CompareTag(ExplosionTag))
         {
             if (isLocal == false) return;
             if (isInvincible) return;

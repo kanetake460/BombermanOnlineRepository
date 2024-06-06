@@ -8,15 +8,28 @@ public class LandmineBomb : BombBase
     // ===イベント関数================================================
     private void Update()
     {
-        if (isLocal == false) return;
+        _safeCount--;
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerStay(Collider other)
     {
         if (isLocal == false) return;
-        if (collision.gameObject.CompareTag("Player"))
-            Fire();
 
+        if (other.gameObject.CompareTag("Player") ||
+            other.gameObject.CompareTag("Explosion"))
+            Fire();
+    }
+
+    // ===変数====================================================
+    private int _safeCount = 0;
+    [SerializeField] int m_safeMaxCount = 120;
+
+    // ===関数====================================================
+    public void Put(Coord coord,int exploLevel)
+    {
+        base.Put(coord,exploLevel);
+        _safeCount = m_safeMaxCount;
     }
 
 
@@ -25,6 +38,8 @@ public class LandmineBomb : BombBase
     /// </summary>
     private void Fire()
     {
+        // もし、爆発しないカウントが0より大きいなら爆発しない
+        if (_safeCount > 0) return;
         // 爆弾の位置
         map.ActivePredictLandmark(Coord, false);
         PlayExplosionEffect(Coord);
