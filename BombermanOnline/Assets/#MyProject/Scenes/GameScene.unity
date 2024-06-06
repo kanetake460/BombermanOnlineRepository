@@ -10082,7 +10082,7 @@ MonoBehaviour:
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
-  bombType1: 1
+  bombType1: 3
   m_mainCamera: {fileID: 963194227}
   m_mapCamera: {fileID: 1269192928}
   m_bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
@@ -10094,7 +10094,7 @@ MonoBehaviour:
     grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
     landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
     RemoteBomb: {fileID: 0}
-    crossBomb: {fileID: 0}
+    crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
     persistentBomb: {fileID: -1375502178225266207, guid: 181b74ef1a111254f98b26c10df2d3f4, type: 3}
     megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
     pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
