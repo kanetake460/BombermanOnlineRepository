@@ -49,7 +49,7 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     public bool IsGaming { get;set; } = false;
 
     // ===ŠÖ”====================================================
-
+    public void GameStart() => IsGaming = true;
 }
 
 

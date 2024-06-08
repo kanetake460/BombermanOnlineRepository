@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CanvasBook : StrixBehaviour
 {
+    [SerializeField] Canvas _canvas;
     [SerializeField] GameObject[] page;
     private int _currentPage = 0;
 
@@ -34,4 +35,7 @@ public class CanvasBook : StrixBehaviour
         }
         page[_currentPage].SetActive(true);
     }
+
+    public void Close() { _canvas.gameObject.SetActive(false); }
+    public void Open() { _canvas.gameObject.SetActive(true); }
 }

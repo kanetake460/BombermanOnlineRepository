@@ -6,40 +6,59 @@ using UnityEngine.EventSystems;
 
 public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public int id;
-    private Vector3 firstPos;
+    private Vector3 _firstPos;
     private RectTransform _rectTransform;
     private Canvas _canvas;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
-        firstPos = _rectTransform.localPosition;
+        _firstPos = _rectTransform.localPosition;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+
+    /// <summary>
+    /// つかんだ瞬間の処理（イベント関数）
+    /// </summary>
+    /// <param name="eventData"></param>
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
-        // つかんだ瞬間の処理
-        AudioManager.PlayOneShot("爆弾がない");
-
     }
 
-    public void OnDrag(PointerEventData eventData)
+
+    /// <summary>
+    /// つかんでいる間の処理（イベント関数）
+    /// </summary>
+    public virtual void OnDrag(PointerEventData eventData)
     {
         if (_canvas == null) return;
         _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+
+    /// <summary>
+    /// はなした瞬間の処理
+    /// </summary>
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
-        AudioManager.PlayOneShot("爆弾を置く");
-        ResetPosition();
     }
 
+
+    /// <summary>
+    /// UIの位置を最初に戻す
+    /// </summary>
     public void ResetPosition()
     {
-        _rectTransform.localPosition = firstPos;
+        _rectTransform.localPosition = _firstPos;
     }
 
+
+    /// <summary>
+    /// リープ関数でポジションを戻します（Update）
+    /// </summary>
+    public void LeapResetPosition(float speed)
+    {
+        _rectTransform.localPosition = Vector3.Lerp(_rectTransform.localPosition,_firstPos,Time.deltaTime * speed);
+    }
 }

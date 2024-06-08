@@ -95,11 +95,6 @@ public class Player : Base
     private bool isPredictable = false;
 
     private Pool<NormalBomb> _bombPool = new Pool<NormalBomb>();
-    private List<GameObject> _specialBombList1 = new List<GameObject>();   // 特殊爆弾1
-    private List<GameObject> _specialBombList2 = new List<GameObject>();   // 特殊爆弾2
-
-    [SerializeField]private SpesialBomb.BombType bombType1;
-    private SpesialBomb.BombType bombType2;
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0);         // マップカメラのポジション
 
@@ -154,6 +149,7 @@ public class Player : Base
             m_life = value;
         }
     }
+
 
 
     // ===関数================================================================================
@@ -286,7 +282,7 @@ public class Player : Base
     {
         if(Input.GetMouseButtonDown(0))
         {
-            m_specialBomb1.Put(bombType1,map,Trafo,m_firepower);
+            m_specialBomb1.Put(map,Trafo,m_firepower);
         }
     }
 
@@ -408,8 +404,37 @@ public class Player : Base
     }
 
     // ーーーーー特殊爆弾処理ーーーーー
-    
+    public void SetSpesialBombType(int slot,SpesialBomb.BombType type)
+    {
+        if (slot == 0)
+        {
+            m_specialBomb1.SetBombType(type);
+        }
+        else if(slot == 1) 
+        {
+            m_specialBomb2.SetBombType(type);
+        }
+        else
+        {
+            Debug.Log("スロットがない！");
+        }
+    }
 
+    public void AddSpesialBombType(int slot)
+    {
+        if (slot == 0)
+        {
+            m_specialBomb1.Add(map);
+        }
+        else if (slot == 1)
+        {
+            m_specialBomb2.Add(map);
+        }
+        else
+        {
+            Debug.Log("スロットがない！");
+        }
+    }
 
 
     // ーーーーーそれぞれのプレイヤーの見たなどーーーーー

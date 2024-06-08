@@ -20,17 +20,36 @@ public class Pool<T> : IPoolableObject<T> where T : class
     /// <param name="isTakeble">条件</param>
     /// <param name="generator">生成メソッド</param>
     /// <returns>取り出したもの</returns>
-    public T Get(Func<T,bool> isTakeble,Func<T> generator)
+    public T Get(Func<T, bool> isTakeble, Func<T> generator)
     {
-        T t = list.Where(t => isTakeble(t)).FirstOrDefault();
+        // Nullチェック
+        if (isTakeble == null)
+        {
+            Debug.LogError("isTakeble function is null!");
+            return default;
+        }
 
-        if(t == null)
+        if (generator == null)
+        {
+            Debug.LogError("generator function is null!");
+            return default;
+        }
+
+        if(list == null)
+        {
+            Debug.LogError("List function is null!");
+            return default;
+        }
+
+        T t = list.Where(t => isTakeble(t)).FirstOrDefault();
+        if (t == null)
         {
             t = generator();
-            Add(t);
+            list.Add(t);
         }
         return t;
     }
+
 
 
     /// <summary>

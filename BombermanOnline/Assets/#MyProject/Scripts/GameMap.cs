@@ -24,8 +24,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         m_mapSet = m_mapSets[index];
         InitializeMap(m_mapSet);
         InitializePosition();
-        Cursor.lockState = CursorLockMode.Locked;
-        gameManager.IsGaming = true;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
 

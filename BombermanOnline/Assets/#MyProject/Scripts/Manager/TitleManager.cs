@@ -63,7 +63,6 @@ public class TitleResultManager : StrixBehaviour
     private void SelectStage(int index)
     {
         GameMap.Instance.CallCreateMap(index);
-        titleCanvas.SetActive(false);
         player.transform.position += player.posY;
     }
 
