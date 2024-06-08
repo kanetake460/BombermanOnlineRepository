@@ -1,36 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 245893209, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
-  m_Name: StrixReplicatorSettings
-  m_EditorClassIdentifier: 
-  replicators:
-  - {fileID: 105799587945549751, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
-  - {fileID: 105799587945549751, guid: 5ec652ec955784645be4831301ceb538, type: 3}
-  - {fileID: 105799587945549751, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
-  - {fileID: 105799587945549751, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
-  - {fileID: 105799587945549751, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
-  - {fileID: 105799587945549751, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
-  - {fileID: 105799587945549751, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
-  - {fileID: 105799587945549751, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
-  - {fileID: 105799587945549751, guid: 181b74ef1a111254f98b26c10df2d3f4, type: 3}
-  - {fileID: 105799587945549751, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
-  - {fileID: 105799587945549751, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
-  - {fileID: 105799587945549751, guid: f12e334f5962425429284b00b691a956, type: 3}
-  - {fileID: 4584071630267515134, guid: 187544613e2b53141a9956160c0764ef, type: 3}
-  - {fileID: 4584071630267515134, guid: 4ec1f3835b6192d4aa1d456c02f84f47, type: 3}
-  - {fileID: 4584071630267515134, guid: 45250ec9d96e0924c89544cb7f23567c, type: 3}
-  - {fileID: 4584071630267515134, guid: 92f39a851778cb94e97c5b9668ce5c18, type: 3}
-  - {fileID: -1898743265024079889, guid: d9d8412b61d544a4790a7e4684b77e5b, type: 3}
-  - {fileID: -8656837125456601451, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}
-  - {fileID: 6989643454711548087, guid: e262d69456ee2874f8c323e2e47a3377, type: 3}
-  - {fileID: 122930017630390667, guid: c6124439098284949904631a6042a76e, type: 3}
-  - {fileID: -3733433741876581984, guid: a03530478dee1264496b5d31310e7c23, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:93771701e0a0cfb006c7d3f6d8f8a555dfbf59dabe4868770cbf541ecc5bdd92
+size 2161
