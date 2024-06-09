@@ -966,11 +966,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2097050130}
-  - {fileID: 1768082213}
-  - {fileID: 1335250717}
   - {fileID: 2128741503}
   - {fileID: 2091627335}
+  - {fileID: 1768082213}
+  - {fileID: 1335250717}
+  - {fileID: 2097050130}
   m_Father: {fileID: 291420359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2190,7 +2190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &240791179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3080,6 +3080,7 @@ GameObject:
   - component: {fileID: 317235283}
   - component: {fileID: 317235282}
   - component: {fileID: 317235281}
+  - component: {fileID: 317235284}
   m_Layer: 5
   m_Name: PierceBomb
   m_TagString: Untagged
@@ -3139,7 +3140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a27061578fe9e6447b45e33674170246, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c605a3dcb5b14b4298f3dfbb5d77f3c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3157,6 +3158,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317235279}
   m_CullTransparentMesh: 1
+--- !u!225 &317235284
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317235279}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &331353896
 GameObject:
   m_ObjectHideFlags: 0
@@ -4104,6 +4117,7 @@ GameObject:
   - component: {fileID: 446692538}
   - component: {fileID: 446692537}
   - component: {fileID: 446692536}
+  - component: {fileID: 446692539}
   m_Layer: 5
   m_Name: PoisonBomb
   m_TagString: Untagged
@@ -4163,7 +4177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b67d4bba9f76e50458e05925561ee9ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f827a3e8a14ec14daa0a41d93ff84e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4181,6 +4195,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446692534}
   m_CullTransparentMesh: 1
+--- !u!225 &446692539
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446692534}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &476323470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4911,6 +4937,7 @@ GameObject:
   - component: {fileID: 668732014}
   - component: {fileID: 668732013}
   - component: {fileID: 668732012}
+  - component: {fileID: 668732015}
   m_Layer: 5
   m_Name: HealBomb
   m_TagString: Untagged
@@ -4970,7 +4997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7efa4bba485ee2b478c321f99469e87e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8b2f0498272a644f8ba5d7845b25b55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4988,6 +5015,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668732010}
   m_CullTransparentMesh: 1
+--- !u!225 &668732015
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668732010}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &668852559
 GameObject:
   m_ObjectHideFlags: 0
@@ -7344,6 +7383,7 @@ GameObject:
   - component: {fileID: 919642479}
   - component: {fileID: 919642478}
   - component: {fileID: 919642477}
+  - component: {fileID: 919642480}
   m_Layer: 5
   m_Name: PersistentBomb
   m_TagString: Untagged
@@ -7403,7 +7443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2b6b4c404053d4c4daa6eafc9e9df033, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6f4553ac7ce2294ea5104b41a85c611, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7421,6 +7461,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919642475}
   m_CullTransparentMesh: 1
+--- !u!225 &919642480
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919642475}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &929390785
 GameObject:
   m_ObjectHideFlags: 0
@@ -7433,6 +7485,7 @@ GameObject:
   - component: {fileID: 929390789}
   - component: {fileID: 929390788}
   - component: {fileID: 929390787}
+  - component: {fileID: 929390790}
   m_Layer: 5
   m_Name: Landmine
   m_TagString: Untagged
@@ -7492,7 +7545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42229348711b4a440b59f84c16319296, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e127a037f2c1d946afe897672c78a65, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7510,6 +7563,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929390785}
   m_CullTransparentMesh: 1
+--- !u!225 &929390790
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929390785}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &944302537
 GameObject:
   m_ObjectHideFlags: 0
@@ -8432,6 +8497,7 @@ GameObject:
   - component: {fileID: 990858532}
   - component: {fileID: 990858531}
   - component: {fileID: 990858530}
+  - component: {fileID: 990858533}
   m_Layer: 5
   m_Name: IceBomb
   m_TagString: Untagged
@@ -8491,7 +8557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 72ac3757ef9353b45baac11df852b200, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a198242585fcead479fa508c56d00a35, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8509,6 +8575,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990858528}
   m_CullTransparentMesh: 1
+--- !u!225 &990858533
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990858528}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &999425889
 GameObject:
   m_ObjectHideFlags: 0
@@ -11681,7 +11759,7 @@ GameObject:
   - component: {fileID: 1335250719}
   - component: {fileID: 1335250718}
   m_Layer: 5
-  m_Name: SpesialInventri1 (1)
+  m_Name: SpesialInventri2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11740,7 +11818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58b70f6d9ac8ffa4c85254dff1256eab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78fa5319ca7c6db4a82b82360e278393, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12880,6 +12958,7 @@ GameObject:
   - component: {fileID: 1436577743}
   - component: {fileID: 1436577742}
   - component: {fileID: 1436577741}
+  - component: {fileID: 1436577744}
   m_Layer: 5
   m_Name: TransparentBomb
   m_TagString: Untagged
@@ -12939,7 +13018,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 26a79a66ec6a3d74bb20f2404d61693f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb5d4401ccfb52b42be9ad3d6998d53e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12957,6 +13036,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436577739}
   m_CullTransparentMesh: 1
+--- !u!225 &1436577744
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436577739}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1456458001
 GameObject:
   m_ObjectHideFlags: 0
@@ -15092,6 +15183,7 @@ GameObject:
   - component: {fileID: 1624788561}
   - component: {fileID: 1624788560}
   - component: {fileID: 1624788559}
+  - component: {fileID: 1624788562}
   m_Layer: 5
   m_Name: CrossBomb
   m_TagString: Untagged
@@ -15151,7 +15243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8e8df07f3aae3f548854cc5833017986, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7840d5218f83cb54eaeee7c731d0a032, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15169,6 +15261,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624788557}
   m_CullTransparentMesh: 1
+--- !u!225 &1624788562
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624788557}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1637057223
 GameObject:
   m_ObjectHideFlags: 0
@@ -16045,6 +16149,7 @@ GameObject:
   - component: {fileID: 1737703618}
   - component: {fileID: 1737703617}
   - component: {fileID: 1737703619}
+  - component: {fileID: 1737703620}
   m_Layer: 5
   m_Name: Grenade
   m_TagString: Untagged
@@ -16091,7 +16196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b92551adefad79846829513eee507f17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 14a78df13dd0f7944ae217aa159e4586, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16122,6 +16227,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 3
+--- !u!225 &1737703620
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737703614}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1747872059
 GameObject:
   m_ObjectHideFlags: 0
@@ -16256,7 +16373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58b70f6d9ac8ffa4c85254dff1256eab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78fa5319ca7c6db4a82b82360e278393, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18305,6 +18422,7 @@ GameObject:
   - component: {fileID: 2004325612}
   - component: {fileID: 2004325611}
   - component: {fileID: 2004325610}
+  - component: {fileID: 2004325613}
   m_Layer: 5
   m_Name: MegatonBomb
   m_TagString: Untagged
@@ -18364,7 +18482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 39b6bb0993c0c8e4c85f905c6c3d14d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c636c61957430e547a2e1fa907a9bcd4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18382,6 +18500,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004325608}
   m_CullTransparentMesh: 1
+--- !u!225 &2004325613
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004325608}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2008050511
 GameObject:
   m_ObjectHideFlags: 0
@@ -19385,7 +19515,7 @@ GameObject:
   - component: {fileID: 2091627335}
   - component: {fileID: 2091627336}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: Ready
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19459,13 +19589,13 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1491182626}
+        m_TargetAssemblyTypeName: TitleResultManager, Assembly-CSharp
+        m_MethodName: set_Ready
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

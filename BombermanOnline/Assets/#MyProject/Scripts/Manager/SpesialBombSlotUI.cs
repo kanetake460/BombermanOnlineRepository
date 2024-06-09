@@ -9,6 +9,8 @@ public class SpesialBombSlotUI : DroppedUI
     [SerializeField] Player player;
     [SerializeField] int slot;
 
+    private Sprite _currSprite;
+
     /// <summary>
     /// ƒhƒƒbƒv‚³‚ê‚½‚Ìˆ—
     /// </summary>
@@ -18,11 +20,12 @@ public class SpesialBombSlotUI : DroppedUI
         SpesialBombSelectUI bombInfo = eventData.pointerDrag.GetComponent<SpesialBombSelectUI>();
         if (bombInfo != null)
         {
-            SetImage(eventData);
             player.SetSpesialBombType(slot,bombInfo.bombType);
             player.AddSpesialBombType(slot);
+            SetImage(eventData);
         }
     }
+
 
     private void SetImage(PointerEventData eventData)
     {

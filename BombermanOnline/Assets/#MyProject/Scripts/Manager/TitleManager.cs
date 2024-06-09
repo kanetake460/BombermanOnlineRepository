@@ -1,3 +1,4 @@
+using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
 using System;
 using TMPro;
@@ -34,6 +35,23 @@ public class TitleResultManager : StrixBehaviour
     GameManager gameManager;
     ItemManager itemManager;
 
+    private bool _ready;
+    public bool Ready
+    {
+        get
+        {
+            return _ready;
+        }
+        set
+        {
+            gameManager.CallSetReadyCount(value);
+            gameManager.CallGameReady();
+
+            _ready = value;
+        }
+    }
+
+
     [SerializeField] TextMeshProUGUI[] itemCountText;
     [SerializeField] TextMeshProUGUI[] playerName;
 
@@ -54,6 +72,7 @@ public class TitleResultManager : StrixBehaviour
     {
         SceneManager.LoadScene("Lobby");
     }
+
 
     /// <summary>
     /// タイトルキャンバスをInActiveにし、マップを生成します

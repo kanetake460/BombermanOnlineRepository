@@ -28,6 +28,9 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     public ItemManager itemManager;
 
     public Pool<Explosion> exploPool = new Pool<Explosion>();
+
+    [StrixSyncField]
+    public int readyCount = 0;
     
     
     // ===プロパティ=================================================
@@ -50,6 +53,37 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
 
     // ===関数====================================================
     public void GameStart() => IsGaming = true;
+
+
+    /// <summary>
+    /// トグルによって準備OKカウントを変更します
+    /// </summary>
+    /// <param name="ready"></param>
+    public void CallSetReadyCount(bool ready) { RpcToAll(nameof(SetReadyCount), ready); }
+    [StrixRpc]
+    private void SetReadyCount(bool ready)
+    {
+        if (ready)
+            readyCount++;
+        else
+            readyCount--;
+
+        Debug.Log(readyCount);
+    }
+
+
+    /// <summary>
+    /// みんなが準備OKならゲームを開始します
+    /// </summary>
+    public void CallGameReady() { RpcToAll(nameof(GameReady)); }
+    [StrixRpc]
+    private void GameReady()
+    {
+        if (RoomMenbers.Count == readyCount)
+        {
+            GameStart();
+        }
+    }
 }
 
 

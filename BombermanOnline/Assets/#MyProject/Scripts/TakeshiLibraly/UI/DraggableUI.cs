@@ -4,16 +4,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     private Vector3 _firstPos;
     private RectTransform _rectTransform;
     private Canvas _canvas;
+    private CanvasGroup _canvasGroup;
 
     protected virtual void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
+        _canvasGroup = GetComponent<CanvasGroup>();
         _firstPos = _rectTransform.localPosition;
     }
 
@@ -24,6 +27,7 @@ public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDr
     /// <param name="eventData"></param>
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
+        _canvasGroup.blocksRaycasts = false;
     }
 
 
@@ -42,6 +46,7 @@ public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDr
     /// </summary>
     public virtual void OnEndDrag(PointerEventData eventData)
     {
+        _canvasGroup.blocksRaycasts = true;
     }
 
 
