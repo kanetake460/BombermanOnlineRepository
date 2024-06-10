@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleResultManager : StrixBehaviour
 {
@@ -43,20 +44,21 @@ public class TitleResultManager : StrixBehaviour
         }
         set
         {
-            CallSetReadyCount(value);
+            CallSetReadyCount(value,player.PlayerIndex);
             CallGameReady();
 
             _ready = value;
         }
     }
 
-
+    [Header("UI参照")]
     [SerializeField] TextMeshProUGUI[] itemCountText;
     [SerializeField] TextMeshProUGUI[] playerName;
-
     [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject finishButton; 
+    [SerializeField] GameObject finishButton;
+    [SerializeField] Image[] okUI;
 
+    [Header("オブジェクト参照")]
     [SerializeField] Player player;
 
 
@@ -75,16 +77,24 @@ public class TitleResultManager : StrixBehaviour
 
     /// <summary>
     /// トグルによって準備OKカウントを変更します
+    /// プレイヤーインデックスを引数に与えることで、
+    /// 呼び出した人のインデックスを適用することができる
     /// </summary>
     /// <param name="ready"></param>
-    public void CallSetReadyCount(bool ready) { RpcToAll(nameof(SetReadyCount), ready); }
+    public void CallSetReadyCount(bool ready,int playerIndex) { RpcToAll(nameof(SetReadyCount), ready,playerIndex); }
     [StrixRpc]
-    private void SetReadyCount(bool ready)
+    private void SetReadyCount(bool ready, int playerIndex)
     {
         if (ready)
+        {
             gameManager.readyCount++;
+                okUI[playerIndex].gameObject.SetActive(true);
+        }
         else
+        {
             gameManager.readyCount--;
+                okUI[playerIndex].gameObject.SetActive(false);
+        }
     }
 
 

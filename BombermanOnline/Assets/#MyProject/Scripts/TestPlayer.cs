@@ -35,7 +35,8 @@ public class TestPlayer : StrixBehaviour
         // オブジェクト配置
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(test, transform.position, Quaternion.identity);
+            //Instantiate(test, transform.position, Quaternion.identity);
+            CallTest();
         }
 
         // ゲームシーンロード
@@ -162,6 +163,13 @@ public class TestPlayer : StrixBehaviour
             _syncInt = syncInt;
 
         }
+    }
+
+    private void CallTest() { RpcToAll(nameof(Test)); }
+    [StrixRpc]
+    private void Test()
+    {
+        test.SetActive(!test.activeSelf);
     }
 
     /// <summary>

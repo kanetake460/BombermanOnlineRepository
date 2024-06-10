@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using SoftGear.Strix.Unity.Runtime;
 using SoftGear.Strix.Client.Match.Room.Model;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class GameManager : SingletonStrixBehaviour<GameManager>
 {

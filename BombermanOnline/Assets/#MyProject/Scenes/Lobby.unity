@@ -1728,7 +1728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1375318125}
-  test: {fileID: 7750926043821849839, guid: 5f8bffc1aff38894c8f7239d3c097a73, type: 3}
+  test: {fileID: 1485715760}
   tmp: {fileID: 533272421}
   conectUI: {fileID: 462831233}
   cameraPos: {x: 0, y: 30, z: -16}
