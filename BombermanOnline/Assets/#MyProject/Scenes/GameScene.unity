@@ -9000,6 +9000,14 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 5c2d45a0f12693848bddc2cfbb7f9d27, type: 3}
   - key: "\u88AB\u30C0\u30E1\u30FC\u30B8"
     value: {fileID: 8300000, guid: 50cda6870e0151442ab9ca1290c6faf6, type: 3}
+  - key: "\u7279\u6B8A\u7206\u5F3E\u3092\u7F6E\u304F"
+    value: {fileID: 8300000, guid: 43ba89c0aec36e749996b309f9831e5b, type: 3}
+  - key: "\u5E8A\u304C\u51CD\u308B"
+    value: {fileID: 8300000, guid: 806dea1de4cf64744a9ff3b9fbd6d7de, type: 3}
+  - key: "\u7206\u5F3E\u8A2D\u5B9A"
+    value: {fileID: 8300000, guid: 06467573aa86e074aa89e95757dccf0c, type: 3}
+  - key: "\u6E96\u5099OK"
+    value: {fileID: 8300000, guid: 1161ca9a3c55d6e4990914a68ddbb673, type: 3}
   BGM_ClipDictionary:
   - key: "\u30B2\u30FC\u30E0BGM"
     value: {fileID: 8300000, guid: 2378759cbb619b24f9568fb460fccbdc, type: 3}
@@ -12433,7 +12441,6 @@ GameObject:
   - component: {fileID: 1383805133}
   - component: {fileID: 1383805132}
   - component: {fileID: 1383805131}
-  - component: {fileID: 1383805139}
   - component: {fileID: 1383805135}
   - component: {fileID: 1383805136}
   - component: {fileID: 1383805138}
@@ -12551,7 +12558,7 @@ MonoBehaviour:
   m_speed: 5
   m_dashSpeed: 10
   m_slowSpeed: 5
-  m_upSpeed: 5
+  m_upSpeed: 2
   m_defaultDrag: 15
   m_slipDrag: 5
   m_life: 100
@@ -12629,7 +12636,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
-  - {fileID: 1383805139}
   - {fileID: 1383805135}
   - {fileID: 1383805137}
   objectType: 524291
@@ -12638,33 +12644,6 @@ MonoBehaviour:
   networkInstanceId: -1
   InstantiableBy: 1
   ConnectionClosedBehaviour: 1
---- !u!114 &1383805139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383805130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b7857bf89706e49a0af7f2f400bff2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_poolParent: {fileID: 0}
-  m_spesialBombMaxCount: 1
-  m_bombMaxValue: 1
-  m_MegatonExploLevel: 2
-  grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
-  landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
-  RemoteBomb: {fileID: 0}
-  crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
-  persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
-  megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
-  pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
-  transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
-  iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
-  poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
-  healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
 --- !u!1 &1384388182
 GameObject:
   m_ObjectHideFlags: 0

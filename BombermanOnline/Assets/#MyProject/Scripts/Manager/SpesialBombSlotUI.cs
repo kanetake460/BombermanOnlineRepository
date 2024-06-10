@@ -23,6 +23,7 @@ public class SpesialBombSlotUI : DroppedUI
             player.SetSpesialBombType(slot,bombInfo.bombType);
             player.AddSpesialBombType(slot);
             SetImage(eventData);
+            AudioManager.PlayOneShot("îöíeê›íË");
         }
     }
 

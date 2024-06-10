@@ -43,4 +43,7 @@ public class SpesialBombSelectUI : DraggableUI
 
     // ===ïœêî====================================================
     public SpesialBomb.BombType bombType = new SpesialBomb.BombType();
+
+    [TextArea]
+    public string bombExplanation;
 }

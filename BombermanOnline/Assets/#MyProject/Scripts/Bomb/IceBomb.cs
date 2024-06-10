@@ -139,7 +139,7 @@ public class IceBomb : BombBase
             }
         }
 
-        AudioManager.PlayOneShot("”š”­", 0.3f);
+        AudioManager.PlayOneShot("°‚ª“€‚é", 0.3f);
         CallInActive();
         isHeld = true;
     }

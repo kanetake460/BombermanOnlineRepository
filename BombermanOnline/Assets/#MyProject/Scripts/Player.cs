@@ -327,14 +327,18 @@ public class Player : Base
     private void GenarateSpesialBomb1()
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
+     
         m_specialBomb1.GenerateSpesialBomb(Coord, dir, m_firepower);
+        AudioManager.PlayOneShot("特殊爆弾を置く");
     }
     private void CallGenarateSpesialBomb2() { RpcToAll(nameof(GenarateSpesialBomb2)); }
     [StrixRpc]
     private void GenarateSpesialBomb2()
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
+
         m_specialBomb2.GenerateSpesialBomb(Coord, dir, m_firepower);
+        AudioManager.PlayOneShot("特殊爆弾を置く");
     }
 
     // ーーーーーアイテムの処理ーーーーーー

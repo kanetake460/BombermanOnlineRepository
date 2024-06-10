@@ -44,6 +44,7 @@ public class TitleResultManager : StrixBehaviour
         {
             CallSetReadyCount(value,player.PlayerIndex);
             CallGameReady();
+            AudioManager.PlayOneShot("€”õOK");
 
             _ready = value;
         }
