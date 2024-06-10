@@ -29,6 +29,9 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     public ItemManager itemManager;
 
     public Pool<Explosion> exploPool = new Pool<Explosion>();
+    public Pool<Explosion> longExploPool = new Pool<Explosion>();
+    public Pool<Explosion> iceExploPool = new Pool<Explosion>();
+    
 
     /// 別のクラスに作って、参照すると、シンクロ変数になるので、ゲームマネージャーに作る
     public int readyCount = 0;

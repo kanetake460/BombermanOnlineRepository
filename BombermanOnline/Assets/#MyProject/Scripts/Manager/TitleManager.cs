@@ -59,6 +59,7 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] Image[] okUI;
 
     [Header("オブジェクト参照")]
+    [SerializeField] CanvasBook book;
     [SerializeField] Player player;
 
 
@@ -108,6 +109,7 @@ public class TitleResultManager : StrixBehaviour
         if (gameManager.RoomMenbers.Count == gameManager.readyCount)
         {
             gameManager.GameStart();
+            book.CallClose();
         }
     }
 

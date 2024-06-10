@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TakeshiLibrary;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -25,7 +26,7 @@ public class SpesialBomb
     [SerializeField] LandmineBomb landmineBomb;
     [SerializeField] NormalBomb RemoteBomb;
     [SerializeField] CrossBomb crossBomb;
-    [SerializeField] NormalBomb persistentBomb;
+    [SerializeField] PersistentBomb persistentBomb;
     [SerializeField] MegatonBomb megatonBomb;
     [SerializeField] PierceBomb pierceBomb;
     [SerializeField] NormalBomb transparentBomb;
@@ -78,56 +79,42 @@ public class SpesialBomb
             // èÖ’e
             case BombType.GrenadeBomb:
                 {
-                    GrenadeBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<GrenadeBomb>().isHeld).GetComponent<GrenadeBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<GrenadeBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    GrenadeBomb grenade = bomb.GetComponent<GrenadeBomb>();
 
-                    bomb.Throw(coord, dir);
+                    grenade.Initialize(map);
+                    grenade.Throw(coord, dir);
                     break;
                 }
 
             // ’n—‹’e
             case BombType.LandmineBomb:
                 {
-                    LandmineBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<LandmineBomb>().isHeld).GetComponent<LandmineBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<LandmineBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    LandmineBomb landmine = bomb.GetComponent<LandmineBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord,exploLevel);
-                    break;
-                }
-
-            // ƒŠƒ‚[ƒg”š’e
-            case BombType.RemoteBomb:
-                {
-                    LandmineBomb bomb = GameObject.Instantiate(landmineBomb, m_poolParent.transform);
-                    if (bomb == null)
-                    {
-                        Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
-                    }
-
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    landmine.Initialize(map);
+                    landmine.Put(coord,exploLevel);
                     break;
                 }
 
             // ƒNƒƒX”š’e
             case BombType.CrossBomb:
                 {
-                    Debug.Log(_spesialPool.Count);
                     GameObject bomb = _spesialPool.Take(b => b.GetComponent<CrossBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
@@ -135,7 +122,6 @@ public class SpesialBomb
                     }
                     CrossBomb cross = bomb.GetComponent<CrossBomb>();
 
-                    bomb.SetActive(false);
                     cross.Initialize(map);
                     cross.Put(coord, exploLevel);
                     break;
@@ -144,119 +130,119 @@ public class SpesialBomb
             // ‘±”š’e
             case BombType.PersistentBomb:
                 {
-                    NormalBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<NormalBomb>().isHeld).GetComponent<NormalBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<PersistentBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    PersistentBomb persistent = bomb.GetComponent<PersistentBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    persistent.Initialize(map);
+                    persistent.Put(coord, exploLevel);
                     break;
                 }
 
             // “§–¾”š’e
             case BombType.TransparentBomb:
                 {
-                    NormalBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<NormalBomb>().isHeld).GetComponent<NormalBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<NormalBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    NormalBomb transparent = bomb.GetComponent<NormalBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    transparent.Initialize(map);
+                    transparent.Put(coord, exploLevel);
                     break;
                 }
 
             // •XŒ‹”š’e
             case BombType.IceBomb:
                 {
-                    IceBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<IceBomb>().isHeld).GetComponent<IceBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<IceBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    IceBomb ice = bomb.GetComponent<IceBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    ice.Initialize(map);
+                    ice.Put(coord, exploLevel);
                     break;
                 }
 
             // ƒƒKƒgƒ“”š’e
             case BombType.MegatonBomb:
                 {
-                    MegatonBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<MegatonBomb>().isHeld).GetComponent<MegatonBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<MegatonBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    MegatonBomb megaton = bomb.GetComponent<MegatonBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, m_MegatonExploLevel);
+                    megaton.Initialize(map);
+                    megaton.Put(coord, m_MegatonExploLevel);
                     break;
                 }
 
             // ŠÑ’Ê”š’e
             case BombType.PierceBomb:
                 {
-                    PierceBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<PierceBomb>().isHeld).GetComponent<PierceBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<PierceBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    PierceBomb pierce = bomb.GetComponent<PierceBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    pierce.Initialize(map);
+                    pierce.Put(coord, exploLevel);
                     break;
                 }
 
             // ‰ñ•œ”š’e
             case BombType.HealBomb:
                 {
-                    FogBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<FogBomb>().isHeld).GetComponent<FogBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<FogBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    FogBomb heal = bomb.GetComponent<FogBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    heal.Initialize(map);
+                    heal.Put(coord, exploLevel);
                     break;
                 }
 
             // “Å”š’e
             case BombType.PoisonBomb:
                 {
-                    FogBomb bomb =
-                        _spesialPool.Take(b => b.GetComponent<FogBomb>().isHeld).GetComponent<FogBomb>();
+                    GameObject bomb = _spesialPool.Take(b => b.GetComponent<FogBomb>().isHeld);
+                    
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
                         return;
                     }
+                    FogBomb poizon = bomb.GetComponent<FogBomb>();
 
-                    bomb.gameObj.SetActive(false);
-                    bomb.Initialize(map);
-                    bomb.Put(coord, exploLevel);
+                    poizon.Initialize(map);
+                    poizon.Put(coord, exploLevel);
                     break;
                 }
         }
@@ -303,7 +289,6 @@ public class SpesialBomb
             // ƒNƒƒX”š’e
             case BombType.CrossBomb:
                 {
-                    Debug.Log("ƒNƒƒX");
                     CrossBomb bomb = GameObject.Instantiate(crossBomb.gameObject).GetComponent<CrossBomb>();
 
                     _spesialPool.Add(bomb.gameObj);
@@ -315,7 +300,7 @@ public class SpesialBomb
             // ‘±”š’e
             case BombType.PersistentBomb:
                 {
-                    NormalBomb bomb = GameObject.Instantiate(persistentBomb.gameObject).GetComponent<NormalBomb>();
+                    PersistentBomb bomb = GameObject.Instantiate(persistentBomb.gameObject).GetComponent<PersistentBomb>();
 
                     _spesialPool.Add(bomb.gameObj);
                     bomb.gameObj.SetActive(false);

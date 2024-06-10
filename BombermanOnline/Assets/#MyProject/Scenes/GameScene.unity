@@ -965,7 +965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &106992626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3269,7 +3269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 8
 --- !u!114 &317235282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4319,7 +4319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 10
 --- !u!114 &446692537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5263,7 +5263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 9
 --- !u!114 &668732013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7725,7 +7725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 4
 --- !u!114 &919642478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7827,7 +7827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 1
 --- !u!114 &929390788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8851,7 +8851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 6
 --- !u!114 &990858531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12595,7 +12595,7 @@ MonoBehaviour:
     landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
     RemoteBomb: {fileID: 0}
     crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
-    persistentBomb: {fileID: -1375502178225266207, guid: 181b74ef1a111254f98b26c10df2d3f4, type: 3}
+    persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
     megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
     pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
     transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
@@ -13504,7 +13504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 5
 --- !u!114 &1436577742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14175,6 +14175,7 @@ MonoBehaviour:
   - {fileID: 1062493483}
   - {fileID: 513284416}
   - {fileID: 310670843}
+  book: {fileID: 1491182629}
   player: {fileID: 1383805135}
 --- !u!114 &1491182627
 MonoBehaviour:
@@ -16762,7 +16763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 0
 --- !u!225 &1737703620
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -19133,7 +19134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
+  bombType: 7
 --- !u!114 &2004325611
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ public class Explosion : Base
 
     // ===変数====================================================
     [Header("パラメーター")]
-    [SerializeField] float collisionDuration;
     private float collisionDurationCount;
 
     [Header("コンポーネント")]
@@ -55,7 +54,7 @@ public class Explosion : Base
     /// </summary>
     /// <param name="map">マップ</param>
     /// <param name="exploCoord">爆発の座標</param>
-    public void Initialize(GameMap map,Coord exploCoord)
+    public void Initialize(GameMap map,Coord exploCoord,int collisionDuration)
     {
         base.Initialize(map);
         gameObj.SetActive(true);

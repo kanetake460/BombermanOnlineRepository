@@ -36,6 +36,19 @@ public class CanvasBook : StrixBehaviour
         page[_currentPage].SetActive(true);
     }
 
+
+    /// <summary>
+    /// •Â‚¶‚Ü‚·
+    /// </summary>
+    public void CallClose() { RpcToAll(nameof(Close)); }
+    [StrixRpc]
     public void Close() { _canvas.gameObject.SetActive(false); }
+
+
+    /// <summary>
+    /// ŠJ‚«‚Ü‚·
+    /// </summary>
+    public void CallOpen() { RpcToAll(nameof(Open)); }
+    [StrixRpc]
     public void Open() { _canvas.gameObject.SetActive(true); }
 }

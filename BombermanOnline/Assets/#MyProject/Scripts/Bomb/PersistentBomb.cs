@@ -1,27 +1,30 @@
 using SoftGear.Strix.Unity.Runtime;
 using UnityEngine;
 
-public class IceBomb : BombBase
+// 貫通爆弾
+public class PersistentBomb : BombBase
 {
     // ===イベント関数================================================
     private void Update()
     {
         if (isLocal == false) return;
-        BombTimer(PredictionFire,Fire);
+        BombTimer(CountAction,Fire);
     }
+    // ===変数====================================================
+    private int persistentCount;
 
     // ===関数====================================================
     /// <summary>
-    /// アイス爆発のプレハブを生成し、エフェクトを再生します
+    /// ロング爆発のプレハブを生成し、エフェクトを再生します
     /// </summary>
     /// <param name="exploCoord">生成する場所</param>
     protected void PlayExplosionEffect(Coord exploCoord)
     {
         // プールから爆発中じゃないモノを探し出す
-        Explosion explo = gameManager.iceExploPool.Get(e => e.IsExplosion == false, () => Instantiate(m_explosion));
+        Explosion explo = gameManager.longExploPool.Get(e => e.IsExplosion == false,() => Instantiate(m_explosion));
 
         // 爆発を初期化
-        explo.Initialize(map, exploCoord, collisionDuration);
+        explo.Initialize(map, exploCoord,collisionDuration);
     }
 
 
@@ -67,23 +70,23 @@ public class IceBomb : BombBase
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            if (map.IsEmpty(exploCoord))
+            if(map.IsEmpty(exploCoord))
             {
                 map.ActivePredictLandmark(exploCoord, false);
                 PlayExplosionEffect(exploCoord);
                 continue;
             }
 
-            if (map.IsWall(exploCoord))
+            if(map.IsWall(exploCoord))
             {
                 break;
             }
 
 
-            if (map.IsStone(exploCoord))
+            if(map.IsStone(exploCoord))
             {
                 map.ActivePredictLandmark(exploCoord, false);
-                map.BreakStone(exploCoord);
+                map.BreakStone (exploCoord);
                 PlayExplosionEffect(exploCoord);
                 break;
             }
@@ -142,6 +145,17 @@ public class IceBomb : BombBase
         AudioManager.PlayOneShot("爆発", 0.3f);
         CallInActive();
         isHeld = true;
+    }
+
+
+    private void CountAction()
+    {
+        PredictionFire();
+        persistentCount--;
+        if(persistentCount < 0)
+        {
+            persistentCount = collisionDuration;
+        }
     }
 
 

@@ -8,12 +8,13 @@ public class BombBase : Base
     // ===変数========================================
     [Header("パラメーター")]
     [SerializeField] Vector3 putPos;
+    [SerializeField] protected int collisionDuration;
     public bool isHeld = true; // 持たれているかどうか
     public int explosionTime;
     public int firepower;
 
     [Header("オブジェクト参照")]
-    [SerializeField] private Explosion m_explosion;
+    [SerializeField] protected Explosion m_explosion;
 
     private Timer counter = new Timer();
     
@@ -76,7 +77,7 @@ public class BombBase : Base
         Explosion explo = gameManager.exploPool.Get(e => e.IsExplosion == false,() => Instantiate(m_explosion));
 
         // 爆発を初期化
-        explo.Initialize(map, exploCoord);
+        explo.Initialize(map, exploCoord,collisionDuration);
     }
 
 
