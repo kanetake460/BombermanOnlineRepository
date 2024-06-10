@@ -52,7 +52,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     [SerializeField] Texture m_stoneTexture;        // 石オブジェクトのテクスチャ
     [SerializeField] Texture m_artificialTexture;   // 人工石オブジェクトのテクスチャ
     [SerializeField] Texture m_planeTexture;        // 床オブジェクトのテクスチャ
-    [SerializeField] Texture m_frozenTexture;       // 凍った床のテクスチャ
+    [SerializeField] Material m_frozenMaterial;     // 凍り床のマテリアル
+    [SerializeField] Material m_standerdMaterial;   // 普通のマテリアル
     [SerializeField] Camera m_mapCamera;            // マップカメラ
     GameManager gameManager;                        // ゲームマネージャー
 
@@ -73,6 +74,8 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         // テクスチャ変更
         mapObj.ChangeAllWallTexture(m_wallTexture);
         mapObj.ChangeAllPlaneTexture(m_planeTexture);
+        // PhysicMaterialComponent追加
+
         // 壁オブジェクトが生成されていない場所をストーンリストに入れる
         stoneBlockList = mapSet.WhereBlocks(c => mapSet.blocks[c.x, c.z].isSpace == true);
         // 壁オブジェクトの場所を壁リストに入れる
@@ -248,14 +251,14 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
         if (frozen)
         {
             frozenCoords.Add(coord);
-            mapObj.ChangePlaneTexture(coord,m_frozenTexture);
             m_mapSet.blocks[coord.x, coord.z].planeObj.tag = "FrozenFloor";
+            m_mapSet.blocks[coord.x, coord.z].planeObj.GetComponent<Renderer>().material = m_frozenMaterial;
         }
         else 
         {
-            mapObj.ChangePlaneTexture(coord, m_planeTexture);
             frozenCoords.Remove(coord);
             m_mapSet.blocks[coord.x, coord.z].planeObj.tag = "Untagged";
+            m_mapSet.blocks[coord.x, coord.z].planeObj.GetComponent<Renderer>().material = m_standerdMaterial;
         }
     }
 

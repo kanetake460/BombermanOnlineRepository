@@ -29,7 +29,7 @@ public class TestPlayer : StrixBehaviour
         {
             return;
         }
-        fps.AddForceLocomotion();
+        fps.VelocityForceLocomotion(speed);
         fps.PlayerViewport();
 
         // オブジェクト配置
@@ -65,6 +65,7 @@ public class TestPlayer : StrixBehaviour
 
     [Header("パラメーター")]
     [SerializeField] Vector3 cameraPos;
+    [SerializeField] float speed;
     [StrixSyncField]
     public int syncInt = 0;
     public int intValue = 0;

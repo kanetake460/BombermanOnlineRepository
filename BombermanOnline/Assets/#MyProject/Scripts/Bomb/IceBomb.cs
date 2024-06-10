@@ -19,7 +19,7 @@ public class IceBomb : BombBase
     {
         // ƒv[ƒ‹‚©‚ç”š”­’†‚¶‚á‚È‚¢ƒ‚ƒm‚ğ’T‚µo‚·
         Explosion explo = gameManager.iceExploPool.Get(e => e.IsExplosion == false, () => Instantiate(m_explosion));
-
+        map.SetFrozenFloor(exploCoord,true);
         // ”š”­‚ğ‰Šú‰»
         explo.Initialize(map, exploCoord, collisionDuration);
     }

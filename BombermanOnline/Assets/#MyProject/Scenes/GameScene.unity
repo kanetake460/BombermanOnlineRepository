@@ -12273,7 +12273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1383805135}
-  slot: 0
+  slot: 1
 --- !u!114 &1335250719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12551,7 +12551,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 41.61, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 558329489}
@@ -12571,10 +12571,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   posY: {x: 0, y: 2, z: 0}
-  m_speed: 10
-  m_dashSpeed: 20
+  m_speed: 5
+  m_dashSpeed: 10
   m_slowSpeed: 5
   m_upSpeed: 5
+  m_defaultDrag: 15
+  m_slipDrag: 5
   m_life: 100
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
@@ -12603,21 +12605,21 @@ MonoBehaviour:
     poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
     healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
   m_specialBomb2:
-    m_poolParent: {fileID: 0}
+    m_poolParent: {fileID: 1383805134}
     m_spesialBombMaxCount: 0
-    m_bombMaxValue: 0
-    m_MegatonExploLevel: 0
-    grenadeBomb: {fileID: 0}
-    landmineBomb: {fileID: 0}
+    m_bombMaxValue: 1
+    m_MegatonExploLevel: 2
+    grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+    landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
     RemoteBomb: {fileID: 0}
-    crossBomb: {fileID: 0}
-    persistentBomb: {fileID: 0}
-    megatonBomb: {fileID: 0}
-    pierceBomb: {fileID: 0}
-    transparentBomb: {fileID: 0}
-    iceBomb: {fileID: 0}
-    poisonBomb: {fileID: 0}
-    healBomb: {fileID: 0}
+    crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
+    persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
+    megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
+    pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
+    transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
+    iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
+    poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
+    healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
   m_playerInfoText: {fileID: 1481765626}
   m_titleCanvas: {fileID: 291420355}
   ui: {fileID: 1414995915}
@@ -12630,7 +12632,7 @@ Rigidbody:
   m_GameObject: {fileID: 1383805130}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 15
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -18546,8 +18548,9 @@ MonoBehaviour:
   m_wallTexture: {fileID: 2800000, guid: 280c50d6e26aeeb40b69ab7465cdd958, type: 3}
   m_stoneTexture: {fileID: 2800000, guid: a51a0abef9d5982438981013812071a5, type: 3}
   m_artificialTexture: {fileID: 2800000, guid: 854ddad95b0b31c4bbc651616d4a46d9, type: 3}
-  m_planeTexture: {fileID: 2800000, guid: b2d9ff8a591c7514fa37843a7a0a5194, type: 3}
-  m_frozenTexture: {fileID: 0}
+  m_planeTexture: {fileID: 2800000, guid: 59b20028f19acde4fbf5a3f1c1c9f352, type: 3}
+  m_frozenMaterial: {fileID: 2100000, guid: b18721a73c21ca84a8d0f58c75f46529, type: 2}
+  m_standerdMaterial: {fileID: 2100000, guid: b407fd11e21317043aa869c77993f5f3, type: 2}
   m_mapCamera: {fileID: 1269192928}
 --- !u!114 &1898085065
 MonoBehaviour:

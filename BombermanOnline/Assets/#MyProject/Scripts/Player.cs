@@ -1,3 +1,4 @@
+using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,12 @@ public class Player : Base
     {
         if (isLocal == false) return;
         PlayerSettings();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isLocal == false) return;
+        fps.AddForceLocomotion(_currSpeed, m_dashSpeed);
     }
 
 
@@ -64,6 +71,21 @@ public class Player : Base
             other.gameObject.SetActive(false);
         }
     }
+
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (isLocal == false) return;
+        if (collision.gameObject.CompareTag(FrozenFloorTag))
+        {
+            rb.drag = m_slipDrag;
+        }
+        else
+        {
+            rb.drag = m_defaultDrag;
+        }
+    }
+
     // ===変数======================================================================================
 
     [Header("パラメーター")]
@@ -76,6 +98,8 @@ public class Player : Base
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_slowSpeed;     // 遅いスピード
     [SerializeField] private float m_upSpeed;       // 上がるスピード
+    [SerializeField] private float m_defaultDrag;      // 滑る床にいるときの空気抵抗
+    [SerializeField] private float m_slipDrag;      // 滑る床にいるときの空気抵抗
 
     // 体力
     [SerializeField] private float m_life;            // 体力
@@ -103,6 +127,7 @@ public class Player : Base
     private const string ItemSpeedTag = "Item_Speed";
     private const string ItemLifeTag = "Item_Life";
     private const string ExplosionTag = "Explosion";
+    private const string FrozenFloorTag = "FrozenFloor";
 
 
     [Header("オブジェクト参照")]
@@ -165,7 +190,6 @@ public class Player : Base
         if (gameManager.IsGaming == false) return;
         // カメラ、移動の設定
         fps.PlayerViewport();
-        fps.AddForceLocomotion(_currSpeed, m_dashSpeed);
         fps.ClampMoveRange();
         //fps.CursorLock();
 
@@ -278,11 +302,19 @@ public class Player : Base
         }
     }
 
+
+    /// <summary>
+    /// キー入力によってスペシャルボムを生成します
+    /// </summary>
     private void PutSpesialBomb()
     {
         if(Input.GetMouseButtonDown(0))
         {
             m_specialBomb1.Put(map,Trafo,m_firepower);
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            m_specialBomb2.Put(map, Trafo, m_firepower);
         }
     }
 
@@ -365,7 +397,7 @@ public class Player : Base
     private void PredictiveEye()
     {
         // 左コントロールキー
-        isPredictable = Input.GetKey(KeyCode.LeftControl);
+        //isPredictable = Input.GetKey(KeyCode.LeftControl);
 
         if (isPredictable)
         {

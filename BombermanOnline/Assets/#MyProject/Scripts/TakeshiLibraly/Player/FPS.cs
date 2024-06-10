@@ -104,7 +104,7 @@ namespace TakeshiLibrary
         /// </summary>
         /// <param name="player">動かすプレイヤー</param>
         /// <param name="speed">移動スピード</param>
-        public void AddForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashuKey = KeyCode.LeftShift)
+        public void VelocityForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashuKey = KeyCode.LeftShift)
         {
             if (Input.GetKey(dashuKey)) speed = dashSpeed;
 
@@ -116,6 +116,30 @@ namespace TakeshiLibrary
 
             _rb.velocity = _player.transform.right * x * speed + _player.transform.forward * z * speed;
         }
+        public void AddForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashKey = KeyCode.LeftShift)
+        {
+            Vector3 movement = Vector3.zero;
+
+            if (Input.GetKey(dashKey))
+            {
+                movement = (_player.transform.right * Input.GetAxisRaw("Horizontal") + _player.transform.forward * Input.GetAxisRaw("Vertical")).normalized * dashSpeed;
+            }
+            else
+            {
+                movement = (_player.transform.right * Input.GetAxisRaw("Horizontal") + _player.transform.forward * Input.GetAxisRaw("Vertical")).normalized * speed;
+            }
+
+            if (movement.magnitude > 0)
+            {
+                if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Vertical") != 0)
+                {
+                    movement *= 0.707f; // 斜め移動の速度補正
+                }
+
+                _rb.AddForce(movement, ForceMode.VelocityChange);
+            }
+        }
+
 
 
         /// <summary>

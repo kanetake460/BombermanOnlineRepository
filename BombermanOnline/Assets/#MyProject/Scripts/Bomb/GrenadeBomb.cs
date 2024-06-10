@@ -9,13 +9,14 @@ public class GrenadeBomb : BombBase
 
     private void Update()
     {
+        BombTimer(PredictionFire, Fire);
         Fly();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (isLocal == false) return;
-        Fire();
+        
     }
 
     // ===変数====================================================
@@ -23,7 +24,6 @@ public class GrenadeBomb : BombBase
     [SerializeField] float m_throwSpeed;
     
     private Vector3 _throwDirection;
-    private Coord _instanceCoord;
 
 
     // ===関数====================================================
@@ -36,7 +36,6 @@ public class GrenadeBomb : BombBase
     public void Throw(Coord coord,Vector3 dir)
     {
         Put(coord,1);
-        _instanceCoord = coord;
         _throwDirection = dir;
     }
 
@@ -49,18 +48,26 @@ public class GrenadeBomb : BombBase
         rb.velocity = _throwDirection * m_throwSpeed;
     }
 
+    private void Stop()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
 
     /// <summary>
     /// 貫通爆弾の発火
     /// </summary>
     private void Fire()
     {
-        // もし、現在の座標が、投げた座標なら、爆発しない
-        if (_instanceCoord == Coord) return;
         // 爆弾の位置
         map.ActivePredictLandmark(Coord, false);
+        
         PlayExplosionEffect(Coord);
         map.BreakStone(Coord);
+
+        Coord fowardCoord = Coord + new Coord((int)_throwDirection.x, (int)_throwDirection.z);
+        PlayExplosionEffect(fowardCoord);
+        map.BreakStone(fowardCoord);
 
         isHeld = true;
         CallInActive();
