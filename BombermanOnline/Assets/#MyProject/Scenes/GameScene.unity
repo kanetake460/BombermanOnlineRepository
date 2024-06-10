@@ -953,7 +953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &106992626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1676,8 +1676,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7279\u5FB4\n\u7206\u767A\u529B\n\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\n\u898B\u305F\u76EE"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c9a1a8ef9c4b61147bb9522607dd73c7, type: 2}
+  m_sharedMaterial: {fileID: 6263483651000165035, guid: c9a1a8ef9c4b61147bb9522607dd73c7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2266,7 +2266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &240791179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3310,6 +3310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 8
+  bombExplanation: 
 --- !u!114 &317235282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4336,6 +4337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 10
+  bombExplanation: 
 --- !u!114 &446692537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5268,6 +5270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 9
+  bombExplanation: 
 --- !u!114 &668732013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7718,6 +7721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 4
+  bombExplanation: 
 --- !u!114 &919642478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7820,6 +7824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 1
+  bombExplanation: 
 --- !u!114 &929390788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8832,6 +8837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 6
+  bombExplanation: 
 --- !u!114 &990858531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13437,6 +13443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 5
+  bombExplanation: 
 --- !u!114 &1436577742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15645,6 +15652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 3
+  bombExplanation: 
 --- !u!114 &1624788560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16729,6 +16737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 0
+  bombExplanation: 
 --- !u!225 &1737703620
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -19065,6 +19074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombType: 7
+  bombExplanation: 
 --- !u!114 &2004325611
 MonoBehaviour:
   m_ObjectHideFlags: 0
