@@ -26,8 +26,6 @@ public class TitleResultManager : StrixBehaviour
         {
             itemCountText[i].text = itemManager.items[i].itemNum.ToString();
         }
-
-        finishButton.SetActive(gameManager.IsGameFinish);
     }
 
 
@@ -55,6 +53,7 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI[] itemCountText;
     [SerializeField] TextMeshProUGUI[] playerName;
     [SerializeField] GameObject titleCanvas;
+    [SerializeField] GameObject resultCanvas;
     [SerializeField] GameObject finishButton;
     [SerializeField] Image[] okUI;
 
@@ -74,6 +73,11 @@ public class TitleResultManager : StrixBehaviour
     {
         SceneManager.LoadScene("Lobby");
     }
+
+    /// <summary>
+    /// ゲームをスタートさせます
+    /// </summary>
+    public void StartGame() => gameManager.IsGaming = true;
 
 
     /// <summary>
@@ -108,13 +112,14 @@ public class TitleResultManager : StrixBehaviour
     {
         if (gameManager.RoomMenbers.Count == gameManager.readyCount)
         {
-            gameManager.GameStart();
+            StartGame();
             book.CallClose();
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
     /// <summary>
-    /// タイトルキャンバスをInActiveにし、マップを生成します
+    /// マップを生成しプレイヤーの位置を設定します
     /// </summary>
     public void CallSelectStage(int index) { if (StrixNetwork.instance.isRoomOwner) RpcToAll(nameof(SelectStage), index); }
     [StrixRpc]
@@ -122,8 +127,20 @@ public class TitleResultManager : StrixBehaviour
     {
         GameMap.Instance.CallCreateMap(index);
         player.transform.position += player.posY;
+        book.NextPage();
     }
 
+
+    /// <summary>
+    /// リザルト画面を表示します
+    /// </summary>
+    public void CallShowResult() { RpcToAll(nameof(ShowResult)); }
+    [StrixRpc]
+    private void ShowResult()
+    {
+        resultCanvas.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
 
 /// <summary>
 /// アイテムを増やします

@@ -304,18 +304,37 @@ public class Player : Base
 
 
     /// <summary>
-    /// キー入力によってスペシャルボムを生成します
+    /// キー入力によってスペシャルボムを置きます
     /// </summary>
     private void PutSpesialBomb()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            m_specialBomb1.Put(map,Trafo,m_firepower);
+            CallGenarateSpesialBomb1();
         }
         if(Input.GetMouseButtonDown(1))
         {
-            m_specialBomb2.Put(map, Trafo, m_firepower);
+            CallGenarateSpesialBomb2();
         }
+    }
+
+
+    /// <summary>
+    /// スペシャルボムを生成します（RPC）
+    /// </summary>
+    private void CallGenarateSpesialBomb1() { RpcToAll(nameof(GenarateSpesialBomb1)); }
+    [StrixRpc]
+    private void GenarateSpesialBomb1()
+    {
+        Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
+        m_specialBomb1.GenerateSpesialBomb(Coord, dir, m_firepower);
+    }
+    private void CallGenarateSpesialBomb2() { RpcToAll(nameof(GenarateSpesialBomb2)); }
+    [StrixRpc]
+    private void GenarateSpesialBomb2()
+    {
+        Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
+        m_specialBomb2.GenerateSpesialBomb(Coord, dir, m_firepower);
     }
 
     // ーーーーーアイテムの処理ーーーーーー

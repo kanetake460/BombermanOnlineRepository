@@ -1,3 +1,4 @@
+using SoftGear.Strix.Unity.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
 [Serializable]
-public class SpesialBomb
+public class SpesialBomb : StrixBehaviour
 {
     // ===変数====================================================
     [Header("プールの親")]
@@ -35,6 +36,7 @@ public class SpesialBomb
     [SerializeField] FogBomb healBomb;
 
     private Pool<GameObject> _spesialPool = new Pool<GameObject>();
+    private GameMap _map;
 
     public enum BombType
     {
@@ -70,10 +72,8 @@ public class SpesialBomb
     /// <param name="map">マップ情報</param>
     /// <param name="playerTrafo">プレイヤーのトランスフォーム</param>
     /// <param name="exploLevel">爆発レベル</param>
-    public void Put(GameMap map, Transform playerTrafo, int exploLevel)
+    public void GenerateSpesialBomb(Coord coord,Vector3 dir, int exploLevel)
     {
-        Coord coord = map.gridField.GridCoordinate(playerTrafo.position);
-        Vector3 dir = FPS.GetVector3FourDirection(playerTrafo.rotation.eulerAngles);
         switch (_type)
         {
             // 手榴弾
@@ -88,7 +88,6 @@ public class SpesialBomb
                     }
                     GrenadeBomb grenade = bomb.GetComponent<GrenadeBomb>();
 
-                    grenade.Initialize(map);
                     grenade.Throw(coord, dir);
                     break;
                 }
@@ -105,7 +104,6 @@ public class SpesialBomb
                     }
                     LandmineBomb landmine = bomb.GetComponent<LandmineBomb>();
 
-                    landmine.Initialize(map);
                     landmine.Put(coord,exploLevel);
                     break;
                 }
@@ -122,7 +120,6 @@ public class SpesialBomb
                     }
                     CrossBomb cross = bomb.GetComponent<CrossBomb>();
 
-                    cross.Initialize(map);
                     cross.Put(coord, exploLevel);
                     break;
                 }
@@ -139,7 +136,6 @@ public class SpesialBomb
                     }
                     PersistentBomb persistent = bomb.GetComponent<PersistentBomb>();
 
-                    persistent.Initialize(map);
                     persistent.Put(coord, exploLevel);
                     break;
                 }
@@ -156,7 +152,6 @@ public class SpesialBomb
                     }
                     NormalBomb transparent = bomb.GetComponent<NormalBomb>();
 
-                    transparent.Initialize(map);
                     transparent.Put(coord, exploLevel);
                     break;
                 }
@@ -173,7 +168,6 @@ public class SpesialBomb
                     }
                     IceBomb ice = bomb.GetComponent<IceBomb>();
 
-                    ice.Initialize(map);
                     ice.Put(coord, exploLevel);
                     break;
                 }
@@ -190,7 +184,6 @@ public class SpesialBomb
                     }
                     MegatonBomb megaton = bomb.GetComponent<MegatonBomb>();
 
-                    megaton.Initialize(map);
                     megaton.Put(coord, m_MegatonExploLevel);
                     break;
                 }
@@ -207,7 +200,6 @@ public class SpesialBomb
                     }
                     PierceBomb pierce = bomb.GetComponent<PierceBomb>();
 
-                    pierce.Initialize(map);
                     pierce.Put(coord, exploLevel);
                     break;
                 }
@@ -224,7 +216,6 @@ public class SpesialBomb
                     }
                     FogBomb heal = bomb.GetComponent<FogBomb>();
 
-                    heal.Initialize(map);
                     heal.Put(coord, exploLevel);
                     break;
                 }
@@ -241,7 +232,6 @@ public class SpesialBomb
                     }
                     FogBomb poizon = bomb.GetComponent<FogBomb>();
 
-                    poizon.Initialize(map);
                     poizon.Put(coord, exploLevel);
                     break;
                 }
@@ -250,6 +240,7 @@ public class SpesialBomb
 
     public void Add(GameMap map)
     {
+        _map = map;
         Debug.Log("あど");
         switch (_type)
         {

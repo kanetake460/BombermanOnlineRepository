@@ -637,18 +637,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &31692930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1888,18 +1876,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &186484614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,6 +2097,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214322679}
+  m_CullTransparentMesh: 1
+--- !u!1 &223974226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223974227}
+  - component: {fileID: 223974229}
+  - component: {fileID: 223974228}
+  m_Layer: 5
+  m_Name: ResultBackGround
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &223974227
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 291420359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &223974228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.98564017, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &223974229
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
   m_CullTransparentMesh: 1
 --- !u!1 &233518846
 GameObject:
@@ -2366,18 +2417,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 9
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2701,6 +2740,7 @@ RectTransform:
   - {fileID: 1637057224}
   - {fileID: 240791179}
   - {fileID: 1060438066}
+  - {fileID: 223974227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3544,18 +3584,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &336478580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3819,18 +3847,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 8
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5108,18 +5124,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 9
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7198,18 +7202,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &893154301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8377,18 +8369,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &955543938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9133,18 +9113,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10207,18 +10175,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1136211768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10693,18 +10649,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1181844584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10909,18 +10853,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 9
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11342,18 +11274,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1235048911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11558,18 +11478,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11885,6 +11793,86 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 958827932528607114, guid: 91d257743c2b60e4e964a6360dc6bebf, type: 3}
   m_PrefabInstance: {fileID: 2011975274}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1281358009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281358012}
+  - component: {fileID: 1281358011}
+  - component: {fileID: 1281358010}
+  m_Layer: 0
+  m_Name: SpesialBomb2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1281358010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281358009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7857bf89706e49a0af7f2f400bff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolParent: {fileID: 0}
+  m_spesialBombMaxCount: 1
+  m_bombMaxValue: 1
+  m_MegatonExploLevel: 2
+  grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+  landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
+  RemoteBomb: {fileID: 0}
+  crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
+  persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
+  megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
+  pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
+  transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
+  iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
+  poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
+  healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
+--- !u!114 &1281358011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281358009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 1281358010}
+  objectType: 524290
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
+--- !u!4 &1281358012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281358009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.740677, y: 58.124226, z: 38.02768}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1286473989
 GameObject:
   m_ObjectHideFlags: 0
@@ -12012,18 +12000,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 7
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12457,6 +12433,7 @@ GameObject:
   - component: {fileID: 1383805133}
   - component: {fileID: 1383805132}
   - component: {fileID: 1383805131}
+  - component: {fileID: 1383805139}
   - component: {fileID: 1383805135}
   - component: {fileID: 1383805136}
   - component: {fileID: 1383805138}
@@ -12580,7 +12557,7 @@ MonoBehaviour:
   m_life: 100
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
-  m_firepower: 5
+  m_firepower: 1
   invncebleTime: 5
   predictLandmarkMask:
     serializedVersion: 2
@@ -12588,38 +12565,8 @@ MonoBehaviour:
   m_mainCamera: {fileID: 963194227}
   m_mapCamera: {fileID: 1269192928}
   m_bomb: {fileID: -1375502178225266207, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
-  m_specialBomb1:
-    m_poolParent: {fileID: 1383805134}
-    m_spesialBombMaxCount: 0
-    m_bombMaxValue: 1
-    m_MegatonExploLevel: 2
-    grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
-    landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
-    RemoteBomb: {fileID: 0}
-    crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
-    persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
-    megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
-    pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
-    transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
-    iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
-    poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
-    healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
-  m_specialBomb2:
-    m_poolParent: {fileID: 1383805134}
-    m_spesialBombMaxCount: 0
-    m_bombMaxValue: 1
-    m_MegatonExploLevel: 2
-    grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
-    landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
-    RemoteBomb: {fileID: 0}
-    crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
-    persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
-    megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
-    pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
-    transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
-    iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
-    poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
-    healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
+  m_specialBomb1: {fileID: 1655137703}
+  m_specialBomb2: {fileID: 1281358010}
   m_playerInfoText: {fileID: 1481765626}
   m_titleCanvas: {fileID: 291420355}
   ui: {fileID: 1414995915}
@@ -12682,6 +12629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
+  - {fileID: 1383805139}
   - {fileID: 1383805135}
   - {fileID: 1383805137}
   objectType: 524291
@@ -12690,6 +12638,33 @@ MonoBehaviour:
   networkInstanceId: -1
   InstantiableBy: 1
   ConnectionClosedBehaviour: 1
+--- !u!114 &1383805139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383805130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7857bf89706e49a0af7f2f400bff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolParent: {fileID: 0}
+  m_spesialBombMaxCount: 1
+  m_bombMaxValue: 1
+  m_MegatonExploLevel: 2
+  grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+  landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
+  RemoteBomb: {fileID: 0}
+  crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
+  persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
+  megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
+  pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
+  transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
+  iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
+  poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
+  healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
 --- !u!1 &1384388182
 GameObject:
   m_ObjectHideFlags: 0
@@ -12781,18 +12756,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13192,18 +13155,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 6
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14171,6 +14122,7 @@ MonoBehaviour:
   - {fileID: 160018930}
   - {fileID: 179628582}
   titleCanvas: {fileID: 291420355}
+  resultCanvas: {fileID: 0}
   finishButton: {fileID: 1520198730}
   okUI:
   - {fileID: 1908674851}
@@ -14590,18 +14542,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -15250,18 +15190,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1565330722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15551,18 +15479,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: TitleResultManager, Assembly-CSharp
         m_MethodName: CallSelectStage
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15928,6 +15844,86 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1109872872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1655137702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655137705}
+  - component: {fileID: 1655137704}
+  - component: {fileID: 1655137703}
+  m_Layer: 0
+  m_Name: SpesialBomb1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1655137703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655137702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7857bf89706e49a0af7f2f400bff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolParent: {fileID: 0}
+  m_spesialBombMaxCount: 1
+  m_bombMaxValue: 1
+  m_MegatonExploLevel: 2
+  grenadeBomb: {fileID: 6268799882381680082, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+  landmineBomb: {fileID: 100609174000261725, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
+  RemoteBomb: {fileID: 0}
+  crossBomb: {fileID: 3137272170271163079, guid: 5ec652ec955784645be4831301ceb538, type: 3}
+  persistentBomb: {fileID: 5262208404670659218, guid: f12d458a67b493f418ffc902d923bf4d, type: 3}
+  megatonBomb: {fileID: 6497990751618578599, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
+  pierceBomb: {fileID: -3249076242847269991, guid: 7b17f1e9a4fee9c44b576000786a07fc, type: 3}
+  transparentBomb: {fileID: -2172111585482037127, guid: f12e334f5962425429284b00b691a956, type: 3}
+  iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
+  poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
+  healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
+--- !u!114 &1655137704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655137702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 1655137703}
+  objectType: 524289
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
+--- !u!4 &1655137705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655137702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.740677, y: 58.124226, z: 38.02768}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675351211
 GameObject:
   m_ObjectHideFlags: 0
@@ -16090,18 +16086,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: TitleResultManager, Assembly-CSharp
         m_MethodName: CallGameStart1
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17307,18 +17291,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1791023639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17652,18 +17624,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -18082,18 +18042,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 9
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -19283,18 +19231,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2008050514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19703,18 +19639,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2028629923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19849,18 +19773,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1491182629}
-        m_TargetAssemblyTypeName: CanvasBook, Assembly-CSharp
-        m_MethodName: CallNextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -20768,3 +20680,5 @@ SceneRoots:
   - {fileID: 1491182628}
   - {fileID: 1109872872}
   - {fileID: 2065065966}
+  - {fileID: 1655137705}
+  - {fileID: 1281358012}
