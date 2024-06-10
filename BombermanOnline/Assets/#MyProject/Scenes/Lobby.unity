@@ -1167,7 +1167,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
       propertyPath: objectType
-      value: 262153
+      value: 262146
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
       propertyPath: m_Name
@@ -2702,11 +2702,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
       propertyPath: objectType
-      value: 262170
+      value: 262149
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
       propertyPath: m_Name
       value: Grenade
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094428007210208929, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8611783670965569473, guid: 40cb8f4953b80224fa5d0a4688de7592, type: 3}
       propertyPath: m_LocalScale.x

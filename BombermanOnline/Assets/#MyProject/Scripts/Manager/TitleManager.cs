@@ -13,7 +13,6 @@ public class TitleResultManager : StrixBehaviour
     {
         gameManager = GameManager.Instance;
         itemManager = gameManager.itemManager;
-        //ActiveOwnPointer();
         for (int i = 0; i < gameManager.RoomMenbers.Count; i++)
         {
             playerName[i].text = gameManager.RoomMenbers[i].GetName();
@@ -44,8 +43,8 @@ public class TitleResultManager : StrixBehaviour
         }
         set
         {
-            gameManager.CallSetReadyCount(value);
-            gameManager.CallGameReady();
+            CallSetReadyCount(value);
+            CallGameReady();
 
             _ready = value;
         }
@@ -73,6 +72,34 @@ public class TitleResultManager : StrixBehaviour
         SceneManager.LoadScene("Lobby");
     }
 
+
+    /// <summary>
+    /// トグルによって準備OKカウントを変更します
+    /// </summary>
+    /// <param name="ready"></param>
+    public void CallSetReadyCount(bool ready) { RpcToAll(nameof(SetReadyCount), ready); }
+    [StrixRpc]
+    private void SetReadyCount(bool ready)
+    {
+        if (ready)
+            gameManager.readyCount++;
+        else
+            gameManager.readyCount--;
+    }
+
+
+    /// <summary>
+    /// みんなが準備OKならゲームを開始します
+    /// </summary>
+    public void CallGameReady() { RpcToAll(nameof(GameReady)); }
+    [StrixRpc]
+    private void GameReady()
+    {
+        if (gameManager.RoomMenbers.Count == gameManager.readyCount)
+        {
+            gameManager.GameStart();
+        }
+    }
 
     /// <summary>
     /// タイトルキャンバスをInActiveにし、マップを生成します
