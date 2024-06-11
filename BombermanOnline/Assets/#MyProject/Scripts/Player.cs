@@ -1,5 +1,6 @@
 using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
@@ -108,6 +109,11 @@ public class Player : Base
     // 爆弾
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
+
+    // 特殊爆弾
+    [SerializeField] SpesialBomb.BombType m_specialBombType1;
+    [SerializeField] SpesialBomb.BombType m_specialBombType2;
+
 
     // 無敵
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
@@ -245,10 +251,13 @@ public class Player : Base
     [StrixRpc]
     private void GameOver()
     {
-        m_mainCamera.transform.position = Pos = mapCameraPos;
-        m_mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
-        gameObj.SetActive(false);
-        m_mainCamera.GetComponent<CameraView>().enabled = false;
+        if (isLocal)
+        {
+            m_mainCamera.transform.position = Pos = mapCameraPos;
+            m_mainCamera.transform.rotation = Rot = Quaternion.Euler(90f, 0f, 0f);
+            gameObj.SetActive(false);
+            m_mainCamera.GetComponent<CameraView>().enabled = false;
+        }
         ui.ShowGameText("P" + (PlayerIndex + 1) + ":" + PlayerName + " is Down", 2);
     }
     // ーーーーープレイヤーアクションーーーーー
@@ -328,7 +337,7 @@ public class Player : Base
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
      
-        m_specialBomb1.GenerateSpesialBomb(Coord, dir, m_firepower);
+        m_specialBomb1.GenerateSpesialBomb(m_specialBombType1,Coord, dir, m_firepower);
         AudioManager.PlayOneShot("特殊爆弾を置く");
     }
     private void CallGenarateSpesialBomb2() { RpcToAll(nameof(GenarateSpesialBomb2)); }
@@ -337,7 +346,7 @@ public class Player : Base
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
 
-        m_specialBomb2.GenerateSpesialBomb(Coord, dir, m_firepower);
+        m_specialBomb2.GenerateSpesialBomb(m_specialBombType2,Coord, dir, m_firepower);
         AudioManager.PlayOneShot("特殊爆弾を置く");
     }
 
@@ -459,15 +468,19 @@ public class Player : Base
     }
 
     // ーーーーー特殊爆弾処理ーーーーー
-    public void SetSpesialBombType(int slot,SpesialBomb.BombType type)
+    public void CallSetSpecialBombType(int slot,int type) { RpcToAll(nameof(SetSpecialBombType),slot,type); }
+    [StrixRpc]
+    public void SetSpecialBombType(int slot,int type)
     {
         if (slot == 0)
         {
-            m_specialBomb1.SetBombType(type);
+            m_specialBombType1 = (SpesialBomb.BombType)Enum.ToObject(typeof(SpesialBomb.BombType), type);
+            m_specialBomb1.ClearBombType();
         }
         else if(slot == 1) 
         {
-            m_specialBomb2.SetBombType(type);
+            m_specialBombType2 = (SpesialBomb.BombType)Enum.ToObject(typeof(SpesialBomb.BombType), type);
+            m_specialBomb2.ClearBombType();
         }
         else
         {
@@ -475,15 +488,17 @@ public class Player : Base
         }
     }
 
-    public void AddSpesialBombType(int slot)
+    public void CallAddSpecialBomb(int slot) { RpcToAll(nameof(AddSpecialBomb), slot); }
+    [StrixRpc]
+    public void AddSpecialBomb(int slot)
     {
         if (slot == 0)
         {
-            m_specialBomb1.Add(map);
+            m_specialBomb1.Add(m_specialBombType1,map);
         }
         else if (slot == 1)
         {
-            m_specialBomb2.Add(map);
+            m_specialBomb2.Add(m_specialBombType2,map);
         }
         else
         {

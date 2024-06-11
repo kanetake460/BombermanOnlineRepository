@@ -1,3 +1,4 @@
+using SoftGear.Strix.Unity.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SpesialBombSlotUI : DroppedUI
+public class SpesialBombSlotUI : StrixDroppedUI
 {
     /// <summary>
     /// ドロップされた時の処理
@@ -16,8 +17,7 @@ public class SpesialBombSlotUI : DroppedUI
         SpesialBombSelectUI bombInfo = eventData.pointerDrag.GetComponent<SpesialBombSelectUI>();
         if (bombInfo != null)
         {
-            player.SetSpesialBombType(slot,bombInfo.Type);
-            player.AddSpesialBombType(slot);
+            SetInfo(bombInfo.Type);
             SetImage(bombInfo);
             AudioManager.PlayOneShot("爆弾設定");
         }
@@ -34,5 +34,12 @@ public class SpesialBombSlotUI : DroppedUI
     private void SetImage(SpesialBombSelectUI bombInfo)
     {
         GetComponent<Image>().sprite = bombInfo.ImageSprite;
+    }
+
+    private void SetInfo(SpesialBomb.BombType type)
+    {
+        Debug.Log("セットインフォ");
+        player.CallSetSpecialBombType(slot, (int)type);
+        player.CallAddSpecialBomb(slot);
     }
 }

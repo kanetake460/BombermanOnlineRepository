@@ -17,7 +17,7 @@ public class SpesialBomb : StrixBehaviour
     [SerializeField] Transform m_poolParent;
 
     [Header("パラメーター")]
-    private BombType _type;
+    private BombType type;
     [SerializeField] int m_spesialBombMaxCount;
     [SerializeField] int m_bombMaxValue;
     [SerializeField] int m_MegatonExploLevel;
@@ -36,7 +36,6 @@ public class SpesialBomb : StrixBehaviour
     [SerializeField] FogBomb healBomb;
 
     private Pool<GameObject> _spesialPool = new Pool<GameObject>();
-    private GameMap _map;
 
     public enum BombType
     {
@@ -55,13 +54,11 @@ public class SpesialBomb : StrixBehaviour
 
     // ===関数====================================================
     /// <summary>
-    /// ボムを変更します。
-    /// プールを一度空にする
+    /// プールを空にする
     /// </summary>
     /// <param name="type">変更するタイプ</param>
-    public void SetBombType(BombType type)
+    public void ClearBombType()
     {
-        _type = type;
         _spesialPool.list.Clear();
     }
 
@@ -72,9 +69,9 @@ public class SpesialBomb : StrixBehaviour
     /// <param name="map">マップ情報</param>
     /// <param name="playerTrafo">プレイヤーのトランスフォーム</param>
     /// <param name="exploLevel">爆発レベル</param>
-    public void GenerateSpesialBomb(Coord coord,Vector3 dir, int exploLevel)
+    public void GenerateSpesialBomb(BombType type,Coord coord,Vector3 dir, int exploLevel)
     {
-        switch (_type)
+        switch (type)
         {
             // 手榴弾
             case BombType.GrenadeBomb:
@@ -104,7 +101,7 @@ public class SpesialBomb : StrixBehaviour
                     }
                     LandmineBomb landmine = bomb.GetComponent<LandmineBomb>();
 
-                    landmine.Put(coord,exploLevel);
+                    landmine.Put(coord, exploLevel);
                     break;
                 }
 
@@ -238,11 +235,10 @@ public class SpesialBomb : StrixBehaviour
         }
     }
 
-    public void Add(GameMap map)
+    public void Add(BombType type,GameMap map)
     {
-        _map = map;
         Debug.Log("あど");
-        switch (_type)
+        switch (type)
         {
             // 手榴弾
             case BombType.GrenadeBomb:

@@ -206,7 +206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: objectType
-      value: 262157
+      value: 262159
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: m_Name
@@ -2854,7 +2854,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: objectType
-      value: 262145
+      value: 262162
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: m_Name
@@ -2878,15 +2878,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8611783670965569473, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8611783670965569473, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8611783670965569473, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8611783670965569473, guid: 5ec652ec955784645be4831301ceb538, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3103,7 +3103,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: objectType
-      value: 262168
+      value: 262160
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: m_Name
@@ -3667,8 +3667,8 @@ SceneRoots:
   - {fileID: 266295322}
   - {fileID: 88723688}
   - {fileID: 994291356}
-  - {fileID: 1485715764}
   - {fileID: 1535838389}
+  - {fileID: 1485715764}
   - {fileID: 364317257}
   - {fileID: 1694124844}
   - {fileID: 446375620}
