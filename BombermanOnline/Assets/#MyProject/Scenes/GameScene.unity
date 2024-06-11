@@ -1652,7 +1652,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 650, y: 550}
+  m_SizeDelta: {x: 650, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184878227
 MonoBehaviour:
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u7279\u5FB4\n\u7206\u767A\u529B\n\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\n\u898B\u305F\u76EE"
+  m_text: "\u3010\u540D\u524D\u3011\n\u3010\u7279\u5FB4\u3011\n\u3010\u7206\u767A\u529B\u3011\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u3010\u898B\u305F\u76EE\u3011"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9a1a8ef9c4b61147bb9522607dd73c7, type: 2}
   m_sharedMaterial: {fileID: 6263483651000165035, guid: c9a1a8ef9c4b61147bb9522607dd73c7, type: 2}
@@ -1701,8 +1701,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3309,8 +3309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 8
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30D4\u30A2\u30B9\n\n\u3010\u7279\u5FB4\u3011\n\u8CAB\u901A\u3057\u3066\u7206\u767A\u3059\u308B\n\n\u3010\u7206\u767A\u529B\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EFirePower\u306B\u4F9D\u5B58\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u9EC4\u8272\u3068\u9ED2\u306E\u30DC\u30FC\u30C0\u30FC"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &317235282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4336,8 +4337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 10
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30DD\u30A4\u30BA\u30F3\n\n\u3010\u7279\u5FB4\u3011\n\u6BD2\u9727\u3092\u767A\u751F\u3055\u305B\u308B\n\n\u3010\u9727\u306E\u7BC4\u56F2\u3011\n\u7F6E\u3044\u305F\u30DE\u30B9\u3092\u4E2D\u5FC3\u3068\u3057\u305F\uFF13\xD7\uFF13\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u6BD2\u306E\u3088\u3046"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &446692537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5269,8 +5271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 9
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30D2\u30FC\u30EB\n\n\u3010\u7279\u5FB4\u3011\n\u56DE\u5FA9\u9727\u3092\u767A\u751F\u3055\u305B\u308B\n\n\u3010\u9727\u306E\u7BC4\u56F2\u3011\n\u7F6E\u3044\u305F\u30DE\u30B9\u3092\u4E2D\u5FC3\u3068\u3057\u305F\uFF13\xD7\uFF13\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u30D4\u30F3\u30AF\u3068\u767D\u306E\u9727"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &668732013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7720,8 +7723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 4
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30D5\u30A1\u30A4\u30E4\u30FC\n\n\u3010\u7279\u5FB4\u3011\n\u7206\u767A\u6642\u9593\u304C\u9577\u3044\n\n\u3010\u7206\u767A\u529B\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EFirePower\u306B\u4F9D\u5B58\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u30895\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u71C3\u3048\u3066\u3044\u308B"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &919642478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7823,8 +7827,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 1
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u5730\u96F7\n\n\u3010\u7279\u5FB4\u3011\n\u5730\u9762\u306B\u57CB\u3081\u308B\u3053\u3068\u304C\u3067\u304D\u308B\n\n\u3010\u7206\u767A\u529B\u3011\n\u57CB\u3081\u305F\uFF11\u30DE\u30B9\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u304C\u4E0A\u3092\u901A\u3063\u305F\u3068\u304D\n\u4ED6\u306E\u7206\u767A\u304C\u4E0A\u3067\u8D77\u304D\u305F\u3068\u304D\n\n\u3010\u898B\u305F\u76EE\u3011\n\u5730\u9762\u306B\u57CB\u307E\u3063\u3066\u3044\u308B"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &929390788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8836,8 +8841,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 6
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30A2\u30A4\u30B9\n\n\u3010\u7279\u5FB4\u3011\n\u5730\u9762\u3092\u51CD\u3089\u305B\u308B\n\n\u3010\u7206\u767A\u529B\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EFirePower\u306B\u4F9D\u5B58\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u6C37\u306E\u3088\u3046"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &990858531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13442,8 +13448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 5
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30B9\u30B1\u30EB\u30C8\u30F3\n\n\u3010\u7279\u5FB4\u3011\n\u900F\u660E\u3067\u898B\u3048\u306B\u304F\u3044\n\n\u3010\u7206\u767A\u529B\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EFirePower\u306B\u4F9D\u5B58\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u900F\u3051\u3066\u3044\u308B"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &1436577742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15651,8 +15658,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 3
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30AF\u30ED\u30B9\n\n\u3010\u7279\u5FB4\u3011\n\u659C\u3081\u65B9\u5411\u306B\u8CAB\u901A\u3057\u3066\u7206\u767A\u3059\u308B\n\n\u3010\u7206\u767A\u529B\u3011\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306EFirePower\u306B\u4F9D\u5B58\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF15\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u659C\u3081\u306E\u30AA\u30EC\u30F3\u30B8\u306E\u7DDA\u304C\u5165\u3063\u3066\u3044\u308B"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &1624788560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16736,8 +16744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 0
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30B0\u30EC\u30CD\u30FC\u30C9\n\n\u3010\u7279\u5FB4\u3011\n\u6B63\u9762\u306B\u6295\u3052\u308B\u3053\u3068\u304C\u3067\u304D\u308B\n\n\u3010\u7206\u767A\u529B\u3011\n\u7740\u5730\u3057\u305F2\u30DE\u30B9\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u6295\u3052\u3066\u304B\u30895\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u5C0F\u3055\u3044\u898B\u305F\u76EE\u3067\u30AF\u30EB\u30AF\u30EB\u56DE\u3063\u3066\u3044\u308B"
+  explanationTmp: {fileID: 184878227}
 --- !u!225 &1737703620
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -19073,8 +19082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa861bf7b7dc1f4e96479fdb47629e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombType: 7
-  bombExplanation: 
+  type: 0
+  explanation: "\u3010\u540D\u524D\u3011\n\u30E1\u30AC\u30C8\u30F3\n\n\u3010\u7279\u5FB4\u3011\n\u3067\u304B\u3044\u7206\u767A\n\n\u3010\u7206\u767A\u529B\u3011\n\u7F6E\u3044\u305F\u30DE\u30B9\u3092\u4E2D\u5FC3\u3068\u3057\u305F\uFF15\xD7\uFF15\n\n\u3010\u7206\u767A\u30BF\u30A4\u30DF\u30F3\u30B0\u3011\n\u7F6E\u3044\u3066\u304B\u3089\uFF11\uFF10\u79D2\u5F8C\n\n\u3010\u898B\u305F\u76EE\u3011\n\u3067\u304B\u3044\u3001\u8D64\u3068\u767D\u306E\u30DC\u30FC\u30C0\u30FC"
+  explanationTmp: {fileID: 184878227}
 --- !u!114 &2004325611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20474,8 +20484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 550, y: 150}
-  m_SizeDelta: {x: 700, y: 600}
+  m_AnchoredPosition: {x: 550, y: 170}
+  m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128741504
 MonoBehaviour:

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SpesialBombSelectUI : DraggableUI
 {
@@ -10,6 +12,16 @@ public class SpesialBombSelectUI : DraggableUI
     protected override void Awake()
     {
         base.Awake();
+    }
+
+
+    /// <summary>
+    /// マウスカーソルが乗っているときの処理（イベント関数）
+    /// </summary>
+    /// <param name="eventData"></param>
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        explanationTmp.text = explanation;
     }
 
     /// <summary>
@@ -28,7 +40,6 @@ public class SpesialBombSelectUI : DraggableUI
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
-
     }
 
 
@@ -42,8 +53,19 @@ public class SpesialBombSelectUI : DraggableUI
     }
 
     // ===変数====================================================
-    public SpesialBomb.BombType bombType = new SpesialBomb.BombType();
+    [Header("パラメーター")]
+    [SerializeField]
+    private SpesialBomb.BombType type = new SpesialBomb.BombType();
 
-    [TextArea]
-    public string bombExplanation;
+    [SerializeField,TextArea]
+    private string explanation;
+
+    [Header("参照")]
+    [SerializeField] TextMeshProUGUI explanationTmp;
+
+    // ===プロパティ=================================================
+    public SpesialBomb.BombType Type => type;
+
+    public Sprite ImageSprite => GetComponent<Image>().sprite;
+
 }

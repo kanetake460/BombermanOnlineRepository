@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Vector3 _firstPos;
     private RectTransform _rectTransform;
@@ -18,6 +18,24 @@ public class DraggableUI : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDr
         _canvas = GetComponentInParent<Canvas>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _firstPos = _rectTransform.localPosition;
+    }
+
+
+    /// <summary>
+    /// マウスカーソルがUIの上にある時の処理
+    /// </summary>
+    public virtual void OnPointerEnter(PointerEventData eventData)
+    {
+        // ここで他の処理を追加できます
+    }
+
+
+    /// <summary>
+    /// マウスカーソルがUIの上から離れた時の処理
+    /// </summary>
+    public virtual void OnPointerExit(PointerEventData eventData)
+    {
+        // ここで他の処理を追加できます
     }
 
 

@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SpesialBombSlotUI : DroppedUI
 {
-    [SerializeField] Player player;
-    [SerializeField] int slot;
-
-    private Sprite _currSprite;
-
     /// <summary>
     /// ÉhÉçÉbÉvÇ≥ÇÍÇΩéûÇÃèàóù
     /// </summary>
@@ -20,16 +16,23 @@ public class SpesialBombSlotUI : DroppedUI
         SpesialBombSelectUI bombInfo = eventData.pointerDrag.GetComponent<SpesialBombSelectUI>();
         if (bombInfo != null)
         {
-            player.SetSpesialBombType(slot,bombInfo.bombType);
+            player.SetSpesialBombType(slot,bombInfo.Type);
             player.AddSpesialBombType(slot);
-            SetImage(eventData);
+            SetImage(bombInfo);
             AudioManager.PlayOneShot("îöíeê›íË");
         }
     }
 
+    // ===ïœêî====================================================
+    [SerializeField] Player player;
+    [SerializeField] int slot;
 
-    private void SetImage(PointerEventData eventData)
+
+
+    // ===ä÷êî====================================================
+
+    private void SetImage(SpesialBombSelectUI bombInfo)
     {
-        GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+        GetComponent<Image>().sprite = bombInfo.ImageSprite;
     }
 }
