@@ -20,10 +20,12 @@ namespace TakeshiLibrary
         public static void SetGUIStyle(GUIStyle gUIStyle, Texture2D trueTexture, Texture2D falseTextrue, Texture2D pushTexture)
         {
             // テクスチャを設定
-            if (trueTexture == null || trueTexture == null || pushTexture == null)
-            {
-                Debug.LogError("テクスチャファイルが見つかりません！");
-            }
+            if (trueTexture == null)
+                Debug.LogError("trueテクスチャファイルが見つかりません！");
+            if (falseTextrue == null)
+                Debug.LogError("falseテクスチャファイルが見つかりません！");
+            if (pushTexture == null)
+                Debug.LogError("pushテクスチャファイルが見つかりません！");
             else
             {
                 // true

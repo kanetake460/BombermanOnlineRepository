@@ -101,9 +101,10 @@ namespace TakeshiLibrary
         private void InitGUIStyles()
         {
             // テクスチャ取得
-            _spaceTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/FrameCell.png") as Texture2D;
-            _wallTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/BlackCell.png") as Texture2D;
-            _pushTexture = EditorGUIUtility.Load("Assets/Sprite/EditorTexture/ColorCells/OrangeCell.png") as Texture2D;
+            _spaceTexture = EditorGUIUtility.Load("Assets/Editor/EditorTexture/ColorCells/FrameCell.png") as Texture2D;
+            _wallTexture = EditorGUIUtility.Load("Assets/Editor/EditorTexture/ColorCells/BlackCell.png") as Texture2D;
+            _pushTexture = EditorGUIUtility.Load("Assets/Editor/EditorTexture/ColorCells/OrangeCell.png") as Texture2D;
+
 
             // セルトグル初期化
             GUIUtilityT.SetGUIStyle(_cellToggleStyle, _spaceTexture, _wallTexture, _pushTexture);

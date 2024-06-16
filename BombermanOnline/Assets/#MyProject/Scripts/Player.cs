@@ -17,7 +17,6 @@ public class Player : Base
         gameManager = GameManager.Instance;
         fps ??= new FPS(map.m_mapSet, rb, gameObject, m_mainCamera.gameObject);
         InitPlayer();
-        InitLocalPlayer();
     }
 
 
@@ -235,16 +234,6 @@ public class Player : Base
 
 
     /// <summary>
-    /// Localのプレイヤーの初期化をします
-    /// この関数はStart関数で呼び出します
-    /// </summary>
-    private void InitLocalPlayer()
-    {
-
-    }
-
-
-    /// <summary>
     /// ゲームオーバー
     /// </summary>
     private void CallGameOver() { RpcToAll(nameof(GameOver)); }
@@ -336,9 +325,15 @@ public class Player : Base
     private void GenarateSpesialBomb1()
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
-     
-        m_specialBomb1.GenerateSpesialBomb(m_specialBombType1,Coord, dir, m_firepower);
-        AudioManager.PlayOneShot("特殊爆弾を置く");
+
+        if (m_specialBomb1.GenerateSpesialBomb(m_specialBombType1, Coord, dir, m_firepower))
+        {
+            AudioManager.PlayOneShot("特殊爆弾を置く");
+        }
+        else
+        {
+            AudioManager.PlayOneShot("爆弾がない");
+        }
     }
     private void CallGenarateSpesialBomb2() { RpcToAll(nameof(GenarateSpesialBomb2)); }
     [StrixRpc]
@@ -346,8 +341,14 @@ public class Player : Base
     {
         Vector3 dir = FPS.GetVector3FourDirection(Trafo.rotation.eulerAngles);
 
-        m_specialBomb2.GenerateSpesialBomb(m_specialBombType2,Coord, dir, m_firepower);
-        AudioManager.PlayOneShot("特殊爆弾を置く");
+        if (m_specialBomb2.GenerateSpesialBomb(m_specialBombType2, Coord, dir, m_firepower))
+        {
+            AudioManager.PlayOneShot("特殊爆弾を置く");
+        }
+        else
+        {
+            AudioManager.PlayOneShot("爆弾がない");
+        }
     }
 
     // ーーーーーアイテムの処理ーーーーーー

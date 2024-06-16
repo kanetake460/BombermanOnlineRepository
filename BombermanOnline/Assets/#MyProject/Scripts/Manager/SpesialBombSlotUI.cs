@@ -26,6 +26,7 @@ public class SpesialBombSlotUI : StrixDroppedUI
     // ===ïœêî====================================================
     [SerializeField] Player player;
     [SerializeField] int slot;
+    [SerializeField] UIManager uiManager;
 
 
 
@@ -34,6 +35,7 @@ public class SpesialBombSlotUI : StrixDroppedUI
     private void SetImage(SpesialBombSelectUI bombInfo)
     {
         GetComponent<Image>().sprite = bombInfo.ImageSprite;
+        uiManager.SetSpecialBombUI(slot,bombInfo.ImageSprite);
     }
 
     private void SetInfo(SpesialBomb.BombType type)

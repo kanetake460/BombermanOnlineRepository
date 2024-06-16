@@ -38,6 +38,8 @@ public class UIManager : StrixBehaviour
     [SerializeField] Image damageEffect;
     [SerializeField] TextMeshProUGUI firepowerText;
     [SerializeField] TextMeshProUGUI gameText;
+    [SerializeField] Image specialBombUI1;
+    [SerializeField] Image specialBombUI2;
     [SerializeField] Player player;
 
     [Header("パラメーター")]
@@ -47,6 +49,28 @@ public class UIManager : StrixBehaviour
     private readonly Color damageColor = new Color(1,0,0,0.8f);
 
     // ===関数====================================================
+    /// <summary>
+    /// スペシャルボムUIを設定します。
+    /// </summary>
+    /// <param name="slot">スロット</param>
+    /// <param name="sprite">スプライト</param>
+    /// <exception cref="Exception">存在しないスロット</exception>
+    public void SetSpecialBombUI(int slot,Sprite sprite)
+    {
+        if (slot == 0)
+        {
+            specialBombUI1.sprite = sprite;
+        }
+        else if (slot == 1)
+        {
+            specialBombUI2.sprite = sprite;
+        }
+        else
+        {
+            throw new Exception("そのスロットはない！");
+        }
+    }
+
     /// <summary>ボムUI表示</summary>
     public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);
 

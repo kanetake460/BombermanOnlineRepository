@@ -69,7 +69,7 @@ public class SpesialBomb : StrixBehaviour
     /// <param name="map">ƒ}ƒbƒvî•ñ</param>
     /// <param name="playerTrafo">ƒvƒŒƒCƒ„[‚Ìƒgƒ‰ƒ“ƒXƒtƒH[ƒ€</param>
     /// <param name="exploLevel">”š”­ƒŒƒxƒ‹</param>
-    public void GenerateSpesialBomb(BombType type,Coord coord,Vector3 dir, int exploLevel)
+    public bool GenerateSpesialBomb(BombType type,Coord coord,Vector3 dir, int exploLevel)
     {
         switch (type)
         {
@@ -81,12 +81,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     GrenadeBomb grenade = bomb.GetComponent<GrenadeBomb>();
 
                     grenade.Throw(coord, dir);
-                    break;
+                    return true;
                 }
 
             // ’n—‹’e
@@ -97,12 +97,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     LandmineBomb landmine = bomb.GetComponent<LandmineBomb>();
 
                     landmine.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // ƒNƒƒX”š’e
@@ -113,12 +113,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     CrossBomb cross = bomb.GetComponent<CrossBomb>();
 
                     cross.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // ‘±”š’e
@@ -129,12 +129,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     PersistentBomb persistent = bomb.GetComponent<PersistentBomb>();
 
                     persistent.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // “§–¾”š’e
@@ -145,12 +145,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     NormalBomb transparent = bomb.GetComponent<NormalBomb>();
 
                     transparent.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // •XŒ‹”š’e
@@ -161,12 +161,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     IceBomb ice = bomb.GetComponent<IceBomb>();
 
                     ice.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // ƒƒKƒgƒ“”š’e
@@ -177,12 +177,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     MegatonBomb megaton = bomb.GetComponent<MegatonBomb>();
 
                     megaton.Put(coord, m_MegatonExploLevel);
-                    break;
+                    return true;
                 }
 
             // ŠÑ’Ê”š’e
@@ -193,12 +193,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     PierceBomb pierce = bomb.GetComponent<PierceBomb>();
 
                     pierce.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // ‰ñ•œ”š’e
@@ -209,12 +209,12 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     FogBomb heal = bomb.GetComponent<FogBomb>();
 
                     heal.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
 
             // “Å”š’e
@@ -225,14 +225,15 @@ public class SpesialBomb : StrixBehaviour
                     if (bomb == null)
                     {
                         Debug.Log("”š’e‚ª‚È‚¢I");
-                        return;
+                        return false;
                     }
                     FogBomb poizon = bomb.GetComponent<FogBomb>();
 
                     poizon.Put(coord, exploLevel);
-                    break;
+                    return true;
                 }
         }
+        return false;
     }
 
     public void Add(BombType type,GameMap map)
