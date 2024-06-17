@@ -536,11 +536,11 @@ public class Player : Base
     {
         if (Special1MaxCount <= 0 && Special1LockTime <= 0)
         {
-            AddSpecialBomb(Slot1);
+            CallAddSpecialBomb(Slot1);
         }
         if (Special2MaxCount <= 0 && Special2LockTime <= 0)
         {
-            AddSpecialBomb(Slot2);
+            CallAddSpecialBomb(Slot2);
         }
     }
 

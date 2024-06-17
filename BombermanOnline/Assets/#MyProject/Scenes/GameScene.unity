@@ -13225,7 +13225,7 @@ MonoBehaviour:
   m_upSpeed: 2
   m_defaultDrag: 15
   m_slipDrag: 5
-  m_life: 1
+  m_life: 100
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
   m_firepower: 1
