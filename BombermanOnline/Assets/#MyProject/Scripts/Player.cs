@@ -63,6 +63,10 @@ public class Player : Base
                 case ItemLifeTag:
                     LifeUp();
                     break;
+
+                case ItemBrickTag:
+                    BrickUp();
+                    break;
             }
 
             AudioManager.PlayOneShot("アイテムゲット");
@@ -115,6 +119,11 @@ public class Player : Base
     private const int Slot1 = 0;
     private const int Slot2 = 1;
 
+    // 人工石
+    private int _brickCount = 0;                    // 持っているレンガの数
+    [SerializeField] private int m_brickUpValue;    // アイテムを拾った時の上昇量
+    [SerializeField] private int m_brickValue;      // 生成に必要なレンガの量
+
     // 無敵
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
     private bool isInvincible = false;
@@ -132,6 +141,7 @@ public class Player : Base
     private const string ItemFireTag = "Item_Fire";
     private const string ItemSpeedTag = "Item_Speed";
     private const string ItemLifeTag = "Item_Life";
+    private const string ItemBrickTag = "Item_Brick";
     private const string ExplosionTag = "Explosion";
     private const string FrozenFloorTag = "FrozenFloor";
 
@@ -321,7 +331,15 @@ public class Player : Base
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            CallGenerateArtificialStone();
+            if (_brickCount >= m_brickValue)
+            {
+                _brickCount -= m_brickValue;
+                CallGenerateArtificialStone();
+            }
+            else 
+            {
+                Debug.Log("レンガが足りない！");
+            }
         }
     }
 
@@ -427,6 +445,14 @@ public class Player : Base
     private void LifeUp()
     {
         Life += 10;
+    }
+
+    /// <summary>
+    /// レンガを増やします
+    /// </summary>
+    private void BrickUp()
+    {
+        _brickCount += m_brickUpValue;
     }
 
 
