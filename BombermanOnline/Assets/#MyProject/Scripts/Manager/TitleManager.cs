@@ -1,6 +1,7 @@
 using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
 using System;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -54,8 +55,8 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI[] itemCountText;
     [SerializeField] TextMeshProUGUI[] playerName;
     [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject resultCanvas;
-    [SerializeField] GameObject finishButton;
+    [SerializeField] GameObject result;
+    [SerializeField] TextMeshProUGUI winnerName;
     [SerializeField] Image[] okUI;
 
     [Header("オブジェクト参照")]
@@ -65,6 +66,20 @@ public class TitleResultManager : StrixBehaviour
 
 
     // ===関数====================================================
+
+    /// <summary>
+    /// リザルト画面を表示します
+    /// </summary>
+    public void CallShowResult() { RpcToAll(nameof(ShowResult)); }
+    [StrixRpc]
+    private void ShowResult()
+    {
+        result.SetActive(true);
+        winnerName.text = gameManager.PlayerList.First().PlayerName;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+
     /// <summary>
     /// ゲームを終了させ、ロビーに戻ります
     /// </summary>
@@ -74,11 +89,6 @@ public class TitleResultManager : StrixBehaviour
     {
         SceneManager.LoadScene("Lobby");
     }
-
-    /// <summary>
-    /// ゲームをスタートさせます
-    /// </summary>
-    public void StartGame() => gameManager.IsGaming = true;
 
 
     /// <summary>
@@ -113,7 +123,7 @@ public class TitleResultManager : StrixBehaviour
     {
         if (gameManager.RoomMenbers.Count == gameManager.readyCount)
         {
-            StartGame();
+            gameManager.GameStart();
             book.CallClose();
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -133,21 +143,10 @@ public class TitleResultManager : StrixBehaviour
 
 
     /// <summary>
-    /// リザルト画面を表示します
+    /// アイテムを増やします
     /// </summary>
-    public void CallShowResult() { RpcToAll(nameof(ShowResult)); }
-    [StrixRpc]
-    private void ShowResult()
-    {
-        resultCanvas.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-/// <summary>
-/// アイテムを増やします
-/// </summary>
-/// <param name="itemIndex">アイテムインデックス</param>
-public void CallIncItem(int index) { RpcToAll(nameof(IncItem),index); }
+    /// <param name="itemIndex">アイテムインデックス</param>
+    public void CallIncItem(int index) { RpcToAll(nameof(IncItem),index); }
     [StrixRpc]
     public void IncItem(int itemIndex)
     {

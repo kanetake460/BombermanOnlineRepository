@@ -39,7 +39,7 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     /// 別のクラスに作って、参照すると、シンクロ変数になるので、ゲームマネージャーに作る
     public int readyCount = 0;
 
-
+    private List<Player> playerList;
     private float gameTime = 0;
     // ===プロパティ=================================================
     /// <summary>ルームメンバーリスト</summary>
@@ -50,8 +50,11 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     {
         get
         {
-            var playerObjs = GameObject.FindGameObjectsWithTag("Player");
-            return playerObjs.Select(obj => obj.GetComponent<Player>()).ToList();
+            if(playerList == null)
+            {
+                playerList = GameObject.FindGameObjectsWithTag("Player").Select(obj => obj.GetComponent<Player>()).ToList();
+            }
+            return playerList;
         }
     }
 
@@ -63,6 +66,10 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
 
     // ===関数====================================================
 
+    public void GameStart()
+    {
+        IsGaming = true;
+    }
 }
 
 

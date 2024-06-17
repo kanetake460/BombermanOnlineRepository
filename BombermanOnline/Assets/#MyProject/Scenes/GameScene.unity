@@ -2257,7 +2257,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223974226}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2265,7 +2265,7 @@ RectTransform:
   - {fileID: 1520198734}
   - {fileID: 144768864}
   - {fileID: 620884868}
-  m_Father: {fileID: 291420359}
+  m_Father: {fileID: 1222872810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2877,7 +2877,6 @@ RectTransform:
   - {fileID: 1637057224}
   - {fileID: 240791179}
   - {fileID: 1060438066}
-  - {fileID: 223974227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11557,7 +11556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1222872807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11616,7 +11615,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -11632,7 +11631,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 223974227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13225,7 +13225,7 @@ MonoBehaviour:
   m_upSpeed: 2
   m_defaultDrag: 15
   m_slipDrag: 5
-  m_life: 100
+  m_life: 1
   m_lifeMaxValue: 100
   m_bombMaxValue: 5
   m_firepower: 1
@@ -13245,6 +13245,7 @@ MonoBehaviour:
   m_playerInfoText: {fileID: 1481765626}
   m_titleCanvas: {fileID: 291420355}
   ui: {fileID: 1414995915}
+  titleResultManager: {fileID: 1491182626}
 --- !u!54 &1383805136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14967,8 +14968,8 @@ MonoBehaviour:
   - {fileID: 160018930}
   - {fileID: 179628582}
   titleCanvas: {fileID: 291420355}
-  resultCanvas: {fileID: 0}
-  finishButton: {fileID: 1520198730}
+  result: {fileID: 1222872806}
+  winnerName: {fileID: 144768865}
   okUI:
   - {fileID: 1908674851}
   - {fileID: 1062493483}

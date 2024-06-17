@@ -1,8 +1,5 @@
-using OpenCover.Framework.Model;
-using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
 using TMPro;
@@ -150,6 +147,7 @@ public class Player : Base
 
     [Header("コンポーネント")]
     [SerializeField] UIManager ui;
+    [SerializeField] TitleResultManager titleResultManager;
     FPS fps;
 
     // ===プロパティ================================================================================
@@ -234,6 +232,13 @@ public class Player : Base
         if (m_life <= 0)
         {
             CallGameOver();
+            if (gameManager.IsGameFinish)
+                titleResultManager.CallShowResult();
+        }
+        if (Input.GetKeyDown(KeyCode.Delete)) 
+        {
+            if(gameManager.IsGameFinish)
+                titleResultManager.CallShowResult();
         }
     }
 
@@ -266,6 +271,7 @@ public class Player : Base
             gameObj.SetActive(false);
             m_mainCamera.GetComponent<CameraView>().enabled = false;
         }
+        gameManager.PlayerList.Remove(this);
         ui.ShowGameText("P" + (PlayerIndex + 1) + ":" + PlayerName + " is Down", 2);
     }
     // ーーーーープレイヤーアクションーーーーー
