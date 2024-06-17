@@ -21,6 +21,9 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     {
         base.Update();
 
+        if(IsGaming)
+            gameTime += Time.deltaTime;
+        
         AudioManager.PlayBGM("ゲームBGM", 0.0f);
 
     }
@@ -31,11 +34,13 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     public Pool<Explosion> exploPool = new Pool<Explosion>();
     public Pool<Explosion> longExploPool = new Pool<Explosion>();
     public Pool<Explosion> iceExploPool = new Pool<Explosion>();
-    
+
 
     /// 別のクラスに作って、参照すると、シンクロ変数になるので、ゲームマネージャーに作る
     public int readyCount = 0;
 
+
+    private float gameTime = 0;
     // ===プロパティ=================================================
     /// <summary>ルームメンバーリスト</summary>
     public IList<CustomizableMatchRoomMember> RoomMenbers => StrixNetwork.instance.sortedRoomMembers;
@@ -51,8 +56,10 @@ public class GameManager : SingletonStrixBehaviour<GameManager>
     }
 
     public bool IsGameFinish => PlayerList.Count <= 1;
-    
-    public bool IsGaming { get;set; } = false;
+
+    public bool IsGaming { get; set; } = false;
+
+    public float GameTime => Mathf.Floor(gameTime);
 
     // ===関数====================================================
 

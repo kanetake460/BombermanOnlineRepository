@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Unity.Runtime;
 using System;
@@ -112,7 +113,10 @@ public class Player : Base
     // 特殊爆弾
     [SerializeField] SpesialBomb.BombType m_specialBombType1;
     [SerializeField] SpesialBomb.BombType m_specialBombType2;
-
+    [SerializeField] float m_specialBombLockTime1;
+    [SerializeField] float m_specialBombLockTime2;
+    private const int Slot1 = 0;
+    private const int Slot2 = 1;
 
     // 無敵
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
@@ -160,6 +164,18 @@ public class Player : Base
     /// <summary>爆弾所持数</summary>
     public int BombCount => _bombPool.list.Where(b => b.isHeld).Count();  // 手に持っている爆弾数
 
+    ///　<summary>特殊爆弾所持数</summary>
+    public int Special1Count => m_specialBomb1.PoolList.Where(b => b.activeSelf == false).Count();   // 手に持っている特殊ボム1
+    public int Special2Count => m_specialBomb2.PoolList.Where(b => b.activeSelf == false).Count();   // 手に持っている特殊ボム2
+
+    /// <Summary>特殊爆弾最大所持数</summary>
+    public int Special1MaxCount => m_specialBomb1.PoolList.Count();
+    public int Special2MaxCount => m_specialBomb2.PoolList.Count();
+
+    /// <summary>特殊爆弾のロック時間</summary>
+    public float Special1LockTime => m_specialBombLockTime1 - gameManager.GameTime;
+    public float Special2LockTime => m_specialBombLockTime2 - gameManager.GameTime;
+
     /// <summary>ライフ数</summary>
     public float Life
     {
@@ -206,10 +222,13 @@ public class Player : Base
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
         m_mapCamera.transform.position = mapCamPos;
-        
+
         // アイテム効果
         Invincible();
         PredictiveEye();
+
+        // 爆弾処理
+        UnlockSpecialBomb();
 
         // ゲームオーバー処理
         if (m_life <= 0)
@@ -473,12 +492,12 @@ public class Player : Base
     [StrixRpc]
     public void SetSpecialBombType(int slot,int type)
     {
-        if (slot == 0)
+        if (slot == Slot1)
         {
             m_specialBombType1 = (SpesialBomb.BombType)Enum.ToObject(typeof(SpesialBomb.BombType), type);
             m_specialBomb1.ClearBombType();
         }
-        else if(slot == 1) 
+        else if(slot == Slot2) 
         {
             m_specialBombType2 = (SpesialBomb.BombType)Enum.ToObject(typeof(SpesialBomb.BombType), type);
             m_specialBomb2.ClearBombType();
@@ -493,11 +512,11 @@ public class Player : Base
     [StrixRpc]
     public void AddSpecialBomb(int slot)
     {
-        if (slot == 0)
+        if (slot == Slot1)
         {
             m_specialBomb1.Add(m_specialBombType1,map);
         }
-        else if (slot == 1)
+        else if (slot == Slot2)
         {
             m_specialBomb2.Add(m_specialBombType2,map);
         }
@@ -507,10 +526,22 @@ public class Player : Base
         }
     }
 
+    private void UnlockSpecialBomb()
+    {
+        if (Special1MaxCount <= 0 && Special1LockTime <= 0)
+        {
+            AddSpecialBomb(Slot1);
+        }
+        if (Special2MaxCount <= 0 && Special2LockTime <= 0)
+        {
+            AddSpecialBomb(Slot2);
+        }
+    }
+
 
     // ーーーーーそれぞれのプレイヤーの見たなどーーーーー
 
-    
+
     /// <summary>
     /// [RPC]プレイヤーの色を設定します。
     /// </summary>
@@ -554,6 +585,3 @@ public class Player : Base
     }
 
 }
-
-
-

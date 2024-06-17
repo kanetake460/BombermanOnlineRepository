@@ -204,99 +204,99 @@ public class BombBase : Base
     /// </summary>
     public void PredictionFire()
     {
-        // 爆弾の位置
-        map.ActivePredictLandmark(Coord,true);
+        //// 爆弾の位置
+        //map.ActivePredictLandmark(Coord,true);
 
-        Coord exploCoord;
-        for (int x = 1; x <= firepower; x++)
-        {
-            exploCoord = new Coord(Coord.x + x, Coord.z);
+        //Coord exploCoord;
+        //for (int x = 1; x <= firepower; x++)
+        //{
+        //    exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            // 何もないマス
-            if (map.IsEmpty(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                continue;
-            }
+        //    // 何もないマス
+        //    if (map.IsEmpty(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        continue;
+        //    }
 
-            // 壁マス
-            if (map.IsWall(exploCoord))
-            {
-                break;
-            }
+        //    // 壁マス
+        //    if (map.IsWall(exploCoord))
+        //    {
+        //        break;
+        //    }
 
-            // 石マス
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                break;
-            }
-        }
-        for (int x = -1; x >= -firepower; x--)
-        {
-            exploCoord = new Coord(Coord.x + x, Coord.z);
+        //    // 石マス
+        //    if (map.IsStone(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        break;
+        //    }
+        //}
+        //for (int x = -1; x >= -firepower; x--)
+        //{
+        //    exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            if (map.IsEmpty(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                continue;
-            }
+        //    if (map.IsEmpty(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        continue;
+        //    }
 
-            if (map.IsWall(exploCoord))
-            {
-                break;
-            }
-
-
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                break;
-            }
-        }
-        for (int z = 1; z <= firepower; z++)
-        {
-            exploCoord = new Coord(Coord.x, Coord.z + z);
-
-            if (map.IsEmpty(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                continue;
-            }
-
-            if (map.IsWall(exploCoord))
-            {
-                break;
-            }
+        //    if (map.IsWall(exploCoord))
+        //    {
+        //        break;
+        //    }
 
 
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                break;
-            }
-        }
-        for (int z = -1; z >= -firepower; z--)
-        {
-            exploCoord = new Coord(Coord.x, Coord.z + z);
+        //    if (map.IsStone(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        break;
+        //    }
+        //}
+        //for (int z = 1; z <= firepower; z++)
+        //{
+        //    exploCoord = new Coord(Coord.x, Coord.z + z);
 
-            if (map.IsEmpty(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                continue;
-            }
+        //    if (map.IsEmpty(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        continue;
+        //    }
 
-            if (map.IsWall(exploCoord))
-            {
-                break;
-            }
+        //    if (map.IsWall(exploCoord))
+        //    {
+        //        break;
+        //    }
 
 
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, true);
-                break;
-            }
-        }
+        //    if (map.IsStone(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        break;
+        //    }
+        //}
+        //for (int z = -1; z >= -firepower; z--)
+        //{
+        //    exploCoord = new Coord(Coord.x, Coord.z + z);
+
+        //    if (map.IsEmpty(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        continue;
+        //    }
+
+        //    if (map.IsWall(exploCoord))
+        //    {
+        //        break;
+        //    }
+
+
+        //    if (map.IsStone(exploCoord))
+        //    {
+        //        map.ActivePredictLandmark(exploCoord, true);
+        //        break;
+        //    }
+        //}
     }
 }

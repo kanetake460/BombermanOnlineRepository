@@ -52,6 +52,9 @@ public class SpesialBomb : StrixBehaviour
         PoisonBomb,
     };
 
+    // ===プロパティ=================================================
+    public List<GameObject> PoolList => _spesialPool.list;
+
     // ===関数====================================================
     /// <summary>
     /// プールを空にする

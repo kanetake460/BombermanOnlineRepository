@@ -10,8 +10,10 @@ public class UIManager : StrixBehaviour
     private void Update()
     {
         ShowBombUI(player.BombCount);
+        ShowSpecialTime();
         ShowLifeUI(player.Life, player.m_lifeMaxValue);
         ShowUIText(firepowerText, "FirePower : " + player.Firepower);
+        ShowNOUI();
         // ゲームテキストのカウント
         if (uiCount > 0)
         {
@@ -40,6 +42,11 @@ public class UIManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI gameText;
     [SerializeField] Image specialBombUI1;
     [SerializeField] Image specialBombUI2;
+    [SerializeField] Image no1;
+    [SerializeField] Image no2;
+    [SerializeField] TextMeshProUGUI specialTime1tmp;
+    [SerializeField] TextMeshProUGUI specialTime2tmp;
+
     [SerializeField] Player player;
 
     [Header("パラメーター")]
@@ -49,6 +56,22 @@ public class UIManager : StrixBehaviour
     private readonly Color damageColor = new Color(1,0,0,0.8f);
 
     // ===関数====================================================
+    /// <summary>
+    /// 特殊爆弾のロック解除時間を表示します
+    /// </summary>
+    public void ShowSpecialTime()
+    {
+        if (player.Special1LockTime >= 0)
+            specialTime1tmp.text = player.Special1LockTime.ToString();
+        else
+            specialTime1tmp.enabled = false;
+
+        if (player.Special2LockTime >= 0)
+            specialTime2tmp.text = player.Special2LockTime.ToString();
+        else
+            specialTime2tmp.enabled = false;
+    }
+
     /// <summary>
     /// スペシャルボムUIを設定します。
     /// </summary>
@@ -70,6 +93,36 @@ public class UIManager : StrixBehaviour
             throw new Exception("そのスロットはない！");
         }
     }
+
+    /// <summary>
+    /// NoUIの表示
+    /// </summary>
+    public void ShowNOUI()
+    {
+        // 爆弾の最大数が0ならNOを表示するそうでないなら非表示
+        if (player.Special1MaxCount == 0)
+            no1.enabled = true;
+        else
+            no1.enabled = false;
+        
+        if (player.Special2MaxCount == 0)
+            no2.enabled = true;
+        else
+            no2.enabled = false;
+
+        // 爆弾の所持数が0なら色をグレーにする
+        if (player.Special1Count == 0)
+            specialBombUI1.color = Color.gray;
+        else
+            specialBombUI1.color = Color.white;
+
+        if (player.Special2Count == 0)
+            specialBombUI2.color = Color.gray;
+        else
+            specialBombUI2.color = Color.white;
+
+    }
+
 
     /// <summary>ボムUI表示</summary>
     public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);
