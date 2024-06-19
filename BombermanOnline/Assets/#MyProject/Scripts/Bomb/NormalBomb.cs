@@ -30,7 +30,6 @@ public class NormalBomb : BombBase
     [StrixRpc]
     private void InActive()
     {
-        Debug.Log("インアクティブ");
         gameObj.SetActive(false);
     }
 }

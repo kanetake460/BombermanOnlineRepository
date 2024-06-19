@@ -10,9 +10,11 @@ public class UIManager : StrixBehaviour
     private void Update()
     {
         ShowBombUI(player.BombCount);
+        ShowEmptyBombUI(player.BombMaxCount);
         ShowSpecialTime();
         ShowLifeUI(player.Life, player.m_lifeMaxValue);
-        ShowUIText(firepowerText, "FirePower : " + player.Firepower);
+        ShowUIText(firepowerText, "× " + player.Firepower);
+        ShowUIText(brickCountText, "× " + player.BrickCount);
         ShowNOUI();
         // ゲームテキストのカウント
         if (uiCount > 0)
@@ -35,25 +37,35 @@ public class UIManager : StrixBehaviour
 
     // ===変数====================================================
     [Header("オブジェクト参照")]
+    [SerializeField] Player player;
+    [Header("爆弾UI")]
     [SerializeField] GameObject[] bombUIs;
+    [SerializeField] GameObject[] emptyBombUIs;
+    [Header("インフォUI")]
     [SerializeField] Slider hpSlider;
+    [SerializeField] Image sliderFillImage;
+    [Header("エフェクトUI")]
     [SerializeField] Image damageEffect;
-    [SerializeField] TextMeshProUGUI firepowerText;
-    [SerializeField] TextMeshProUGUI gameText;
+    [Header("特殊爆弾UI")]
     [SerializeField] Image specialBombUI1;
     [SerializeField] Image specialBombUI2;
     [SerializeField] Image no1;
     [SerializeField] Image no2;
+    [Header("テキストUI")]
+    [SerializeField] TextMeshProUGUI firepowerText;
+    [SerializeField] TextMeshProUGUI brickCountText;
+    [SerializeField] TextMeshProUGUI gameText;
     [SerializeField] TextMeshProUGUI specialTime1tmp;
     [SerializeField] TextMeshProUGUI specialTime2tmp;
 
-    [SerializeField] Player player;
 
     [Header("パラメーター")]
     [SerializeField] float damageEffectSpeed;
     private float uiCount;
 
     private readonly Color damageColor = new Color(1,0,0,0.8f);
+
+    [SerializeField] private int m_dyingHp;
 
     // ===関数====================================================
     /// <summary>
@@ -125,10 +137,13 @@ public class UIManager : StrixBehaviour
 
 
     /// <summary>ボムUI表示</summary>
-    public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);
+    public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);    
+    
+    /// <summary>空のボムUI表示</summary>
+    public void ShowEmptyBombUI(int count) => ShowParamGuage(emptyBombUIs, count);
 
     /// <summary>ライフUI表示</summary>
-    public void ShowLifeUI(float value, float maxValue) => ShowSliderGuage(hpSlider, value, maxValue);
+    public void ShowLifeUI(int value, int maxValue) => ShowSliderGuage(hpSlider, value, maxValue);
     
     /// <summary>ゲームテキスト表示（RPC）</summary>
     public void CallShowGameText(string text, float count) { Rpc(nameof(ShowGameText), text, count); }
@@ -181,9 +196,13 @@ public class UIManager : StrixBehaviour
     /// </summary>
     /// <param name="slider">スライダー</param>
     /// <param name="value">値</param>
-    public void ShowSliderGuage(Slider slider,float value,float maxValue)
+    public void ShowSliderGuage(Slider slider,int value,float maxValue)
     {
         slider.maxValue = maxValue;
         slider.value = value;
+        if(value == m_dyingHp)
+        {
+            sliderFillImage.color = Color.red;
+        }
     }
 }

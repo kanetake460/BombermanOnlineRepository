@@ -37,10 +37,7 @@ public class Player : Base
         {
             if (isLocal == false) return;
             if (isInvincible) return;
-            Life -= 10f;
-            isInvincible = true;
-            AudioManager.PlayOneShot("被ダメージ", 1f);
-            ui.ShowDamageEffectUI();
+            TakenDamage();
         }
 
         // アイテムのレイヤーなら
@@ -75,6 +72,7 @@ public class Player : Base
     }
 
 
+
     private void OnCollisionStay(Collision collision)
     {
         if (isLocal == false) return;
@@ -104,8 +102,8 @@ public class Player : Base
     [SerializeField] private float m_slipDrag;      // 滑る床にいるときの空気抵抗
 
     // 体力
-    [SerializeField] private float m_life;            // 体力
-    public float m_lifeMaxValue;    // 体力の最大値
+    [SerializeField] private int m_life;            // 体力
+    public int m_lifeMaxValue;    // 体力の最大値
 
     // 爆弾
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
@@ -137,6 +135,8 @@ public class Player : Base
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0);         // マップカメラのポジション
 
+    private const int _Damage = 1;
+
     private const string ItemBombTag = "Item_Bomb";
     private const string ItemFireTag = "Item_Fire";
     private const string ItemSpeedTag = "Item_Speed";
@@ -165,6 +165,9 @@ public class Player : Base
 
     /// <summary>火力</summary>
     public int Firepower => m_firepower;
+
+    /// <summary>レンガ所持数</summary></summary>
+    public int BrickCount => _brickCount;
     
     /// <summary>爆弾所持最大数</summary>
     public int BombMaxCount => _bombPool.Count;                  // 手持ちの爆弾最大値
@@ -185,7 +188,7 @@ public class Player : Base
     public float Special2LockTime => m_specialBombLockTime2 - gameManager.GameTime;
 
     /// <summary>ライフ数</summary>
-    public float Life
+    public int Life
     {
         get
         {
@@ -394,6 +397,17 @@ public class Player : Base
         }
     }
 
+    /// <summary>
+    /// ダメージ処理
+    /// </summary>
+    private void TakenDamage()
+    {
+        Life -= _Damage;
+        isInvincible = true;
+        AudioManager.PlayOneShot("被ダメージ", 1f);
+        ui.ShowDamageEffectUI();
+    }
+
     // ーーーーーアイテムの処理ーーーーーー
 
     /// <summary>
@@ -454,7 +468,6 @@ public class Player : Base
     {
         _brickCount += m_brickUpValue;
     }
-
 
     /// <summary>
     /// 無敵時の処理
