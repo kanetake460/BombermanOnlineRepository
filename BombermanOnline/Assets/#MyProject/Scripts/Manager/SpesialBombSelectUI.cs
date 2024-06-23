@@ -21,7 +21,15 @@ public class SpesialBombSelectUI : DraggableUI
     /// <param name="eventData"></param>
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        AudioManager.PlayOneShot("ÉJÅ[É\Éãà⁄ìÆ");
+        transform.position += Vector3.up * 10;
         explanationTmp.text = explanation;
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+        transform.position -= Vector3.up * 10;
     }
 
     /// <summary>

@@ -380,10 +380,12 @@ public class Player : Base
             {
                 _brickCount -= m_brickValue;
                 CallGenerateArtificialStone();
+                AudioManager.PlayOneShot("lHÎ");
             }
             else 
             {
-                Debug.Log("ƒŒƒ“ƒK‚ª‘«‚è‚È‚¢I");
+                ui.ShowGameText("No Brick !!", 1);
+                AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
             }
         }
     }

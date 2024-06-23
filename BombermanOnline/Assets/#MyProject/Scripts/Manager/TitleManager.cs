@@ -139,8 +139,26 @@ public class TitleResultManager : StrixBehaviour
         GameMap.Instance.CallCreateMap(index);
         player.transform.position += player.posY;
         book.NextPage();
+        AudioManager.PlayOneShot("爆弾設定");
     }
 
+    /// <summary>
+    /// 次のページへ
+    /// </summary>
+    public void NextPage()
+    {
+        book.NextPage();
+        AudioManager.PlayOneShot("爆弾設定");
+    }
+
+
+    /// <summary>
+    /// ボタンに乗った時のSE
+    /// </summary>
+    public void OverButton()
+    {
+        AudioManager.PlayOneShot("カーソル移動");
+    }
 
     /// <summary>
     /// アイテムを増やします
@@ -156,6 +174,10 @@ public class TitleResultManager : StrixBehaviour
             AudioManager.PlayOneShot("爆弾がない");
             return; 
         }
+        else
+        {
+            AudioManager.PlayOneShot("カーソル移動");
+        }
         itemManager.items[itemIndex].IncItem();
     }
 
@@ -168,5 +190,7 @@ public class TitleResultManager : StrixBehaviour
     public void DecItem(int itemIndex)
     {
         itemManager.items[itemIndex].DecItem();
+        AudioManager.PlayOneShot("カーソル移動");
+
     }
 }

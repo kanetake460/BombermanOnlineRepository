@@ -40,7 +40,6 @@ public class SpesialBombSlotUI : StrixDroppedUI
 
     private void SetInfo(SpesialBomb.BombType type)
     {
-        Debug.Log("セットインフォ");
         player.CallSetSpecialBombType(slot, (int)type);
     }
 }
