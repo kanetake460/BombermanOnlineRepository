@@ -6795,7 +6795,7 @@ RectTransform:
   m_GameObject: {fileID: 802526498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.375, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2128856148}
@@ -13392,11 +13392,13 @@ MonoBehaviour:
   map: {fileID: 0}
   posY: {x: 0, y: 2, z: 0}
   m_speed: 5
-  m_dashSpeed: 20
   m_slowSpeed: 5
   m_upSpeed: 1
   m_defaultDrag: 15
   m_slipDrag: 5
+  m_dashbleTime: 2
+  m_dashSpeed: 20
+  m_upDashSpeed: 20
   m_life: 5
   m_lifeMaxValue: 5
   m_healLife: 1
@@ -13409,6 +13411,7 @@ MonoBehaviour:
   m_brickUpValue: 1
   m_brickValue: 2
   invncebleTime: 5
+  stunTime: 0
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
@@ -13938,6 +13941,7 @@ MonoBehaviour:
   specialBombUI2: {fileID: 1961689149}
   no1: {fileID: 993225898}
   no2: {fileID: 922177228}
+  dashUI: {fileID: 2128856149}
   firepowerText: {fileID: 390888057}
   brickCountText: {fileID: 502914392}
   gameText: {fileID: 944302538}
@@ -16025,7 +16029,7 @@ RectTransform:
   m_GameObject: {fileID: 1547523767}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 796387261}
@@ -22280,7 +22284,7 @@ RectTransform:
   m_GameObject: {fileID: 2128856147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 2.5, z: 1}
+  m_LocalScale: {x: 6, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 802526499}

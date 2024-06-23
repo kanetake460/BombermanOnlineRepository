@@ -22,11 +22,8 @@ public class Player : Base
     {
         if (isLocal == false) return;
         PlayerSettings();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            rb.AddForce(transform.forward * m_dashSpeed,ForceMode.VelocityChange);
-        }
     }
+
 
     private void FixedUpdate()
     {
@@ -95,26 +92,31 @@ public class Player : Base
     [Header("パラメーター")]
     public Vector3 posY;
 
-    // スピード
-    private float _currSpeed;                       // 現在のスピード
+    [Header("移動スピード")]
     [SerializeField] private float m_speed;         // 普通のスピード
-    [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_slowSpeed;     // 遅いスピード
     [SerializeField] private float m_upSpeed;       // 上がるスピード
-    [SerializeField] private float m_upDashSpeed;       // 上がるダッシュスピード
     [SerializeField] private float m_defaultDrag;      // 滑る床にいるときの空気抵抗
     [SerializeField] private float m_slipDrag;      // 滑る床にいるときの空気抵抗
+    private float _currSpeed;                       // 現在のスピード
 
-    // 体力
+    [Header("ダッシュ")]
+    [SerializeField] private float m_dashbleTime;
+    [SerializeField] private float m_dashSpeed;     // ダッシュスピード
+    [SerializeField] private float m_upDashSpeed;       // 上がるダッシュスピード
+    private bool _isDashble = true;
+    private float _dashbleCount = 0;
+
+    [Header("体力")]
     [SerializeField] private int m_life;            // 体力
     public int m_lifeMaxValue;              // 体力の最大値
     public int m_healLife;                  // 回復
 
-    // 爆弾
+    [Header("爆弾")]
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
     [SerializeField] private int m_firepower;       // 爆弾の火力
 
-    // 特殊爆弾
+    [Header("特殊爆弾")]
     [SerializeField] SpesialBomb.BombType m_specialBombType1;
     [SerializeField] SpesialBomb.BombType m_specialBombType2;
     [SerializeField] float m_specialBombLockTime1;
@@ -122,24 +124,25 @@ public class Player : Base
     private const int Slot1 = 0;
     private const int Slot2 = 1;
 
-    // 人工石
+    [Header("人工石")]
     private int _brickCount = 0;                    // 持っているレンガの数
     [SerializeField] private int m_brickUpValue;    // アイテムを拾った時の上昇量
     [SerializeField] private int m_brickValue;      // 生成に必要なレンガの量
 
-    // 無敵
+    [Header("無敵")]
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
     private bool isInvincible = false;
     private float invncebleCount = 0;
 
-    // 予測
-    [SerializeField] LayerMask predictLandmarkMask;
-    private bool isPredictable = false;
-
-    // スタン
+    [Header("スタン")]
     [SerializeField] private float stunTime;
     private float stunCount;
     private bool isStun = false;
+
+    [Header("予測")]
+    [SerializeField] LayerMask predictLandmarkMask;
+    private bool isPredictable = false;
+
 
     private Pool<NormalBomb> _bombPool = new Pool<NormalBomb>();
 
@@ -155,7 +158,7 @@ public class Player : Base
     private const string ExplosionTag = "Explosion";
     private const string FrozenFloorTag = "FrozenFloor";
 
-
+    [Space]
     [Header("オブジェクト参照")]
     [SerializeField] Camera m_mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] Camera m_mapCamera;          // マップUIのカメラ
@@ -165,6 +168,7 @@ public class Player : Base
     [SerializeField] TextMeshProUGUI m_playerInfoText;
     [SerializeField] GameObject m_titleCanvas;
 
+    [Space]
     [Header("コンポーネント")]
     [SerializeField] UIManager ui;
     [SerializeField] TitleResultManager titleResultManager;
@@ -172,6 +176,8 @@ public class Player : Base
 
     // ===プロパティ================================================================================
     public string PlayerName => StrixNetwork.instance.roomMembers[strixReplicator.ownerUid].GetName();
+
+    public bool IsDashble => _isDashble;
 
     /// <summary>火力</summary>
     public int Firepower => m_firepower;
@@ -233,12 +239,15 @@ public class Player : Base
         // カメラ、移動の設定
         fps.PlayerViewport();
         fps.ClampMoveRange();
+        Dash();
         //fps.CursorLock();
 
         // キー入力によるプレイヤーのアクション
         PutBomb();
         PutSpesialBomb();
         PutArtificialStone();
+        InputDash();
+
 
         // マップカメラのポジション設定
         Vector3 mapCamPos = transform.position + mapCameraPos;
@@ -403,6 +412,40 @@ public class Player : Base
         else
         {
             AudioManager.PlayOneShot("爆弾がない");
+        }
+    }
+
+
+    /// <summary>
+    /// キー入力によってダッシュします
+    /// </summary>
+    private void InputDash()
+    {
+        if (_isDashble)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _isDashble = false;
+                rb.AddForce(transform.forward * m_dashSpeed, ForceMode.VelocityChange);
+            }
+        }
+    }
+
+    /// <summary>
+    /// ダッシュ処理
+    /// </summary>
+    private void Dash()
+    {
+        if (_isDashble == false)
+        {
+            // 無敵時間のカウント
+            _dashbleCount += Time.deltaTime;
+
+            if (_dashbleCount > m_dashbleTime)
+            {
+                _isDashble = true;
+                _dashbleCount = 0;
+            }
         }
     }
 

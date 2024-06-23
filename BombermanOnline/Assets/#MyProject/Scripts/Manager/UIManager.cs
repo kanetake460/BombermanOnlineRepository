@@ -16,6 +16,7 @@ public class UIManager : StrixBehaviour
         ShowUIText(firepowerText, "× " + player.Firepower);
         ShowUIText(brickCountText, "× " + player.BrickCount);
         ShowNOUI();
+        ShowDashUI();
         // ゲームテキストのカウント
         if (uiCount > 0)
         {
@@ -51,6 +52,8 @@ public class UIManager : StrixBehaviour
     [SerializeField] Image specialBombUI2;
     [SerializeField] Image no1;
     [SerializeField] Image no2;
+    [Header("ダッシュ")]
+    [SerializeField] Image dashUI;
     [Header("テキストUI")]
     [SerializeField] TextMeshProUGUI firepowerText;
     [SerializeField] TextMeshProUGUI brickCountText;
@@ -68,10 +71,23 @@ public class UIManager : StrixBehaviour
     [SerializeField] private int m_dyingHp;
 
     // ===関数====================================================
+    private void ShowDashUI()
+    {
+        if(player.IsDashble)
+        {
+            dashUI.color = Color.white;
+        }
+        else
+        {
+            dashUI.color = Color.gray;
+        }
+    }
+
+
     /// <summary>
     /// 特殊爆弾のロック解除時間を表示します
     /// </summary>
-    public void ShowSpecialTime()
+    private void ShowSpecialTime()
     {
         if (player.Special1LockTime >= 0)
             specialTime1tmp.text = player.Special1LockTime.ToString();
@@ -109,7 +125,7 @@ public class UIManager : StrixBehaviour
     /// <summary>
     /// NoUIの表示
     /// </summary>
-    public void ShowNOUI()
+    private void ShowNOUI()
     {
         // 爆弾の最大数が0ならNOを表示するそうでないなら非表示
         if (player.Special1MaxCount == 0)
@@ -137,13 +153,13 @@ public class UIManager : StrixBehaviour
 
 
     /// <summary>ボムUI表示</summary>
-    public void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);    
+    private void ShowBombUI(int count) => ShowParamGuage(bombUIs, count);    
     
     /// <summary>空のボムUI表示</summary>
-    public void ShowEmptyBombUI(int count) => ShowParamGuage(emptyBombUIs, count);
+    private void ShowEmptyBombUI(int count) => ShowParamGuage(emptyBombUIs, count);
 
     /// <summary>ライフUI表示</summary>
-    public void ShowLifeUI(int value, int maxValue) => ShowSliderGuage(hpSlider, value, maxValue);
+    private void ShowLifeUI(int value, int maxValue) => ShowSliderGuage(hpSlider, value, maxValue);
     
     /// <summary>ゲームテキスト表示（RPC）</summary>
     public void CallShowGameText(string text, float count) { Rpc(nameof(ShowGameText), text, count); }
