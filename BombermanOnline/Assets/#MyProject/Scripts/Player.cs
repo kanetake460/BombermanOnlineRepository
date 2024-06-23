@@ -28,7 +28,10 @@ public class Player : Base
     private void FixedUpdate()
     {
         if (isLocal == false) return;
-        fps.AddForceLocomotion(_currSpeed, _currSpeed);
+        if (_isStun == false)
+        {
+            fps.AddForceLocomotion(_currSpeed, _currSpeed);
+        }
     }
 
 
@@ -37,10 +40,16 @@ public class Player : Base
         if (other.gameObject.CompareTag(ExplosionTag))
         {
             if (isLocal == false) return;
-            if (isInvincible) return;
+            if (_isInvincible) return;
+            IsStun = false;
             TakenDamage();
         }
-
+        if(other.gameObject.CompareTag(IceExplosionTag))
+        {
+            if (isLocal == false) return;
+            if (_isInvincible) return;
+            IsStun = true;
+        }
         // アイテムのレイヤーなら
         if (gameManager.itemManager.itemLayer == (gameManager.itemManager.itemLayer | (1 << other.gameObject.layer)))
         {
@@ -131,13 +140,13 @@ public class Player : Base
 
     [Header("無敵")]
     [SerializeField] private float invncebleTime;     // 非ダメージ後の無敵時間
-    private bool isInvincible = false;
-    private float invncebleCount = 0;
+    private bool _isInvincible = false;
+    private float _invncebleCount = 0;
 
     [Header("スタン")]
     [SerializeField] private float stunTime;
-    private float stunCount;
-    private bool isStun = false;
+    private float _stunCount;
+    private bool _isStun = false;
 
     [Header("予測")]
     [SerializeField] LayerMask predictLandmarkMask;
@@ -156,6 +165,7 @@ public class Player : Base
     private const string ItemLifeTag = "Item_Life";
     private const string ItemBrickTag = "Item_Brick";
     private const string ExplosionTag = "Explosion";
+    private const string IceExplosionTag = "IceExplosion";
     private const string FrozenFloorTag = "FrozenFloor";
 
     [Space]
@@ -177,7 +187,13 @@ public class Player : Base
     // ===プロパティ================================================================================
     public string PlayerName => StrixNetwork.instance.roomMembers[strixReplicator.ownerUid].GetName();
 
+    public bool IsInvincible => _isInvincible;
+
+    /// <summary>ダッシュ</summary>
     public bool IsDashble => _isDashble;
+
+    /// <summary>スタン</summary>
+    public bool IsStun { private set { _isStun = value; } get { return _isStun; } }
 
     /// <summary>火力</summary>
     public int Firepower => m_firepower;
@@ -237,16 +253,21 @@ public class Player : Base
     {
         if (gameManager.IsGaming == false) return;
         // カメラ、移動の設定
-        fps.PlayerViewport();
-        fps.ClampMoveRange();
-        Dash();
-        //fps.CursorLock();
 
-        // キー入力によるプレイヤーのアクション
-        PutBomb();
-        PutSpesialBomb();
-        PutArtificialStone();
-        InputDash();
+        //スタン時は動けない
+        if (_isStun == false)
+        {
+            fps.PlayerViewport();
+            fps.ClampMoveRange();
+            Dash();
+            //fps.CursorLock();
+
+            // キー入力によるプレイヤーのアクション
+            PutBomb();
+            PutSpesialBomb();
+            PutArtificialStone();
+            InputDash();
+        }
 
 
         // マップカメラのポジション設定
@@ -259,6 +280,9 @@ public class Player : Base
 
         // 爆弾処理
         UnlockSpecialBomb();
+
+        // スタン処理
+        Stunnig();
 
         // ゲームオーバー処理
         if (m_life <= 0)
@@ -396,6 +420,7 @@ public class Player : Base
         }
         else
         {
+            ui.ShowGameText("No bomb !!", 1);
             AudioManager.PlayOneShot("爆弾がない");
         }
     }
@@ -411,6 +436,7 @@ public class Player : Base
         }
         else
         {
+            ui.ShowGameText("No bomb !!", 1);
             AudioManager.PlayOneShot("爆弾がない");
         }
     }
@@ -421,15 +447,21 @@ public class Player : Base
     /// </summary>
     private void InputDash()
     {
-        if (_isDashble)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (_isDashble)
             {
                 _isDashble = false;
                 rb.AddForce(transform.forward * m_dashSpeed, ForceMode.VelocityChange);
+                AudioManager.PlayOneShot("ダッシュ");
+            }
+            else
+            {
+                AudioManager.PlayOneShot("爆弾がない");
             }
         }
     }
+
 
     /// <summary>
     /// ダッシュ処理
@@ -449,15 +481,33 @@ public class Player : Base
         }
     }
 
+
     /// <summary>
     /// ダメージ処理
     /// </summary>
     private void TakenDamage()
     {
         Life -= _Damage;
-        isInvincible = true;
+        _isInvincible = true;
         AudioManager.PlayOneShot("被ダメージ", 1f);
         ui.ShowDamageEffectUI();
+    }
+
+
+    /// <summary>
+    /// スタン中処理
+    /// </summary>
+    private void Stunnig()
+    {
+        if(_isStun)
+        {
+            _stunCount += Time.deltaTime;
+            if(_stunCount > stunTime)
+            {
+                _stunCount = 0;
+                _isStun = false;
+            }
+        }
     }
 
     // ーーーーーアイテムの処理ーーーーーー
@@ -521,20 +571,21 @@ public class Player : Base
         _brickCount += m_brickUpValue;
     }
 
+
     /// <summary>
     /// 無敵時の処理
     /// </summary>
     private void Invincible()
     {
-        if (isInvincible)
+        if (_isInvincible)
         {
             // 無敵時間のカウント
-            invncebleCount += Time.deltaTime;
+            _invncebleCount += Time.deltaTime;
 
-            if (invncebleCount > invncebleTime)
+            if (_invncebleCount > invncebleTime)
             {
-                isInvincible = false;
-                invncebleCount = 0;
+                _isInvincible = false;
+                _invncebleCount = 0;
             }
         }
     }

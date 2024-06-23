@@ -5547,6 +5547,81 @@ MonoBehaviour:
   cellWidth: 10
   cellDepth: 10
   isSpaceProp: 00000000000000000000000000000000000001010101010101000101010101010100000100010101010100010101010100010000010100010101010001010101000101000001010101010101000101010101010100000101010100010100010100010101010000010101010100010101000101010101000001010101010101010101010101010100000000000000010100010100000000000000010101010101010101010101010101000001010101010001010100010101010100000101010100010100010100010101010000010101010101010001010101010101000001010001010101000101010100010100000100010101010100010101010100010000010101010101010001010101010101000000000000000000000000000000000000
+--- !u!1 &647094700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 647094701}
+  - component: {fileID: 647094703}
+  - component: {fileID: 647094702}
+  m_Layer: 5
+  m_Name: FreezeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &647094701
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647094700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1036371553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &647094702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647094700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &647094703
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647094700}
+  m_CullTransparentMesh: 1
 --- !u!1 &668852559
 GameObject:
   m_ObjectHideFlags: 0
@@ -9763,6 +9838,8 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 06467573aa86e074aa89e95757dccf0c, type: 3}
   - key: "\u6E96\u5099OK"
     value: {fileID: 8300000, guid: 1161ca9a3c55d6e4990914a68ddbb673, type: 3}
+  - key: "\u30C0\u30C3\u30B7\u30E5"
+    value: {fileID: 8300000, guid: a3217cf9ce4210f48b0f242474dc398b, type: 3}
   BGM_ClipDictionary:
   - key: "\u30B2\u30FC\u30E0BGM"
     value: {fileID: 8300000, guid: 2378759cbb619b24f9568fb460fccbdc, type: 3}
@@ -9918,6 +9995,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013805281}
   m_CullTransparentMesh: 1
+--- !u!1 &1018074675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018074676}
+  - component: {fileID: 1018074677}
+  - component: {fileID: 1018074678}
+  m_Layer: 5
+  m_Name: InvincibleImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1018074676
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018074675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1036371553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1018074677
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018074675}
+  m_CullTransparentMesh: 1
+--- !u!114 &1018074678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018074675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1022037183
 GameObject:
   m_ObjectHideFlags: 0
@@ -10441,6 +10593,8 @@ RectTransform:
   m_Children:
   - {fileID: 1516724891}
   - {fileID: 1791274108}
+  - {fileID: 647094701}
+  - {fileID: 1018074676}
   - {fileID: 944302540}
   - {fileID: 796387261}
   - {fileID: 1153362075}
@@ -13398,7 +13552,7 @@ MonoBehaviour:
   m_slipDrag: 5
   m_dashbleTime: 2
   m_dashSpeed: 20
-  m_upDashSpeed: 20
+  m_upDashSpeed: 30
   m_life: 5
   m_lifeMaxValue: 5
   m_healLife: 1
@@ -13406,12 +13560,12 @@ MonoBehaviour:
   m_firepower: 1
   m_specialBombType1: 0
   m_specialBombType2: 0
-  m_specialBombLockTime1: 100
+  m_specialBombLockTime1: 10
   m_specialBombLockTime2: 200
   m_brickUpValue: 1
   m_brickValue: 2
   invncebleTime: 5
-  stunTime: 0
+  stunTime: 3
   predictLandmarkMask:
     serializedVersion: 2
     m_Bits: 128
@@ -13937,6 +14091,8 @@ MonoBehaviour:
   hpSlider: {fileID: 1616496293}
   sliderFillImage: {fileID: 1840133198}
   damageEffect: {fileID: 1791274109}
+  freezeEffect: {fileID: 647094702}
+  invincibleEffect: {fileID: 1018074678}
   specialBombUI1: {fileID: 1153362076}
   specialBombUI2: {fileID: 1961689149}
   no1: {fileID: 993225898}
@@ -18537,7 +18693,7 @@ GameObject:
   - component: {fileID: 1791274110}
   - component: {fileID: 1791274109}
   m_Layer: 5
-  m_Name: DamangeEffect
+  m_Name: DamageImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

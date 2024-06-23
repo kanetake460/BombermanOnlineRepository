@@ -49,17 +49,8 @@ public class IceBomb : BombBase
             }
 
             // 壁マス
-            if (map.IsWall(exploCoord))
+            if (map.IsWall(exploCoord) || map.IsStone(exploCoord))
             {
-                break;
-            }
-
-            // 石マス
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, false);
-                map.BreakStone(exploCoord);
-                PlayExplosionEffect(exploCoord);
                 break;
             }
         }
@@ -74,17 +65,9 @@ public class IceBomb : BombBase
                 continue;
             }
 
-            if (map.IsWall(exploCoord))
+            // 壁マス
+            if (map.IsWall(exploCoord) || map.IsStone(exploCoord))
             {
-                break;
-            }
-
-
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, false);
-                map.BreakStone(exploCoord);
-                PlayExplosionEffect(exploCoord);
                 break;
             }
         }
@@ -99,17 +82,9 @@ public class IceBomb : BombBase
                 continue;
             }
 
-            if (map.IsWall(exploCoord))
+            // 壁マス
+            if (map.IsWall(exploCoord) || map.IsStone(exploCoord))
             {
-                break;
-            }
-
-
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, false);
-                map.BreakStone(exploCoord);
-                PlayExplosionEffect(exploCoord);
                 break;
             }
         }
@@ -124,17 +99,9 @@ public class IceBomb : BombBase
                 continue;
             }
 
-            if (map.IsWall(exploCoord))
+            // 壁マス
+            if (map.IsWall(exploCoord) || map.IsStone(exploCoord))
             {
-                break;
-            }
-
-
-            if (map.IsStone(exploCoord))
-            {
-                map.ActivePredictLandmark(exploCoord, false);
-                map.BreakStone(exploCoord);
-                PlayExplosionEffect(exploCoord);
                 break;
             }
         }

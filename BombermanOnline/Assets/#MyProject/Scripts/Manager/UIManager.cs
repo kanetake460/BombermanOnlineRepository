@@ -17,6 +17,11 @@ public class UIManager : StrixBehaviour
         ShowUIText(brickCountText, "× " + player.BrickCount);
         ShowNOUI();
         ShowDashUI();
+
+        // エフェクト
+        ShowFreezedEffect();
+        ShowDamageEffect();
+        ShowInvincibleEffect();
         // ゲームテキストのカウント
         if (uiCount > 0)
         {
@@ -27,13 +32,6 @@ public class UIManager : StrixBehaviour
             gameText.text = null;
         }
 
-        // ダメージエフェクトのカウント
-        if (Mathf.Approximately(damageEffect.color.a, 0) == false)
-        {
-            Color color = damageEffect.color;
-            color.a = Mathf.Lerp(color.a, 0, Time.deltaTime * damageEffectSpeed);
-            damageEffect.color = color;
-        }
     }
 
     // ===変数====================================================
@@ -47,6 +45,8 @@ public class UIManager : StrixBehaviour
     [SerializeField] Image sliderFillImage;
     [Header("エフェクトUI")]
     [SerializeField] Image damageEffect;
+    [SerializeField] Image freezeEffect;
+    [SerializeField] Image invincibleEffect;
     [Header("特殊爆弾UI")]
     [SerializeField] Image specialBombUI1;
     [SerializeField] Image specialBombUI2;
@@ -67,10 +67,69 @@ public class UIManager : StrixBehaviour
     private float uiCount;
 
     private readonly Color damageColor = new Color(1,0,0,0.8f);
+    private readonly Color freezeColor = new Color(0, 1, 1, 0.5f);
+    private readonly Color invincibleColor = new Color(1, 1, 1, 0.2f);
 
+    private bool isDamageEffect = false;    // ダメージエフェクト再生中かどうか
+    
+    // ひん死のHP
     [SerializeField] private int m_dyingHp;
 
     // ===関数====================================================
+    /// <summary>
+    /// ダメージエフェクトを出します
+    /// </summary>
+    private void ShowDamageEffect()
+    {
+        // ダメージエフェクトのカウント
+        if (Mathf.Approximately(damageEffect.color.a, 0) == false)
+        {
+            Color color = damageEffect.color;
+            color.a = Mathf.Lerp(color.a, 0, Time.deltaTime * damageEffectSpeed);
+            damageEffect.color = color;
+        }
+
+        if(damageEffect.color.a < 0.1)
+        {
+            isDamageEffect = true;
+        }
+        else
+        {
+            isDamageEffect = false;
+        }
+    }
+
+    /// <summary>
+    /// 無敵エフェクトを出します
+    /// </summary>
+    private void ShowInvincibleEffect()
+    {
+        if(player.IsInvincible)
+        {
+            invincibleEffect.color = invincibleColor;
+        }
+        else
+        {
+            invincibleEffect.color = Color.clear;
+        }
+    }
+
+    /// <summary>
+    /// 凍りエフェクトを出します
+    /// </summary>
+    private void ShowFreezedEffect()
+    {
+        if (player.IsStun)
+        {
+            freezeEffect.color = freezeColor;
+        }
+        else
+        {
+            freezeEffect.color = Color.clear;
+        }
+    }
+
+
     private void ShowDashUI()
     {
         if(player.IsDashble)
