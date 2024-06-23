@@ -145,7 +145,7 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// アイテムを増やします
     /// </summary>
-    /// <param name="itemIndex">アイテムインデックス</param>
+    /// <param name="index">アイテムインデックス</param>
     public void CallIncItem(int index) { RpcToAll(nameof(IncItem),index); }
     [StrixRpc]
     public void IncItem(int itemIndex)
@@ -156,7 +156,7 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// アイテムを減らします
     /// </summary>
-    /// <param name="itemIndex">アイテムインデックス</param>
+    /// <param name="index">アイテムインデックス</param>
     public void CallDecItem(int index) { RpcToAll(nameof(DecItem), index); }
     [StrixRpc]
     public void DecItem(int itemIndex)

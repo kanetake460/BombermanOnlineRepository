@@ -82,6 +82,21 @@ public class ItemManager
     public LayerMask itemLayer;         // アイテムのレイヤー
     [SerializeField] GameMap m_gameMap; // ゲームマップ
 
+    // すべてのアイテムの数
+    public int AllItemCount 
+    {
+        get
+        {
+            int count = 0;
+
+            // カウントする
+            foreach (var item in items)
+            {
+                count += item.itemNum;
+            }
+            return count;
+        }
+    }
 
     // ===関数====================================================
     /// <summary>
@@ -89,18 +104,10 @@ public class ItemManager
     /// </summary>
     public void InstanceItems()
     {
-        int allItemCount = 0;       // すべてのアイテムの数
-
-        // カウントする
-        foreach (var item in items)
-        {
-            allItemCount += item.itemNum;
-        }
-
         // もし、アイテムの数が、ストーンブロックの数より多い場合は生成する場所が足りないのでエラー
-        if (m_gameMap.stoneBlockList.Count < allItemCount)
+        if (m_gameMap.stoneBlockList.Count < AllItemCount)
         {
-            Debug.Log(allItemCount);
+            Debug.Log(AllItemCount);
             Debug.LogError("アイテムの数が多いため生成できません");
             return;
         }

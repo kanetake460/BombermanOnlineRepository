@@ -22,12 +22,16 @@ public class Player : Base
     {
         if (isLocal == false) return;
         PlayerSettings();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rb.AddForce(transform.forward * m_dashSpeed,ForceMode.VelocityChange);
+        }
     }
 
     private void FixedUpdate()
     {
         if (isLocal == false) return;
-        fps.AddForceLocomotion(_currSpeed, m_dashSpeed);
+        fps.AddForceLocomotion(_currSpeed, _currSpeed);
     }
 
 
@@ -93,17 +97,18 @@ public class Player : Base
 
     // スピード
     private float _currSpeed;                       // 現在のスピード
-    private float _currDashSpeed;                   // 現在のダッシュスピード
     [SerializeField] private float m_speed;         // 普通のスピード
     [SerializeField] private float m_dashSpeed;     // ダッシュスピード
     [SerializeField] private float m_slowSpeed;     // 遅いスピード
     [SerializeField] private float m_upSpeed;       // 上がるスピード
+    [SerializeField] private float m_upDashSpeed;       // 上がるダッシュスピード
     [SerializeField] private float m_defaultDrag;      // 滑る床にいるときの空気抵抗
     [SerializeField] private float m_slipDrag;      // 滑る床にいるときの空気抵抗
 
     // 体力
     [SerializeField] private int m_life;            // 体力
-    public int m_lifeMaxValue;    // 体力の最大値
+    public int m_lifeMaxValue;              // 体力の最大値
+    public int m_healLife;                  // 回復
 
     // 爆弾
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
@@ -130,6 +135,11 @@ public class Player : Base
     // 予測
     [SerializeField] LayerMask predictLandmarkMask;
     private bool isPredictable = false;
+
+    // スタン
+    [SerializeField] private float stunTime;
+    private float stunCount;
+    private bool isStun = false;
 
     private Pool<NormalBomb> _bombPool = new Pool<NormalBomb>();
 
@@ -263,7 +273,6 @@ public class Player : Base
     private void InitPlayer()
     {
         _currSpeed = m_speed;
-        _currDashSpeed = m_dashSpeed;
         AddBombPool();
         CallSetMembersColor();
         CallShowPlayerName();
@@ -441,7 +450,7 @@ public class Player : Base
     private void SpeedUp()
     {
         m_speed += m_upSpeed;
-        m_dashSpeed += m_upSpeed;
+        m_dashSpeed += m_upDashSpeed;
     }
 
 
@@ -458,7 +467,7 @@ public class Player : Base
     /// </summary>
     private void LifeUp()
     {
-        Life += 10;
+        Life += m_healLife;
     }
 
     /// <summary>
@@ -498,13 +507,12 @@ public class Player : Base
 
         if (isPredictable)
         {
-            _currSpeed = _currDashSpeed = m_slowSpeed;
+            _currSpeed = m_slowSpeed;
             m_mainCamera.cullingMask |= predictLandmarkMask;
         }
         else
         {
             _currSpeed = m_speed;
-            _currDashSpeed = m_dashSpeed;
             m_mainCamera.cullingMask &= ~predictLandmarkMask;
         }
     }
