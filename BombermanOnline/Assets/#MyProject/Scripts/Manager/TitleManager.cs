@@ -150,6 +150,12 @@ public class TitleResultManager : StrixBehaviour
     [StrixRpc]
     public void IncItem(int itemIndex)
     {
+        if(itemManager.AllItemCount >= 60) 
+        {
+            Debug.Log("アイテムが多い！");
+            AudioManager.PlayOneShot("爆弾がない");
+            return; 
+        }
         itemManager.items[itemIndex].IncItem();
     }
 
