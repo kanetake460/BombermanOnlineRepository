@@ -11025,6 +11025,10 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 61162f0bb05ce254c93932425ef857d2, type: 3}
   - key: "\u30AB\u30FC\u30BD\u30EB\u79FB\u52D5"
     value: {fileID: 8300000, guid: 81722d95230c87b49af5b9abbe99bf03, type: 3}
+  - key: "\u7206\u5F3E\u89E3\u653E"
+    value: {fileID: 8300000, guid: ca44f0ed1d2a20b4e95538cc64c67d22, type: 3}
+  - key: "\u30C0\u30C3\u30B7\u30E5\u56DE\u5FA9"
+    value: {fileID: 8300000, guid: bf501a4f506f801468e299afbfcc75e7, type: 3}
   BGM_ClipDictionary:
   - key: "\u30B2\u30FC\u30E0BGM"
     value: {fileID: 8300000, guid: 2378759cbb619b24f9568fb460fccbdc, type: 3}
@@ -15021,11 +15025,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
-  gridWidth: 9
-  gridDepth: 9
+  gridWidth: 10
+  gridDepth: 11
   cellWidth: 10
   cellDepth: 10
-  isSpaceProp: 000000000000000000000101010101010100000101010101010100000101010101010100000101010101010100000101010101010100000101010101010100000101010101010100000000000000000000
+  isSpaceProp: 0000000000000000000000010101010101010100000101010101010101000001010101010101010000010101010101010100000101010101010101000001010101010101010000010101010101010100000101010101010101000001010101010101010000000000000000000000
 --- !u!1 &1335199910
 GameObject:
   m_ObjectHideFlags: 0
@@ -15490,9 +15494,9 @@ MonoBehaviour:
   m_specialBombType1: 0
   m_specialBombType2: 0
   m_specialBombLockTime1: 5
-  m_specialBombLockTime2: 5
+  m_specialBombLockTime2: 8.37
   m_brickUpValue: 1
-  m_brickValue: 2
+  m_brickValue: 1
   invncebleTime: 5
   stunTime: 3
   predictLandmarkMask:

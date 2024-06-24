@@ -378,7 +378,6 @@ public class Player : Base
         {
             if (_brickCount >= m_brickValue)
             {
-                _brickCount -= m_brickValue;
                 CallGenerateArtificialStone();
                 AudioManager.PlayOneShot("êlçHêŒ");
             }
@@ -479,6 +478,7 @@ public class Player : Base
             {
                 _isDashble = true;
                 _dashbleCount = 0;
+                AudioManager.PlayOneShot("É_ÉbÉVÉÖâÒïú");
             }
         }
     }
@@ -629,6 +629,7 @@ public class Player : Base
         {
             map.GenerateStone(generateCoord);
             map.SetArtificialStoneTexture(generateCoord);
+            _brickCount -= m_brickValue;
         }
         else
         {
@@ -679,10 +680,12 @@ public class Player : Base
     {
         if (Special1MaxCount <= 0 && Special1LockTime <= 0)
         {
+            AudioManager.PlayOneShot("îöíeâï˙");
             CallAddSpecialBomb(Slot1);
         }
         if (Special2MaxCount <= 0 && Special2LockTime <= 0)
         {
+            AudioManager.PlayOneShot("îöíeâï˙");
             CallAddSpecialBomb(Slot2);
         }
     }

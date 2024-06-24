@@ -221,13 +221,18 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     /// </summary>
     /// <param name="coord">ê∂ê¨Ç∑ÇÈç¿ïW</param>
     /// <returns>ê∂ê¨Ç≈Ç´ÇÈÇ©Ç«Ç§Ç©</returns>
-    public void GenerateStone(Coord coord)
+    public bool GenerateStone(Coord coord)
     {
         GridFieldMapSettings.Block b = m_mapSet.blocks[coord.x, coord.z];
+        
+        if(b.isSpace == false)
+            return false;
+
         b.isSpace = false;
         stoneBlockList.Add(b);
         emptyCoords.Remove(coord);
         mapObj.SetActiveMapWallObjects();
+        return true;
     }
 
 
