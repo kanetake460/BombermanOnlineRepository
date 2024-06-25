@@ -2434,8 +2434,8 @@ RectTransform:
   - {fileID: 620884868}
   m_Father: {fileID: 1222872810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15877,10 +15877,10 @@ MonoBehaviour:
   m_lifeMaxValue: 5
   m_healLife: 1
   m_bombMaxValue: 5
-  m_firepower: 10
+  m_firepower: 1
   m_specialBombType1: 0
   m_specialBombType2: 0
-  m_specialBombLockTime1: 1
+  m_specialBombLockTime1: 100
   m_specialBombLockTime2: 200
   m_brickUpValue: 1
   m_brickValue: 1
