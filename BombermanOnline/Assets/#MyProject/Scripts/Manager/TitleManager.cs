@@ -145,6 +145,8 @@ public class TitleResultManager : StrixBehaviour
     /// <summary>
     /// éüÇÃÉyÅ[ÉWÇ÷
     /// </summary>
+    public void CallNextPage() { RpcToAll(nameof(NextPage)); }
+    [StrixRpc]
     public void NextPage()
     {
         book.NextPage();
