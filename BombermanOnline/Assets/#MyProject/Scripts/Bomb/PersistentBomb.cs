@@ -22,6 +22,7 @@ public class PersistentBomb : BombBase
     {
         // ƒv[ƒ‹‚©‚ç”š”­’†‚¶‚á‚È‚¢ƒ‚ƒm‚ğ’T‚µo‚·
         Explosion explo = gameManager.longExploPool.Get(e => e.IsExplosion == false,() => Instantiate(m_explosion));
+        map.SetFrozenFloor(exploCoord, false);
 
         // ”š”­‚ğ‰Šú‰»
         explo.Initialize(map, exploCoord,collisionDuration);

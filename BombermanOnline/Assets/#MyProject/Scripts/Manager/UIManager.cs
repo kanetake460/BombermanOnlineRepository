@@ -76,6 +76,7 @@ public class UIManager : StrixBehaviour
     [SerializeField] private int m_dyingHp;
 
     // ===関数====================================================
+
     /// <summary>
     /// ダメージエフェクトを出します
     /// </summary>
@@ -218,7 +219,7 @@ public class UIManager : StrixBehaviour
     private void ShowEmptyBombUI(int count) => ShowParamGuage(emptyBombUIs, count);
 
     /// <summary>ライフUI表示</summary>
-    private void ShowLifeUI(int value, int maxValue) => ShowSliderGuage(hpSlider, value, maxValue);
+    private void ShowLifeUI(int value, int maxValue) => ShowSliderGuage(hpSlider,sliderFillImage, value, maxValue);
     
     /// <summary>ゲームテキスト表示（RPC）</summary>
     public void CallShowGameText(string text, float count) { Rpc(nameof(ShowGameText), text, count); }
@@ -271,13 +272,17 @@ public class UIManager : StrixBehaviour
     /// </summary>
     /// <param name="slider">スライダー</param>
     /// <param name="value">値</param>
-    public void ShowSliderGuage(Slider slider,int value,float maxValue)
+    public void ShowSliderGuage(Slider slider,Image fillImage,int value,float maxValue)
     {
         slider.maxValue = maxValue;
         slider.value = value;
         if(value == m_dyingHp)
         {
-            sliderFillImage.color = Color.red;
+            fillImage.color = Color.red;
+        }
+        else
+        {
+            fillImage.color = Color.green;
         }
     }
 }

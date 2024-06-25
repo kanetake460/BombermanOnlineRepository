@@ -4,6 +4,7 @@ using System.Linq;
 using TakeshiLibrary;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Base
 {
@@ -175,8 +176,11 @@ public class Player : Base
     [SerializeField] NormalBomb m_bomb;           // 生成する爆弾
     [SerializeField] SpesialBomb m_specialBomb1;   // 特殊爆弾1
     [SerializeField] SpesialBomb m_specialBomb2;   // 特殊爆弾2
-    [SerializeField] TextMeshProUGUI m_playerInfoText;
+
     [SerializeField] GameObject m_titleCanvas;
+    [SerializeField] TextMeshProUGUI m_playerInfoText;
+    [SerializeField] Slider m_hpSlider;
+    [SerializeField] Image m_hpImage;
 
     [Space]
     [Header("コンポーネント")]
@@ -268,6 +272,8 @@ public class Player : Base
             PutArtificialStone();
             InputDash();
         }
+        // プレイヤーのHP表示
+        CallShowPlayerHP(Life);
 
 
         // マップカメラのポジション設定
@@ -309,6 +315,7 @@ public class Player : Base
         AddBombPool();
         CallSetMembersColor();
         CallShowPlayerName();
+        CallInitInfo();
     }
 
 
@@ -736,4 +743,32 @@ public class Player : Base
         m_playerInfoText.text = "P" + (PlayerIndex + 1) + ":" + PlayerName;
     }
 
+
+    /// <summary>
+    /// プレイヤーのHPを表示します
+    /// </summary>
+    private void CallShowPlayerHP(int hp) => RpcToAll(nameof(ShowPlayerHP),hp);
+    [StrixRpc]
+    private void ShowPlayerHP(int hp)
+    {
+        ui.ShowSliderGuage(m_hpSlider,m_hpImage,hp,m_lifeMaxValue);
+    }
+
+
+    /// <summary>
+    /// プレイヤーの情報キャンバスの初期化
+    /// </summary>
+    private void CallInitInfo() => RpcToAll(nameof(InitInfo));
+    [StrixRpc]
+    private void InitInfo()
+    {
+        // 子オブジェクトの名前が"Canvas(Clone)"である場合に、そのオブジェクトを探して非表示にする
+        foreach (Transform child in transform)
+        {
+            if (child.name == "Canvas")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+    }
 }

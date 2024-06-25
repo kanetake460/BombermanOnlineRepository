@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
       propertyPath: objectType
-      value: 262147
+      value: 262150
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 96f5f15f7e8e59d4b872e5e3e305a6e9, type: 3}
       propertyPath: m_Name
@@ -206,7 +206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: objectType
-      value: 262146
+      value: 262147
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: f12e334f5962425429284b00b691a956, type: 3}
       propertyPath: m_Name
@@ -1180,7 +1180,6 @@ GameObject:
   - component: {fileID: 533272420}
   - component: {fileID: 533272422}
   - component: {fileID: 533272421}
-  - component: {fileID: 533272423}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1204,7 +1203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -532.3}
+  m_AnchoredPosition: {x: 0, y: -36}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533272421
@@ -1254,8 +1253,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1304,25 +1303,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533272419}
   m_CullTransparentMesh: 1
---- !u!114 &533272423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533272419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strixBehaviours: []
-  objectType: 262150
-  sendRate: 5
-  syncDestroy: 1
-  networkInstanceId: -1
-  InstantiableBy: 1
-  ConnectionClosedBehaviour: 1
 --- !u!1 &805096494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1381,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
       propertyPath: objectType
-      value: 262166
+      value: 262148
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 770baae52e1c2f543a6bddd56a0268fe, type: 3}
       propertyPath: m_Name
@@ -1462,7 +1442,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
       propertyPath: objectType
-      value: 262156
+      value: 262163
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 7dc61200c73ec5a4f83ecb5a01db5252, type: 3}
       propertyPath: m_Name
@@ -1648,7 +1628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 945578714}
-  objectType: 262151
+  objectType: 262152
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -1795,7 +1775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 992082378}
-  objectType: 262152
+  objectType: 262154
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -1811,7 +1791,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
       propertyPath: objectType
-      value: 262158
+      value: 262153
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
       propertyPath: m_Name
@@ -2140,7 +2120,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 1371443069}
   - {fileID: 1371443070}
-  objectType: 262154
+  objectType: 262155
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -2266,7 +2246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours: []
-  objectType: 262155
+  objectType: 262156
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -3175,7 +3155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentInfo:
-  - {fileID: 1839163499}
+  - {fileID: 1371443068}
 --- !u!4 &1612403358
 Transform:
   m_ObjectHideFlags: 1
@@ -3262,7 +3242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: objectType
-      value: 262148
+      value: 262160
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
       propertyPath: m_Name
@@ -3546,6 +3526,8 @@ GameObject:
   - component: {fileID: 1839163498}
   - component: {fileID: 1839163497}
   - component: {fileID: 1839163496}
+  - component: {fileID: 1839163500}
+  - component: {fileID: 1839163501}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3636,6 +3618,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 185.57}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1839163500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839163495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6e68fc30f02e54d9af83fa478b5c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1839163501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839163495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strixBehaviours:
+  - {fileID: 1839163500}
+  objectType: 262145
+  sendRate: 5
+  syncDestroy: 1
+  networkInstanceId: -1
+  InstantiableBy: 1
+  ConnectionClosedBehaviour: 1
 --- !u!1001 &1881364128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3646,7 +3660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105799587945549751, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
       propertyPath: objectType
-      value: 262145
+      value: 262146
       objectReference: {fileID: 0}
     - target: {fileID: 2416152949586608248, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
       propertyPath: m_Name
