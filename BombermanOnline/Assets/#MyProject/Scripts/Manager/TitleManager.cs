@@ -56,6 +56,8 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI[] playerName;
     [SerializeField] GameObject titleCanvas;
     [SerializeField] GameObject result;
+    [SerializeField] Image selectedStage;
+    [SerializeField] Sprite[] stageImages;
     [SerializeField] TextMeshProUGUI winnerName;
     [SerializeField] Image[] okUI;
 
@@ -66,6 +68,7 @@ public class TitleResultManager : StrixBehaviour
 
 
     // ===関数====================================================
+
 
     /// <summary>
     /// リザルト画面を表示します
@@ -140,7 +143,19 @@ public class TitleResultManager : StrixBehaviour
         player.transform.position += player.posY;
         book.NextPage();
         AudioManager.PlayOneShot("爆弾設定");
+        SetStageSprite(index);
     }
+
+
+    /// <summary>
+    /// 選択されたステージのスプライトを設定します
+    /// </summary>
+    /// <param name="index">インデックス</param>
+    private void SetStageSprite(int index)
+    {
+        selectedStage.sprite = stageImages[index];
+    }
+
 
     /// <summary>
     /// 次のページへ
