@@ -253,6 +253,7 @@ public class GameMap : SingletonStrixBehaviour<GameMap>
     /// <param name="frozen">true : “€‚é</param>
     public void SetFrozenFloor(Coord coord,bool frozen)
     {
+        if(m_mapSet.CheckMap(coord) == false) return;
         if (frozen)
         {
             frozenCoords.Add(coord);

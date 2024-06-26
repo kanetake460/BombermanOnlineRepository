@@ -27,53 +27,45 @@ public class PierceBomb : BombBase
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            // 壁マス
-            if (map.IsWall(exploCoord))
-                break;
+            if (map.m_mapSet.CheckMap(exploCoord) == false)
+                continue;
 
             map.BreakStone(exploCoord);
             map.ActivePredictLandmark(exploCoord, false);
             PlayExplosionEffect(exploCoord);
-            continue;
         }
         for (int x = -1; x >= -firepower; x--)
         {
             exploCoord = new Coord(Coord.x + x, Coord.z);
 
-            // 壁マス
-            if (map.IsWall(exploCoord))
-                break;
+            if (map.m_mapSet.CheckMap(exploCoord) == false)
+                continue;
 
             map.BreakStone(exploCoord);
             map.ActivePredictLandmark(exploCoord, false);
             PlayExplosionEffect(exploCoord);
-            continue;
         }
         for (int z = 1; z <= firepower; z++)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
 
-            // 壁マス
-            if (map.IsWall(exploCoord))
-                break;
+            if (map.m_mapSet.CheckMap(exploCoord) == false)
+                continue;
 
             map.BreakStone(exploCoord);
             map.ActivePredictLandmark(exploCoord, false);
             PlayExplosionEffect(exploCoord);
-            continue;
         }
         for (int z = -1; z >= -firepower; z--)
         {
             exploCoord = new Coord(Coord.x, Coord.z + z);
 
-            // 壁マス
-            if (map.IsWall(exploCoord))
-                break;
+            if (map.m_mapSet.CheckMap(exploCoord) == false)
+                continue;
 
             map.BreakStone(exploCoord);
             map.ActivePredictLandmark(exploCoord, false);
             PlayExplosionEffect(exploCoord);
-            continue;
         }
         isHeld = true;
 
