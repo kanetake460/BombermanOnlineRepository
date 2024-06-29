@@ -38,6 +38,7 @@ public class Player : Base
 
     private void OnTriggerEnter(Collider other)
     {
+        // 爆発に当たったら
         if (other.gameObject.CompareTag(ExplosionTag))
         {
             if (isLocal == false) return;
@@ -45,6 +46,7 @@ public class Player : Base
             IsStun = false;
             TakenDamage();
         }
+        // アイス爆発に当たったら
         if(other.gameObject.CompareTag(IceExplosionTag))
         {
             if (isLocal == false) return;
@@ -87,6 +89,7 @@ public class Player : Base
     private void OnCollisionStay(Collision collision)
     {
         if (isLocal == false) return;
+        // 氷の床の上なら
         if (collision.gameObject.CompareTag(FrozenFloorTag))
         {
             rb.drag = m_slipDrag;
@@ -119,8 +122,10 @@ public class Player : Base
 
     [Header("体力")]
     [SerializeField] private int m_life;            // 体力
+    [SerializeField] private int m_damage = 1;
     public int m_lifeMaxValue;              // 体力の最大値
     public int m_healLife;                  // 回復
+
 
     [Header("爆弾")]
     [SerializeField] private int m_bombMaxValue;    // 爆弾の最大値
@@ -158,7 +163,6 @@ public class Player : Base
 
     private readonly Vector3 mapCameraPos = new Vector3(0, 150, 0);         // マップカメラのポジション
 
-    private const int _Damage = 1;
 
     private const string ItemBombTag = "Item_Bomb";
     private const string ItemFireTag = "Item_Fire";
@@ -299,8 +303,8 @@ public class Player : Base
         }
         if (Input.GetKeyDown(KeyCode.Delete)) 
         {
-            if(gameManager.IsGameFinish)
-                titleResultManager.CallShowResult();
+            if (StrixNetwork.instance.isRoomOwner)
+                titleResultManager.CallShowShutdown();
         }
     }
 
@@ -496,7 +500,7 @@ public class Player : Base
     /// </summary>
     private void TakenDamage()
     {
-        Life -= _Damage;
+        Life -= m_damage;
         _isInvincible = true;
         AudioManager.PlayOneShot("被ダメージ", 1f);
         ui.ShowDamageEffectUI();

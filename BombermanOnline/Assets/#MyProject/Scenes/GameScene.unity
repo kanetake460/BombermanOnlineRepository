@@ -11460,6 +11460,8 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 2378759cbb619b24f9568fb460fccbdc, type: 3}
   - key: "\u30ED\u30D3\u30FCBGM"
     value: {fileID: 8300000, guid: 2996c36e8bf7ac04b8832e00a59be1db, type: 3}
+  - key: "\u52DD\u5229"
+    value: {fileID: 8300000, guid: 631761cbb73e79a49bcb43e334321c94, type: 3}
   volume_SE: 0.5
   volume_BGM: 0.2
 --- !u!4 &1009865285
@@ -15948,15 +15950,16 @@ MonoBehaviour:
   m_dashbleTime: 2
   m_dashSpeed: 20
   m_upDashSpeed: 60
-  m_life: 5
-  m_lifeMaxValue: 5
+  m_life: 10
+  m_damage: 2
+  m_lifeMaxValue: 10
   m_healLife: 1
   m_bombMaxValue: 5
   m_firepower: 1
   m_specialBombType1: 0
   m_specialBombType2: 0
   m_specialBombLockTime1: 60
-  m_specialBombLockTime2: 120
+  m_specialBombLockTime2: 300
   m_brickUpValue: 1
   m_brickValue: 1
   invncebleTime: 5
@@ -17673,6 +17676,8 @@ MonoBehaviour:
   - {fileID: 179628582}
   titleCanvas: {fileID: 291420355}
   result: {fileID: 1222872806}
+  winnerName: {fileID: 144768865}
+  win: {fileID: 620884869}
   selectedStage: {fileID: 243351263}
   stageImages:
   - {fileID: 21300000, guid: ec12afb47107e004abfcb431fefcbd79, type: 3}
@@ -17702,7 +17707,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1797e1e5d7f8f634084c60efa6114e03, type: 3}
   - {fileID: 21300000, guid: 05461a1e09e5ed540b7cfa816fb79b78, type: 3}
   - {fileID: 21300000, guid: 21a476a4483413645a923ebe9153804e, type: 3}
-  winnerName: {fileID: 144768865}
   okUI:
   - {fileID: 1908674851}
   - {fileID: 1062493483}

@@ -56,9 +56,10 @@ public class TitleResultManager : StrixBehaviour
     [SerializeField] TextMeshProUGUI[] playerName;
     [SerializeField] GameObject titleCanvas;
     [SerializeField] GameObject result;
+    [SerializeField] TextMeshProUGUI winnerName;
+    [SerializeField] TextMeshProUGUI win;
     [SerializeField] Image selectedStage;
     [SerializeField] Sprite[] stageImages;
-    [SerializeField] TextMeshProUGUI winnerName;
     [SerializeField] Image[] okUI;
 
     [Header("オブジェクト参照")]
@@ -68,7 +69,19 @@ public class TitleResultManager : StrixBehaviour
 
 
     // ===関数====================================================
-
+    
+    /// <summary>
+    /// 強制終了画面を表示します
+    /// </summary>
+    public void CallShowShutdown() => RpcToAll(nameof(ShowShutdown));
+    [StrixRpc]
+    private void ShowShutdown()
+    {
+        result.SetActive(true);
+        winnerName.text = "1Pによって\nゲームが強制終了\nされました。";
+        win.text = "";
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     /// <summary>
     /// リザルト画面を表示します
@@ -80,6 +93,7 @@ public class TitleResultManager : StrixBehaviour
         result.SetActive(true);
         winnerName.text = gameManager.PlayerList.First().PlayerName;
         Cursor.lockState = CursorLockMode.None;
+        AudioManager.PlayOneShot("勝利");
     }
 
 
