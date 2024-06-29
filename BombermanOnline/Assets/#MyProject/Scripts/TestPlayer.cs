@@ -32,6 +32,11 @@ public class TestPlayer : StrixBehaviour
         fps.VelocityForceLocomotion(speed);
         fps.PlayerViewport();
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowManual();
+        }
+
         // オブジェクト配置
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -62,6 +67,7 @@ public class TestPlayer : StrixBehaviour
     [SerializeField] GameObject test;
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject conectUI;
+    [SerializeField] CanvasBook manualBook;
 
     [Header("パラメーター")]
     [SerializeField] Vector3 cameraPos;
@@ -96,6 +102,14 @@ public class TestPlayer : StrixBehaviour
     bool IsConected => StrixNetwork.instance.playerName != null;
 
     // ===関数====================================================
+    /// <summary>
+    /// マニュアルを表示
+    /// </summary>
+    private void ShowManual()
+    {
+        manualBook.Open();
+    }
+
     [StrixRpc]
     private void ShowValueText()
     {

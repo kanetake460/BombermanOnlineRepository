@@ -276,7 +276,7 @@ public class UIManager : StrixBehaviour
     {
         slider.maxValue = maxValue;
         slider.value = value;
-        if(value == m_dyingHp)
+        if(value <= m_dyingHp)
         {
             fillImage.color = Color.red;
         }

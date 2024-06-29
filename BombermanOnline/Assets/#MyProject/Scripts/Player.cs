@@ -432,8 +432,11 @@ public class Player : Base
         }
         else
         {
-            ui.ShowGameText("No bomb !!", 1);
-            AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
+            if (isLocal)
+            {
+                ui.ShowGameText("No bomb !!", 1);
+                AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
+            }
         }
     }
     private void CallGenarateSpesialBomb2() { RpcToAll(nameof(GenarateSpesialBomb2)); }
@@ -448,8 +451,11 @@ public class Player : Base
         }
         else
         {
-            ui.ShowGameText("No bomb !!", 1);
-            AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
+            if (isLocal)
+            {
+                ui.ShowGameText("No bomb !!", 1);
+                AudioManager.PlayOneShot("”š’e‚ª‚È‚¢");
+            }
         }
     }
 
