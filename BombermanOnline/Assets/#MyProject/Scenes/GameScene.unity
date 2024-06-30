@@ -15924,6 +15924,7 @@ GameObject:
   - component: {fileID: 1383805136}
   - component: {fileID: 1383805138}
   - component: {fileID: 1383805137}
+  - component: {fileID: 1383805141}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -16136,6 +16137,7 @@ MonoBehaviour:
   - {fileID: 1383805139}
   - {fileID: 1383805140}
   - {fileID: 1383805137}
+  - {fileID: 1383805141}
   objectType: 524291
   sendRate: 5
   syncDestroy: 1
@@ -16196,6 +16198,21 @@ MonoBehaviour:
   iceBomb: {fileID: -4877041180149567092, guid: ed395d1482e99114e8c76e01aeb6a734, type: 3}
   poisonBomb: {fileID: 7247847052120146054, guid: 648fa0df12ad70440bce78fc2ff7b9b3, type: 3}
   healBomb: {fileID: 7247847052120146054, guid: 3a63dbbea6f228c439ccfcda431d49b2, type: 3}
+--- !u!114 &1383805141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383805130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -357823647, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1871282628}
+  SynchronizeStates: 1
+  ParameterSynchronizationFlags: 0101010101
 --- !u!1 &1384388182
 GameObject:
   m_ObjectHideFlags: 0

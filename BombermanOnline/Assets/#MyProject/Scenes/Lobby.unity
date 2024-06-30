@@ -3478,6 +3478,7 @@ GameObject:
   - component: {fileID: 1371443069}
   - component: {fileID: 1371443071}
   - component: {fileID: 1371443070}
+  - component: {fileID: 1371443072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3660,12 +3661,28 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 1371443069}
   - {fileID: 1371443070}
+  - {fileID: 1371443072}
   objectType: 262155
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1
   ConnectionClosedBehaviour: 1
+--- !u!114 &1371443072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371443063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -357823647, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 2103237407}
+  SynchronizeStates: 1
+  ParameterSynchronizationFlags: 0101010101
 --- !u!1 &1375318125
 GameObject:
   m_ObjectHideFlags: 0
