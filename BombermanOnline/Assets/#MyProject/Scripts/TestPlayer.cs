@@ -19,7 +19,6 @@ public class TestPlayer : StrixBehaviour
     private void Start()
     {
         if (isLocal == false) return;
-        CallSetMembersColor();
     }
 
 
@@ -29,8 +28,18 @@ public class TestPlayer : StrixBehaviour
         {
             return;
         }
-        fps.VelocityForceLocomotion(speed);
+        CallSetMembersColor();
+
         fps.PlayerViewport();
+        
+        if(fps.VelocityForceLocomotion(speed,speed,lowSpeed) != 0)
+        {
+            anim.SetFloat("Blend", speed, 0.3f, Time.deltaTime);
+        }
+        else
+        {
+            anim.SetFloat("Blend", 0, 0.1f, Time.deltaTime);
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -69,9 +78,15 @@ public class TestPlayer : StrixBehaviour
     [SerializeField] GameObject conectUI;
     [SerializeField] CanvasBook manualBook;
 
+    [Header("コンポーネント")]
+    [SerializeField] Animator anim;
+    [SerializeField] CharacterSkinController skin;
+
     [Header("パラメーター")]
     [SerializeField] Vector3 cameraPos;
     [SerializeField] float speed;
+    [SerializeField] float lowSpeed;
+    private float _currSpeed;
     [StrixSyncField]
     public int syncInt = 0;
     public int intValue = 0;
@@ -127,22 +142,7 @@ public class TestPlayer : StrixBehaviour
     [StrixRpc]
     private void SetMembersColor()
     {
-        if (PlayerIndex == 0)
-        {
-            SetPlayerColor(Color.black);
-        }
-        if (PlayerIndex == 1)
-        {
-            SetPlayerColor(Color.yellow);
-        }
-        if (PlayerIndex == 2)
-        {
-            SetPlayerColor(Color.blue);
-        }
-        if (PlayerIndex == 3)
-        {
-            SetPlayerColor(Color.red);
-        }
+        skin.ColorIndex = PlayerIndex;
     }
 
 
@@ -193,7 +193,10 @@ public class TestPlayer : StrixBehaviour
     /// <param name="color">色</param>
     private void SetPlayerColor(Color color) { gameObject.GetComponent<Renderer>().material.color = color; }
 
-
+    private void MoveAnimetion()
+    {
+        anim.SetFloat("Blend", speed, 0.3f, Time.deltaTime);
+    }
 
 
 

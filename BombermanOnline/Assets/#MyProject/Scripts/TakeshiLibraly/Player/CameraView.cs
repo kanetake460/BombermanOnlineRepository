@@ -7,18 +7,20 @@ public class CameraView : MonoBehaviour
 {
     void Start()
     {
-        parent = new GameObject("MainCameraPrent");
+        parent = new GameObject("MainCameraParent");
         transform.parent = parent.transform;
     }
 
     void Update()
     {
+        transform.localPosition = cameraPosition;
         parent.transform.position = playerTransform.position;
         parent.transform.localRotation = playerTransform.localRotation;
         CameraViewport();
     }
 
     [SerializeField] Transform playerTransform;
+    [SerializeField] Vector3 cameraPosition;
     GameObject parent;
 
 

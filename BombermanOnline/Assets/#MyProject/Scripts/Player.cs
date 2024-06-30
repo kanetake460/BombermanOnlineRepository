@@ -188,6 +188,8 @@ public class Player : Base
 
     [Space]
     [Header("コンポーネント")]
+    [SerializeField] Animator anim;
+    [SerializeField] CharacterSkinController skin;
     [SerializeField] UIManager ui;
     [SerializeField] TitleResultManager titleResultManager;
     FPS fps;
@@ -278,6 +280,9 @@ public class Player : Base
         }
         // プレイヤーのHP表示
         CallShowPlayerHP(Life);
+
+        PlayLocomotionAnim();
+
 
 
         // マップカメラのポジション設定
@@ -709,7 +714,10 @@ public class Player : Base
 
 
     // ーーーーーそれぞれのプレイヤーの見たなどーーーーー
-
+    private void PlayLocomotionAnim()
+    {
+        anim.SetFloat("Blend", rb.velocity.magnitude, 0.1f, Time.deltaTime);
+    }
 
     /// <summary>
     /// [RPC]プレイヤーの色を設定します。
@@ -718,22 +726,7 @@ public class Player : Base
     [StrixRpc]
     private void SetMembersColor()
     {
-        if (PlayerIndex == 0)
-        {
-            SetPlayerColor(Color.red);
-        }
-        if (PlayerIndex == 1)
-        {
-            SetPlayerColor(Color.blue);
-        }
-        if (PlayerIndex == 2)
-        {
-            SetPlayerColor(Color.yellow);
-        }
-        if (PlayerIndex == 3)
-        {
-            SetPlayerColor(Color.green);
-        }
+        skin.ColorIndex = PlayerIndex;
     }
 
     /// <summary>

@@ -104,9 +104,9 @@ namespace TakeshiLibrary
         /// </summary>
         /// <param name="player">動かすプレイヤー</param>
         /// <param name="speed">移動スピード</param>
-        public void VelocityForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashuKey = KeyCode.LeftShift)
+        public float VelocityForceLocomotion(float speed = 10f, float dashSpeed = 15, float backSpeed = 5, KeyCode dashKey = KeyCode.LeftShift)
         {
-            if (Input.GetKey(dashuKey)) speed = dashSpeed;
+            if (Input.GetKey(dashKey)) speed = dashSpeed;
 
             float x = Input.GetAxisRaw("Horizontal");     // 移動入力
             float z = Input.GetAxisRaw("Vertical");       // 移動入力
@@ -114,7 +114,12 @@ namespace TakeshiLibrary
             if(x != 0 &&  z != 0)
                 speed *= 0.707f;
 
+            if (z < 0)
+                speed = backSpeed;
+
             _rb.velocity = _player.transform.right * x * speed + _player.transform.forward * z * speed;
+
+            return x + z;
         }
         public void AddForceLocomotion(float speed = 10f, float dashSpeed = 15, KeyCode dashKey = KeyCode.LeftShift)
         {

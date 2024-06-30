@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,22 @@ public class CharacterSkinController : MonoBehaviour
     public enum EyePosition { normal, happy, angry, dead}
     public EyePosition eyeState;
 
+    private int colorIndex = 0;
+    
+    public int ColorIndex
+    {
+        get
+        {
+            return colorIndex;
+        }
+        set 
+        {
+            colorIndex = value;
+            if (colorIndex >= albedoList.Length) colorIndex = 0;
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,30 +41,36 @@ public class CharacterSkinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            //ChangeMaterialSettings(0);
-            ChangeEyeOffset(EyePosition.normal);
-            ChangeAnimatorIdle("normal");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            //ChangeMaterialSettings(1);
-            ChangeEyeOffset(EyePosition.angry);
-            ChangeAnimatorIdle("angry");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            //ChangeMaterialSettings(2);
-            ChangeEyeOffset(EyePosition.happy);
-            ChangeAnimatorIdle("happy");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            //ChangeMaterialSettings(3);
-            ChangeEyeOffset(EyePosition.dead);
-            ChangeAnimatorIdle("dead");
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    ChangeMaterialSettings(0);
+        //    ChangeEyeOffset(EyePosition.normal);
+        //    ChangeAnimatorIdle("normal");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    ChangeMaterialSettings(1);
+        //    ChangeEyeOffset(EyePosition.angry);
+        //    ChangeAnimatorIdle("angry");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    ChangeMaterialSettings(2);
+        //    ChangeEyeOffset(EyePosition.happy);
+        //    ChangeAnimatorIdle("happy");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    ChangeMaterialSettings(3);
+        //    ChangeEyeOffset(EyePosition.dead);
+        //    ChangeAnimatorIdle("dead");
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    ColorIndex++;
+        //}
+        ChangeMaterialSettings(ColorIndex);
     }
 
     void ChangeAnimatorIdle(string trigger)
