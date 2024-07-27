@@ -92,6 +92,7 @@ public class Player : Base
     [Header("オブジェクト参照")]
     [SerializeField] GameObject mainCamera;         // プレイヤーに追従するカメラ
     [SerializeField] GameObject mapCamera;          // マップUIのカメラ
+    [SerializeField] GameObject m_startButton;          // スタートボタン
     [SerializeField] Bomb bomb;                     // 生成する爆弾
     GameManager gameManager;
 
@@ -167,6 +168,7 @@ public class Player : Base
     public void GameStart()
     {
         Coord = map._startCoords[0];
+        m_startButton.SetActive(false);
         enabled = true;
     }
 
