@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TakeshiLibrary;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : Base
 {
@@ -15,7 +11,6 @@ public class Player : Base
     {
         fps ??= new FPS(map.mapSet, rb, gameObject, mainCamera);
         gameManager = GameManager.Instance;
-        InitPlayer();
     }
 
 
@@ -156,7 +151,7 @@ public class Player : Base
     /// プレイヤーの初期化をします
     /// この関数はStart関数で呼び出します
     /// </summary>
-    private void InitPlayer()
+    public void InitPlayer()
     {
         AddBombList();
     }

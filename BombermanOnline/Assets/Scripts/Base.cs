@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TakeshiLibrary;
 
@@ -17,6 +15,7 @@ public class Base : MonoBehaviour
         Trafo = gameObject.transform;
         gameObj = gameObject;
         rb ??= GetComponent<Rigidbody>();
+        map = GameMap.Instance;
     }
 
     // ===プロパティ=================================================

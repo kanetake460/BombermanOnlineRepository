@@ -1,6 +1,7 @@
 using System;
 using TakeshiLibrary;
 using UnityEngine;
+using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     }
 
     public ItemManager itemManager;
+    public UIManager uiManager;
 
 
     private void Start()
@@ -52,6 +54,15 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.PlayBGM("ÉQÅ[ÉÄBGM",0.0f);
     }
+
+    public void GameStart()
+    {
+        IsGameStart = true;
+        GameObject g = PhotonNetwork.Instantiate("Player", new Vector3(-60,0,60), Quaternion.identity);
+        g.GetComponent<Player>().InitPlayer();
+    }
+
+    public bool IsGameStart { get; private set; } = false;
 }
 
 [Serializable]

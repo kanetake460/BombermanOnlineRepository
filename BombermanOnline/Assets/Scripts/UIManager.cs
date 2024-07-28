@@ -1,15 +1,21 @@
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TakeshiLibrary;
 
 public class UIManager : MonoBehaviour
 {
+    public void Initialize(Player player)
+    {
+        player = GetComponent<Player>();
+    }
+
     private void Update()
     {
+        if (GameManager.Instance.IsGameStart == false)
+            return;
+
         ShowBombUI(player.BombCount);
         ShowLifeUI(player.LifeCount);
         ShowUIText(firepowerText, "FirePower : " + player.Firepower);
