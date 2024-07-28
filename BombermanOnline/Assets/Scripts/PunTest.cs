@@ -59,7 +59,7 @@ public class PunTest : MonoBehaviourPunCallbacks
         var position = new Vector3(Random.Range(-3f, 3f), 0.5f, Random.Range(-3f, 3f));
 
         //ResourcesƒtƒHƒ‹ƒ_‚©‚ç"Player"‚ğ’T‚µ‚Ä‚«‚Ä‚»‚ê‚ğ¶¬
-        //PhotonNetwork.Instantiate("Player", position, Quaternion.identity);
+        PhotonNetwork.Instantiate("TestPlayer", position, Quaternion.identity);
     }
 
 
